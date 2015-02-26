@@ -37,6 +37,12 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'headjs-rails'
 
+# Random
+gem 'mailboxer', git: 'git://github.com/ging/mailboxer.git'
+gem 'rails4-autocomplete'
+gem 'acts_as_votable', '~> 0.10.0'
+gem 'acts-as-taggable-on'
+
 # Javascript
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -52,7 +58,6 @@ gem 'coffee-rails'
 
 # Design
 gem "autoprefixer-rails"
-# gem 'bootstrap-sass'
 gem 'js-routes'
 gem 'draper', '~> 1.3'
 # gem 'bourbon'

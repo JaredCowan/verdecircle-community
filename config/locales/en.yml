@@ -3,11 +3,11 @@
 
 en:
   brand:
-    name: 'VerdeForum'
+    name: 'Verde Circle Community'
 
   emails:
     welcome:
-      subject: 'Verde Circle Community'
+      subject: 'Welcome to the Verde Circle Community'
 
   auth:
     login:

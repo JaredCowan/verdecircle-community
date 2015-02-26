@@ -9,7 +9,7 @@ common: &common
   # Downcased and trimmed app name for namespaces.
   # Safest to start with a letter rather than a number.
   # See locales/en.yml for setting your app's user facing brand name.
-  app_name: 'verdeforum'
+  app_name: 'Verde Circle Community'
 
   # Place social links for you or your company here
   social:
@@ -63,12 +63,10 @@ default_env: &default_env
   # Devise password encryption keys.
   # Changing the keys will invalidate user passwords,
   # forcing users to use the forgot password feature.
-  # TODO: make new keys with `rake secret`
   VERDE_FORUM_DEVISE_SECRET_KEY: ENV['VERDE_FORUM_DEVISE_SECRET_KEY']
   VERDE_FORUM_DEVISE_PEPPER: ENV['VERDE_FORUM_DEVISE_PEPPER']
 
   # Signed cookie encryption key.
-  # TODO: make new key with `rake secret`
   VERDE_FORUM_SECRET_KEY_BASE: ENV['VERDE_FORUM_SECRET_KEY_BASE']
 
   # Redis server used by Sidekiq, cache, etc.
@@ -98,5 +96,4 @@ staging:
 production:
   <<: *common
   env:
-    # Set dummy key so rake assets:precompile succeeds
     DEVISE_SECRET_KEY: ''
