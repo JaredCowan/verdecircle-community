@@ -19,7 +19,7 @@ node_modules/**
 /log/*.log
 /tmp
 
-/coverage
+/coverage/**
 .zeus.sock
 .env
 
