@@ -1,0 +1,28 @@
+# Ignore bundler config.
+/.bundle
+node_modules/**
+/vendor/cache
+/vendor/bundle
+.DS_Store
+.sass-cache
+*.[Gg]emfile.lock
+.rvmrc
+.rbenv-version
+.rspec
+.travis.yml
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+/coverage
+.zeus.sock
+.env
+
+# Ignore Sublime Text workspace files
+/*.sublime-workspace
+*.sublime-project

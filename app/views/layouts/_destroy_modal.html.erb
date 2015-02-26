@@ -1,0 +1,38 @@
+
+<% id ||= "destroy-modal" %>
+<% i18n_prefix = i18n_prefix.present? ? "#{i18n_prefix}." : "" %>
+
+<div aria-hidden="<%= true %>" aria-labelledby="<%= id %>-title" class="modal fade" id="<%= id %>" role="dialog" tabindex="<%= -1 %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 id="<%= id %>-title">
+          <%= I18n.t "#{i18n_prefix}prompt" %>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <% warning = I18n.t "#{i18n_prefix}warning" %>
+        <% if warning.present? %>
+          <div class="alert alert-danger">
+            <i class="glyphicon glyphicon-warning-sign text-danger"></i>
+            <%= warning %>
+          </div>
+        <% end %>
+        <p>
+          <%= I18n.t "#{i18n_prefix}notice" %>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="<%= locales('account.destroy.submit-class') %> pull-left" data-confirm="" data-dismiss="modal" aria-hidden="true">
+          <%= I18n.t "#{i18n_prefix}submit" %>
+        </button>
+        <button class="<%= locales('account.destroy.cancel-class') %>" data-dismiss="modal" aria-hidden="true">
+          <%= I18n.t "#{i18n_prefix}cancel" %>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<% user ||= User.new %>
+<% size ||= :thumb %>
+<% target ||= '_self' %>
+<% username ||= 'view' %>
+<% profile_url = user_path(user) unless defined? profile_url %>
+
+<div class="card__user-<%= size %> card__user">
+  <%= render 'users/avatar', user: user, size: size %>
+  <h4>
+    <%= user.name %>
+  </h4>
+  <div class="card__user__links">
+    <% if profile_url %>
+      <%= link_to username, profile_url, target: target %>
+    <% end %>
+  </div>
+  <%= yield %>
+</div>

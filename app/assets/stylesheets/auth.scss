@@ -1,0 +1,116 @@
+.auth__form {
+  max-width: 420px;
+  margin: 0 auto;
+
+  @extend .row;
+
+  .nav-tabs {
+    margin-bottom: 20px;
+  }
+
+  .title {
+    margin-bottom: 2em;
+    text-align: center;
+    .help-block {
+      margin: 20px 0 -10px;
+      font-size: 16px;
+      font-weight: normal;
+    }
+  }
+
+  abbr[title=required] {
+    display: none;
+  }
+
+  ul {
+    @extend .list-unstyled;
+  }
+
+  .collapse {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 1;
+
+    transition: max-height .5s ease;
+    &.in {
+      max-height: 300px;
+    }
+  }
+
+  .facepile {
+    margin: 20px 0;
+  }
+}
+
+.auth__or {
+  position: relative;
+  padding: 10px 0;
+  margin: 20px 0;
+  font-size: 16px;
+  color: darken(#333, 15%);
+  hr {
+    height: 1px;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    background-color: darken(#333, 10%);
+  }
+  span {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    display: block;
+    width: 50px;
+    margin-left: -25px;
+    text-align: center;
+    background-color: #fff;
+  }
+}
+
+.auth__links {
+  margin: 30px 0;
+
+  @extend .help-block;
+}
+
+.auth__group {
+  margin-bottom: 40px;
+}
+
+.auth__providers {
+  @extend .row;
+}
+
+.auth__providers__provider {
+  width: 50%;
+  margin-bottom: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  a {
+    width: 100%;
+  }
+}
+
+.btn {
+  &[data-provider=twitter] {
+    background: #00aced;
+    border-color: #0099d3;
+    &:hover {
+      background: #21c2ff;
+    }
+  }
+  &[data-provider=facebook] {
+    background: #3b5998;
+    border-color: #2f487c;
+    &:hover {
+      background: #4c70ba;
+    }
+  }
+  &[data-provider=linkedin] {
+    background: #069;
+    border-color: #00547e;
+    &:hover {
+      background: #08c;
+    }
+  }
+}

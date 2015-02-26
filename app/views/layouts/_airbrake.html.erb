@@ -1,0 +1,3 @@
+<% if defined?(Airbrake) && Airbrake.configuration.js_api_key.present? %>
+  <%= airbrake_javascript_notifier %>
+<% end %>

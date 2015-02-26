@@ -1,0 +1,24 @@
+// Page footer
+
+.page__footer {
+  padding: 20px 10px;
+  margin-top: 100px;
+  text-align: center;
+  border-top: 1px solid #333;
+
+  ul {
+    margin: 0;
+
+    @extend .list-unstyled;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  a {
+    color: #000;
+    &:hover {
+      color: #000;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<% size ||= :tiny %>
+<% alt ||= '' %>
+<% user ||= current_user %>
+<div class="<%= size.to_s %> avatar">
+  <%= image_tag user.image_url(size: size, ssl: request.ssl?), alt: alt %>
+  <i class="default glyphicon glyphicon-user"></i>
+</div>

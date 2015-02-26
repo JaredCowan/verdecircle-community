@@ -1,0 +1,53 @@
+{
+    "name": "ProjectName",
+    "title": "ProjectTitle",
+    "description": "Project Description",
+    "homepage": "https://github.com",
+    "version": "1.0.0",
+    "csspath": "app/assets/stylesheets",
+    "jspath": "app/assets/javascripts",
+    "assetspath": "app/assets",
+    "csscombpath": "grunt/csscomb.json",
+    "csslintpath": "grunt/csslint.json",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/"
+    },
+    "bugs": {
+        "url": "https://github.com/"
+    },
+    "license": {
+        "type": "MIT",
+        "url": "https://github.com/"
+    },
+    "devDependencies": {
+        "grunt": "^0.4.5",
+        "grunt-autoprefixer": "^2.0.0",
+        "npm": "^1.4.28",
+        "grunt-contrib-compass": "^1.0.1",
+        "grunt-contrib-concat": "^0.4.0",
+        "grunt-contrib-csslint": "^0.3.1",
+        "grunt-contrib-sass": "^0.8.1",
+        "grunt-contrib-clean": "^0.6.0",
+        "grunt-contrib-uglify": "^0.6.0",
+        "grunt-banner": "^0.3.1",
+        "grunt-contrib-watch": "^0.6.1",
+        "grunt-csscomb": "^3.0.0",
+        "load-grunt-tasks": "^1.0.0"
+    },
+    "config": {
+        "autoprefixerBrowsers": [
+        "Android 2.3",
+        "Android >= 4",
+        "Chrome >= 20",
+        "ChromeAndroid >= 39",
+        "Firefox >= 24",
+        "FirefoxAndroid >= 33",
+        "Explorer >= 8",
+        "ExplorerMobile >= 9",
+        "iOS >= 6",
+        "Opera >= 12",
+        "Safari >= 6"
+        ]
+    }
+}
