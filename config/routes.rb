@@ -38,6 +38,16 @@ Rails.application.routes.draw do
   resources :users, path: 'u', only: :show do
     resources :authentications, path: 'accounts'
   end
+
+  resources :conversations do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+      post :perm_trash
+    end
+  end
+
   get '/home' => 'users#show', as: 'user_home'
 
   # Dummy preview pages for testing.

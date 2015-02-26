@@ -1,5 +1,6 @@
 module ApplicationHelper
   include CommonHelper
+  include ConversationHelper
 
   # Render a partial only one time.
   # Useful for rendering partials that require JavaScript like Google Maps

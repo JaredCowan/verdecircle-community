@@ -1,9 +1,17 @@
 class User < ActiveRecord::Base
   include Concerns::UserImagesConcern
+  acts_as_messageable
+  acts_as_voter
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :timeoutable, :lockable, :async
+
+  has_attached_file :avatar
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
+  has_many :taggings
+  has_many :tags, through: :taggings
 
   has_many :authentications, dependent: :destroy, validate: false, inverse_of: :user do
     def grouped_with_oauth
@@ -20,6 +28,18 @@ class User < ActiveRecord::Base
 
   def display_name
     first_name.presence || email.split('@')[0]
+  end
+
+  def full_name
+    "#{username}"
+  end
+
+  def name_with_initial
+    "#{username}"
+  end
+
+  def mailboxer_email(object)
+    email
   end
 
   # Case insensitive email lookup.

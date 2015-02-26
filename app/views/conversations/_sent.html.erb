@@ -1,0 +1,48 @@
+<table class="table-no-border">
+  <thead>
+    <tr>
+      <th width="75">To</th>
+      <th width="325">Subject</th>
+      <th width="40">Time</th>
+      <th width="50">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_user.mailbox.sentbox.each do |convo| %>
+      <tr class="conversation-table-row" id="<%= convo.receipts.where(is_read: false, receiver_id: current_user.id).count > 0 ? "unread" : "read" %>">
+        <td class="conversation-font">
+        <%= convo.recipients.last.full_name == current_user.full_name ? convo.recipients.first.full_name : convo.recipients.last.full_name %>
+        </td>
+        <td id="subject">
+          <% if convo.receipts.where(is_read: false, receiver_id: current_user.id).count > 0 %>
+            <span class="label radius"> New </span>
+          <% end %>
+          <% if convo.messages.last.sender_id == current_user.id %>
+            <span data-tooltip aria-haspopup="true" class="has-tip tip-top radius" title="You sent at <%= convo.messages.last.created_at.strftime("%l:%M %p on %D") %>"><i class="fi-refresh"></i></span>
+          <% end %>
+            <%= link_to convo.subject.titleize, conversation_path(convo),  class: "conversation-font" %>
+          <!-- <a href="/conversations/<%= convo.id %>" data-dropdown="hover<%= convo.id %>" data-options="is_hover:true"> <%= convo.subject.titleize %> -->
+          <!-- </a> -->
+        </td>
+        <td class="conversation-font">
+          <% if Date.today > convo.messages.last.created_at %>
+            <%=  convo.messages.last.created_at.strftime("%D") %>
+          <% else %>
+           <%=  convo.messages.last.created_at.strftime("%l:%M %p") %>  
+          <% end %>
+        </td>
+        <td>
+          <% if convo.is_completely_trashed?(current_user) %>
+            <%= link_to 'Untrash', untrash_conversation_path(convo), method: :post %>
+            <%= link_to 'DELETE', perm_trash_conversation_path(convo), method: :post %>
+          <% else %>
+            <%= link_to '<i class="fi-trash"></i>'.html_safe, trash_conversation_path(convo), class: 'move-to-trash conversation-font', method: :post %> 
+          <% end %>
+        </td>
+      </tr>
+      <ul id="hover<%= convo.id %>" class="f-dropdown" data-dropdown-content>
+        <li><a href="#">DropDown</a></li>
+      </ul>
+    <% end %>
+  </tbody>
+</table>

@@ -42,6 +42,7 @@ gem 'mailboxer', git: 'git://github.com/ging/mailboxer.git'
 gem 'rails4-autocomplete'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'acts-as-taggable-on'
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 # Javascript
 gem 'jquery-rails'

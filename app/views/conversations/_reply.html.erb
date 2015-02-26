@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="large-9 medium-10 small-12 large-centered medium-centered small-centered columns activity">
+    <center><h1> <%= message_name %> </h1></center><br>
+    <%= simple_form_for :message, url: reply_conversation_path(conversation) do |f| %>
+      <%#= f.input :subject, placeholder: 'Subject' %>
+      <%= f.label :body %>
+      <%= f.text_area :body, placeholder: 'Body' %>
+      <%= submit_tag 'Cancel', type: :reset, class: 'button alert radius left' %>
+      <%= f.button :submit, value: 'Send Message', class: 'button success radius right' %>
+    <% end %>
+  </div>
+</div>

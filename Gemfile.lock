@@ -7,6 +7,16 @@ GIT
       foreigner (>= 0.9.1)
       rails (>= 3.2.0)
 
+GIT
+  remote: git://github.com/thoughtbot/paperclip.git
+  revision: 97c78efdce65b07c6425e76000f34f1909a257cb
+  specs:
+    paperclip (4.2.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.5)
+      mime-types
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -68,6 +78,10 @@ GEM
       mime-types (>= 1.16)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.5)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -422,6 +436,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-linkedin
   omniauth-twitter
+  paperclip!
   pg
   premailer-rails
   pry-byebug
