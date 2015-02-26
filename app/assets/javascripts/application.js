@@ -43,3 +43,54 @@ $(function(e) {
     // $this.val($username);
   });
 });
+
+$(function() {
+
+  $(".untrash").on("click", function(e) {
+    e.preventDefault();
+    $this = $(this),
+    $id   = $this.attr("data-id"),
+    $elm  = $this.closest("li");
+
+    // console.log($this.closest("li"))
+    $.ajax({
+       url: "/messages/" + $id + "/untrash",
+       type: "POST",
+       success: $elm.remove()
+    });
+
+    return false; 
+  });
+
+  $(".trash").on("click", function(e) {
+    e.preventDefault();
+    $this = $(this),
+    $id   = $this.attr("data-id"),
+    $elm  = $this.closest("li");
+
+    // console.log($this.closest("li"))
+    $.ajax({
+       url: "/messages/" + $id + "/trash",
+       type: "POST",
+       success: $elm.remove()
+    });
+
+    return false; 
+  });
+
+  $(".delete").on("click", function(e) {
+    e.preventDefault();
+    $this = $(this),
+    $id   = $this.attr("data-id"),
+    $elm  = $this.closest("li");
+
+    // console.log($this.closest("li"))
+    $.ajax({
+       url: "/messages/" + $id + "/perm_trash",
+       type: "POST",
+       success: $elm.remove()
+    });
+
+    return false; 
+  });
+});

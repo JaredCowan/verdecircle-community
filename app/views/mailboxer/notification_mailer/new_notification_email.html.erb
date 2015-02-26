@@ -6,7 +6,7 @@
   <body>
     <h1>You have a new notification: <%= @notification.subject.html_safe? ? @notification.subject : strip_tags(@notification.subject) %></h1>
     <p>
-      You have received a new notification:
+      You have received a new notification from :
     </p>
     <blockquote>
       <p>

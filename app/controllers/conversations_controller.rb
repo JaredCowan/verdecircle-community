@@ -1,21 +1,26 @@
 class ConversationsController < ApplicationController
   skip_authorization_check
   helper_method :mailbox, :conversation
+  respond_to :html, :json
   # load_and_authorize_resource
 
   def index
     @inbox ||= current_user.mailbox.inbox
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @inbox, include: [:recipients, :receipts, :messages] }
+    end
   end
 
   def create
     recipient_emails = conversation_params(:recipients).split(',')
     recipients = User.where(email: recipient_emails).all
-
     conversation = current_user.
       send_message(recipients, *conversation_params(:body, :subject)).conversation
 
-    # redirect_to :conversations
-    redirect_to :back
+    redirect_to :conversations
+    # redirect_to :back
   end
 
   def reply
@@ -28,6 +33,7 @@ class ConversationsController < ApplicationController
     conversation.mark_as_read(current_user)
     conversation.move_to_trash(current_user)
     redirect_to :conversations
+
   end
 
   def untrash

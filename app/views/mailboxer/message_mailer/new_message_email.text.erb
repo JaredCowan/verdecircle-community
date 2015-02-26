@@ -1,7 +1,5 @@
-You have a new message: <%= @subject %>
+<%= @message.sender.username.titleize %> sent you a new message: <%= @subject %>
 ===============================================
-
-You have received a new message:
 
 -----------------------------------------------
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>

@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     resources :authentications, path: 'accounts'
   end
 
-  resources :conversations do
+  resources :conversations, path: '/messages' do
     member do
       post :reply
       post :trash

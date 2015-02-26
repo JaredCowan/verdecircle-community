@@ -4,10 +4,9 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>You have a new message: <%= @subject %></h1>
-    <p>
-      You have received a new message:
-    </p>
+    <h1>
+     <%= @message.sender.username.titleize %> sent you a new message: <%= @subject %>
+    </h1>
     <blockquote>
       <p>
         <%= raw @message.body %>

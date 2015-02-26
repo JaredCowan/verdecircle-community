@@ -5,6 +5,7 @@ You have received a new notification:
 
 -----------------------------------------------
 <%= @notification.body.html_safe? ? @notification.body : strip_tags(@notification.body) %>
+<%= @notification.inspect %>
 -----------------------------------------------
 
 Visit <%= root_url %> and go to your notifications for more info.

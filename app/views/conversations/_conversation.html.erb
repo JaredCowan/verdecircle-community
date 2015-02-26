@@ -3,9 +3,11 @@
     <%= link_to conversation.subject, conversation_path(conversation) %>
     |
     <% if conversation.is_completely_trashed?(current_user) %>
-      <%= link_to 'Untrash', untrash_conversation_path(conversation), method: :post %>
+      <%= link_to 'Untrash', untrash_conversation_path(conversation), :class => "untrash", :data => {id: conversation.id}, method: :post %>
+      <%= link_to 'DELETE', perm_trash_conversation_path(conversation), :class => "delete", :data => {id: conversation.id}, method: :post %>
     <% else %>
-      <%= link_to 'Move to trash', trash_conversation_path(conversation), method: :post %>
+      <%= link_to 'Move to trash', trash_conversation_path(conversation), :class => "trash", :data => {id: conversation.id}, method: :post %>
+      <%#= link_to 'DELETE', perm_trash_conversation_path(conversation), method: :post %>
     <% end %>
   </p>
 <% end %>

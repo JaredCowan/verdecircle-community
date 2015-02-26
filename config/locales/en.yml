@@ -5,6 +5,13 @@ en:
   brand:
     name: 'Verde Circle Community'
 
+  mailboxer:
+    message_mailer:
+      subject_new: 'You receive a new message at Verde Circle Community Forums'
+      subject_reply: 'You received a new reply at Verde Circle Community Forums'
+    notification_mailer:
+      subject: "You new notification at Verde Circle Community Forum"
+
   emails:
     welcome:
       subject: 'Welcome to the Verde Circle Community'
@@ -55,6 +62,8 @@ en:
   account:
     profile:
       link: 'Your Profile'
+    messages:
+      link: 'Private Messages'
     edit:
       link: 'Account'
     destroy:
@@ -137,6 +146,7 @@ en:
       user:
         edit:
           password: 'Leave blank unless updating password'
+
 
     # Labels and hints examples
     # labels:
