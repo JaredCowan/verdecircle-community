@@ -14,13 +14,14 @@ gem 'terminal-notifier', group: [:development]
 # gem 'rb-inotify', :group => [:development, :test]   # monitor file changes without hammering the disk
 
 
-
 # Monitoring
 gem 'rack-timeout', '~> 0.1.0beta4'
 gem 'newrelic_rpm'
 gem 'airbrake', '~> 3.2.1'         # use with airbrake.io or errbit
 # gem 'airbrake_user_attributes'  # use with self-hosted errbit; see config/initializers/airbrake.rb
 gem 'rack-google-analytics'
+# Consider switching to rake-tracker gem instead of Google gem
+# gem 'rack-tracker'
 
 # Data
 gem 'pg'
