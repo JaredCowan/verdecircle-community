@@ -22,6 +22,37 @@ class ApplicationController < ActionController::Base
   include ErrorReportingConcern
   include AuthorizationErrorsConcern
 
+  def flyer(style = "notice", options = {})
+    options.key?(:value)  ? "" : options.merge!(:value  => "You didn't define a value!")
+    options.key?(:sticky) ? "" : options.merge!(:sticky => true)
+    options.key?(:time)   ? "" : options.merge!(:time => 1500)
+
+    defaultClass = "#{style}"
+    puts options.key?(:class)
+    userClass    = options.key?(:class) ? options.values_at(:class) : nil
+    newClass     = "#{defaultClass} #{userClass}"
+    newClass     = newClass.gsub("nil", "").delete("[\"]")
+
+    options.merge!(:class_name => "#{newClass}")
+
+    case style
+    when "notice"
+      gflash notice: options
+    when "error"
+      gflash error: options
+    when "success"
+      gflash success: options
+    when "warning"
+      gflash warning: options
+    when "progress"
+      gflash progress: options
+    else
+      gflash notice: options
+    end
+
+    puts options
+  end
+
   protected
 
   def skip_check_authorization?

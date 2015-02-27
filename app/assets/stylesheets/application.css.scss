@@ -3,11 +3,11 @@
  * Changed: Wednesday, February 18th, 2015, at 3:51:35 PM * 
 */ 
 //= require_self
-//= require gritter
 
 // Core
 @import "variables";
-@import "bootstrap";
+@import "depend/bootstrap";
+@import "depend/gritter";
 @import "icons_social";
 @import "auth";
 @import "avatar";

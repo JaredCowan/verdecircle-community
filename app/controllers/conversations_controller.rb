@@ -6,7 +6,8 @@ class ConversationsController < ApplicationController
 
   def index
     @inbox ||= current_user.mailbox.inbox
-
+    # gflash :error => { value: "The product has been created successfully!", sticky: false, :time => 100 }
+    flyer("notice", {value: "I see dead people", class: "hey"})
     respond_to do |format|
       format.html
       format.json { render json: @inbox, include: [:recipients, :receipts, :messages] }
