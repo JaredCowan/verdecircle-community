@@ -37,6 +37,7 @@ gem 'haml-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'headjs-rails'
+gem "gritter", "1.1.0"
 
 # Random
 gem 'mailboxer', git: 'git://github.com/ging/mailboxer.git'
@@ -53,7 +54,6 @@ gem 'jquery-ui-rails'
 gem 'nprogress-rails'
 gem 'modernizr-rails'
 gem 'twitter-bootstrap-rails-confirm'
-gem 'jquery-smooth-scroll-rails', :git => 'git@github.com:gretel/jquery-smooth-scroll-rails.git'
 
 # CoffeeScript
 # Not needed in production if precompiling assets

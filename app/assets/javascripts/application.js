@@ -10,6 +10,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap/rails/confirm
 //= require jquery-ui
+//= require gritter
 
 /*!
  * Bootstrap
@@ -23,7 +24,6 @@
 //= require rails_confirm_dialog
 
 //= require jquery.scrollto
-//= require jquery-smooth-scroll
 
 //= require js-routes
 

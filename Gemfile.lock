@@ -17,13 +17,6 @@ GIT
       cocaine (~> 0.5.5)
       mime-types
 
-GIT
-  remote: git@github.com:gretel/jquery-smooth-scroll-rails.git
-  revision: 0ca6feb7d31eaa2cc4aa1aa98d5dd237f657e9f3
-  specs:
-    jquery-smooth-scroll-rails (0.0.4)
-      railties (~> 4.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -137,6 +130,7 @@ GEM
     foreigner (1.7.2)
       activerecord (>= 3.0.0)
     formatador (0.2.5)
+    gritter (1.1.0)
     guard (2.6.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -428,12 +422,12 @@ DEPENDENCIES
   draper (~> 1.3)
   factory_girl_rails
   ffaker
+  gritter (= 1.1.0)
   guard-rspec
   haml-rails
   headjs-rails
   jbuilder
   jquery-rails
-  jquery-smooth-scroll-rails!
   jquery-turbolinks
   jquery-ui-rails
   js-routes
