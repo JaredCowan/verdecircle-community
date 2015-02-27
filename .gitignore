@@ -22,6 +22,7 @@ node_modules/**
 /coverage/**
 .zeus.sock
 .env
+public/assets/**
 
 # Ignore Sublime Text workspace files
 /*.sublime-workspace
