@@ -23,15 +23,19 @@ class ApplicationController < ActionController::Base
   include AuthorizationErrorsConcern
 
   def flyer(style = "notice", options = {})
-    options.key?(:value)  ? "" : options.merge!(:value  => "You didn't define a value!")
+    options.key?(:value)  ? "" : options.merge!(:value  => I18n.t('gflash.errors.nodefault'))
     options.key?(:sticky) ? "" : options.merge!(:sticky => true)
     options.key?(:time)   ? "" : options.merge!(:time => 1500)
+    options.key?(:title)  ? "" : options.merge!(:title => I18n.t("#{style}", :scope => [:gflash, :titles]))
+    # options.key?(:image)  ? "" : options.merge!(:image => "")
 
+    
     defaultClass = "#{style}"
     puts options.key?(:class)
     userClass    = options.key?(:class) ? options.values_at(:class) : nil
-    newClass     = "#{defaultClass} #{userClass}"
-    newClass     = newClass.gsub("nil", "").delete("[\"]")
+    newClass     = "#{defaultClass} #{userClass}".gsub("nil", "").delete("[\"]")
+    # newClass     = newClass.gsub("nil", "").delete("[\"]")
+
 
     options.merge!(:class_name => "#{newClass}")
 
