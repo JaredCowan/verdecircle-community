@@ -1,14 +1,29 @@
-<h1>Conversations</h1>
-<h2>Inbox</h2>
-<ul>
-  <%= render collection: mailbox.inbox, partial: 'conversation' %>
-</ul>
-<h2>Sentbox</h2>
-<ul>
-  <%= render collection: mailbox.sentbox, partial: 'conversation' %>
-</ul>
-<h2>Trash</h2>
-<ul>
-  <%= render collection: mailbox.trash, partial: 'conversation' %>
-</ul>
-<%= link_to 'Start Conversation', :new_conversation, :class => "new" %>
+<div role="tabpanel">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="<%= conversations_path + "#inbox" %>" aria-controls="inbox" role="tab" data-toggle="tab">Inbox</a>
+    </li>
+    <li role="presentation">
+      <a href="<%= conversations_path + "#sent" %>" aria-controls="sent" role="tab" data-toggle="tab">Sent</a>
+    </li>
+    <li role="presentation">
+      <a href="<%= conversations_path + "#trash" %>" aria-controls="trash" role="tab" data-toggle="tab">Trash</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+ <div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="inbox">
+    <%= render collection: mailbox.inbox, partial: 'conversation' %>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="sent">
+    <%= render collection: mailbox.sentbox, partial: 'conversation' %>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="trash">
+    <%= render collection: mailbox.trash, partial: 'conversation' %>
+  </div>
+</div>
+</div>
+<%= link_to 'Start Conversation', :new_conversation, class: "btn btn-success" %>
+<%= link_to 'Empty Trash', empty_trash_path, class: "btn btn-danger pull-right" %>

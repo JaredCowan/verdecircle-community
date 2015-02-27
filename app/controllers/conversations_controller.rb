@@ -19,8 +19,10 @@ class ConversationsController < ApplicationController
     conversation = current_user.
       send_message(recipients, *conversation_params(:body, :subject)).conversation
 
+    flash.keep[:success] = "Your message has been sent to: #{recipients.all.map(&:username).map { |u| u.titleize }.join(',\s')
+}."
+
     redirect_to :conversations
-    # redirect_to :back
   end
 
   def reply
@@ -30,10 +32,9 @@ class ConversationsController < ApplicationController
   end
 
   def trash
-    conversation.mark_as_read(current_user)
+    # conversation.mark_as_read(current_user)
     conversation.move_to_trash(current_user)
     redirect_to :conversations
-
   end
 
   def untrash
@@ -48,6 +49,17 @@ class ConversationsController < ApplicationController
     conversation.mark_as_deleted(current_user)
     conversation.untrash(current_user)
     redirect_to :conversations
+  end
+
+  def empty_trash
+    if current_user.mailbox.trash.count > 0
+      current_user.mailbox.empty_trash
+      flash[:success] = "Your trash has been emptied."
+      redirect_to :conversations
+    else
+      redirect_to :back
+      flash[:info] = "Nothing to delete! Your trash is already empty."
+    end
   end
 
   private

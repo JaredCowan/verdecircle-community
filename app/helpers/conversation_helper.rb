@@ -20,6 +20,10 @@ module ConversationHelper
     current_user && current_user.receipts.is_unread.length
   end
 
+  def css_unread?(conversation)
+    conversation.receipts.where(is_read: false).count > 0 ? "unread" : "read"
+  end
+
   def message_name
     if conversation.recipients.length >= 2
       if current_user.full_name != nil && conversation.recipients[0].full_name == current_user.full_name

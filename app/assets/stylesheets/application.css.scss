@@ -2,7 +2,6 @@
  * ProjectName v1.0.0 * 
  * Changed: Wednesday, February 18th, 2015, at 3:51:35 PM * 
 */ 
-
 //= require_self
 
 // Core
@@ -23,3 +22,7 @@
 
 // Overrides
 @import "overrides";
+
+.unread {
+  background-color: #ff0;
+}

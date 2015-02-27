@@ -7,10 +7,10 @@ en:
 
   mailboxer:
     message_mailer:
-      subject_new: 'You receive a new message at Verde Circle Community Forums'
+      subject_new: 'You received a new message at Verde Circle Community Forums'
       subject_reply: 'You received a new reply at Verde Circle Community Forums'
     notification_mailer:
-      subject: "You new notification at Verde Circle Community Forum"
+      subject: "You have a new notification at Verde Circle Community Forums"
 
   emails:
     welcome:

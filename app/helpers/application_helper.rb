@@ -25,6 +25,14 @@ module ApplicationHelper
     end
   end
 
+  def username
+    current_user.username.titleize
+  end
+
+  def email
+    current_user.email
+  end
+
   def locales(type)
     %(#{I18n.t "#{type}"})
   end

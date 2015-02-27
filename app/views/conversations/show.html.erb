@@ -4,6 +4,7 @@
 <ul>
   <%= content_tag_for(:li, conversation.receipts_for(current_user)) do |receipt| %>
     <% message = receipt.message %>
+    <% receipt.mark_as_read %>
     <h3>
       <%= message.subject %>
     </h3>

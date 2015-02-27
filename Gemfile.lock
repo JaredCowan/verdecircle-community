@@ -17,6 +17,13 @@ GIT
       cocaine (~> 0.5.5)
       mime-types
 
+GIT
+  remote: git@github.com:gretel/jquery-smooth-scroll-rails.git
+  revision: 0ca6feb7d31eaa2cc4aa1aa98d5dd237f657e9f3
+  specs:
+    jquery-smooth-scroll-rails (0.0.4)
+      railties (~> 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -387,6 +394,7 @@ GEM
     timers (1.1.0)
     turbolinks (2.4.0)
       coffee-rails
+    twitter-bootstrap-rails-confirm (1.0.4)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -425,7 +433,9 @@ DEPENDENCIES
   headjs-rails
   jbuilder
   jquery-rails
+  jquery-smooth-scroll-rails!
   jquery-turbolinks
+  jquery-ui-rails
   js-routes
   mailboxer!
   memcachier
@@ -470,5 +480,6 @@ DEPENDENCIES
   terminal-notifier
   terminal-notifier-guard
   turbolinks
+  twitter-bootstrap-rails-confirm
   uglifier
   unicorn

@@ -48,6 +48,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/emptytrash', to: 'conversations#empty_trash', as: 'empty_trash'
+
   get '/home' => 'users#show', as: 'user_home'
 
   # Dummy preview pages for testing.

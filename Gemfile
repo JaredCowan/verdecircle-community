@@ -17,7 +17,7 @@ gem 'terminal-notifier', group: [:development]
 # Monitoring
 gem 'rack-timeout', '~> 0.1.0beta4'
 gem 'newrelic_rpm'
-gem 'airbrake', '~> 3.2.1'         # use with airbrake.io or errbit
+gem 'airbrake', '~> 3.2.1' # use with airbrake.io or errbit
 # gem 'airbrake_user_attributes'  # use with self-hosted errbit; see config/initializers/airbrake.rb
 gem 'rack-google-analytics'
 # Consider switching to rake-tracker gem instead of Google gem
@@ -26,8 +26,8 @@ gem 'rack-google-analytics'
 # Data
 gem 'pg'
 # gem 'mysql2'
-gem 'dalli'                     # memcached
-# gem 'schema_plus'             # add better index and foreign key support
+gem 'dalli' # memcached
+# gem 'schema_plus' # add better index and foreign key support
 gem 'jbuilder'
 gem 'rake', '>=10.3.2'
 
@@ -49,8 +49,11 @@ gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
+gem 'jquery-ui-rails'
 gem 'nprogress-rails'
 gem 'modernizr-rails'
+gem 'twitter-bootstrap-rails-confirm'
+gem 'jquery-smooth-scroll-rails', :git => 'git@github.com:gretel/jquery-smooth-scroll-rails.git'
 
 # CoffeeScript
 # Not needed in production if precompiling assets
