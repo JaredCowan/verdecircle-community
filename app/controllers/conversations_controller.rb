@@ -6,8 +6,7 @@ class ConversationsController < ApplicationController
 
   def index
     @inbox ||= current_user.mailbox.inbox
-    # gflash :error => { value: "The product has been created successfully!", sticky: false, :time => 100 }
-    flyer("notice", {value: "I see dead people", class: "hey"})
+
     respond_to do |format|
       format.html
       format.json { render json: @inbox, include: [:recipients, :receipts, :messages] }
@@ -22,8 +21,9 @@ class ConversationsController < ApplicationController
 
     flash.keep[:success] = "Your message has been sent to: #{recipients.all.map(&:username).map { |u| u.titleize }.join(',\s')
 }."
+    
 
-    redirect_to :conversations
+    redirect_to :conversations, :gflash => { :warning => "You just deleted something important." }
   end
 
   def reply

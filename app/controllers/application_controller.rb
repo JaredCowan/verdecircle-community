@@ -25,9 +25,10 @@ class ApplicationController < ActionController::Base
   def flyer(style = "notice", options = {})
     options.key?(:value)  ? "" : options.merge!(:value  => I18n.t('gflash.errors.nodefault'))
     options.key?(:sticky) ? "" : options.merge!(:sticky => true)
-    options.key?(:time)   ? "" : options.merge!(:time => 1500)
+    options.key?(:time)   ? "" : options.merge!(:time => 2000)
     options.key?(:title)  ? "" : options.merge!(:title => I18n.t("#{style}", :scope => [:gflash, :titles]))
-    # options.key?(:image)  ? "" : options.merge!(:image => "")
+    imagePath = options.values_at(:image).to_s.gsub("nil", "").delete("[\"]")
+    options.merge!(:image => "#{imagePath}") if options.key?(:image)
 
     
     defaultClass = "#{style}"
