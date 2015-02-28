@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150226092413) do
+ActiveRecord::Schema.define(version: 20150227214958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: true do |t|
+    t.integer  "user_id"
+    t.string   "action",          default: "", null: false
+    t.integer  "targetable_id",   default: 0,  null: false
+    t.string   "targetable_type", default: "", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["targetable_id", "targetable_type"], name: "index_activities_on_targetable_id_and_targetable_type", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -31,6 +42,18 @@ ActiveRecord::Schema.define(version: 20150226092413) do
   end
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
+
+  create_table "documents", force: true do |t|
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+  end
+
+  add_index "documents", ["post_id"], name: "index_documents_on_post_id", using: :btree
 
   create_table "mailboxer_conversation_opt_outs", force: true do |t|
     t.integer "unsubscriber_id"
@@ -91,6 +114,17 @@ ActiveRecord::Schema.define(version: 20150226092413) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "posts", force: true do |t|
+    t.integer  "user_id"
+    t.string   "subject",     default: "", null: false
+    t.text     "body",        default: "", null: false
+    t.integer  "document_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "rails_admin_histories", force: true do |t|
     t.text     "message"

@@ -10,8 +10,11 @@ class User < ActiveRecord::Base
   has_attached_file :avatar
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
-  has_many :taggings
-  has_many :tags, through: :taggings
+  has_many :posts, dependent: :destroy
+  has_many :activities, :dependent => :destroy
+
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings, dependent: :destroy
 
   has_many :authentications, dependent: :destroy, validate: false, inverse_of: :user do
     def grouped_with_oauth
@@ -54,6 +57,14 @@ class User < ActiveRecord::Base
 
   def self.find_by_username(username)
     find_by(username: username.downcase)
+  end
+
+  def create_activity(item, action)
+    activity            = activities.new
+    activity.targetable = item
+    activity.action     = action
+    activity.save
+    activity
   end
 
   # Override Devise to allow for Authentication or password.

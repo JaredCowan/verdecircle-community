@@ -34,6 +34,7 @@
 
 //= require verdecircle/messaging
 //= require verdecircle/userscripts
+//= require verdecircle/posts
 
 /*!
  * common scripts load last!

@@ -7,4 +7,4 @@ en:
       error: "Error"
       progress: "Progress"
     error:
-      nodefault: "You didn't define a value!"
+      nodefault: "You didn't define a default value!"

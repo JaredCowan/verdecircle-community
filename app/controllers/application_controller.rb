@@ -4,6 +4,15 @@ class ApplicationController < ActionController::Base
     http_basic_authenticate_with name: user, password: pass
   end
 
+  if Rails.env == "production"
+    rescue_from Exception, :with => :render_500
+    rescue_from NoMethodError, :with => :render_not_found
+  end
+
+  # rescue_from ActionController::RoutingError, :with => :render_not_found
+  # rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
+  # rescue_from Exception, :with => :render_404
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -21,7 +30,8 @@ class ApplicationController < ActionController::Base
   include CommonHelper
   include ErrorReportingConcern
   include AuthorizationErrorsConcern
-
+  
+  # Move flyer method to helper.
   def flyer(style = "notice", options = {})
     options.key?(:value)  ? "" : options.merge!(:value  => I18n.t('gflash.errors.nodefault'))
     options.key?(:sticky) ? "" : options.merge!(:sticky => true)
@@ -30,29 +40,26 @@ class ApplicationController < ActionController::Base
     imagePath = options.values_at(:image).to_s.gsub("nil", "").delete("[\"]")
     options.merge!(:image => "#{imagePath}") if options.key?(:image)
 
-    
     defaultClass = "#{style}"
     puts options.key?(:class)
     userClass    = options.key?(:class) ? options.values_at(:class) : nil
     newClass     = "#{defaultClass} #{userClass}".gsub("nil", "").delete("[\"]")
-    # newClass     = newClass.gsub("nil", "").delete("[\"]")
-
 
     options.merge!(:class_name => "#{newClass}")
 
     case style
-    when "notice"
-      gflash notice: options
-    when "error"
-      gflash error: options
-    when "success"
-      gflash success: options
-    when "warning"
-      gflash warning: options
-    when "progress"
-      gflash progress: options
-    else
-      gflash notice: options
+      when "notice"
+        gflash notice: options
+      when "error"
+        gflash error: options
+      when "success"
+        gflash success: options
+      when "warning"
+        gflash warning: options
+      when "progress"
+        gflash progress: options
+      else
+        gflash notice: options
     end
 
     puts options
@@ -79,5 +86,20 @@ class ApplicationController < ActionController::Base
     else
       raise
     end
+  end
+
+  def routing_error
+    raise ActionController::RoutingError.new(params[:path])
+  end
+
+  def render_not_found
+    render "public/404"
+  end
+
+  private
+
+  def render_404(exception = nil)
+    logger.info "Exception, redirecting: #{exception.message}" if exception
+    redirect_to :root
   end
 end

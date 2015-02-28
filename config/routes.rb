@@ -9,12 +9,16 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin' if defined? RailsAdmin
 
+  resources :posts
+  resources :activities
+
   # Static pages
   match '/error' => 'pages#error', via: [:get, :post], as: 'error_page'
   get '/terms' => 'pages#terms', as: 'terms'
   get '/privacy' => 'pages#privacy', as: 'privacy'
   get '/users', to: 'users#index', as: 'users_page'
   get '/u/:username', to: 'users#profile', as: 'profile_page'
+  # get '/posts/:id/:subject', to: 'posts#show', as: 'posts_show_page'
 
   # OAuth
   oauth_prefix = Rails.application.config.auth.omniauth.path_prefix
@@ -48,6 +52,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :posts do
+    member do
+      put "like", to: "posts#liked"
+      put "unlike", to: "posts#unliked"
+      put "dislike", to: "posts#disliked"
+      put "undislike", to: "posts#undisliked"
+    end
+  end
+
   get '/emptytrash', to: 'conversations#empty_trash', as: 'empty_trash'
 
   get '/home' => 'users#show', as: 'user_home'
@@ -59,4 +72,8 @@ Rails.application.routes.draw do
   get 'robots.:format' => 'robots#index'
 
   root 'pages#home'
+
+  # Handle routing errors
+  ## NEVER PUT ROUTES BELOW THIS LINE
+  # match "*path", to: 'application#routing_error',   via: 'get'
 end

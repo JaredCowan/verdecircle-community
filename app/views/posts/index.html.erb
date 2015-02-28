@@ -1,0 +1,29 @@
+<%= simple_form_for Post.create, :html => { :multipart => true } do |f| %>
+  <%= f.input :subject %>
+  <%= f.input :body %>
+  <%= f.button :submit %>
+<% end %>
+<br>
+<% @posts.each do |p| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= prettyname(p) %> <%= prettytitle(p) %> <%= prettycreated(p, {class: "pull-right"}) %>
+      <%= p.created_at.strftime("Posted at %l:%H %P") %>
+    </div>
+    <div class="panel-body">
+      <%= p.body %>
+      <% if user_signed_in? %>
+        <% if hidden_logic(p)[:like] %>
+          <%= link_to "Like", like_post_path(p), method: :put %>
+        <% else %>
+          <%= link_to "UnLike", unlike_post_path(p), method: :put %>
+        <% end %>
+        <% if hidden_logic(p)[:dislike] %>
+          <%= link_to "DisLike", dislike_post_path(p), method: :put %>
+        <% else %>
+          <%= link_to "Undislike", undislike_post_path(p), method: :put %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

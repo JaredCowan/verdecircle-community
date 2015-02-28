@@ -82,6 +82,17 @@ en:
     edit:
       link: 'Social'
 
+  likable:
+    posts:
+      like: 'like dis shit'
+      like-link: 'like'
+      unlike: 'unlike dis shit'
+      unlike-link: 'unlike'
+      disliked: 'dislike dis shit'
+      disliked-link: 'disliked'
+      undisliked: 'undislike dis shit'
+      undisliked-link: 'undislike'
+
   # See rails_admin locale file for more settings
   admin:
     link: 'Admin'           # Name of admin link in application drop down menu
