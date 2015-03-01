@@ -20,8 +20,8 @@ module PostsHelper
   end
 
   def prettycreated(object, options = {})
-    time, present, past = object.created_at, "Posted at %l:%H %P", "Posted on %a, %B #{object.created_at.day.ordinalize} at %l:%H %P"
-    formatted_time = time.today? ? time.strftime("#{present}") : time.strftime("#{past}")
-    return content_tag(:span, formatted_time, options)
+    # time, present, past = object.created_at, "Posted at %l:%H %P", "Posted on %a, %B #{object.created_at.day.ordinalize} at %l:%H %P"
+    # formatted_time = time.today? ? time.strftime("#{present}") : time.strftime("#{past}")
+    # return content_tag(:span, formatted_time, options)
   end
 end

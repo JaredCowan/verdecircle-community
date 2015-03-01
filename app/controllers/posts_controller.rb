@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.all
 
     respond_to do |format|
       format.html
@@ -123,6 +123,10 @@ class PostsController < ApplicationController
     #   format.html {redirect_to :back }
     #   format.json { render json: @post, include: [:get_upvotes] }
     # end
+  end
+
+  def undo_link
+    view_context.link_to("undo", revert_version_path(@product.versions.scoped.last), :method => :post)
   end
 
   private

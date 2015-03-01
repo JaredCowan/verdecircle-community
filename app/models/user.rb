@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include Concerns::UserImagesConcern
   acts_as_messageable
   acts_as_voter
+  has_paper_trail :versions => :paper_trail_versions
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,

@@ -5,13 +5,12 @@
 <% @posts.each do |p| %>
   <div class="panel panel-default" id="<%= p.id %>">
     <div class="panel-heading">
-      <%= prettyname(p) %> <%= prettytitle(p) %> <%= prettycreated(p, {class: "pull-right"}) %>
-      <%= p.created_at.strftime("Posted at %l:%H %P") %>
+      <%= prettyname(p) %> <%= prettytitle(p) %> <span class="pull-right"><%= p.created_at.strftime("Posted at %l:%M %P") %></span>
     </div>
     <div class="panel-body">
       <%= p.body %>
       <% if p.image? %>
-        <br><%= image_tag(p.image.url) %><br>
+        <br><%= image_tag(p.image.url, class: "img-responsive", alt: "Forum Image") %><br>
       <% end %>
       <% if user_signed_in? %>
         <% if hidden_logic(p)[:like] %>
@@ -30,6 +29,7 @@
     <%= link_to 'Edit', edit_post_path(p) %> |
     <%= link_to 'Destroy', post_path(p), method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
+    <%= link_to("undo", revert_version_path(p.versions.last), :method => :post) if !p.versions.last == nil %>
     <%= p.previous_version.inspect %>
   </div>
 <% end %>

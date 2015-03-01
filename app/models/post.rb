@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   acts_as_votable
-  has_paper_trail :versions => :paper_trail_versions
+  has_paper_trail
   belongs_to :user
   has_attached_file :image
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/

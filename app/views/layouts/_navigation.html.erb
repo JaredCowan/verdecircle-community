@@ -35,6 +35,9 @@
               <%= link_to I18n.t('account.edit.link'), edit_user_registration_path %>
             </li>
             <li>
+              <%= link_to "Activity Feed", activities_path %>
+            </li>
+            <li>
               <%= link_to I18n.t('auth.logout.link'), destroy_user_session_path, rel: :nofollow %>
             </li>
           </ul> <!-- END dropdown-menu -->

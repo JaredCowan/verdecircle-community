@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :posts
   resources :activities
 
+  post "versions/:id/revert" => "versions#revert", :as => "revert_version"
+
   # Static pages
   match '/error' => 'pages#error', via: [:get, :post], as: 'error_page'
   get '/terms' => 'pages#terms', as: 'terms'

@@ -68,12 +68,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
-    # Only create activity for profile updates
-    # every 2 hours to prevent flooding
-    if current_user.activities.where(targetable_type: "profile").empty? ||
-      (!current_user.activities.where(targetable_type: "profile").empty? && current_user.activities.where(targetable_type: "profile").last.created_at < 3.hours.ago)
-      Activity.create!(user_id: current_user.id, action: 'updated', targetable_id: current_user.id, targetable_type: "profile")
-    end
   end
 
   # DELETE /resource

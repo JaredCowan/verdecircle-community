@@ -24,7 +24,7 @@
             <% another = auths.present? ? 'Another ' : '' %>
             <%= link_to provider_auth_path(provider, origin: @return_to), class: 'btn btn-primary btn-sm', data: {flow: 'connect'} do %>
               <i class="sico-<%= provider %> sico-fixed"></i>
-              Connect <%= "Another\s" + Authentication.provider_name(provider) %>
+                <%= "Connect your\s" + Authentication.provider_name(provider) %>
             <% end %>
             <% if auths.present? && provider == 'twitter' %>
               <div class="help-block">

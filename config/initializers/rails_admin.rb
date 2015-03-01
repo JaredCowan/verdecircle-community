@@ -20,6 +20,8 @@ if defined? RailsAdmin
 
 
   RailsAdmin.config do |config|
+    
+    PaperTrail.config.version_limit = 4
 
     ################  Global configuration  ################
 
@@ -43,6 +45,7 @@ if defined? RailsAdmin
 
     # If you want to track changes on your models:
     # config.audit_with :history, 'User'
+    config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
     # Display empty fields in show views:
     # config.compact_show_view = false

@@ -52,7 +52,7 @@ en:
       prompt: 'Disconnect this social account?'
       tooltip: 'Disconnect social account and remove related data'
       warning: ''
-      notice: 'Your social account will be disconnected form your StarterKit account. You can reconnect the social account at any time.'
+      notice: 'Your social account will be disconnected form your Verde Circle account. You can reconnect the social account at any time.'
       submit: 'Yes, disconnect the account'
       cancel: 'Cancel'
     reconnect:
@@ -63,11 +63,11 @@ en:
     profile:
       link: 'Your Profile'
     messages:
-      link: 'Private Messages'
+      link: 'Messages'
     posts:
       link: 'Forum'
     edit:
-      link: 'Account'
+      link: 'My Account'
     destroy:
       link: 'Delete my account'
       prompt: 'Delete your account?'
@@ -97,7 +97,7 @@ en:
 
   # See rails_admin locale file for more settings
   admin:
-    link: 'Admin'           # Name of admin link in application drop down menu
+    link: 'Admin Dashboard'           # Name of admin link in application drop down menu
     home:
       name: 'Application'   # Name of link back to app in admin dashboard
     dashboard:
