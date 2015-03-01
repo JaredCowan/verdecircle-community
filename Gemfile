@@ -20,7 +20,7 @@ gem 'newrelic_rpm'
 gem 'airbrake', '~> 3.2.1' # use with airbrake.io or errbit
 # gem 'airbrake_user_attributes'  # use with self-hosted errbit; see config/initializers/airbrake.rb
 gem 'rack-google-analytics'
-# Consider switching to rake-tracker gem instead of Google gem
+# Consider switching to rack-tracker gem instead of Google gem
 # gem 'rack-tracker'
 
 # Data
@@ -90,6 +90,7 @@ gem 'omniauth-google-oauth2'
 
 # Admin
 gem 'rails_admin'
+gem 'paper_trail', '~> 4.0.0.beta'
 
 # Workers
 gem 'sidekiq'
@@ -173,4 +174,3 @@ group :production do
   gem 'unicorn'
   gem 'rails_12factor'          # https://devcenter.heroku.com/articles/rails4
 end
-
