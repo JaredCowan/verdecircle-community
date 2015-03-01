@@ -91,8 +91,8 @@ class PostsController < ApplicationController
 
   def unliked
     @post = Post.find(params[:id])
-    @activity = Activity.find_by(targetable_id: @post)
-    @activity.destroy!
+    # @activity = Activity.find_by(targetable_id: @post)
+    # @activity.destroy!
     current_user.destroy_activity(@post, "liked")
     @post.unliked_by current_user, :vote_weight => 1
     redirect_to :back

@@ -34,6 +34,7 @@ if defined? RailsAdmin
 
     ## == PaperTrail ==
     # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
+    # config.audit_with :paper_trail, 'User', 'Version' # PaperTrail < 3.0.0
 
     # Set the admin name here (optional second array element will appear in red). For example:
     # or for a more dynamic name:
@@ -51,7 +52,7 @@ if defined? RailsAdmin
 
     # Exclude specific models (keep the others):
     # config.excluded_models = ['Authentication', 'User']
-    config.excluded_models = ['OauthCache', 'Document', 'PaperclipImage', 'Mailboxer::Conversation', 'Mailboxer::Notification', 'Mailboxer::Message', 'Mailboxer::Conversation::OptOut', 'Mailboxer::Receipt']
+    config.excluded_models = ['OauthCache', 'PaperclipImage', 'Mailboxer::Conversation', 'Mailboxer::Notification', 'Mailboxer::Message', 'Mailboxer::Conversation::OptOut', 'Mailboxer::Receipt']
 
     # Include specific models (exclude the others):
     # config.included_models = ['Authentications', 'Users', 'Activities', 'Posts']
