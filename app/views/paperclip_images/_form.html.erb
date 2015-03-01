@@ -1,0 +1,32 @@
+<%= simple_form_for @paperclip_image, html: { multipart: true } do |f| %>
+  <% if @paperclip_image.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@paperclip_image.errors.count, "error") %> prohibited this paperclip_image from being saved:</h2>
+
+      <ul>
+      <% @paperclip_image.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :asset %>
+    <%= f.file_field :asset, html: { class: 'form-control' } %>
+    <% if f.object.image? %>
+        <br />
+        <%= image_tag(f.object.asset.url) %><br />
+        <em>Currently uploaded image</em>
+        <p>
+        <%= f.object.asset_file_name %>
+        <%= f.input :_destroy, :as => :boolean, :label => "Delete?" %>
+        </p>
+    <% end %>
+
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

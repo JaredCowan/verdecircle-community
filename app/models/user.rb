@@ -8,13 +8,14 @@ class User < ActiveRecord::Base
          :confirmable, :timeoutable, :lockable, :async
 
   has_attached_file :avatar
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  # validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   has_many :posts, dependent: :destroy
-  has_many :activities, :dependent => :destroy
+  has_many :activities, dependent: :destroy
+  # has_many :images, dependent: :destroy
 
-  has_many :taggings, dependent: :destroy
-  has_many :tags, through: :taggings, dependent: :destroy
+  # has_many :taggings, dependent: :destroy
+  # has_many :tags, through: :taggings, dependent: :destroy
 
   has_many :authentications, dependent: :destroy, validate: false, inverse_of: :user do
     def grouped_with_oauth
@@ -66,6 +67,18 @@ class User < ActiveRecord::Base
     activity.save
     activity
   end
+
+  def destroy_activity(object, action_type)
+    Activity.find_by(targetable_id: object.id, action: "#{action_type}").destroy!
+    puts "here"
+    puts caller[0][/`([^']*)'/, 1]
+    puts "here"
+  end
+
+  # def destroy_activity(object, action_type)
+  #   Activity.find_by(targetable_id: object.id, action: "#{action_type}")
+  #   @activity.destroy!
+  # end
 
   # Override Devise to allow for Authentication or password.
   #

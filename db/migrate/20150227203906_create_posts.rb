@@ -5,7 +5,6 @@ class CreatePosts < ActiveRecord::Migration
 
       t.string :subject, null: false, default: ''
       t.text :body, null: false, default: ''
-      t.integer :document_id
 
       t.timestamps
     end

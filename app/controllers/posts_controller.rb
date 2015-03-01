@@ -1,11 +1,10 @@
 class PostsController < ApplicationController
   skip_authorization_check
-  # load_and_authorize_resource
   before_filter :authenticate_user!, except: [:index, :show]
   respond_to :html, :json
 
   def index
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :desc)
 
     respond_to do |format|
       format.html
@@ -42,38 +41,35 @@ class PostsController < ApplicationController
   end
 
   def update
-    if current_user
-      @post     = Post.find(params[:id])
-      # Only create activity for updates every 30min to prevent flooding
-      if current_user.activities.where(targetable_type: "post").empty? ||
-        (!current_user.activities.where(targetable_type: "post").empty? && current_user.activities.where(targetable_type: "post").last.created_at < 30.minutes.ago)
-        current_user.create_activity(@post, 'updated')
+    @post = current_user.posts.find(params[:id])
+    @post.transaction do
+      @post.update_attributes(post_params)
+      current_user.create_activity(@post, 'updated')
+      unless @post.valid? || (@post.valid? && @post.image && !@post.image.valid?)
+        raise ActiveRecord::Rollback
       end
-      # @document = @post.document
-    else
-      @post     = current_user.posts.find(params[:id])
-      # @post.document.user_id = current_user.id
-      # @document = @post.document
     end
-
+    
     respond_to do |format|
-      if @post.update_attributes(post_params)
-        format.html { redirect_to :back }
-        format.json { head :no_content }
-        flash[:success] = "Post was successfully updated."
-      else
-        redirect_to :back
-        # format_generic_error("edit")
+      format.html { redirect_to @post, notice: 'Status was successfully updated.' }
+      format.json { head :no_content }
+    end
+  rescue ActiveRecord::Rollback
+    respond_to do |format|
+      format.html do
+        flash.now[:error] = "Update failed."
+        render action: "edit"
       end
+      format.json { render json: @post.errors, status: :unprocessable_entity }
     end
   end
 
   def destroy
-    @post = Posts.find(params[:id])
+    @post = current_user.posts.find(params[:id])
 
     respond_to do |format|
       if @post.destroy
-        format.html { redirect_to :back }
+        format.html { redirect_to posts_path }
         format.json { head :no_content }
         flash[:success] = "Post was successfully deleted."
       else
@@ -97,6 +93,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @activity = Activity.find_by(targetable_id: @post)
     @activity.destroy!
+    current_user.destroy_activity(@post, "liked")
     @post.unliked_by current_user, :vote_weight => 1
     redirect_to :back
     # respond_to do |format|
@@ -131,6 +128,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:subject, :body, :document_attributes, :attachment)
+    params.require(:post).permit(:subject, :body, :image, :image_delete)
   end
 end

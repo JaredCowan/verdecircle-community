@@ -64,6 +64,8 @@ en:
       link: 'Your Profile'
     messages:
       link: 'Private Messages'
+    posts:
+      link: 'Forum'
     edit:
       link: 'Account'
     destroy:

@@ -26,7 +26,10 @@
               <%= link_to I18n.t('account.profile.link'), profile_page_path(current_user.username) %>
             </li>
             <li>
-            <%= link_to I18n.t('account.messages.link'), :conversations %>
+              <%= link_to I18n.t('account.posts.link'), posts_path %>
+            </li>
+            <li>
+              <%= link_to I18n.t('account.messages.link'), :conversations %>
             </li>
             <li>
               <%= link_to I18n.t('account.edit.link'), edit_user_registration_path %>

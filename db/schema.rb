@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227214958) do
+ActiveRecord::Schema.define(version: 20150228205820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,18 +42,6 @@ ActiveRecord::Schema.define(version: 20150227214958) do
   end
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
-
-  create_table "documents", force: true do |t|
-    t.integer  "post_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
-  end
-
-  add_index "documents", ["post_id"], name: "index_documents_on_post_id", using: :btree
 
   create_table "mailboxer_conversation_opt_outs", force: true do |t|
     t.integer "unsubscriber_id"
@@ -115,13 +103,25 @@ ActiveRecord::Schema.define(version: 20150227214958) do
     t.datetime "updated_at"
   end
 
-  create_table "posts", force: true do |t|
-    t.integer  "user_id"
-    t.string   "subject",     default: "", null: false
-    t.text     "body",        default: "", null: false
-    t.integer  "document_id"
+  create_table "paperclip_images", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "asset_file_name"
+    t.string   "asset_content_type"
+    t.integer  "asset_file_size"
+    t.datetime "asset_updated_at"
+  end
+
+  create_table "posts", force: true do |t|
+    t.integer  "user_id"
+    t.string   "subject",            default: "", null: false
+    t.text     "body",               default: "", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree

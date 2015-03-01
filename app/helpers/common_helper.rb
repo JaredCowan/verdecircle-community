@@ -4,6 +4,10 @@ module CommonHelper
   include GuidHelper
   include OauthHelper
 
+  # def destroy_activity(object, action_type)
+  #   current_user.activities.find_by(targetable_id: object.id, action: "#{action_type}").destroy!
+  # end
+
   # Check if resource has a specific error.
   #
   # Requires I18n::Backend::Metadata is enabled.

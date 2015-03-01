@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+
+<%= image_tag @paperclip_image.asset.url, class: "img-thumbnail" %>
+
+<%= link_to 'Edit', edit_paperclip_image_path(@paperclip_image) %> |
+<%= link_to 'Back', paperclip_images_path %>

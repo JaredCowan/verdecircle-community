@@ -51,10 +51,10 @@ if defined? RailsAdmin
 
     # Exclude specific models (keep the others):
     # config.excluded_models = ['Authentication', 'User']
-    config.excluded_models = ['OauthCache']
+    config.excluded_models = ['OauthCache', 'Document', 'PaperclipImage', 'Mailboxer::Conversation', 'Mailboxer::Notification', 'Mailboxer::Message', 'Mailboxer::Conversation::OptOut', 'Mailboxer::Receipt']
 
     # Include specific models (exclude the others):
-    # config.included_models = ['Authentication', 'User']
+    # config.included_models = ['Authentications', 'Users', 'Activities', 'Posts']
 
     # Label methods for model instances:
     # config.label_methods << :description # Default is [:name, :title]

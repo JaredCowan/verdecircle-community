@@ -50,7 +50,6 @@ module VerdeForum
 
     # Serve vendor fonts
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts', 'bootstrap')
 
     config.assets.precompile += %w( head )
 

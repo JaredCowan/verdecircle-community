@@ -1,8 +1,6 @@
-<%= simple_form_for Post.create, :html => { :multipart => true } do |f| %>
-  <%= f.input :subject %>
-  <%= f.input :body %>
-  <%= f.button :submit %>
-<% end %>
+<div class="form-group">
+  <%= link_to("New Post", new_post_path , class: "btn btn-primary") %>
+</div>
 <br>
 <% @posts.each do |p| %>
   <div class="panel panel-default">
@@ -12,6 +10,9 @@
     </div>
     <div class="panel-body">
       <%= p.body %>
+      <% if p.image? %>
+        <br><%= image_tag(p.image.url) %><br>
+      <% end %>
       <% if user_signed_in? %>
         <% if hidden_logic(p)[:like] %>
           <%= link_to "Like", like_post_path(p), method: :put %>

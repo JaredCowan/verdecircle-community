@@ -15,7 +15,8 @@ Rails.application.configure do
 
   # Logging
   config.log_level = :debug
-  config.logger = ActiveSupport::Logger.new(STDOUT)
+  # Causes every SQL query to call twice.
+  # config.logger = ActiveSupport::Logger.new(STDOUT)
   config.colorize_logging = true
 
   # Don't care if the mailer can't send.
@@ -55,4 +56,5 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  Paperclip.options[:command_path] = "/usr/local/bin/convert"
 end
