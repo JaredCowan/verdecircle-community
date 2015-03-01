@@ -26,10 +26,13 @@
       <% end %>
     </div>
     <div class="panel-heading">
-    <%= link_to 'Edit', edit_post_path(p) %> |
-    <%= link_to 'Destroy', post_path(p), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% if user_signed_in? && current_user == p.user %>
+        <%= link_to 'Edit', edit_post_path(p) %> |
+        <%= link_to 'Destroy', post_path(p), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% if p.versions.all.count > 0 %>
+          <%= link_to("undo", revert_version_path(p.versions.last), :method => :post) %>
+        <% end %>
+      <% end %>
     </div>
-    <%= link_to("undo", revert_version_path(p.versions.last), :method => :post) if !p.versions.last == nil %>
-    <%= p.previous_version.inspect %>
   </div>
 <% end %>
