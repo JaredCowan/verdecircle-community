@@ -103,15 +103,6 @@ ActiveRecord::Schema.define(version: 20150228205820) do
     t.datetime "updated_at"
   end
 
-  create_table "paperclip_images", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "asset_file_name"
-    t.string   "asset_content_type"
-    t.integer  "asset_file_size"
-    t.datetime "asset_updated_at"
-  end
-
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.string   "subject",            default: "", null: false

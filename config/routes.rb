@@ -1,6 +1,5 @@
 # Route prefixes use a single letter to allow for vanity urls of two or more characters
 Rails.application.routes.draw do
-  resources :paperclip_images
 
   if defined? Sidekiq
     require 'sidekiq/web'
