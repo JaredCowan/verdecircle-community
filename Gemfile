@@ -38,6 +38,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'headjs-rails'
 gem "gritter", "1.1.0"
+gem 'pusher'
 
 # Random
 gem 'mailboxer', git: 'git://github.com/ging/mailboxer.git'

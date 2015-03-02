@@ -21,7 +21,9 @@ class ConversationsController < ApplicationController
 
     flash.keep[:success] = "Your message has been sent to: #{recipients.all.map(&:username).map { |u| u.titleize }.join(',\s')
 }."
-    redirect_to :conversations, :gflash => { :warning => "You just deleted something important." }
+    # data = {userdata: current_user.username}
+    # Pusher['notifications'].trigger('message', data)
+    redirect_to :conversations
   end
 
   def reply
@@ -31,7 +33,7 @@ class ConversationsController < ApplicationController
   end
 
   def trash
-    # conversation.mark_as_read(current_user)
+    conversation.mark_as_read(current_user)
     conversation.move_to_trash(current_user)
     redirect_to :conversations
   end
