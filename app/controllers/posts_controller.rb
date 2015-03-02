@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @posts = Post.all
+    @posts = Post.all.order("created_at DESC")
 
     respond_to do |format|
       format.html
@@ -83,23 +83,13 @@ class PostsController < ApplicationController
     current_user.create_activity(@post, 'liked')
     @post.liked_by current_user, :vote_weight => 1
     redirect_to :back
-    # respond_to do |format|
-    #   format.html {redirect_to :back }
-    #   format.json { render json: @post, include: [:get_upvotes] }
-    # end
   end
 
   def unliked
     @post = Post.find(params[:id])
-    # @activity = Activity.find_by(targetable_id: @post)
-    # @activity.destroy!
     current_user.destroy_activity(@post, "liked")
     @post.unliked_by current_user, :vote_weight => 1
     redirect_to :back
-    # respond_to do |format|
-    #   format.html {redirect_to :back }
-    #   format.json { render json: @post, include: [:get_upvotes] }
-    # end
   end
 
   def disliked
@@ -107,10 +97,6 @@ class PostsController < ApplicationController
     current_user.create_activity(@post, 'disliked')
     @post.disliked_by current_user, :vote_weight => 1
     redirect_to :back
-    # respond_to do |format|
-    #   format.html {redirect_to :back }
-    #   format.json { render json: @post, include: [:get_upvotes] }
-    # end
   end
 
   def undisliked
@@ -119,10 +105,6 @@ class PostsController < ApplicationController
     @activity.destroy!
     @post.undisliked_by current_user, :vote_weight => 1
     redirect_to :back
-    # respond_to do |format|
-    #   format.html {redirect_to :back }
-    #   format.json { render json: @post, include: [:get_upvotes] }
-    # end
   end
 
   def undo_link
