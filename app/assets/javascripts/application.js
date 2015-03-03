@@ -5,10 +5,12 @@
 
 /*!
  * Load jQuery first
+ * require twitter/bootstrap/rails/confirm
+ * require rails_confirm_dialog
 */
 //= require jquery_2
 //= require jquery_ujs
-//= require twitter/bootstrap/rails/confirm
+//= 
 //= require jquery-ui
 
 /*!
@@ -20,7 +22,6 @@
 //= require turbolinks
 //= require nprogress
 //= require nprogress-turbolinks
-//= require rails_confirm_dialog
 //= require gritter
 
 //= require jquery.scrollto

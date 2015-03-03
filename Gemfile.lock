@@ -397,7 +397,6 @@ GEM
     timers (1.1.0)
     turbolinks (2.4.0)
       coffee-rails
-    twitter-bootstrap-rails-confirm (1.0.4)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -485,6 +484,5 @@ DEPENDENCIES
   terminal-notifier
   terminal-notifier-guard
   turbolinks
-  twitter-bootstrap-rails-confirm
   uglifier
   unicorn

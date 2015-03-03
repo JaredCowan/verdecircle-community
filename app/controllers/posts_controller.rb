@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
-  skip_authorization_check
+  load_and_authorize_resource
   before_filter :authenticate_user!, except: [:index, :show]
   respond_to :html, :json
 
   def index
-    @posts = Post.all.order("created_at DESC")
+    @posts = Post.all
 
     respond_to do |format|
       format.html
@@ -13,7 +13,9 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post        = Post.find(params[:id])
+    @comments    = @post.comments
+    @new_comment = @post.comments.new
   end
 
   def new
@@ -30,7 +32,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         current_user.create_activity(@post, 'created')
-        format.html { redirect_to :back }
+        format.html { redirect_to @post }
         format.json { render json: @post, post: :created, location: @post }
         flash[:success] = "Post was successfully created."
       else
@@ -42,6 +44,7 @@ class PostsController < ApplicationController
 
   def update
     @post = current_user.posts.find(params[:id])
+
     @post.transaction do
       @post.update_attributes(post_params)
       current_user.create_activity(@post, 'updated')
@@ -54,7 +57,9 @@ class PostsController < ApplicationController
       format.html { redirect_to @post, notice: 'Status was successfully updated.' }
       format.json { head :no_content }
     end
-  rescue ActiveRecord::Rollback
+
+    rescue ActiveRecord::Rollback
+
     respond_to do |format|
       format.html do
         flash.now[:error] = "Update failed."
@@ -82,6 +87,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     current_user.create_activity(@post, 'liked')
     @post.liked_by current_user, :vote_weight => 1
+    flash.keep[:success] = "You like this."
     redirect_to :back
   end
 
@@ -108,7 +114,7 @@ class PostsController < ApplicationController
   end
 
   def undo_link
-    view_context.link_to("undo", revert_version_path(@product.versions.scoped.last), :method => :post)
+    view_context.link_to("undo", revert_version_path(@post.versions.scoped.last), :method => :post)
   end
 
   private

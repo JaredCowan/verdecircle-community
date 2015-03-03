@@ -1,0 +1,17 @@
+<%= simple_form_for [@post, @new_comment], remote: true do |f| %>
+
+    <div class="form-group">
+      <%# if signed_in? %>
+          <%#= f.text_field :author, readonly: true, value: current_user.name, class: 'form-control' %>
+	  <%# else %>
+	      <%#= f.text_field :author, class: 'form-control', placeholder: 'Name (required)' %>
+	  <%# end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.text_area :body, rows: '5', class: 'form-control', autofocus: true %>
+      <%= f.input :user_id, as: :hidden, input_html: { value: "#{current_user.id}" } %>
+    </div>
+
+    <%= f.submit 'Post your comment', class: 'btn btn-default' %>
+<% end %>

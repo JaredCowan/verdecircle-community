@@ -4,6 +4,6 @@ class ActivitiesController < ApplicationController
   respond_to :html, :json
 
   def index
-    @activities = Activity.all.order("created_at DESC")
+    @activities = Activity.all
   end
 end

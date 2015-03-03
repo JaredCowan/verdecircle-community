@@ -20,7 +20,31 @@
     </div>
   </div>
 <% end %>
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <% if user_signed_in? %>
+        <% if hidden_logic(@post)[:like] %>
+          <%= link_to "Like", like_post_path(@post), method: :put %>
+        <% else %>
+          <%= link_to "UnLike", unlike_post_path(@post), method: :put %>
+        <% end %>
+        <% if hidden_logic(@post)[:dislike] %>
+          <%= link_to "DisLike", dislike_post_path(@post), method: :put %>
+        <% else %>
+          <%= link_to "Undislike", undislike_post_path(@post), method: :put %>
+        <% end %>
+      <% end %>
+      <h4 id="comments-count"><%= pluralize(@post.comments.count, 'Comment') %></h4>
+  </div>
+</div>
+<div id="comments-list">
+  <%= render partial: @post.reload.comments %>
+</div>
+
+<div id="comment-form">
+  <%= render 'comments/comment_form' %>
+</div>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', posts_path %> |
 <%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %>

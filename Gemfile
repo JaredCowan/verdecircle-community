@@ -54,7 +54,7 @@ gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 gem 'nprogress-rails'
 gem 'modernizr-rails'
-gem 'twitter-bootstrap-rails-confirm'
+# gem 'twitter-bootstrap-rails-confirm'
 
 # CoffeeScript
 # Not needed in production if precompiling assets

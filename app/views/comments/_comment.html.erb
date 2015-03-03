@@ -1,0 +1,30 @@
+<%# if comment.quother %>
+    <% comment_class = 'quother' %>
+<%# else %>
+	<% comment_class = 'visitor' %>
+<%# end %>
+
+<%= div_for comment, class: "#{comment_class}" do %>
+  <h4 class="comment-author"><%#= sanitize(comment.author) %><%#= sanitize(" @ <span class='quoth-typography'> quoth</span>") if comment.quother %></h4>
+  <span class="date"><small><%= time_ago_in_words(comment.created_at) %> ago</small></span>
+
+  <p class="comment-content"><%= sanitize(comment.body) %></p>
+  <% if user_signed_in? %>
+        <% if hidden_logic(comment)[:like] %>
+          <%= link_to "Like", like_post_comment_path(comment.post, comment), method: :put %>
+        <% else %>
+          <%= link_to "UnLike", unlike_post_comment_path(comment.post, comment), method: :put %>
+        <% end %>
+        <% if hidden_logic(comment)[:dislike] %>
+          <%= link_to "DisLike", dislike_post_comment_path(comment.post, comment), method: :put %>
+        <% else %>
+          <%= link_to "Undislike", undislike_post_comment_path(comment.post, comment), method: :put %>
+        <% end %>
+      <% end %>
+  <% if signed_in? && comment.user_id == current_user.id %>
+      <%= link_to '', post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Delete comment?' },
+                  class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true,
+                  title: 'Delete comment', rel: 'tooltip' %>
+  <% end %>
+  <hr />
+<% end %>

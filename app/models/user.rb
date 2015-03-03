@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   # validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :activities, dependent: :destroy
 
   has_many :authentications, dependent: :destroy, validate: false, inverse_of: :user do
@@ -27,6 +28,7 @@ class User < ActiveRecord::Base
             uniqueness: { case_sensitive: false }
 
   after_create :send_welcome_emails
+  default_scope -> { order('username ASC') }
 
   def display_name
     first_name.presence || email.split('@')[0]

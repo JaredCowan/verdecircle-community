@@ -8,6 +8,7 @@ class Post < ActiveRecord::Base
   validates_attachment :image,
   :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/gif", "image/png"] }
   has_many :activities, as: :targetable, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates :subject, presence: true, 
             length: { minimum: 3, maximum: 60 }
@@ -15,6 +16,7 @@ class Post < ActiveRecord::Base
             length: { minimum: 3, maximum: 4000 }
 
   before_save :destroy_image?
+  default_scope -> { order('created_at DESC') }
 
   def image_delete
     @image_delete ||= "0"
@@ -22,6 +24,10 @@ class Post < ActiveRecord::Base
 
   def image_delete=(value)
     @image_delete = value
+  end
+
+  def to_param
+    "#{id}-#{subject.parameterize}"
   end
 
   private

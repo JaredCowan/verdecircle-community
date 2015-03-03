@@ -10,7 +10,25 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin' if defined? RailsAdmin
 
-  resources :posts
+  # Posts, Posts likes, Post Comments & Post Comment likes
+  resources :posts do
+    member do
+      put "like", to: "posts#liked"
+      put "unlike", to: "posts#unliked"
+      put "dislike", to: "posts#disliked"
+      put "undislike", to: "posts#undisliked"
+    end
+
+    resources :comments, except: [:show, :edit] do
+      member do
+        put "like", to: "comments#liked"
+        put "unlike", to: "comments#unliked"
+        put "dislike", to: "comments#disliked"
+        put "undislike", to: "comments#undisliked"
+      end
+    end
+  end
+
   resources :activities
 
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
@@ -52,15 +70,6 @@ Rails.application.routes.draw do
       post :trash
       post :untrash
       post :perm_trash
-    end
-  end
-
-  resources :posts do
-    member do
-      put "like", to: "posts#liked"
-      put "unlike", to: "posts#unliked"
-      put "dislike", to: "posts#disliked"
-      put "undislike", to: "posts#undisliked"
     end
   end
 
