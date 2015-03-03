@@ -47,6 +47,7 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'acts-as-taggable-on'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem "paranoia", :github => "radar/paranoia", :branch => "rails4"
+gem 'aws-sdk', '~> 1.5.7'
 
 # Javascript
 gem 'jquery-rails'

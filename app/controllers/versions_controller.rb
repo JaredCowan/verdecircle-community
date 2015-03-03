@@ -28,8 +28,7 @@ class VersionsController < ApplicationController
     post = Post.with_deleted.find(params[:id])
     post.really_destroy!
     flash.keep[:success] = "Post was permanently deleted."
-    redirectPath = request.env["HTTP_REFERER"] ||= posts_path
-    redirect_to redirectPath
+    redirect_to posts_path
   end
 
   # Restore a comment that has been deleted.

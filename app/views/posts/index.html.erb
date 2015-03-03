@@ -43,7 +43,8 @@
       <%= link_to 'Show', post_path(p) %>
       <% if user_signed_in? && current_user == p.user %>
         | <%= link_to 'Edit', edit_post_path(p) %> |
-        <%= link_to 'Destroy', post_path(p), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Soft Delete', post_path(p), method: :delete, data: { confirm: 'This will only be visible to you and can be restored later.' } %>
+        | <%= link_to "Permanently Delete", super_delete_post_path(p.id), method: :delete, data: { confirm: 'Are you sure? You Can\'t restore this. Maybe try soft delete.'} %>
         <% if p.versions.all.count > 0 %>
           | <%= link_to("undo", revert_version_path(p.versions.last), :method => :post) %>
         <% end %>

@@ -10,6 +10,7 @@ node_modules/**
 .rbenv-version
 .rspec
 .travis.yml
+/public/system/**
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
