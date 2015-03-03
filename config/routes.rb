@@ -36,6 +36,12 @@ Rails.application.routes.draw do
   # Route for undoing / redoing changes made to a post
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
 
+  post "versions/:id/restore_post" => "versions#restore_post", :as => "restore_post"
+  delete "versions/:id/super_delete_post" => "versions#super_delete_post", :as => "super_delete_post"
+
+  post "versions/:id/restore_comment" => "versions#restore_comment", :as => "restore_comment"
+  delete "versions/:id/super_delete_comment" => "versions#super_delete_comment", :as => "super_delete_comment"
+
   # Static pages
   match '/error', to: 'pages#error', via: [:get, :post], as: 'error_page'
   get '/terms', to: 'pages#terms', as: 'terms'

@@ -2,3 +2,31 @@
 <h1><%= @user.username %></h1>
 
 <%= @user.fullname %>
+
+<h1>Deleted Posts</h1>
+<% Post.only_deleted.each do |p| %>
+  <%= p.inspect %><br>
+  <div class="btn-group">
+    <%= link_to "Restore this post", restore_post_path(p.id), class: "btn btn-warning", method: :post %>
+    <%= link_to "Permanently delete this post", super_delete_post_path(p.id), method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure? You Can\'t restore this. Maybe try soft delete.' } %>
+  </div>
+  <br>
+  <hr>
+<% end %>
+
+<h1>Deleted Comments</h1>
+<% Comment.only_deleted.reverse.each do |c| %>
+  <% disabled = "#{Post.with_deleted.find(c.post_id).deleted? ? 'disabled' : ''}" %>
+  <% btnText = %Q(#{Post.with_deleted.find(c.post_id).deleted? ? "You need to restore post Id: #{c.post_id} first" : 'Restore Comment'})% %>
+  <div class="btn-group">
+  <% Post.with_deleted.find(c.post_id).deleted? %>
+  <%= link_to "#{btnText}", restore_comment_path(c.id), method: :post, class: "btn btn-warning #{disabled}" %>
+  <% if Post.with_deleted.find(c.post_id).deleted? %>
+    <%= link_to "Restore post and comments", restore_post_path(Post.with_deleted.find(c.post_id)), method: :post, class: "btn btn-warning" %>
+  <% end %>
+  <%= link_to "Permanently delete comment", super_delete_comment_path(c.id), method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure? You Can\'t restore this comment. Maybe try soft delete.'} %>
+  </div> <br>
+  <%= c.inspect %>
+  <br>
+  <hr>
+<% end %>

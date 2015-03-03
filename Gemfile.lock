@@ -8,6 +8,14 @@ GIT
       rails (>= 3.2.0)
 
 GIT
+  remote: git://github.com/radar/paranoia.git
+  revision: 86be201e9cbd6b0b008f9bd60a92ea10ad6c8533
+  branch: rails4
+  specs:
+    paranoia (2.1.0)
+      activerecord (~> 4.0)
+
+GIT
   remote: git://github.com/thoughtbot/paperclip.git
   revision: 97c78efdce65b07c6425e76000f34f1909a257cb
   specs:
@@ -453,6 +461,7 @@ DEPENDENCIES
   omniauth-twitter
   paper_trail (~> 4.0.0.beta)
   paperclip!
+  paranoia!
   pg
   premailer-rails
   pry-byebug

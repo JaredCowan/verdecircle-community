@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   acts_as_votable
   has_paper_trail
+  acts_as_paranoid
   belongs_to :user
   has_attached_file :image
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
