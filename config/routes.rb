@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin' if defined? RailsAdmin
 
+  get  'posts/tags/:tag', to: 'posts#index', as: :tag
+
   # Posts, Posts likes, Post Comments & Post Comment likes
   resources :posts do
     member do
@@ -29,17 +31,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :activities
-
+  resources :activities, only: [:index, :destroy]
+  
+  # Route for undoing / redoing changes made to a post
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
 
   # Static pages
-  match '/error' => 'pages#error', via: [:get, :post], as: 'error_page'
-  get '/terms' => 'pages#terms', as: 'terms'
-  get '/privacy' => 'pages#privacy', as: 'privacy'
+  match '/error', to: 'pages#error', via: [:get, :post], as: 'error_page'
+  get '/terms', to: 'pages#terms', as: 'terms'
+  get '/privacy', to: 'pages#privacy', as: 'privacy'
   get '/users', to: 'users#index', as: 'users_page'
   get '/u/:username', to: 'users#profile', as: 'profile_page'
-  # get '/posts/:id/:subject', to: 'posts#show', as: 'posts_show_page'
 
   # OAuth
   oauth_prefix = Rails.application.config.auth.omniauth.path_prefix
@@ -87,5 +89,5 @@ Rails.application.routes.draw do
 
   # Handle routing errors
   ## NEVER PUT ROUTES BELOW THIS LINE
-  # match "*path", to: 'application#routing_error',   via: 'get'
+  # match "*path", to: 'application#routing_error', via: 'get'
 end

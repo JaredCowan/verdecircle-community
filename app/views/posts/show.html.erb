@@ -7,6 +7,10 @@
     <%= @post.body %>
   </div>
 </div>
+<% @post.taggings.each do |t| %>
+  <% name = Tag.find(t.tag_id).name %>
+  <%= link_to name, tag_path(name) %>
+<% end %>
 
 <% if @post.image? %>
   <div class="panel panel-default">

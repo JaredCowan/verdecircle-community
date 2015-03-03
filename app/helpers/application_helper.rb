@@ -37,6 +37,14 @@ module ApplicationHelper
     %(#{I18n.t "#{type}"})
   end
 
+  def tag_cloud(tags, classes)
+    max = tags.sort_by(&:count).last
+    tags.each do |tag|
+      index = tag.count.to_f / Integer(max.count) * (classes.size - 1)
+      yield(tag, classes[index.round])
+    end
+  end
+
   # To add text in front on the default title. Place this at the head of the view page.
   # <% provide(:title, view_bag_title("your text here")) %>
   # To completely replace the title, just use <% provide(:title, "your text here") %>

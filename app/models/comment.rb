@@ -4,6 +4,8 @@ class Comment < ActiveRecord::Base
 
   acts_as_votable
 
+  has_paper_trail
+
   validates :body, presence: true
   validates :post_id, presence: true
   validates :user_id, presence: true

@@ -10,6 +10,9 @@ class Post < ActiveRecord::Base
   has_many :activities, as: :targetable, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings, dependent: :destroy
+
   validates :subject, presence: true, 
             length: { minimum: 3, maximum: 60 }
   validates :body, presence: true, 
@@ -28,6 +31,25 @@ class Post < ActiveRecord::Base
 
   def to_param
     "#{id}-#{subject.parameterize}"
+  end
+
+  def self.tagged_with(name)
+    Tag.find_by_name!(name).posts
+  end
+
+  def self.tag_counts
+    Tag.select("tags.id, tags.name,count(taggings.tag_id) as count").
+      joins(:taggings).group("taggings.tag_id, tags.id, tags.name")
+  end
+
+  def tag_list
+    tags.map(&:name).join(", ")
+  end
+
+  def tag_list=(names)
+    self.tags = names.split(",").map do |n|
+      Tag.where(name: n.downcase.strip).first_or_create!
+    end
   end
 
   private

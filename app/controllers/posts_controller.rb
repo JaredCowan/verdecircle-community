@@ -3,12 +3,24 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   respond_to :html, :json
 
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  
   def index
-    @posts = Post.all
+    if params[:tag]
+      begin
+        @posttag = Post.tagged_with(params[:tag])
+      rescue ActiveRecord::RecordNotFound  
+        flash.keep[:danger] = "Sorry, we couldn't find anything with that tag."
+        @notFoundReturnUrl = request.env["HTTP_REFERER"] ||= posts_path
+        redirect_to @notFoundReturnUrl
+      end
+    else
+      @post = Post.all
 
-    respond_to do |format|
-      format.html
-      format.json { render json: @posts, include: [:user, :get_upvotes, :get_downvotes, :activities] }
+      respond_to do |format|
+        format.html
+        format.json { render json: @posts, include: [:comments, :user, :get_upvotes, :get_downvotes, :activities] }
+      end
     end
   end
 
@@ -78,7 +90,8 @@ class PostsController < ApplicationController
         format.json { head :no_content }
         flash[:success] = "Post was successfully deleted."
       else
-        # format_generic_error("index")
+        flash.keep[:success] = "There was an error deleting this post."
+        redirect_to not_found
       end
     end
   end
@@ -87,7 +100,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     current_user.create_activity(@post, 'liked')
     @post.liked_by current_user, :vote_weight => 1
-    flash.keep[:success] = "You like this."
     redirect_to :back
   end
 
@@ -117,9 +129,14 @@ class PostsController < ApplicationController
     view_context.link_to("undo", revert_version_path(@post.versions.scoped.last), :method => :post)
   end
 
+  def not_found
+    flash.keep[:danger] = "Sorry, we couldn't find that post you were looking for."
+    redirect_to :controller => "posts", :action => "index"
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:subject, :body, :image, :image_delete)
+    params.require(:post).permit(:subject, :body, :image, :image_delete, :tag_list)
   end
 end
