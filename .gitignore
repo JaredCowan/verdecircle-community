@@ -27,4 +27,3 @@ node_modules/**
 # Ignore Sublime Text workspace files
 /*.sublime-workspace
 *.sublime-project
-
