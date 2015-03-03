@@ -36,9 +36,11 @@ Rails.application.routes.draw do
   # Route for undoing / redoing changes made to a post
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
 
+  # Route for restoring a soft deleted post or permanently deleting it
   post "versions/:id/restore_post" => "versions#restore_post", :as => "restore_post"
   delete "versions/:id/super_delete_post" => "versions#super_delete_post", :as => "super_delete_post"
 
+  # Route for restoring a soft deleted comment or permanently deleting it
   post "versions/:id/restore_comment" => "versions#restore_comment", :as => "restore_comment"
   delete "versions/:id/super_delete_comment" => "versions#super_delete_comment", :as => "super_delete_comment"
 

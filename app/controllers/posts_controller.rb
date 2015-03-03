@@ -30,6 +30,12 @@ class PostsController < ApplicationController
     @new_comment = @post.comments.new
   end
 
+  #   def auto_link_usernames(text)
+  #   text.gsub /(?<=\s|^)@[A-Za-z0-9_]+(?=\b)/ do |username|
+  #   link_to(username, user_path(username.gsub('@', '')))
+  #   end.html_safe
+  # end
+
   def new
     @post = Post.new
   end

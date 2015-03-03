@@ -7,7 +7,7 @@
 <% Post.only_deleted.each do |p| %>
   <%= p.inspect %><br>
   <div class="btn-group">
-    <%= link_to "Restore this post", restore_post_path(p.id), class: "btn btn-warning", method: :post %>
+    <%= link_to "Restore this post", restore_post_path(p.id), class: "btn btn-success", method: :post %>
     <%= link_to "Permanently delete this post", super_delete_post_path(p.id), method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure? You Can\'t restore this. Maybe try soft delete.' } %>
   </div>
   <br>
@@ -22,7 +22,7 @@
   <% Post.with_deleted.find(c.post_id).deleted? %>
   <%= link_to "#{btnText}", restore_comment_path(c.id), method: :post, class: "btn btn-warning #{disabled}" %>
   <% if Post.with_deleted.find(c.post_id).deleted? %>
-    <%= link_to "Restore post and comments", restore_post_path(Post.with_deleted.find(c.post_id)), method: :post, class: "btn btn-warning" %>
+    <%= link_to "Restore post and comments", restore_post_path(Post.with_deleted.find(c.post_id)), method: :post, class: "btn btn-success" %>
   <% end %>
   <%= link_to "Permanently delete comment", super_delete_comment_path(c.id), method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure? You Can\'t restore this comment. Maybe try soft delete.'} %>
   </div> <br>
