@@ -4,7 +4,7 @@
 <%= @user.fullname %>
 
 <div class="btn-group">
-  <%= link_to("Restore All Posts", restore_all_post_path, method: :post, class: "btn btn-warning", data: { confirm: 'Are you sure? You are about to restore all your deleted posted and their comments.' }) %>
+  <%= link_to("Restore All Posts", restore_all_post_path, method: :post, class: "btn btn-warning", data: { confirm: 'Are you sure? You are about to restore all your deleted posts and their comments.' }) %>
   <%= link_to("Restore All Comments", restore_all_comment_path, method: :post, class: "btn btn-warning", data: { confirm: 'Are you sure? You about to restore all deleted comments.' }) %>
 </div>
 

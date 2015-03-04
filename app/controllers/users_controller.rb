@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   def show
     # Don't Use. 
     # Use profile method.
-    redirect_to :not_found
+    redirect_to :root
   end
 
   def profile

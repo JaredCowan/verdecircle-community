@@ -40,6 +40,7 @@ gem 'headjs-rails'
 gem "gritter", "1.1.0"
 gem 'pusher'
 gem 'kaminari'
+gem 'aasm'
 
 # Random
 gem 'mailboxer', git: 'git://github.com/ging/mailboxer.git'
@@ -144,10 +145,10 @@ group :development, :test do
   gem 'awesome_print'           # pretty pring debugging output
 
   # Testing
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
   gem 'ffaker'
-  # gem 'capybara-webkit'
+  gem 'capybara-webkit'
   # gem 'poltergeist'           # alternative to capybara-webkit
   # gem 'capybara-firebug'
   # gem 'launchy'               # save_and_open_page support for rspec
