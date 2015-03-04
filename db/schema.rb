@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304023409) do
+ActiveRecord::Schema.define(version: 20150304201029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,17 @@ ActiveRecord::Schema.define(version: 20150304023409) do
   end
 
   add_index "topics", ["name"], name: "index_topics_on_name", using: :btree
+
+  create_table "user_relationships", force: true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_relationships", ["follower_id", "followed_id"], name: "index_user_relationships_on_follower_id_and_followed_id", using: :btree
+  add_index "user_relationships", ["state"], name: "index_user_relationships_on_state", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"
