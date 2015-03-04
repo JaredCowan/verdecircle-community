@@ -41,3 +41,17 @@
  * common scripts load last!
 */
 //= require verdecircle/commonscripts
+
+// jQuery(function() {
+//   if ($('#infinite-scrolling').size() > 0) {
+//     var more_posts_url = $('.pagination .next a').attr('href');
+//     $(window).on('scroll', function() {
+//       return more_posts_url;
+//     });
+//     if (more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
+//       $('.pagination').html('<img src="http://www.toidesignz.com/images/ajax-loader.gif" alt="Loading..." title="Loading..." />');
+//       $.getScript(more_posts_url);
+//     }
+//     return;
+//   }
+// });

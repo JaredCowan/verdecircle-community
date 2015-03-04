@@ -22,8 +22,14 @@ class Post < ActiveRecord::Base
   before_save :destroy_image?
   default_scope -> { order('created_at DESC') }
 
+  paginates_per 5
+
   def image_delete
     @image_delete ||= "0"
+  end
+
+  def timestamp
+    created_at.strftime('%d %B %Y %H:%M:%S')
   end
 
   def image_delete=(value)

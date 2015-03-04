@@ -15,11 +15,12 @@ class PostsController < ApplicationController
         redirect_to @notFoundReturnUrl
       end
     else
-      @post = Post.all
+      @posts = Post.order(:created_at).page params[:page]
 
       respond_to do |format|
         format.html
         format.json { render json: @posts, include: [:comments, :user, :get_upvotes, :get_downvotes, :activities] }
+        format.js
       end
     end
   end
@@ -29,12 +30,6 @@ class PostsController < ApplicationController
     @comments    = @post.comments
     @new_comment = @post.comments.new
   end
-
-  #   def auto_link_usernames(text)
-  #   text.gsub /(?<=\s|^)@[A-Za-z0-9_]+(?=\b)/ do |username|
-  #   link_to(username, user_path(username.gsub('@', '')))
-  #   end.html_safe
-  # end
 
   def new
     @post = Post.new

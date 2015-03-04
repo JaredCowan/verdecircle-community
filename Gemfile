@@ -39,6 +39,8 @@ gem 'uglifier'
 gem 'headjs-rails'
 gem "gritter", "1.1.0"
 gem 'pusher'
+gem 'kaminari'
+gem 'bootstrap-will_paginate', '~> 0.0.10'
 
 # Random
 gem 'mailboxer', git: 'git://github.com/ging/mailboxer.git'

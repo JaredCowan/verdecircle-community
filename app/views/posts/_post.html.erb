@@ -1,0 +1,9 @@
+<% @posts.each do |p| %>
+  <div>
+    <h2><%= link_to p.subject, post_path(p) %></h2>
+   
+    <small><em><%= p.timestamp %></em></small>
+   
+    <p><%= truncate(strip_tags(p.body), length: 600) %></p>
+  </div>
+<% end %>

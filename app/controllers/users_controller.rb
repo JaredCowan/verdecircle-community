@@ -3,7 +3,11 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update, :destroy]
 
   rescue_from NoMethodError, with: :not_found
-  rescue_from ActionController::RoutingError, with: :not_found
+
+  # Commenting this error catch out for now.
+  # 
+  # Seems to be throwing an error when logging-in. Look into it.
+  # rescue_from ActionController::RoutingError, with: :not_found
 
   def index
 
