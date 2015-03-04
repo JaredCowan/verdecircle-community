@@ -1,4 +1,6 @@
-class UserRelationships < ActiveRecord::Base
+class UserRelationship < ActiveRecord::Base
+  include AASM
+
   belongs_to :user
   belongs_to :follower, class_name: 'User', foreign_key: 'follower_id'
 
@@ -12,11 +14,11 @@ class UserRelationships < ActiveRecord::Base
     state :blocked
 
     event :accept do
-      transition to: :accepted, after: [:send_acceptance_email, :accept_mutual_following!]
+      transitions to: :accepted, after: [:send_acceptance_email, :accept_mutual_following!]
     end
 
     event :block do
-      transition to: :blocked, after: [:block_mutual_following!]
+      transitions to: :blocked, after: [:block_mutual_following!]
     end
   end
 
@@ -33,13 +35,14 @@ class UserRelationships < ActiveRecord::Base
   end
 
   def not_blocked
-    if UserRelationship.exist?(follower_id: follower_id, followed_id: followed_id, state: 'blocked') ||
-       UserRelationship.exist?(follower_id: followed_id, followed_id: follower_id, state: 'blocked')
+    if UserRelationship.exist?(user_id: user_id, follower_id: follower_id, state: 'blocked') ||
+       UserRelationship.exist?(user_id: follower_id, follower_id: user_id, state: 'blocked')
       errors.add(:base, "Sorry, you cant follow this user.")
+    end
   end
 
   def mutual_following
-    self.class.where({follower_id: followed_id, followed_id: follower_id}).first
+    self.class.where({user_id: follower_id, follower_id: user_id}).first
   end
 
   def accept_mutual_following!

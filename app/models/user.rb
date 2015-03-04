@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   include Concerns::UserImagesConcern
   include Concerns::UserActivityConcern
+
+  default_scope -> { order('username ASC') }
+
   acts_as_messageable
   acts_as_voter
   has_paper_trail
@@ -17,6 +20,8 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :activities, dependent: :destroy
 
+  has_many :user_relationships, dependent: :destroy
+
   has_many :authentications, dependent: :destroy, validate: false, inverse_of: :user do
     def grouped_with_oauth
       includes(:oauth_cache).group_by {|a| a.provider }
@@ -29,7 +34,28 @@ class User < ActiveRecord::Base
             uniqueness: { case_sensitive: false }
 
   after_create :send_welcome_emails
-  default_scope -> { order('username ASC') }
+
+  has_many :followers, -> { where user_relationships: { state: 'accepted'} }, through: :user_relationships
+
+  has_many :pending_user_relationships, -> { where state: 'pending' },
+                                      class_name: 'UserRelationship', 
+                                      foreign_key: :user_id
+  has_many :pending_followers, through: :pending_user_relationships, source: :follower
+
+  has_many :requested_user_relationships, -> { where state: 'requested' },
+                                      class_name: 'UserRelationship',
+                                      foreign_key: :user_id
+  has_many :requested_followers, through: :requested_user_relationships, source: :follower
+
+  has_many :blocked_user_relationships, -> { where state: 'blocked' },
+                                      class_name: 'UserRelationship',
+                                      foreign_key: :user_id
+  has_many :blocked_followers, through: :blocked_user_relationships, source: :follower
+
+  has_many :accepted_user_relationships, -> { where state: 'accepted' },
+                                      class_name: 'UserRelationship',
+                                      foreign_key: :user_id
+  has_many :accepted_followers, through: :accepted_user_relationships, source: :follower
 
   def display_name
     first_name.presence || email.split('@')[0]

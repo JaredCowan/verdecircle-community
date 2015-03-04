@@ -185,15 +185,15 @@ ActiveRecord::Schema.define(version: 20150304201029) do
   add_index "topics", ["name"], name: "index_topics_on_name", using: :btree
 
   create_table "user_relationships", force: true do |t|
+    t.integer  "user_id"
     t.integer  "follower_id"
-    t.integer  "followed_id"
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "user_relationships", ["follower_id", "followed_id"], name: "index_user_relationships_on_follower_id_and_followed_id", using: :btree
   add_index "user_relationships", ["state"], name: "index_user_relationships_on_state", using: :btree
+  add_index "user_relationships", ["user_id", "follower_id"], name: "index_user_relationships_on_user_id_and_follower_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"
