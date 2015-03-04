@@ -11,7 +11,7 @@
 <% view.each do |p| %>
   <div class="panel panel-default" id="<%= p.id %>">
     <div class="panel-heading">
-      <%= prettyname(p) %> <%= prettytitle(p) %> <span class="pull-right"><%= p.decoratetime %></span>
+      <%= p.username %> <%= prettytitle(p) %> <span class="pull-right"><%= p.decoratetime %></span>
     </div>
     <div class="large-3 medium-3 columns">
       <div id="tag_cloud">

@@ -46,6 +46,10 @@ Rails.application.routes.draw do
   post "versions/:id/restore_comment" => "versions#restore_comment", :as => "restore_comment"
   delete "versions/:id/super_delete_comment" => "versions#super_delete_comment", :as => "super_delete_comment"
 
+  # Restore all comments and post
+  post "versions/restore_all_post" => "versions#restore_all_post", :as => "restore_all_post"
+  post "versions/restore_all_comment" => "versions#restore_all_comment", :as => "restore_all_comment"
+
   # Static pages
   match '/error', to: 'pages#error', via: [:get, :post], as: 'error_page'
   get '/terms', to: 'pages#terms', as: 'terms'

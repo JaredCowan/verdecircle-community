@@ -3,6 +3,10 @@ class PostDecorator < ApplicationDecorator
   decorates_finders
   delegate_all
 
+  def prettyname
+    model.username.titleize
+  end
+
   def decoratetime
     case model.created_at.today? ? "today" : (model.created_at < 1.day.ago ? "yesterday" : "older")
       when "today"

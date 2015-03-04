@@ -14,6 +14,32 @@ class VersionsController < ApplicationController
     redirect_to :back, :notice => "Undid #{@version.event}. #{link}".html_safe
   end
 
+  def restore_all_post
+    Post.deleted.each do |p|
+      Post.restore(p.id, :recursive => true)
+    end
+    flash.keep[:success] = "All posts have been restored and are now public again."
+    redirectPath = request.env["HTTP_REFERER"] ||= posts_path
+    redirect_to redirectPath
+  end
+
+  def restore_all_comment
+    d = 0
+    s = 0
+    Comment.deleted.each do |p|
+      d += 1
+      if !Post.with_deleted.find(p.post_id).deleted?
+        Comment.restore(p.id, :recursive => true)
+        s = d - 1
+      end
+    end
+    result = d - s
+    commentsLeft = "<br>Some comments need their parent post restored, before comments can be." if s < result
+    flash.keep[:success] = "#{s} out of #{result} eligible comments have been restored and are now public again. #{commentsLeft} You may not be the creator of post.".html_safe
+    redirectPath = request.env["HTTP_REFERER"] ||= posts_path
+    redirect_to redirectPath
+  end
+
   # Restore a post that has been deleted.
   # 
   # Recursive restores all their dependently destroyed associated records. (I.E. Comments, likes etc.)
