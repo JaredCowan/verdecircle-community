@@ -40,13 +40,12 @@ gem 'headjs-rails'
 gem "gritter", "1.1.0"
 gem 'pusher'
 gem 'kaminari'
-gem 'bootstrap-will_paginate', '~> 0.0.10'
 
 # Random
 gem 'mailboxer', git: 'git://github.com/ging/mailboxer.git'
 gem 'rails4-autocomplete'
 gem 'acts_as_votable', '~> 0.10.0'
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', '~> 3.4'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem "paranoia", :github => "radar/paranoia", :branch => "rails4"
 gem 'aws-sdk', '~> 1.5.7'

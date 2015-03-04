@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin' if defined? RailsAdmin
 
-  get  'posts/tags/:tag', to: 'posts#index', as: :tag
+  get 'posts/tags/:tag', to: 'posts#index', as: :tag
 
   # Posts, Posts likes, Post Comments & Post Comment likes
   resources :posts do
@@ -30,6 +30,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :topics, path: '/topics/posts/'
 
   resources :activities, only: [:index, :destroy]
   
@@ -85,7 +87,8 @@ Rails.application.routes.draw do
 
   get '/emptytrash', to: 'conversations#empty_trash', as: 'empty_trash'
 
-  get '/home' => 'users#show', as: 'user_home'
+  # get '/home' => 'users#show', as: 'user_home'
+  get '/home' => 'users#profile', as: 'user_home'
 
   # Dummy preview pages for testing.
   get '/p/test' => 'pages#test', as: 'test'

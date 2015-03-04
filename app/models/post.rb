@@ -1,28 +1,47 @@
 class Post < ActiveRecord::Base
+
+  belongs_to :user
+  belongs_to :topic
+
+  default_scope -> { order('created_at DESC') }
+
+  validates :subject, presence: true,
+            length: { minimum: 3, maximum: 60 }
+
+  validates :body, presence: true,
+            length: { minimum: 3, maximum: 4000 }
+
+  validates :topic_id, presence: true
+
   acts_as_votable
   has_paper_trail
   acts_as_paranoid
-  belongs_to :user
+  
   has_attached_file :image
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   validates_attachment_file_name :image, :matches => [/png\Z/, /jpg\Z/, /gif\Z/, /jpeg\Z/]
   validates_attachment :image,
   :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/gif", "image/png"] }
+
   has_many :activities, as: :targetable, dependent: :destroy
+
   has_many :comments, dependent: :destroy
 
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings, dependent: :destroy
 
-  validates :subject, presence: true, 
-            length: { minimum: 3, maximum: 60 }
-  validates :body, presence: true, 
-            length: { minimum: 3, maximum: 4000 }
-
   before_save :destroy_image?
-  default_scope -> { order('created_at DESC') }
 
-  paginates_per 5
+  paginates_per 15
+
+  # before_save { self.body = tester(self.body) }
+
+  # def tester(body)
+  #   body.gsub /@(\w+)/ do |username|
+  #     user = username.gsub('@', '')
+  #     "<a href='/u/#{user}'>#{username}</a>"
+  #   end
+  # end
 
   def image_delete
     @image_delete ||= "0"
@@ -55,7 +74,7 @@ class Post < ActiveRecord::Base
 
   def tag_list=(names)
     self.tags = names.split(",").map do |n|
-      Tag.where(name: n.downcase.strip).first_or_create!
+      Tag.where(name: n.downcase.strip.parameterize).first_or_create!
     end
   end
 

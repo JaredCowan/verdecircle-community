@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include ActsAsTaggableOn::TagsHelper
   include CommonHelper
   include ConversationHelper
 

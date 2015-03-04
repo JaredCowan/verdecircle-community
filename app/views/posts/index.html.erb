@@ -1,13 +1,60 @@
-<div class="page-header">
-  <h1>My posts</h1>
+<div class="form-group">
+  <%= link_to("New Post", new_post_path , class: "btn btn-primary") %>
 </div>
- 
-<div id="my-posts">
-  <%= render :partial => "post" %>
-</div>
- 
-<div id="infinite-scrolling">
-  <% if !params[:tag] %>
-    <%= paginate @posts %>
-  <% end %>
-</div>
+<br>
+<% view = params[:tag] ? @posttag : @posts %>
+<% if params[:tag] %>
+  <div class="alert alert-info">
+    <%= "You're viewing post tagged with '#{params[:tag]}'" %> <%= link_to("Back to view all posts", posts_path, class: "pull-right") %>
+  </div>
+<% end %>
+<% view.each do |p| %>
+  <div class="panel panel-default" id="<%= p.id %>">
+    <div class="panel-heading">
+      <%= prettyname(p) %> <%= prettytitle(p) %> <span class="pull-right"><%= p.created_at.strftime("Posted at %l:%M %P") %></span>
+    </div>
+    <div class="large-3 medium-3 columns">
+      <div id="tag_cloud">
+        <% p.taggings.each do |t| %>
+          <% name = Tag.find(t.tag_id).name %>
+          <%= link_to name, tag_path(name) %>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel-body">
+      <%= p.body %>
+      <% if p.image? %>
+        <br><%= image_tag(p.image.url, class: "img-responsive", alt: "Forum Image") %><br>
+      <% end %>
+      <% if user_signed_in? %>
+        <% if hidden_logic(p)[:like] %>
+          <%= link_to "Like", like_post_path(p), method: :put %>
+        <% else %>
+          <%= link_to "UnLike", unlike_post_path(p), method: :put %>
+        <% end %>
+        <% if hidden_logic(p)[:dislike] %>
+          <%= link_to "DisLike", dislike_post_path(p), method: :put %>
+        <% else %>
+          <%= link_to "Undislike", undislike_post_path(p), method: :put %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="panel-heading">
+      <%= link_to 'Show', post_path(p) %>
+      <% if user_signed_in? && current_user == p.user %>
+        | <%= link_to 'Edit', edit_post_path(p) %> |
+        <%= link_to 'Soft Delete', post_path(p), method: :delete, data: { confirm: 'This will only be visible to you and can be restored later.' } %>
+        | <%= link_to "Permanently Delete", super_delete_post_path(p.id), method: :delete, data: { confirm: 'Are you sure? You Can\'t restore this. Maybe try soft delete.'} %>
+        <% if p.versions.all.count > 0 %>
+          | <%= link_to("undo", revert_version_path(p.versions.last), :method => :post) %>
+        <% end %>
+      <% end %>
+      | <%= link_to("Comment", "posts/#{p.id}#comment-form") %>
+      | <span id="comments-count"><%= pluralize(p.comments.count, 'Comment') %></span>
+    </div>
+  </div>
+<% end %>
+
+<% if !params[:tag] %>
+  <%= paginate @posts %>
+<% end %>

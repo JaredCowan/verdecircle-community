@@ -7,6 +7,7 @@
     <div class="panel-body">
       <%= f.input :subject %>
       <%= f.input :tag_list, placeholder: "Tags (separated by commas) Tag users by their name. e.g., john, jane" %>
+      <%= f.association :topic, label: "Categories", include_blank: false, required: true %>
       <%= f.input :body %>
     </div>
   </div>

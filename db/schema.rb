@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303061320) do
+ActiveRecord::Schema.define(version: 20150304023409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,9 +128,11 @@ ActiveRecord::Schema.define(version: 20150303061320) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.datetime "deleted_at"
+    t.integer  "topic_id",           default: 0,  null: false
   end
 
   add_index "posts", ["deleted_at"], name: "index_posts_on_deleted_at", using: :btree
+  add_index "posts", ["topic_id"], name: "index_posts_on_topic_id", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "rails_admin_histories", force: true do |t|
@@ -173,6 +175,14 @@ ActiveRecord::Schema.define(version: 20150303061320) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
   add_index "tags", ["user_id", "post_id"], name: "index_tags_on_user_id_and_post_id", using: :btree
+
+  create_table "topics", force: true do |t|
+    t.string   "name",       default: "", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "topics", ["name"], name: "index_topics_on_name", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"

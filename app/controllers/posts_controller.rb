@@ -16,11 +16,12 @@ class PostsController < ApplicationController
       end
     else
       @posts = Post.order(:created_at).page params[:page]
+      @topics = Topic.all
 
       respond_to do |format|
         format.html
+        # format.js
         format.json { render json: @posts, include: [:comments, :user, :get_upvotes, :get_downvotes, :activities] }
-        format.js
       end
     end
   end
@@ -37,6 +38,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @new_topic = Topic.new
   end
 
   def create
@@ -138,6 +140,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:subject, :body, :image, :image_delete, :tag_list)
+    params.require(:post).permit(:subject, :body, :image, :image_delete, :topic_id, :tag_list)
   end
 end
