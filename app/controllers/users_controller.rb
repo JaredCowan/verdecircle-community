@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   before_filter :authenticate_user!, only: [:edit, :update, :destroy]
 
-  rescue_from NoMethodError, with: :not_found
+  # rescue_from NoMethodError, with: :not_found
 
   # Commenting this error catch out for now.
   # 
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def index
 
-    @users = User.all
+    @users = User.all.decorate
     respond_to do |format|
       format.html
       format.json { render json: @users, include: [:activities, :posts] }

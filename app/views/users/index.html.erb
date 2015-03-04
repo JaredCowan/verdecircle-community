@@ -1,5 +1,7 @@
 <h1>Users Index</h1>
 
 <% @users.each do |u| %>
-  <%= u.username %>
+  <%= u.prettyname %>
+  <%= u.created %>
+  <br>
 <% end %>
