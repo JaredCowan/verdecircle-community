@@ -89,10 +89,17 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :user_relationships, path: '/u/:username/followers' do
+    member do
+      put :accept
+      put :block
+      post :new, to: "user_relationships#create"
+    end
+  end
+
   get '/emptytrash', to: 'conversations#empty_trash', as: 'empty_trash'
 
   get '/home' => 'users#show', as: 'user_home'
-  # get '/home' => 'users#profile', as: 'user_home'
 
   # Dummy preview pages for testing.
   get '/p/test' => 'pages#test', as: 'test'

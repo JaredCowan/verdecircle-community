@@ -1,0 +1,15 @@
+<h1>UserRelationships#index</h1>
+
+<% @user_relationships.each do |r| %>
+  <% follower = r.user %>
+  <% followie = r.follower %>
+  State: <%= r.state %>
+  <br>
+  <%= link_to "Edit Friendship", edit_user_relationship_path(follower.username, r.id, user_id: r.user_id) %>
+  <br>
+  <%= r.inspect %><br><hr>
+  <%= "follower" %><br><hr>
+  <%= follower.inspect %><br><hr>
+  <%= "followie" %><br><hr>
+  <%= followie.inspect %><br><hr>
+<% end %>

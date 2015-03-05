@@ -1,6 +1,69 @@
 <h1>Profile Page</h1>
 <h1><%= @user.username %></h1>
 
+
+<%= link_to "Add Friend", new_user_relationship_path(follower_id: @user.id), class: 'btn btn-primary', id: 'add-friendship', method: :create, data: { follower_id: @user.id } %>
+
+
+
+<br>
+
+<% current_user.user_relationships.each do |f| %>
+  <% if f.requested? %>
+    <%= form_for :user_relationship, url: accept_user_relationship_path(username: f.follower.username, id: f.id), method: :put do |form| %>
+    <%= submit_tag "Accept Friendship", class: 'button radius success expand' %>
+<% end %>
+  <% end %>
+  <% if f.pending? %>
+    <%= link_to "Friendship Pending", "javascript:;", class: "btn btn-info" %>
+  <% end %>
+
+  <%= form_for :user_relationship, url: block_user_relationship_path(username: f.follower.username, id: f.id), method: :put do |form| %>
+    <%= submit_tag "Block Friendship", class: 'button radius alert' %>
+  <% end %>
+
+  <br>
+
+  <%= form_for :user_relationship, url: user_relationship_path(username: f.follower.username, id: f.id), method: :delete do |form| %>
+      <%= submit_tag "Delete Friendship", class: 'button radius alert' %>
+  <% end %>
+
+<% end %>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <%= @user.fullname %>
 
 <div class="btn-group">

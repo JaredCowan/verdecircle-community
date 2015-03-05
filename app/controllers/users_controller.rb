@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
   before_filter :authenticate_user!, only: [:edit, :update, :destroy]
+  respond_to :html, :json
 
   # rescue_from NoMethodError, with: :not_found
 
@@ -10,11 +11,10 @@ class UsersController < ApplicationController
   # rescue_from ActionController::RoutingError, with: :not_found
 
   def index
-
     @users = User.all.decorate
     respond_to do |format|
       format.html
-      format.json { render json: @users, include: [:activities, :posts] }
+      format.json { render json: @users, include: [:user_relationships, :activities, :posts] }
     end
   end
 
@@ -26,6 +26,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = User.find_by(username: params[:username]).decorate
+    @actions = User.includes(:posts, :comments, :user_relationships)
   end
 
   def not_found

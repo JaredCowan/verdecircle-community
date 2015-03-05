@@ -1,5 +1,6 @@
 class VersionsController < ApplicationController
   skip_authorization_check
+  before_filter :authenticate_user!
 
   # Revert a post or comment to a previous version before or after being edited
   def revert
