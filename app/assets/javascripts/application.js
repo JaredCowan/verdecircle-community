@@ -56,5 +56,5 @@
 //   }
 // });
 
-$("img").error().replaceWith("<h5 class='alert alert-danger'>Sorry, that was an error loading image.</h5>")
+// $("img").error().replaceWith("<h5 class='alert alert-danger'>Sorry, that was an error loading image.</h5>")
 

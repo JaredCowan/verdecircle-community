@@ -42,14 +42,6 @@ class User < ActiveRecord::Base
     first_name.presence || email.split('@')[0]
   end
 
-  # def first_name
-  #   "#{first_name}"
-  # end
-
-  # def last_name
-  #   "#{last_name}"
-  # end
-
   def full_name
     "#{first_name} #{last_name}"
   end
