@@ -91,11 +91,16 @@ Rails.application.routes.draw do
 
   resources :user_relationships, path: '/u/:username/followers' do
     member do
-      put :accept
-      put :block
       post :new, to: "user_relationships#create"
     end
   end
+  
+  scope '/u/:username' do
+    get 'profile', to: "users#profile"
+    match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
+    match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
+  end
+  get '/:username', to: redirect('/u/%{username}')
 
   get '/emptytrash', to: 'conversations#empty_trash', as: 'empty_trash'
 

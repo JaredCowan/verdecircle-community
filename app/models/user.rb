@@ -38,32 +38,20 @@ class User < ActiveRecord::Base
   has_many :followers, -> { where user_relationships: { state: 'following'} }, through: :user_relationships
   has_many :followings, -> { where user_relationships: { state: 'followed'} }, through: :user_relationships
 
-  has_many :pending_user_relationships, -> { where state: 'pending' },
-                                      class_name: 'UserRelationship', 
-                                      foreign_key: :user_id
-  has_many :pending_followers, through: :pending_user_relationships, source: :follower
-
-  has_many :requested_user_relationships, -> { where state: 'requested' },
-                                      class_name: 'UserRelationship',
-                                      foreign_key: :user_id
-  has_many :requested_followers, through: :requested_user_relationships, source: :follower
-
-  has_many :blocked_user_relationships, -> { where state: 'blocked' },
-                                      class_name: 'UserRelationship',
-                                      foreign_key: :user_id
-  has_many :blocked_followers, through: :blocked_user_relationships, source: :follower
-
-  has_many :accepted_user_relationships, -> { where state: 'accepted' },
-                                      class_name: 'UserRelationship',
-                                      foreign_key: :user_id
-  has_many :accepted_followers, through: :accepted_user_relationships, source: :follower
-
   def display_name
     first_name.presence || email.split('@')[0]
   end
 
+  # def first_name
+  #   "#{first_name}"
+  # end
+
+  # def last_name
+  #   "#{last_name}"
+  # end
+
   def full_name
-    "#{username}"
+    "#{first_name} #{last_name}"
   end
 
   def name_with_initial

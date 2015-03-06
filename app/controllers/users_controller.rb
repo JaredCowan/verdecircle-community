@@ -3,7 +3,9 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :json
 
-  rescue_from NoMethodError, with: :not_found
+  include CommonHelper
+
+  # rescue_from NoMethodError, with: :not_found
 
   # Commenting this error catch out for now.
   # 

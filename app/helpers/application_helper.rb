@@ -46,6 +46,32 @@ module ApplicationHelper
     end
   end
 
+  def follow_link_helper(user, options = {})
+    iffollowing = current_user.user_relationships.map(&:follower_id).include?(user.id) ? [true, "Unfollow"] : [false, "Follow"]
+
+    if current_user.id == user.id
+      default = "disabled"
+      given = options[:class]
+      merged = options.has_key?(:class) ? "#{given} #{default}" : "btn btn-primary disabled"
+      options[:class] = merged
+      link_to "#{iffollowing[1]}", "Javascript:;", options
+    else
+      case iffollowing[0]
+        when false
+            defaultFollow = {method: :create, data:{follower_id: user.id}}
+            options.merge!(defaultFollow)
+
+            link_to "#{iffollowing[1]}", new_user_relationship_path(follower_id: user.id), options
+        when true
+          defaultUnfollow = {method: :delete}
+          options.merge!(defaultUnfollow)
+
+          link_to "#{iffollowing[1]}", user_relationship_path(username: user.username.downcase, id: user.id), options
+      end
+    end
+  end
+
+
   # To add text in front on the default title. Place this at the head of the view page.
   # <% provide(:title, view_bag_title("your text here")) %>
   # To completely replace the title, just use <% provide(:title, "your text here") %>
