@@ -101,7 +101,7 @@ Rails.application.routes.draw do
     match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
     match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
   end
-  get '/:username', to: redirect('/u/%{username}')
+  # get '/:username', to: redirect('/u/%{username}')
 
   get '/emptytrash', to: 'conversations#empty_trash', as: 'empty_trash'
 
