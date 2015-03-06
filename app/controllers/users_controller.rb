@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   include CommonHelper
 
-  # rescue_from NoMethodError, with: :not_found
+  rescue_from NoMethodError, with: :not_found if ENV['production']
 
   # Commenting this error catch out for now.
   # 
@@ -27,12 +27,12 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @user = User.find_by(username: params[:username]).decorate
+    @user = User.find_by(username: params[:username].downcase).decorate
     @actions = User.includes(:posts, :comments, :user_relationships)
   end
 
   def not_found
-    flash.keep[:danger] = "Sorry, we couldn't find that users profile that you were looking for."
+    flash.keep[:danger] = "Sorry, there was an error on our end. We have been notified and we'll get right on it."
     @notFoundReturnUrl = request.env["HTTP_REFERER"] ||= :root
     redirect_to @notFoundReturnUrl
   end

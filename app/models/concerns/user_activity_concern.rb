@@ -2,11 +2,14 @@ module Concerns::UserActivityConcern
   extend ActiveSupport::Concern
 
   def create_activity(item, action)
-    activity            = activities.new
-    activity.targetable = item
-    activity.action     = action
-    activity.save
-    activity
+    callingKlass = item.class.name
+
+    Activity.create(user_id: item.user_id,
+                    action: action,
+                    targetable_id: item.id,
+                    targetable_type: callingKlass
+    ) # End Create Activity
+
     # a = activity
     # u = User.find(a.user_id)
     
@@ -20,7 +23,7 @@ module Concerns::UserActivityConcern
   end
 
   def destroy_activity(object, action_type)
-    Activity.find_by(targetable_id: object.id, action: "#{action_type}").destroy!
-    puts caller[0][/`([^']*)'/, 1]
+    Activity.where("targetable_id = ? AND action = ?", object.id, action_type).first.destroy!
+    # puts caller[0][/`([^']*)'/, 1]
   end
 end

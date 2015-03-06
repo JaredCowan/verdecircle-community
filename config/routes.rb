@@ -105,7 +105,7 @@ Rails.application.routes.draw do
 
   get '/emptytrash', to: 'conversations#empty_trash', as: 'empty_trash'
 
-  get '/home' => 'users#show', as: 'user_home'
+  get '/home', to: 'users#show', as: 'user_home'
 
   # Dummy preview pages for testing.
   get '/p/test' => 'pages#test', as: 'test'
@@ -115,7 +115,10 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
+  # ToDo: Decide which route(no pun intended) I want to take to handle routing errors
+  # 
   # Handle routing errors
   ## NEVER PUT ROUTES BELOW THIS LINE
-  # match "*path", to: 'application#routing_error', via: 'get'
+  # get "*path", to: 'application#routing_error', via: 'get'
+  # get "*path", to: redirect("/")
 end
