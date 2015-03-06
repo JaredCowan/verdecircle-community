@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   resources :topics, path: '/topics/posts/'
+  get '/topics', to: redirect('/topics/posts')
 
   resources :activities, only: [:index, :destroy]
   

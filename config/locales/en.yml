@@ -144,6 +144,7 @@ en:
       user:
         email: 'you@example.com'
         first_name: 'First Name'
+        last_name: 'Last Name'
         password: 'Password'
         username: 'Username'
 
