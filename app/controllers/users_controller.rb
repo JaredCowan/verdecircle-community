@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
-  before_filter :authenticate_user!, only: [:edit, :update, :destroy]
+  before_filter :authenticate_user!
   respond_to :html, :json
 
-  # rescue_from NoMethodError, with: :not_found
+  rescue_from NoMethodError, with: :not_found
 
   # Commenting this error catch out for now.
   # 

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width" name="viewport"/>
+    <%= content_tag(:style, "#{Rails.application.assets.find_asset('emails/inline').to_s.html_safe}") %>
+  </head>
+  <body>
+    <table class="body">
+      <tr>
+        <td align="center" class="center" valign="top">
+          <center>
+          <table class="row header">
+            <tr>
+              <td align="center" class="center">
+                <center>
+                <table class="container">
+                  <tr>
+                    <td class="wrapper last">
+                      <table class="twelve columns">
+                        <tr>
+                          <td class="six sub-columns">
+                            <img src="http://placehold.it/200x50"/>
+                          </td>
+                          <td align="right" class="six sub-columns last" style="text-align:right; vertical-align:middle;">
+                            <span class="template-label">
+                              <%= I18n.t 'brand.name' %>
+                            </span>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                </center>
+              </td>
+            </tr>
+          </table>
+          <br/>
+          <table class="container">
+            <tr>
+              <td>
+                <!-- content start-->
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+                      <table class="twelve columns">
+                        <tr>
+                          <td>
+                            <h1>
+                            <%= yield :title %>
+                            </h1>
+                            <% if content_for? :lead %>
+                            <p class="lead">
+                              <%= yield :lead %>
+                            </p>
+                            <% end %>
+                            <% if @image_url %>
+                            <img height="300" src="<%= @image_url %>" width="580"/>
+                            <% end %>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <% if content_for? :callout %>
+                <table class="row callout">
+                  <tr>
+                    <td class="wrapper last">
+                      <table class="twelve columns">
+                        <tr>
+                          <td class="panel">
+                            <%= yield :callout %>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <% end %>
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+                      <table class="twelve columns">
+                        <tr>
+                          <td>
+                            <%= yield %>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <% if content_for? :action_button %>
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+                      <table class="three columns">
+                        <tr>
+                          <td>
+                            <table class="button">
+                              <tr>
+                                <td>
+                                  <%= yield :action_button %>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <% end %>
+                <table class="row footer">
+                  <tr>
+                    <td class="wrapper">
+                      <table class="six columns">
+                        <tr>
+                          <td class="left-text-pad">
+                            <% if Rails.application.config.settings.social.facebook %>
+                            <table class="tiny-button facebook">
+                              <tr>
+                                <td>
+                                  <a href="<%= Rails.application.config.settings.social.facebook %>">Facebook</a>
+                                </td>
+                              </tr>
+                            </table>
+                            <br/>
+                            <% end %>
+                            <% if Rails.application.config.settings.social.twitter %>
+                            <table class="tiny-button twitter">
+                              <tr>
+                                <td>
+                                  <a href="<%= Rails.application.config.settings.social.twitter %>">Twitter</a>
+                                </td>
+                              </tr>
+                            </table>
+                            <br/>
+                            <% end %>
+                            <% if Rails.application.config.settings.social.google_plus %>
+                            <table class="tiny-button google-plus">
+                              <tr>
+                                <td>
+                                  <a href="<%= Rails.application.config.settings.social.google_plus %>">Google +</a>
+                                </td>
+                              </tr>
+                            </table>
+                            <% end %>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class="wrapper last">
+                      <table class="six columns">
+                        <tr>
+                          <td class="last right-text-pad">
+                            <p>
+                              Phone:
+                              <%= Rails.application.config.settings.contact.phone %>
+                            </p>
+                            <p>
+                              Email:
+                              <a href="mailto:<%= Rails.application.config.settings.contact.email %>">
+                                <%= Rails.application.config.settings.contact.email %>
+                              </a>
+                            </p>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+                      <table class="twelve columns">
+                        <tr>
+                          <td align="center">
+                            <center>
+                            <p style="text-align:center;">
+                              <a href="<%= terms_url %>">Terms</a>
+                              |
+                              <a href="<%= privacy_url %>">Privacy</a>
+                              <% if @unsubscribe_url %>
+                              |
+                              <a href="<%= @unsubscribe_url %>">
+                                <unsubscribe>Unsubscribe</unsubscribe>
+                              </a>
+                              <% end %>
+                            </p>
+                            </center>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          </center>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

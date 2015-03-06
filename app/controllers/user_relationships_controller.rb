@@ -69,7 +69,7 @@ class UserRelationshipsController < ApplicationController
       # current_user.destroy_activity(@user_relationship, "accepted")
       flash[:success] = "Friendship destroyed"
     end
-    redirect_to user_relationships_path
+    redirect_to :back
   end
 
   private
@@ -90,6 +90,8 @@ class UserRelationshipsController < ApplicationController
           current_user.accepted_user_relationships
         when 'requested'
           current_user.requested_user_relationships
+        else
+          current_user.user_relationships
       end
     end
 end

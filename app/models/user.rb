@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
 
   after_create :send_welcome_emails
 
-  has_many :followers, -> { where user_relationships: { state: 'accepted'} }, through: :user_relationships
+  has_many :followers, -> { where user_relationships: { state: 'following'} }, through: :user_relationships
+  has_many :followings, -> { where user_relationships: { state: 'followed'} }, through: :user_relationships
 
   has_many :pending_user_relationships, -> { where state: 'pending' },
                                       class_name: 'UserRelationship', 

@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   # Preview html email template
   def email
     tpl = (params[:layout] || 'hero').to_sym
-    tpl = :hero unless [:email, :hero, :simple].include? tpl
+    tpl = :hero unless [:email, :hero, :simple, :new].include? tpl
     file = 'user_mailer/welcome_email'
     @user = (defined?(FactoryGirl) \
       ? User.new( FactoryGirl.attributes_for :user )

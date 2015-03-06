@@ -1,7 +1,9 @@
+<% current_path = (params[:user] == "#{current_user.username.downcase}" ? ["All Activities", activities_path] : ["My Activities", activities_path(user: "#{current_user.username.downcase}")]) %>
 <div class="row">
   <div class="small-11 small-centered columns activity">
     <center>
     <h1>Activity Feed</h1>
+    <%= link_to current_path[0], current_path[1], class: "btn btn-info"  %>
     </center>
     <hr>
     <div class="main">

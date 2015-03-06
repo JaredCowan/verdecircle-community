@@ -1,5 +1,60 @@
 <h1>UserRelationships#index</h1>
 
+
+
+<div class="row">
+  <div class="small-11 small-centered columns activity">
+    <div class="row">
+      <div class="large-12 medium-12 small-12 large-centered medium-centered small-centered columns">
+        <center><dl class="sub-nav" id="friend-list-filter">
+        <dt>Filter:</dt>
+
+          <dd class="<%= 'active' if params[:list].blank? %>">
+            <%= link_to 'All', user_relationships_path %>
+          </dd>  
+
+          <dd class="<%= 'active' if params[:list] == "blocked" %>">
+            <%= link_to 'Blocked', user_relationships_path(list: 'blocked') %>
+          </dd>
+
+          <% if current_user.requested_user_relationships.length > 0 %>
+
+          <dd class="<%= 'active' if params[:list] == "requested" %>">
+            <%= link_to "Requested", user_relationships_path(list: 'requested') %><span class="label round">
+              <%= current_user.requested_user_relationships.length.to_s %></span>
+          </dd> 
+          
+          <% else %>
+
+            <dd class="<%= 'active' if params[:list] == "requested" %>">
+              <%= link_to 'Requested', user_relationships_path(list: 'requested') %>
+            </dd> 
+
+          <% end %>
+
+          <dd class="<%= 'active' if params[:list] == "accepted" %>">
+            <%= link_to 'Accepted', user_relationships_path(list: 'accepted') %>
+          </dd>
+          <dd class="<%= 'active' if params[:list] == "pending" %>">
+            <%= link_to 'Pending', user_relationships_path(list: 'pending', cats: 'awesome') %>
+          </dd>
+        </dl>
+        </center>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="btn-group">
+  <%= link_to("All", user_relationships_path, class: "btn btn-primary #{'active' if params[:list].blank?}") %>
+  <%= link_to("Accepted", user_relationships_path(list: 'accepted'), class: "btn btn-primary #{'active' if params[:list] == 'accepted'}") %>
+  <%= link_to("Requested", "javascript:;", class: "btn btn-primary #{'active' if params[:list] == 'requested'}") %>
+  <%= link_to("Blocked", user_relationships_path(list: 'blocked'), class: "btn btn-primary #{'active' if params[:list] == 'blocked'}") %>
+  <%= link_to("Pending", user_relationships_path(list: 'pending'), class: "btn btn-primary #{'active' if params[:list] == 'pending'}") %>
+</div>
+
+
+
 <% @user_relationships.each do |r| %>
   <% follower = r.user %>
   <% followie = r.follower %>

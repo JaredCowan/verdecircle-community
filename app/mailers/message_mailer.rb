@@ -1,6 +1,6 @@
 class Mailboxer::MessageMailer < Mailboxer::BaseMailer
   #Sends and email for indicating a new message or a reply to a receiver.
-  #It calls new_message_email if notifing a new message and reply_message_email
+  #It calls new_message_email if notifying a new message and reply_message_email
   #when indicating a reply to an already created conversation.
   def send_email(message, receiver)
     if message.conversation.messages.size > 1

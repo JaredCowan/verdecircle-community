@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
-  load_and_authorize_resource
-  before_filter :authenticate_user!, except: [:index, :show]
+  skip_authorization_check
+  before_filter :authenticate_user!
 
   def index
     @topics = Topic.all

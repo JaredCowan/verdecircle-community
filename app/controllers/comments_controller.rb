@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  load_and_authorize_resource
+  skip_authorization_check
   before_filter :authenticate_user!
 
   def index

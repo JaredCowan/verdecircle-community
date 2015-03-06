@@ -1,3 +1,11 @@
+<!-- Reminder Email does not seem to render any erb style link routes unless wrapped -->
+<!-- with vanilla HTML link tags. Also doesn't like interpolation using "#{}" -->
+<% message_id = @message.conversation_id %>
+<% message_url = "#{root_url}messages/#{message_id}" %>
+<% base_url = "#{root_url}" %>
+<% @sender = @message.sender %>
+<% sender_title = @sender.username.titleize %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,15 +13,19 @@
   </head>
   <body>
     <h1>
-     <%= @message.sender.username.titleize %> sent you a new message: <%= @subject %>
+      Hey <%= @receiver.username.titleize %>,
     </h1>
-    <blockquote>
-      <p>
-        <%= raw @message.body %>
-      </p>
-    </blockquote>
+    <br>
+    <br>
+      You have a new message from <a href="<%= base_url %>u/<%= sender_title.downcase %>" target="_blank" title="Message View Link"><%= sender_title %></a> on the <%= link_to("Verde Circle Forums", root_url) %>
+    <h1>
+      <%#= @message.inspect %>
+      <%#= @notification.inspect %>
+      <%#= @receiver.inspect %>
+    </h1>
     <p>
-      Visit <%= link_to root_url, root_url %> and go to your inbox for more info.
+      You can read your message <a href="<%= message_url %>" target="_blank" title="Message View Link">
+      here</a>
     </p>
   </body>
 </html>
