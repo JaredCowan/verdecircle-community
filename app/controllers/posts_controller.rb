@@ -15,7 +15,7 @@ class PostsController < ApplicationController
         redirect_to @notFoundReturnUrl
       end
     else
-      @posts = Post.order(:created_at).page(params[:page]).decorate
+      @posts = Post.order(:created_at).page(params[:page])
       @topics = Topic.all
 
       respond_to do |format|

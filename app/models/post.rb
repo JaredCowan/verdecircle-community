@@ -55,6 +55,10 @@ class Post < ActiveRecord::Base
     @image_delete = value
   end
 
+  # def username
+    # user.username
+  # end
+
   def to_param
     "#{id}-#{subject.parameterize}"
   end
