@@ -7,7 +7,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find(params[:id])
+    @topic = Topic.find_by(params[:name])
     @posts = Post.where(topic: @topic)
   end
 

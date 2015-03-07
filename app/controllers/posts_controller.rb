@@ -8,14 +8,14 @@ class PostsController < ApplicationController
   def index
     if params[:tag]
       begin
-        @posttag = Post.tagged_with(params[:tag])
+        @posttag = Post.tagged_with(params[:tag]).decorate
       rescue ActiveRecord::RecordNotFound  
         flash.keep[:danger] = "Sorry, we couldn't find anything with that tag."
         @notFoundReturnUrl = request.env["HTTP_REFERER"] ||= posts_path
         redirect_to @notFoundReturnUrl
       end
     else
-      @posts = Post.order(:created_at).page(params[:page])
+      @posts = Post.order(:created_at).page(params[:page]).decorate
       @topics = Topic.all
 
       respond_to do |format|

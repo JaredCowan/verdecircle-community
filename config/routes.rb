@@ -1,6 +1,12 @@
 # Route prefixes use a single letter to allow for vanity urls of two or more characters
 Rails.application.routes.draw do
 
+  # get 'favorites/index'
+
+  # get 'favorites/create'
+
+  # get 'favorites/destroy'
+
   if defined? Sidekiq
     require 'sidekiq/web'
     authenticate :user, lambda {|u| u.is_admin? } do
@@ -19,6 +25,8 @@ Rails.application.routes.draw do
       put "unlike", to: "posts#unliked"
       put "dislike", to: "posts#disliked"
       put "undislike", to: "posts#undisliked"
+      put "favorite", to: "favorites#add_favorite", defaults: { className: 'Post' }
+      delete "unfavorite", to: "favorites#remove_favorite", defaults: { className: 'Post' }
     end
 
     resources :comments, except: [:show, :edit] do
@@ -31,8 +39,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :topics, path: '/topics/posts/'
-  get '/topics', to: redirect('/topics/posts')
+  resources :topics, path: '/categories/posts'
+  # get '/topics', to: redirect('/topics/posts')
 
   resources :activities, only: [:index, :destroy]
   
@@ -100,6 +108,7 @@ Rails.application.routes.draw do
     get 'profile', to: "users#profile"
     match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
     match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
+    resources :favorites, only: [:index]
   end
   # get '/:username', to: redirect('/u/%{username}')
 

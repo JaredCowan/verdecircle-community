@@ -4,7 +4,7 @@ class Topic < ActiveRecord::Base
   before_save :pretty_name
 
   def to_param
-    "#{id}-#{name.parameterize}"
+    "#{name.parameterize}"
   end
 
   def pretty_name
