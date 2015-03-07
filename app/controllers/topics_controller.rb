@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
   end
 
   def edit
-    @topic = Topic.find(params[:id])
+    @topic = Topic.find_by(params[:name])
   end
 
   def new
@@ -30,12 +30,12 @@ class TopicsController < ApplicationController
   end
 
   def destroy
-    Topic.find(params[:id]).destroy
+    Topic.find_by(params[:name]).destroy
     redirect_to topics_path
   end
 
   def update
-    @topic = Topic.find(params[:id])
+    @topic = Topic.find_by(params[:name])
     if @topic.update_attributes(topic_params)
       flash[:success] = 'Topic name updated.'
       redirect_to topics_path
