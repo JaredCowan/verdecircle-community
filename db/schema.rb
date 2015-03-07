@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306203343) do
+ActiveRecord::Schema.define(version: 20150307170325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,30 @@ ActiveRecord::Schema.define(version: 20150306203343) do
 
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
+
+  create_table "notification_opt_outs", force: true do |t|
+    t.integer  "unsubscriber_id"
+    t.string   "unsubscriber_type"
+    t.integer  "notification_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notification_opt_outs", ["unsubscriber_id", "unsubscriber_type"], name: "index_notification_opt_outs_on_unsubscriber_id_type", using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "sender_id"
+    t.boolean  "is_read",           default: false
+    t.integer  "notification_id",   default: 0,     null: false
+    t.string   "notification_type", default: "",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["is_read"], name: "index_notifications_on_is_read", using: :btree
+  add_index "notifications", ["notification_id", "notification_type"], name: "index_notifications_on_notification_id_and_notification_type", using: :btree
+  add_index "notifications", ["user_id", "sender_id"], name: "index_notifications_on_user_id_and_sender_id", using: :btree
 
   create_table "oauth_caches", id: false, force: true do |t|
     t.integer  "authentication_id", null: false
