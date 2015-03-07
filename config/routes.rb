@@ -1,12 +1,6 @@
 # Route prefixes use a single letter to allow for vanity urls of two or more characters
 Rails.application.routes.draw do
 
-  # get 'favorites/index'
-
-  # get 'favorites/create'
-
-  # get 'favorites/destroy'
-
   if defined? Sidekiq
     require 'sidekiq/web'
     authenticate :user, lambda {|u| u.is_admin? } do
