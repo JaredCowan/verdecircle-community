@@ -23,10 +23,16 @@
               </li>
             <% end %> <!-- END if current_user.is_admin? -->
             <li>
+              <%= link_to I18n.t('account.posts.link'), posts_path %>
+            </li>
+            <li>
+              <%= link_to "Categories", topics_path %>
+            </li>
+            <li>
               <%= link_to I18n.t('account.profile.link'), profile_page_path(current_user.username) %>
             </li>
             <li>
-              <%= link_to I18n.t('account.posts.link'), posts_path %>
+              <%= link_to "My Favorites", favorites_path(current_user.username) %>
             </li>
             <li>
               <%= link_to I18n.t('account.messages.link'), :conversations %>

@@ -6,16 +6,17 @@ class PostsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   
   def index
-    if params[:tag]
-      begin
-        @posttag = Post.tagged_with(params[:tag])
-      rescue ActiveRecord::RecordNotFound  
-        flash.keep[:danger] = "Sorry, we couldn't find anything with that tag."
-        @notFoundReturnUrl = request.env["HTTP_REFERER"] ||= posts_path
-        redirect_to @notFoundReturnUrl
-      end
-    else
-      @posts = Post.order(:created_at).page(params[:page]).decorate
+    # if params[:tag]
+    #   begin
+    #     @posttag = Post.tagged_with(params[:tag])
+    #   rescue ActiveRecord::RecordNotFound  
+    #     flash.keep[:danger] = "Sorry, we couldn't find anything with that tag."
+    #     @notFoundReturnUrl = request.env["HTTP_REFERER"] ||= posts_path
+    #     redirect_to @notFoundReturnUrl
+    #   end
+    # else
+      # @posts = Post.order(:created_at).page(params[:page])
+      @posts = Post.all
       @topics = Topic.all
 
       respond_to do |format|
@@ -23,7 +24,7 @@ class PostsController < ApplicationController
         # format.js
         format.json { render json: @posts, include: [:comments, :user, :get_upvotes, :get_downvotes, :activities] }
       end
-    end
+    # end
   end
 
   def show

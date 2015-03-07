@@ -24,6 +24,7 @@ class Post < ActiveRecord::Base
   :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/gif", "image/png"] }
 
   has_many :activities, as: :targetable, dependent: :destroy
+  has_many :favorites, as: :favorable, dependent: :destroy
 
   has_many :comments, dependent: :destroy
 
@@ -33,15 +34,6 @@ class Post < ActiveRecord::Base
   before_save :destroy_image?
 
   paginates_per 15
-
-  # before_save { self.body = tester(self.body) }
-
-  # def tester(body)
-  #   body.gsub /@(\w+)/ do |username|
-  #     user = username.gsub('@', '')
-  #     "<a href='/u/#{user}'>#{username}</a>"
-  #   end
-  # end
 
   def image_delete
     @image_delete ||= "0"
