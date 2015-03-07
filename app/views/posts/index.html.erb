@@ -2,16 +2,16 @@
   <%= link_to("New Post", new_post_path , class: "btn btn-primary") %>
 </div>
 <br>
-<%# view = params[:tag] ? @posttag : @posts %>
+<% view = params[:tag] ? @posttag : @posts %>
 <% if params[:tag] %>
   <div class="alert alert-info">
     <%= "You're viewing post tagged with '#{params[:tag]}'" %> <%= link_to("Back to view all posts", posts_path, class: "pull-right") %>
   </div>
 <% end %>
-<% @posts.each do |p| %>
+<% view.each do |p| %>
   <div class="panel panel-default" id="<%= p.id %>">
     <div class="panel-heading">
-      <%= p.user %> <%#= prettytitle(p) %> <span class="pull-right"><%#= p.decoratetime %></span>
+      <%= p.prettyname %> <%= prettytitle(p) %> <span class="pull-right"><%= p.decoratetime %></span>
     </div>
     <div class="large-3 medium-3 columns">
       <div id="tag_cloud">
