@@ -1,7 +1,6 @@
 class NotificationsController < ApplicationController
   skip_authorization_check
   before_filter :authenticate_user!
-  respond_to :html, :json, :js
 
   def index
     @notifications = current_user.notifications
@@ -26,7 +25,6 @@ class NotificationsController < ApplicationController
     objectType = params[:type].to_s
 
     Notifyer::OptOut.create(user_id: current_user.id, notifyable_id: objectId, notifyable_type: objectType)
-    # 10.times { puts params }
     redirect_to :back
   end
 
@@ -37,4 +35,11 @@ class NotificationsController < ApplicationController
     end
     redirect_to :back
   end
+
+  private
+
+    def notification_params
+      params.require(:notification).permit(:user_id, :sender_id, :is_read, :notifyable_id, :notifyable_type)
+    end
+
 end

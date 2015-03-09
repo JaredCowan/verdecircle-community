@@ -28,7 +28,7 @@
             </li>
             <% current_user.notifications.each do |n| %>
               <li>
-                <a href="javascript:;"> <%= render 'users/avatar', size: :tiny, user: n.sender %> <%= "#{n.sender.username.titleize} commented on #{n.user.username.titleize}'s #{n.notifyable_type}" %> </a>
+                <a href="/<%= n.notifyable_type.downcase %>s/<%= n.notifyable_id %>"> <%= render 'users/avatar', size: :tiny, user: n.sender %> <%= "#{n.sender.username.titleize} commented on #{n.user.username.titleize}'s #{n.notifyable_type}" %> </a>
               </li>
               <li> 
                 <%= link_to "Mark As Read", mark_as_read_notification_path(current_user.username, n.id), method: :post %>

@@ -21,7 +21,7 @@ if defined? RailsAdmin
 
   RailsAdmin.config do |config|
     
-    PaperTrail.config.version_limit = 4
+    PaperTrail.config.version_limit = 2
 
     ################  Global configuration  ################
 

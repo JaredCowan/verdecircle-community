@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   skip_authorization_check
   before_filter :authenticate_user!
+  include NotificationConcern
 
   def index
     # created in order to handle renders from this controller, which produce URL 'root/posts/:id/comments'
