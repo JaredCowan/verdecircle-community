@@ -26,6 +26,10 @@ class Post < ActiveRecord::Base
   has_many :activities, as: :targetable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
 
+  has_many :notifications, as: :notifyable,
+                           class_name: "Notifyer::Notification",
+                           dependent: :destroy
+
   has_many :comments, dependent: :destroy
 
   has_many :taggings, dependent: :destroy

@@ -11,7 +11,9 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
+    
     if @comment.save
+      Notifyer::Notification.notify_all(@comment, @post)
       @new_comment = @post.comments.new
       respond_to do |format|
         format.html do

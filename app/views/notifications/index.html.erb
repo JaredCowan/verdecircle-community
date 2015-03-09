@@ -1,0 +1,8 @@
+
+<%= link_to "Mark All As Read", mark_all_read_notifications_path(current_user.username), method: :post %>
+|
+<%= link_to "Mark All As Unread", mark_all_unread_notifications_path(current_user.username), method: :post %>
+<br>
+<% @notifications.each do |n| %>
+  <%= n.inspect %>
+<% end %>

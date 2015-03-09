@@ -22,6 +22,25 @@ class User < ActiveRecord::Base
   has_many :user_relationships, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  # Testing Notifications vv
+
+  has_many :notifications, dependent: :destroy,
+                           class_name: "Notifyer::Notification",
+                           foreign_key: 'user_id'
+
+  has_many :sent_notifications, dependent: :destroy,
+                                class_name: "Notifyer::Notification",
+                                foreign_key: 'sender_id'
+
+  # has_many :unread, -> { where notifications: { is_read: false} }, through: :notifications
+  # has_many :read, -> { where notifications: { is_read: true} }, through: :notifications
+
+  has_many :optouts, dependent: :destroy,
+                     class_name: "Notifyer::OptOut",
+                     foreign_key: 'user_id'
+
+  # Testing Notifications ^^
+
   has_many :authentications, dependent: :destroy, validate: false, inverse_of: :user do
     def grouped_with_oauth
       includes(:oauth_cache).group_by {|a| a.provider }
@@ -38,8 +57,13 @@ class User < ActiveRecord::Base
   has_many :followers, -> { where user_relationships: { state: 'following'} }, through: :user_relationships
   has_many :followings, -> { where user_relationships: { state: 'followed'} }, through: :user_relationships
 
+  
   def display_name
     first_name.presence || email.split('@')[0]
+  end
+
+  def tester
+    Notifyer::Notification.notify_all(User.first, Post.first)
   end
 
   def full_name

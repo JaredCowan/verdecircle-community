@@ -103,7 +103,19 @@ Rails.application.routes.draw do
     match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
     match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
     resources :favorites, only: [:index]
+
+    resources :notifications, only: [:index] do
+      collection do
+        post 'markasread', to: 'notifications#mark_as_read', as: :mark_all_read
+        post 'markasunread', to: 'notifications#mark_as_unread', as: :mark_all_unread
+      end
+      member do
+        post 'markasread', to: 'notifications#mark_as_read', as: :mark_as_read
+        post 'optout', to: 'notifications#opt_out', as: :opt_out
+      end
+    end
   end
+
   # get '/:username', to: redirect('/u/%{username}')
 
   get '/emptytrash', to: 'conversations#empty_trash', as: 'empty_trash'

@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
   skip_authorization_check
   before_filter :authenticate_user!
-  respond_to :html, :json
+  respond_to :html, :json, :js
+  include NotificationConcern
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   

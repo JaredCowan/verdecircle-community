@@ -17,6 +17,9 @@ Bundler.require(*Rails.groups)
 
 module VerdeForum
   class Application < Rails::Application
+    # Autoload Notification module
+    config.autoload_paths += Dir[Rails.root.join('app', 'models', 'notifyer/**')]
+
     # Use sql instead of ruby to support case insensitive indices for postgres
     config.active_record.schema_format = :ruby
 
