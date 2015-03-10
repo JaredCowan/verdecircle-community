@@ -31,6 +31,8 @@ module Notifyer
           notifyUserIds = notifyUserIds.delete(optout.user_id)
         end
 
+        test = klass.uniq.joins(:comments).where(comments: {user_id: comments}).reject {|u| u == 3}
+
         notifyUserIds.each do |notif|
           Notifyer::Notification.create(user_id: notif.to_i, sender_id: creator.user.id.to_i,
                                         notifyable_id: object.id, notifyable_type: "#{klass}"

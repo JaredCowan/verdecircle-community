@@ -16,7 +16,6 @@ class PostsController < ApplicationController
         redirect_to @notFoundReturnUrl
       end
     else
-      # @posts = Post.order(:created_at).page(params[:page]).decorate
       @posts = Post.includes(:comments, :user, :tags, :votes, :topic, :notifications, :versions).order(:created_at).page(params[:page]).decorate
       @topics = Topic.all
 
@@ -29,7 +28,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post        = Post.includes(:tags, :taggings, :user, :favorites, votes: [:user], comments: [:votes]).find(params[:id])
+    @post        = Post.includes(:tags, :taggings, :user, :favorites, comments: [:votes]).find(params[:id])
     @comments    = @post.comments.includes(:user, comment: [{votes: :user}, :user], user: [:votes])
     @new_comment = @post.comments.new
   end
