@@ -16,20 +16,21 @@ class PostsController < ApplicationController
         redirect_to @notFoundReturnUrl
       end
     else
-      @posts = Post.order(:created_at).page(params[:page]).decorate
+      # @posts = Post.order(:created_at).page(params[:page]).decorate
+      @posts = Post.includes(:comments, :user, :tags, :votes, :topic, :notifications, :versions).order(:created_at).page(params[:page]).decorate
       @topics = Topic.all
 
       respond_to do |format|
         format.html
         # format.js
-        format.json { render json: @posts, include: [:comments, :user, :get_upvotes, :get_downvotes, :activities] }
+        format.json { render json: @posts, include: [:comments, :user, :votes, :activities] }
       end
     end
   end
 
   def show
-    @post        = Post.find(params[:id])
-    @comments    = @post.comments
+    @post        = Post.includes(:tags, :taggings, :user, :favorites, votes: [:user], comments: [:votes]).find(params[:id])
+    @comments    = @post.comments.includes(:user, comment: [{votes: :user}, :user], user: [:votes])
     @new_comment = @post.comments.new
   end
 

@@ -34,6 +34,7 @@ class Post < ActiveRecord::Base
 
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings, dependent: :destroy
+  has_many :votes, class_name: 'ActsAsVotable::Vote', foreign_key: 'votable_id'
 
   before_save :destroy_image?
 

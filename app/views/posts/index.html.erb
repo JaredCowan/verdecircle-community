@@ -26,18 +26,18 @@
       <% if p.image? %>
         <br><%= image_tag(p.image.url, class: "img-responsive", alt: "Forum Image") %><br>
       <% end %>
-      <% if user_signed_in? %>
-        <% if hidden_logic(p)[:like] %>
-          <%= link_to "Like", like_post_path(p), method: :put %>
-        <% else %>
-          <%= link_to "UnLike", unlike_post_path(p), method: :put %>
-        <% end %>
-        <% if hidden_logic(p)[:dislike] %>
-          <%= link_to "DisLike", dislike_post_path(p), method: :put %>
-        <% else %>
-          <%= link_to "Undislike", undislike_post_path(p), method: :put %>
-        <% end %>
-      <% end %>
+      <%# if user_signed_in? %>
+        <%# if hidden_logic(p)[:like] %>
+          <%#= link_to "Like", like_post_path(p), method: :put %>
+        <%# else %>
+          <%#= link_to "UnLike", unlike_post_path(p), method: :put %>
+        <%# end %>
+        <%# if hidden_logic(p)[:dislike] %>
+          <%#= link_to "DisLike", dislike_post_path(p), method: :put %>
+        <%# else %>
+          <%#= link_to "Undislike", undislike_post_path(p), method: :put %>
+        <%# end %>
+      <%# end %>
     </div>
     <div class="panel-heading">
       <%= link_to 'Show', post_path(p) %>

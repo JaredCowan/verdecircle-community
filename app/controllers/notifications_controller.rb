@@ -3,7 +3,9 @@ class NotificationsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @notifications = current_user.notifications
+    currentUserNotifications = current_user.notifications
+    @notifications = Notifyer::Notification.find_by_sql("SELECT * FROM notifications FULL OUTER JOIN users ON notifications.user_id=users.id WHERE users.id IN ('" + current_user.id.to_s  + "')")
+    @unread = @notifications.map(&:is_read).reject {|n| n == true}.count
   end
 
   def mark_as_read
@@ -41,5 +43,4 @@ class NotificationsController < ApplicationController
     def notification_params
       params.require(:notification).permit(:user_id, :sender_id, :is_read, :notifyable_id, :notifyable_type)
     end
-
 end
