@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin' if defined? RailsAdmin
 
-  get 'posts/tags/:tag', to: 'posts#index', as: :tag
+  scope '/posts' do
+    get '/tags/:tag', to: 'posts#index', as: :tag
+  end
 
   # Posts, Posts likes, Post Comments & Post Comment likes
   resources :posts do

@@ -17,4 +17,6 @@ class Comment < ActiveRecord::Base
                            dependent: :destroy
 
   has_many :votes, class_name: 'ActsAsVotable::Vote', foreign_key: 'votable_id'
+  
+  scope :reported, lambda { ActsAsVotable::Vote.where(vote_scope: 'reported') }
 end

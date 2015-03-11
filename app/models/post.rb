@@ -31,11 +31,15 @@ class Post < ActiveRecord::Base
                            dependent: :destroy
 
   # has_many :comments, dependent: :destroy
-  has_many :comments, -> { order("comments.cached_weighted_score DESC, comments.created_at ASC") }
+  has_many :comments, -> { order("comments.cached_weighted_score DESC, comments.created_at ASC") }, dependent: :destroy
 
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings, dependent: :destroy
-  has_many :votes, class_name: 'ActsAsVotable::Vote', foreign_key: 'votable_id'
+  has_many :votes, class_name: 'ActsAsVotable::Vote', foreign_key: 'votable_id', dependent: :destroy
+  has_many :reported, -> { where votes: { vote_scope: 'reported'} }, class_name: 'ActsAsVotable::Vote', foreign_key: 'votable_id', dependent: :destroy
+  has_many :versions, -> { where versions: { item_type: 'Post'} }, class_name: 'PaperTrail::Version', foreign_key: 'item_id', dependent: :destroy
+  
+  scope :reported, lambda { ActsAsVotable::Vote.where(vote_scope: 'reported') }
 
   before_save :destroy_image?
 
