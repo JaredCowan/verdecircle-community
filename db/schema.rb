@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307170325) do
+ActiveRecord::Schema.define(version: 20150311035507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,14 +44,28 @@ ActiveRecord::Schema.define(version: 20150307170325) do
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
 
   create_table "comments", force: true do |t|
-    t.string   "body",       default: "", null: false
+    t.string   "body",                    default: "",  null: false
     t.integer  "user_id"
     t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "comments", ["cached_votes_down"], name: "index_comments_on_cached_votes_down", using: :btree
+  add_index "comments", ["cached_votes_score"], name: "index_comments_on_cached_votes_score", using: :btree
+  add_index "comments", ["cached_votes_total"], name: "index_comments_on_cached_votes_total", using: :btree
+  add_index "comments", ["cached_votes_up"], name: "index_comments_on_cached_votes_up", using: :btree
+  add_index "comments", ["cached_weighted_average"], name: "index_comments_on_cached_weighted_average", using: :btree
+  add_index "comments", ["cached_weighted_score"], name: "index_comments_on_cached_weighted_score", using: :btree
+  add_index "comments", ["cached_weighted_total"], name: "index_comments_on_cached_weighted_total", using: :btree
   add_index "comments", ["created_at"], name: "index_comments_on_created_at", using: :btree
   add_index "comments", ["deleted_at"], name: "index_comments_on_deleted_at", using: :btree
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
@@ -140,6 +154,7 @@ ActiveRecord::Schema.define(version: 20150307170325) do
     t.string   "notifyable_type", default: "",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "action",          default: "",    null: false
   end
 
   add_index "notifications", ["is_read"], name: "index_notifications_on_is_read", using: :btree
@@ -155,8 +170,8 @@ ActiveRecord::Schema.define(version: 20150307170325) do
 
   create_table "posts", force: true do |t|
     t.integer  "user_id"
-    t.string   "subject",            default: "", null: false
-    t.text     "body",               default: "", null: false
+    t.string   "subject",                 default: "",  null: false
+    t.text     "body",                    default: "",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
@@ -164,9 +179,23 @@ ActiveRecord::Schema.define(version: 20150307170325) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.datetime "deleted_at"
-    t.integer  "topic_id",           default: 0,  null: false
+    t.integer  "topic_id",                default: 0,   null: false
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "posts", ["cached_votes_down"], name: "index_posts_on_cached_votes_down", using: :btree
+  add_index "posts", ["cached_votes_score"], name: "index_posts_on_cached_votes_score", using: :btree
+  add_index "posts", ["cached_votes_total"], name: "index_posts_on_cached_votes_total", using: :btree
+  add_index "posts", ["cached_votes_up"], name: "index_posts_on_cached_votes_up", using: :btree
+  add_index "posts", ["cached_weighted_average"], name: "index_posts_on_cached_weighted_average", using: :btree
+  add_index "posts", ["cached_weighted_score"], name: "index_posts_on_cached_weighted_score", using: :btree
+  add_index "posts", ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total", using: :btree
   add_index "posts", ["deleted_at"], name: "index_posts_on_deleted_at", using: :btree
   add_index "posts", ["topic_id"], name: "index_posts_on_topic_id", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree

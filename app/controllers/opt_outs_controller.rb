@@ -1,2 +1,0 @@
-class OptOutsController < ApplicationController
-end

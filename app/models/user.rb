@@ -22,25 +22,6 @@ class User < ActiveRecord::Base
   has_many :user_relationships, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
-  # Testing Notifications vv
-
-  has_many :notifications, dependent: :destroy,
-                           class_name: "Notifyer::Notification",
-                           foreign_key: 'user_id'
-
-  has_many :sent_notifications, dependent: :destroy,
-                                class_name: "Notifyer::Notification",
-                                foreign_key: 'sender_id'
-
-  # has_many :unread, -> { where notifications: { is_read: false} }, through: :notifications
-  # has_many :read, -> { where notifications: { is_read: true} }, through: :notifications
-
-  has_many :optouts, dependent: :destroy,
-                     class_name: "Notifyer::OptOut",
-                     foreign_key: 'user_id'
-
-  # Testing Notifications ^^
-
   has_many :authentications, dependent: :destroy, validate: false, inverse_of: :user do
     def grouped_with_oauth
       includes(:oauth_cache).group_by {|a| a.provider }
@@ -57,13 +38,38 @@ class User < ActiveRecord::Base
   has_many :followers, -> { where user_relationships: { state: 'following'} }, through: :user_relationships
   has_many :followings, -> { where user_relationships: { state: 'followed'} }, through: :user_relationships
 
-  
+  has_many :notifications, dependent: :destroy,
+                           class_name: "Notifyer::Notification",
+                           foreign_key: 'user_id'
+
+  has_many :sent_notifications, dependent: :destroy,
+                                class_name: "Notifyer::Notification",
+                                foreign_key: 'sender_id'
+
+  has_many :optouts, dependent: :destroy,
+                     class_name: "Notifyer::NotificationOptOut",
+                     foreign_key: 'user_id'
+
+  # Class Methods
+  class << self
+    # Case insensitive email lookup.
+    #
+    # See Devise.config.case_insensitive_keys.
+    # Devise does not automatically downcase email lookups.
+    def find_by_email(email)
+      find_by(email: email.downcase)
+      # Use ILIKE if using PostgreSQL and Devise.config.case_insensitive_keys=[]
+      #where('email ILIKE ?', email).first
+    end
+
+    # Finds users profile page by username
+    def find_by_username(username)
+      find_by(username: username.downcase)
+    end
+  end # End Class Methods
+
   def display_name
     first_name.presence || email.split('@')[0]
-  end
-
-  def tester
-    Notifyer::Notification.notify_all(User.first, Post.first)
   end
 
   def full_name
@@ -76,21 +82,6 @@ class User < ActiveRecord::Base
 
   def mailboxer_email(object)
     email
-  end
-
-  # Case insensitive email lookup.
-  #
-  # See Devise.config.case_insensitive_keys.
-  # Devise does not automatically downcase email lookups.
-  def self.find_by_email(email)
-    find_by(email: email.downcase)
-    # Use ILIKE if using PostgreSQL and Devise.config.case_insensitive_keys=[]
-    #where('email ILIKE ?', email).first
-  end
-
-  # Finds users profile page by username
-  def self.find_by_username(username)
-    find_by(username: username.downcase)
   end
 
   # Override Devise to allow for Authentication or password.

@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :topic
 
-  default_scope -> { order('created_at DESC') }
+  # default_scope -> { order('created_at DESC') }
 
   validates :subject, presence: true,
             length: { minimum: 3, maximum: 60 }
@@ -30,7 +30,8 @@ class Post < ActiveRecord::Base
                            class_name: "Notifyer::Notification",
                            dependent: :destroy
 
-  has_many :comments, dependent: :destroy
+  # has_many :comments, dependent: :destroy
+  has_many :comments, -> { order("comments.cached_weighted_score DESC, comments.created_at ASC") }
 
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings, dependent: :destroy

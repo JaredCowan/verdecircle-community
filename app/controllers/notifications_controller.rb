@@ -3,13 +3,12 @@ class NotificationsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    currentUserNotifications = current_user.notifications
     @notifications = Notifyer::Notification.find_by_sql("SELECT * FROM notifications FULL OUTER JOIN users ON notifications.user_id=users.id WHERE users.id IN ('" + current_user.id.to_s  + "')")
-    @unread = @notifications.map(&:is_read).reject {|n| n == true}.count
+    @unread_count  = @notifications.map(&:is_read).reject {|n| n == true}.count
   end
 
   def mark_as_read
-    notifId = params[:id] if params.has_key? :id
+    notifId   = params[:id] unless !(params.has_key? :id)
     userNotif = current_user.notifications.unread
 
     if notifId.present?
