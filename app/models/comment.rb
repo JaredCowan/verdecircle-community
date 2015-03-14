@@ -10,7 +10,7 @@ class Comment < ActiveRecord::Base
   validates :post_id, presence: true
   validates :user_id, presence: true
 
-  # default_scope -> { order('created_at ASC') }
+  # default_scope -> { order('created_at DESC') }
 
   has_many :notifications, as: :notifyable,
                            class_name: "Notifyer::Notification",

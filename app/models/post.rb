@@ -43,7 +43,7 @@ class Post < ActiveRecord::Base
 
   before_save :destroy_image?
 
-  paginates_per 15
+  paginates_per 1
 
   def image_delete
     @image_delete ||= "0"

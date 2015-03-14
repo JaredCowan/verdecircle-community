@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   skip_authorization_check
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:index, :show]
   respond_to :html, :json, :js
-  include NotificationConcern
+  include NotificationConcern if Rails.application.routes.recognize_path('/')[:action] == "dashboard"
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   
