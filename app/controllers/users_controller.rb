@@ -26,8 +26,18 @@ class UsersController < ApplicationController
     redirect_to :root
   end
 
+  def dashboard
+    if user_signed_in?
+      @user = User.includes(:posts, :comments, :favorites, posts: [{comments: :votes}, :votes]).find(current_user)
+      p
+
+    else
+      redirect_to :user_home
+    end
+  end
+
   def profile
-    @user = User.find_by(username: params[:username].downcase).decorate
+    @user    = User.find_by(username: params[:username].downcase).decorate
     @actions = User.includes(:posts, :comments, :user_relationships)
   end
 

@@ -1,5 +1,12 @@
 <div class="form-group">
   <%= link_to("New Post", new_post_path , class: "btn btn-primary") %>
+  <br>
+  <%# airdog[1].each do |a| %>
+    Post Id: <%#= a[0] %> User Id: <%#= a[1] %> Upvoted: <%#= a[2] %>
+    <br>
+  <%# end %>
+  <br>
+  
 </div>
 <br>
 <% view = params[:tag] ? @posttag : @posts %>
@@ -8,6 +15,10 @@
     <%= "You're viewing post tagged with '#{params[:tag]}'" %> <%= link_to("Back to view all posts", posts_path, class: "pull-right") %>
   </div>
 <% end %>
+  <%#= airdog[0].map(&:votable_id) %>
+  <%#= airdog[1].map(&:votable_id) %>
+  <%# lik = airdog[0].map(&:votable_id) %>
+  <%# dis = airdog[1].map(&:votable_id) %>
 <% view.each do |p| %>
   <div class="panel panel-default" id="<%= p.id %>">
     <div class="panel-heading">
@@ -23,37 +34,42 @@
     </div>
     <div class="panel-body">
       <%= p.body %>
-      <% if p.image? %>
-        <br><%= image_tag(p.image.url, class: "img-responsive", alt: "Forum Image") %><br>
-      <% end %>
+      Likes: <%= p.cached_votes_up %>
+      Dislikes: <%= p.cached_votes_down %>
+      Total: <%= p.cached_votes_total %>
+      <%# if p.image? %>
+        <br><%#= image_tag(p.image.url, class: "img-responsive", alt: "Forum Image") %><br>
+      <%# end %>
+      <%#= dis.include? p.id %>
       <% if user_signed_in? %>
-        <% if hidden_logic(p)[:like] %>
-          <%= link_to "Like", like_post_path(p), method: :put %>
-        <% else %>
-          <%= link_to "UnLike", unlike_post_path(p), method: :put %>
-        <% end %>
-        <% if hidden_logic(p)[:dislike] %>
-          <%= link_to "DisLike", dislike_post_path(p), method: :put %>
-        <% else %>
-          <%= link_to "Undislike", undislike_post_path(p), method: :put %>
-        <% end %>
+        <%# if hidden_logic(p)[:like] %>
+          <%#= link_to "Like", like_post_path(p), method: :put %>
+        <%# else %>
+          <%#= link_to "UnLike", unlike_post_path(p), method: :put %>
+        <%# end %>
+        <%# if hidden_logic(p)[:dislike] %>
+          <%#= link_to "DisLike", dislike_post_path(p), method: :put %>
+        <%# else %>
+          <%#= link_to "Undislike", undislike_post_path(p), method: :put %>
+        <%# end %>
       <% end %>
     </div>
     <div class="panel-heading">
-      <%= link_to 'Show', post_path(p) %>
-      <% if user_signed_in? && current_user == p.user %>
-        | <%= link_to 'Edit', edit_post_path(p) %> |
-        <%= link_to 'Soft Delete', post_path(p), method: :delete, data: { confirm: 'This will only be visible to you and can be restored later.' } %>
-        | <%= link_to "Permanently Delete", super_delete_post_path(p.id), method: :delete, data: { confirm: 'Are you sure? You Can\'t restore this. Maybe try soft delete.'} %>
-        <% if p.versions.all.count > 0 %>
-          | <%= link_to("undo", revert_version_path(p.versions.last), :method => :post) %>
-        <% end %>
-      <% end %>
-      | <%= link_to("Comment", "posts/#{p.id}#comment-form") %>
-      | <span id="comments-count"><%= pluralize(p.comments.count, 'Comment') %></span>
+      <%#= link_to 'Show', post_path(p) %>
+      <%# if user_signed_in? && current_user == p.user %>
+        | <%#= link_to 'Edit', edit_post_path(p) %> |
+        <%#= link_to 'Soft Delete', post_path(p), method: :delete, data: { confirm: 'This will only be visible to you and can be restored later.' } %>
+        | <%#= link_to "Permanently Delete", super_delete_post_path(p.id), method: :delete, data: { confirm: 'Are you sure? You Can\'t restore this. Maybe try soft delete.'} %>
+        <%# if p.versions.all.count > 0 %>
+          | <%#= link_to("undo", revert_version_path(p.versions.last), :method => :post) %>
+        <%# end %>
+      <%# end %>
+      | <%= link_to("Comment", p) %>
+      | <span id="comments-count"><%= pluralize(p.comments.length, 'Comment') %></span>
     </div>
   </div>
 <% end %>
+
 
 <% if !params[:tag] %>
   <%= paginate @posts %>

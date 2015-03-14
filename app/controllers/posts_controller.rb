@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
   skip_authorization_check
-  before_filter :authenticate_user!
-  respond_to :html, :json
+  before_filter :authenticate_user!, except: [:index, :show]
+  respond_to :html, :json, :js
+  include NotificationConcern if Rails.application.routes.recognize_path('/')[:action] == "dashboard"
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   
@@ -15,20 +16,21 @@ class PostsController < ApplicationController
         redirect_to @notFoundReturnUrl
       end
     else
-      @posts = Post.order(:created_at).page(params[:page]).decorate
-      @topics = Topic.all
+      # @posts = Post.all.order(:created_at).page(params[:page]).decorate
+      @posts = Post.includes(:votes, :comments, :tags, :topic, :favorites, {user: :votes}).order(:created_at).page(params[:page]).decorate
+      # @topics = Topic.all
 
       respond_to do |format|
         format.html
         # format.js
-        format.json { render json: @posts, include: [:comments, :user, :get_upvotes, :get_downvotes, :activities] }
+        format.json { render json: @posts, include: [:comments, :user, :votes, :activities] }
       end
     end
   end
 
   def show
-    @post        = Post.find(params[:id])
-    @comments    = @post.comments
+    @post        = Post.includes(:tags, :taggings, :user, :favorites, comments: [:votes]).find(params[:id])
+    @comments    = @post.comments.includes(:votes)
     @new_comment = @post.comments.new
   end
 

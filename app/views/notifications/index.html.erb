@@ -1,0 +1,28 @@
+<%# notifications = @notifications %>
+<%= link_to "Mark All As Read", mark_all_read_notifications_path(current_user.username), method: :post %>
+|
+<%= link_to "Mark All As Unread", mark_all_unread_notifications_path(current_user.username), method: :post %>
+<br>
+<div class="row">
+  <div class="small-12 small-centered columns">
+    <center>
+    <h1>Notifications</h1>
+    </center>
+    <hr>
+    <% if @notifications.nil? %>
+      <% @notifications.each do |notif| %>
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
+              <img class="media-object" src="<%#= notif.sender.image_url %>" alt="User Avatar">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading"><%#= notif.sender.username.titleize %></h4>
+            New Notification on a <%= notif.notifyable_type.downcase %> you're subscribed too.
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -2,8 +2,10 @@
   <div class="panel-heading">
     <span>Post Form</span>
     <span class="pull-right">
-      <%= link_to "Favorite Post", favorite_post_path(@post.id), method: :put, class: "fa fa-star" %>
-      <%= link_to "Remove Favorite", unfavorite_post_path(@post.id), method: :delete, class: "fa fa-star" %>
+      <% if user_signed_in? %>
+        <%= link_to "Favorite Post", favorite_post_path(@post.id), method: :put, class: "fa fa-star" %>
+        <%= link_to "Remove Favorite", unfavorite_post_path(@post.id), method: :delete, class: "fa fa-star" %>
+      <% end %>
     </span>
   </div>
   <div class="panel-body">
@@ -49,12 +51,15 @@
   <%= render partial: @post.reload.comments %>
 </div>
 
-<div id="comment-form">
-  <%= render 'comments/comment_form' %>
-</div>
+<% if user_signed_in? %>
+  <div id="comment-form">
+    <%= render 'comments/comment_form' %>
+  </div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %> |
-<%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Soft Delete', post_path(@post), method: :delete, data: { confirm: 'This will only be visible to you and can be restored later.' } %>
-| <%= link_to "Permanently Delete", super_delete_post_path(@post.id), method: :delete, data: { confirm: 'Are you sure? You Can\'t restore this. Maybe try soft delete.'} %>
+
+  <%= link_to 'Edit', edit_post_path(@post) %> |
+  <%= link_to 'Back', posts_path %> |
+  <%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'Soft Delete', post_path(@post), method: :delete, data: { confirm: 'This will only be visible to you and can be restored later.' } %>
+  | <%= link_to "Permanently Delete", super_delete_post_path(@post.id), method: :delete, data: { confirm: 'Are you sure? You Can\'t restore this. Maybe try soft delete.'} %>
+<% end %>

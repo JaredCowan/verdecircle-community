@@ -23,7 +23,6 @@ module DeviseReturnToConcern
     req_time = session.delete(:"#{resource_name}_return_to_timestamp")
     url = nil if req_time && req_time < time
 
-    # url || user_root_path
-    url || profile_page_path(current_user.username)
+    url || user_root_path
   end
 end

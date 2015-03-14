@@ -17,6 +17,11 @@ Bundler.require(*Rails.groups)
 
 module VerdeForum
   class Application < Rails::Application
+    # Autoload models in subfolders.
+    config.autoload_paths += Dir[Rails.root.join('app', 'models', 'notifyer/**')]
+
+    # config.autoload_paths += Dir[Rails.root.join('app', 'models', 'concerns', '*/**')]
+
     # Use sql instead of ruby to support case insensitive indices for postgres
     config.active_record.schema_format = :ruby
 

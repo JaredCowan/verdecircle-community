@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :topic
 
-  default_scope -> { order('created_at DESC') }
+  # default_scope -> { order('created_at DESC') }
 
   validates :subject, presence: true,
             length: { minimum: 3, maximum: 60 }
@@ -26,14 +26,24 @@ class Post < ActiveRecord::Base
   has_many :activities, as: :targetable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
 
-  has_many :comments, dependent: :destroy
+  has_many :notifications, as: :notifyable,
+                           class_name: "Notifyer::Notification",
+                           dependent: :destroy
+
+  # has_many :comments, dependent: :destroy
+  has_many :comments, -> { order("comments.cached_weighted_score DESC, comments.created_at ASC") }, dependent: :destroy
 
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings, dependent: :destroy
+  has_many :votes, class_name: 'ActsAsVotable::Vote', foreign_key: 'votable_id', dependent: :destroy
+  has_many :reported, -> { where votes: { vote_scope: 'reported'} }, class_name: 'ActsAsVotable::Vote', foreign_key: 'votable_id', dependent: :destroy
+  has_many :versions, -> { where versions: { item_type: 'Post'} }, class_name: 'PaperTrail::Version', foreign_key: 'item_id', dependent: :destroy
+  
+  scope :reported, lambda { ActsAsVotable::Vote.where(vote_scope: 'reported') }
 
   before_save :destroy_image?
 
-  paginates_per 15
+  paginates_per 1
 
   def image_delete
     @image_delete ||= "0"

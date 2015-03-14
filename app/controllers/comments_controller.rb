@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   skip_authorization_check
   before_filter :authenticate_user!
+  include NotificationConcern
 
   def index
     # created in order to handle renders from this controller, which produce URL 'root/posts/:id/comments'
@@ -11,7 +12,9 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
+    
     if @comment.save
+      Notifyer::Notification.notify_all(@comment, @post)
       @new_comment = @post.comments.new
       respond_to do |format|
         format.html do

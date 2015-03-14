@@ -4,12 +4,19 @@ class Comment < ActiveRecord::Base
   acts_as_paranoid
 
   acts_as_votable
-
   has_paper_trail
 
   validates :body, presence: true
   validates :post_id, presence: true
   validates :user_id, presence: true
 
-  default_scope -> { order('created_at ASC') }
+  # default_scope -> { order('created_at DESC') }
+
+  has_many :notifications, as: :notifyable,
+                           class_name: "Notifyer::Notification",
+                           dependent: :destroy
+
+  has_many :votes, class_name: 'ActsAsVotable::Vote', foreign_key: 'votable_id'
+  
+  scope :reported, lambda { ActsAsVotable::Vote.where(vote_scope: 'reported') }
 end

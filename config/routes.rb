@@ -10,10 +10,16 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin' if defined? RailsAdmin
 
-  get 'posts/tags/:tag', to: 'posts#index', as: :tag
+  scope '/posts' do
+    get '/tags/:tag', to: 'posts#index', as: :tag
+  end
+
+  concern :paginatable do
+    get '(page/:page)', action: :index, on: :collection, as: ''
+  end
 
   # Posts, Posts likes, Post Comments & Post Comment likes
-  resources :posts do
+  resources :posts, concerns: :paginatable do
     member do
       put "like", to: "posts#liked"
       put "unlike", to: "posts#unliked"
@@ -33,10 +39,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :topics, path: '/categories/posts'
+  resources :topics, path: '/categories/posts', concerns: :paginatable
   # get '/topics', to: redirect('/topics/posts')
 
-  resources :activities, only: [:index, :destroy]
+  resources :activities, only: [:index, :destroy], concerns: :paginatable
   
   # Route for undoing / redoing changes made to a post
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
@@ -92,7 +98,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :user_relationships, path: '/u/:username/followers' do
+  resources :user_relationships, path: '/u/:username/followers', concerns: :paginatable do
     member do
       post :new, to: "user_relationships#create"
     end
@@ -102,8 +108,20 @@ Rails.application.routes.draw do
     get 'profile', to: "users#profile"
     match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
     match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
-    resources :favorites, only: [:index]
+    resources :favorites, only: [:index], concerns: :paginatable
+
+    resources :notifications, only: [:index], concerns: :paginatable do
+      collection do
+        post 'markasread', to: 'notifications#mark_as_read', as: :mark_all_read
+        post 'markasunread', to: 'notifications#mark_as_unread', as: :mark_all_unread
+      end
+      member do
+        post 'markasread', to: 'notifications#mark_as_read', as: :mark_as_read
+        post 'optout', to: 'notifications#opt_out', as: :opt_out
+      end
+    end
   end
+
   # get '/:username', to: redirect('/u/%{username}')
 
   get '/emptytrash', to: 'conversations#empty_trash', as: 'empty_trash'
@@ -117,6 +135,13 @@ Rails.application.routes.draw do
   get 'robots.:format' => 'robots#index'
 
   root 'pages#home'
+
+  scope '/dashboard' do
+    get '/', to: redirect("/")
+    scope '/:view' do
+      get '/', to: "users#dashboard", defaults: { view: 'posts' }, as: :user_dashboard
+    end
+  end
 
   # ToDo: Decide which route(no pun intended) I want to take to handle routing errors
   # 
