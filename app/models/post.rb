@@ -79,8 +79,9 @@ class Post < ActiveRecord::Base
   end
 
   def tag_list=(names)
+    names     = names.split(",").map {|name| name.downcase.strip.parameterize}.uniq.join(", ")
     self.tags = names.split(",").map do |n|
-      Tag.where(name: n.downcase.strip.parameterize).first_or_create!
+      Tag.where(name: n).first_or_create!
     end
   end
 
