@@ -36,7 +36,6 @@ module NotificationConcern
       if notification
         notification.destroy
       end
-      # 10.times { puts params }
     end
   end
 end

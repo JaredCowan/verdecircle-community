@@ -19,6 +19,7 @@ module VerdeForum
   class Application < Rails::Application
     # Autoload models in subfolders.
     config.autoload_paths += Dir[Rails.root.join('app', 'models', 'notifyer/**')]
+    config.autoload_paths += Dir[Rails.root.join('app/workers/**')]
 
     # config.autoload_paths += Dir[Rails.root.join('app', 'models', 'concerns', '*/**')]
 

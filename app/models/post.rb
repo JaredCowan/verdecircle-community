@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :topic
 
-  # default_scope -> { order('created_at DESC') }
+  default_scope -> { order('created_at DESC') }
 
   validates :subject, presence: true,
             length: { minimum: 3, maximum: 60 }
@@ -42,6 +42,7 @@ class Post < ActiveRecord::Base
   scope :reported, lambda { ActsAsVotable::Vote.where(vote_scope: 'reported') }
 
   before_save :destroy_image?
+  before_save :format_post
 
   paginates_per 15
 
@@ -65,23 +66,29 @@ class Post < ActiveRecord::Base
     "#{id}-#{subject.parameterize}"
   end
 
-  def self.tagged_with(name)
-    Tag.find_by_name!(name).posts
-  end
-
-  def self.tag_counts
-    Tag.select("tags.id, tags.name,count(taggings.tag_id) as count").
-      joins(:taggings).group("taggings.tag_id, tags.id, tags.name")
-  end
-
   def tag_list
     tags.map(&:name).join(", ")
   end
 
   def tag_list=(names)
-    names     = names.split(",").map {|name| name.downcase.strip.parameterize}.uniq.join(", ")
+    names     = names.split(",").map {|name| name.downcase.strip.parameterize}.uniq.join(",")
     self.tags = names.split(",").map do |n|
       Tag.where(name: n).first_or_create!
+    end
+  end
+
+  def format_post
+    self.subject = subject.downcase
+  end
+
+  class << self
+    def tagged_with(name)
+      Tag.find_by_name!(name).posts
+    end
+
+    def tag_counts
+      Tag.select("tags.id, tags.name,count(taggings.tag_id) as count").
+        joins(:taggings).group("taggings.tag_id, tags.id, tags.name")
     end
   end
 
