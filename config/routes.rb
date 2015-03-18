@@ -143,6 +143,16 @@ Rails.application.routes.draw do
     end
   end
 
+  # get 'post', to: 'posts#index', constraints: { subdomain: 'posts' }
+
+  namespace :api, path: '/' do
+    constraints subdomain: 'api' do
+      # resources :posts, path: '/posts'
+      root to: 'activities#index', path: '/activities'
+      # resources :activities
+    end
+  end
+
   # ToDo: Decide which route(no pun intended) I want to take to handle routing errors
   # 
   # Handle routing errors
