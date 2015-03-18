@@ -56,6 +56,9 @@
               </li>
             <% end %> <!-- END if current_user.is_admin? -->
             <li>
+              <%= link_to "My Dashboard", :user_dashboard %>
+            </li>
+            <li>
               <%= link_to "Notifications", notifications_path(current_user.username) %>
             </li>
             <li>

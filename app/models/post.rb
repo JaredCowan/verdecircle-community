@@ -17,11 +17,20 @@ class Post < ActiveRecord::Base
   has_paper_trail
   acts_as_paranoid
   
-  has_attached_file :image
+  has_attached_file :image,
+    url: "/system/posts/images/:id/:style/:hash.:extension",
+    hash_secret: "hashedSecretString",
+    preserve_files: "false",
+    styles: {
+      thumb:    ["100x100#", :png],
+      small:    ["150x150>", :png],
+      medium:   ["200x200",  :png],
+      original: ["*x*",      :png]
+  }
+
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   validates_attachment_file_name :image, :matches => [/png\Z/, /jpg\Z/, /gif\Z/, /jpeg\Z/]
-  validates_attachment :image,
-  :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/gif", "image/png"] }
+  validates_attachment :image, :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/gif", "image/png"] }
 
   has_many :activities, as: :targetable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy

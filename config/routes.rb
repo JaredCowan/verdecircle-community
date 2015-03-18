@@ -137,7 +137,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   scope '/dashboard' do
-    get '/', to: redirect("/")
+    get '/', to: redirect("/dashboard/posts")
     scope '/:view' do
       get '/', to: "users#dashboard", defaults: { view: 'posts' }, as: :user_dashboard
     end
