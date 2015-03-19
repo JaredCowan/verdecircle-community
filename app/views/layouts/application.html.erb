@@ -28,7 +28,12 @@
       <div class="errors__container">
         <%= render 'layouts/messages' %>
       </div>
-      <%= yield %>
+      <div class="row">
+        <div class="col-sm-8 col-lg-6 col-lg-offset-2">
+          <%= yield %>
+        </div>
+        <%= render :partial => "layouts/sidebar" %>
+      </div>
       <footer class="page__footer">
         <% if content_for? :footer %>
           <%= yield :footer %>

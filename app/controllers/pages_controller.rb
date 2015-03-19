@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!
 
   def home
+    @posts = Post.includes(:votes, :comments, :tags, :topic, :favorites, {user: :votes}).order(:created_at).page(params[:page]).decorate
     redirect_to posts_path if user_signed_in?
   end
 
