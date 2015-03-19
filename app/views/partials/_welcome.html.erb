@@ -1,0 +1,20 @@
+<% content_for :brand_name do %>
+  <%= I18n.t('brand.name') %>
+<% end %>
+
+<% content_for :company_name do %>
+  <%= I18n.t('brand.company') %>
+<% end %>
+
+<div class="welcome-header">
+  <h4 class="text-capitalize">
+    <%= yield :brand_name %>
+  </h4>
+  <p>
+    Welcome to the <%= yield :brand_name %>. This is a fun place to learn more about <%= yield :company_name %> products and product features, as well as learn tricks from other companies using <%= yield :company_name %>. We encourage you to help fellow <%= yield :company_name %> users. In fact, we reward you for it!
+    <br>
+    <a href="javascript:;" title="verde circle point system rules">
+      <%= I18n.t('point-system.learn-more.link', company_name: t('brand.company')) %>
+    </a>
+  </p>
+</div>

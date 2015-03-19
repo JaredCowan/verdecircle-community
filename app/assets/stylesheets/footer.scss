@@ -1,10 +1,15 @@
 // Page footer
 
-.page__footer {
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 20px 10px;
   margin-top: 100px;
   text-align: center;
   border-top: 1px solid #333;
+  background-color: #fff;
 
   ul {
     margin: 0;

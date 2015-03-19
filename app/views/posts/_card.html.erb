@@ -1,0 +1,23 @@
+<ul class="list-unstyled">
+  <li>
+    Posts: <%= user.posts.length %>
+  </li>
+  <li>
+    Favorites: <%= user.favorites.length %>
+  </li>
+  <li>
+    Votes: <%= user.votes.up.length %>
+  </li>
+  <li>
+    Comments: <%= user.comments.length %>
+  </li>
+  <li>
+    <%= Faker::Company.name %>
+  </li>
+  <li>
+    <%= Faker::Address.city + ", " + Faker::Address.us_state_abbr %>
+  </li>
+  <li>
+    <%= link_to "Website", "javascript:;" %>
+  </li>
+</ul>
