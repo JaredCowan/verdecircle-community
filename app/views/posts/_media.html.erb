@@ -11,7 +11,7 @@
         <p>
           Category: <%= link_to post.topic.name, topic_path(post) %>
           Tags: <% post.tags.each do |t| %>
-            <%#= link_to t.name.titleize, tag_path(t.name) %>
+            <%= link_to t.name.titleize, tag_path(t.name) %>
           <% end %>
           <br>
           <i class="fa fa-arrow-up"></i> <%= post.cached_votes_up %>
