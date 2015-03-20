@@ -2,3 +2,10 @@ en:
   point-system:
     learn-more:
       link: "Click here to learn all the rules and benefits of the %{company_name} point system."
+
+  verdecircle:
+    navigation-dropdown:
+      item1: "<a href='javascript:;'>VerdeCircle.com</a>"
+      item2: "<a href='javascript:;'>Thriii</a>"
+      item3: "<a href='javascript:;'>Blog</a>"
+      item4: "<a href='javascript:;'>Contact</a>"

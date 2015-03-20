@@ -1,0 +1,40 @@
+<%= simple_form_for(:user, url: session_path(:user), html: {class: "form-inline navbar-form "}) do |f| %>
+
+  <div class="form-group">
+    <%= f.input_field :email %>
+  </div> <!-- /input-group -->
+
+  <div class="input-group">
+    <%= f.input_field :password %>
+    <span class="input-group-btn">
+      <%= f.button :submit, I18n.t('auth.login.link'), class: "btn btn-success" %>
+      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <%= "Other" %>
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <li class="dropdown-header">Log in with:</li>
+          <% Authentication.providers.each do |provider| %>
+            <div class="auth__providers__provider" style="width: 95%;">
+              <li>
+                <%= link_to provider_auth_path(provider, flow: 'login'), data: {flow: 'login', provider: provider}, class: "btn btn-primary" do %>
+                    <i class="sico-<%= provider %> sico-fixed"></i>
+                    <%= Authentication.provider_name(provider) %>
+                <% end %>
+              </li>
+            </div>
+          <% end %>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <%= link_to I18n.t('auth.signup.link'), new_user_registration_path %>
+        </li>
+        <li>
+          <%= link_to I18n.t("auth.forgot.prompt"), new_password_path(:user) %>
+        </li>
+      </ul>
+    </span>
+  </div> <!-- /input-group -->
+  <%= link_to I18n.t("auth.signup.link"), new_user_registration_path, class: "btn btn-primary" %>
+<% end %>

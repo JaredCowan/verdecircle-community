@@ -5,31 +5,75 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="navbar-header">
     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
-    <span class="sr-only">Toggle navigation</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
+      <span class="sr-only">Toggle navigation</span>
+      <% if user_signed_in? %>
+        <%= render 'users/avatar', size: :tiny %>
+      <% else %>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      <% end %>
     </button>
-    <a href="<%= root_url %>" class="navbar-brand" title="brand logo">
+    <a href="<%= root_url %>" class="navbar-brand visible-xs" title="brand logo">
       <%= image_tag "verde-circle-icon.png", class: "brand-image", alt: "Brand" %>
     </a>
+    <button class="navbar-toggle" data-target=".navbar-notif" data-toggle="collapse" type="button">
+      <span class="sr-only">Toggle navigation</span>
+      <i class="fa fa-comments"></i>
+    </button>
   </div>
+  <% if user_signed_in? %>
+    <div class="collapse navbar-notif">
+      <ul class="nav navbar-nav navbar-left">
+        <li>
+          <%= link_to "View All", notifications_path(current_user.username) %>
+          <%= link_to "Mark All As Read", mark_all_read_notifications_path(current_user.username), method: :post %>
+          <%= link_to "Mark All As Unread", mark_all_unread_notifications_path(current_user.username), method: :post %>
+        </li>
+        <% if @notifications.nil? %>
+          <% @notifications.each do |n| %>
+            <li>
+              <a href="/<%= n.notifyable_type.downcase %>s/<%= n.notifyable_id %>"> <%#= render 'users/avatar', size: :tiny, user: n.sender %> <%= n.sender.username.titleize %> commented on <%= "#{n.user.username.titleize}'s #{n.notifyable_type}" %> </a>
+            </li>
+            <li> 
+              <%= link_to "Mark As Read", mark_as_read_notification_path(current_user.username, n.id), method: :post %>
+              <%#= link_to "Stop Notifications", opt_out_notification_path(current_user.username, n.notifyable_id, type: n.notifyable_type), method: :post %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="collapse navbar-collapse">
-    <ul class="nav navbar-nav navbar-right">
-      <% if user_signed_in? %>
+    <ul class="nav navbar-nav navbar-left">
+      <li class="dropdown hidden-xs">
+        <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown"  title="brand logo">
+          <%= image_tag "verde-circle-icon.png", class: "brand-image", alt: "Brand" %>
+        </a>
+        <ul class="dropdown-menu">
+          <% I18n.t('verdecircle.navigation-dropdown').each do |key, link| %>
+            <li>
+              <%= raw link %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
         <li>
           <%= link_to "Home", :root %>
         </li>
+        <% if user_signed_in? %>
         <li>
           <%= link_to "My Dashboard", :user_dashboard %>
         </li>
         <li>
           <%= link_to "Categories", :topics %>
         </li>
-        <li class="dropdown">
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown hidden-xs">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="label label-info">
-              <i class="fa fa-users"></i>
+              <i class="fa fa-comment"></i>
               <span id="notificationsCount">
                 <%= @unread_count %>
               </span>
@@ -57,7 +101,7 @@
         </li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <%= render 'users/avatar', size: :tiny %>
+            <%= render 'users/avatar', size: :tiny %> My Account
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
@@ -87,14 +131,16 @@
           </ul> <!-- END dropdown-menu -->
         </li> <!-- END dropdown -->
       <% end %> <!-- END if user_signedin? -->
-      <% unless user_signed_in? %>
+    </ul>
+    <% unless user_signed_in? %>
+      <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= link_to I18n.t('auth.signup.link'), new_user_registration_path %>
+          <%= render "users/sessions/new" %>
         </li>
         <li>
-          <%= link_to I18n.t('auth.login.link'), new_user_session_path %>
+          <a href="javascript:;" title="free trial link">Free Trail</a>
         </li>
-      <% end %> <!-- END unless user_signedin? < Shows if no user is signed in > -->
-    </ul> <!-- END navbar-nav ul -->
+      </ul> <!-- END navbar-nav ul -->
+    <% end %> <!-- END unless user_signedin? -->
   </div> <!-- END navbar-collapse -->
 </nav> <!-- END navigation menu -->
