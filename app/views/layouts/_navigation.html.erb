@@ -17,10 +17,12 @@
     <a href="<%= root_url %>" class="navbar-brand visible-xs" title="brand logo">
       <%= image_tag "verde-circle-icon.png", class: "brand-image", alt: "Brand" %>
     </a>
-    <button class="navbar-toggle" data-target=".navbar-notif" data-toggle="collapse" type="button">
-      <span class="sr-only">Toggle navigation</span>
-      <i class="fa fa-comments"></i>
-    </button>
+    <% if user_signed_in? %>
+      <button class="navbar-toggle" data-target=".navbar-notif" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-comments"></i>
+      </button>
+    <% end %>
   </div>
   <% if user_signed_in? %>
     <div class="collapse navbar-notif">
