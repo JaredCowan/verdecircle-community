@@ -1,9 +1,5 @@
 <% view = params[:tag] ? @posttag : @posts %>
 
-<% content_for :welcome do %>
-  <%= render partial: "partials/welcome" %>
-<% end %>
-
 <div class="form-group">
   <%= link_to("New Post", new_post_path , class: "btn btn-primary") %>
   <br>

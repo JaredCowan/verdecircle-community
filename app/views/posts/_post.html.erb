@@ -1,9 +1,20 @@
-<% @posts.each do |p| %>
-  <div>
-    <h2><%= link_to p.subject, post_path(p) %></h2>
-   
-    <small><em><%= p.timestamp %></em></small>
-   
-    <p><%= truncate(strip_tags(p.body), length: 600) %></p>
+<% view = params[:tag] ? @posttag : @posts %>
+
+<div class="form-group">
+  <%= link_to("New Post", new_post_path , class: "btn btn-primary") %>
+  <br>
+</div>
+<br>
+<% if params[:tag] %>
+  <div class="alert alert-info">
+    <%= "You're viewing post tagged with '#{params[:tag]}'" %> <%= link_to("Back to view all posts", posts_path, class: "pull-right") %>
   </div>
+<% end %>
+
+<% view.each do |p| %>
+  <%= render partial: "posts/media", locals: { post: p } %>
+<% end %>
+
+<% if !params[:tag] %>
+  <%= paginate @posts %>
 <% end %>

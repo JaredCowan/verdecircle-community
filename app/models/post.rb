@@ -13,6 +13,8 @@ class Post < ActiveRecord::Base
 
   validates :topic_id, presence: true
 
+  validates :tags, presence: true
+
   acts_as_votable
   has_paper_trail
   acts_as_paranoid

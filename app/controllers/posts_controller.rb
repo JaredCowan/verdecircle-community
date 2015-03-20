@@ -17,9 +17,7 @@ class PostsController < ApplicationController
         redirect_to @notFoundReturnUrl
       end
     else
-      # @posts = Post.all.order(:created_at).page(params[:page]).decorate
       @posts = Post.includes(:votes, :comments, :tags, :topic, :favorites, {user: :votes}).order(:created_at).page(params[:page]).decorate
-      # @topics = Topic.all
 
       respond_to do |format|
         format.html
@@ -137,7 +135,7 @@ class PostsController < ApplicationController
 
   def not_found
     flash.keep[:danger] = "Sorry, we couldn't find that post you were looking for."
-    redirect_to :controller => "posts", :action => "index"
+    redirect_to controller: "posts", action: "index"
   end
 
   private
