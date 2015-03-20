@@ -6,7 +6,7 @@ class Comment < ActiveRecord::Base
   acts_as_votable
   has_paper_trail
 
-  validates :body, presence: true
+  validates :body, presence: true, length: { minimum: 3, maximum: 100000 }
   validates :post_id, presence: true
   validates :user_id, presence: true
 

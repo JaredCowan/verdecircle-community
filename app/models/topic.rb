@@ -1,6 +1,10 @@
 class Topic < ActiveRecord::Base
   has_many :posts
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :name,
+            presence: true,
+            length: { minimum: 5 },
+            uniqueness: { case_sensitive: false }
+  
   before_save :pretty_name
 
   def to_param

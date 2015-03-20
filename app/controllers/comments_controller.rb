@@ -12,9 +12,11 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
-    
+    cbody = auto_link_usernames(@comment.body)
+    @comment.body = %Q(#{cbody})
     if @comment.save
       Notifyer::Notification.notify_all(@comment, @post)
+      flash.now[:success] = "Your comment has posted on #{@post.user.username}'s post"
       @new_comment = @post.comments.new
       respond_to do |format|
         format.html do
@@ -25,11 +27,33 @@ class CommentsController < ApplicationController
       end
     else
       @new_comment = @comment
+      error = @comment.errors[:body]
+      flash.now[:danger] = "#{error.count} error(s) prohibited this comment from being saved: #{error.join(", ")}"
       respond_to do |format|
         format.html { render @post }
-        format.js { render action: 'failed_save' }
+        format.js { render action: 'failed_save'}
       end
     end
+  end
+
+
+  def auto_link_usernames(text)
+    text = ActionController::Base.helpers.strip_tags(text)
+    tagged = []
+    body = text.split(" ").each do |b|
+      b.gsub! /(?<=\s|^)@[A-Za-z0-9_]+(?=\b)/ do |username|
+        name = username.gsub!('@', '')
+        user = User.find_by(username: name).present?
+        if !tagged.include?(name) && user
+          # tagged.push(name)
+          b = %Q(<a href='/u/#{name}'>@#{name}</a>)
+          # b = '<%= link_to "@#{name}", profile_page_path(user) %>'
+        else
+          b = %Q(@#{name})
+        end
+      end
+    end
+    return body.join(" ")
   end
 
   def destroy

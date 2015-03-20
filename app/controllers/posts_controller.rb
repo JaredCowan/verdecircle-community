@@ -44,6 +44,8 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
+    @post.subject = ActionController::Base.helpers.strip_tags(@post.subject)
+    @post.body = ActionController::Base.helpers.strip_tags(@post.body)
 
     respond_to do |format|
       if @post.save
@@ -52,15 +54,15 @@ class PostsController < ApplicationController
         format.json { render json: @post, post: :created, location: @post }
         flash[:success] = "Post was successfully created."
       else
-        format.html { redirect_to :back, notice: "#{@post.errors.count} error(s) prohibited this post from being saved: #{@post.errors.full_messages.join(', ')}  " }
+        format.html { render :new }
         format.json { render json: @post.errors, post: :unprocessable_entity }
+        flash.now[:danger] = "#{@post.errors.count} error(s) prohibited this post from being saved: #{@post.errors.full_messages.join(', ')}"
       end
     end
   end
 
   def update
     @post = current_user.posts.find(params[:id])
-
     @post.transaction do
       @post.update_attributes(post_params)
       current_user.create_activity(@post, 'updated')

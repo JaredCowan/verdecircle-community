@@ -1,6 +1,7 @@
 <%= simple_form_for [@post, @new_comment], remote: true do |f| %>
 
     <div class="form-group">
+      <%= render partial: "layouts/messages" %>
       <%# if signed_in? %>
           <%#= f.text_field :author, readonly: true, value: current_user.name, class: 'form-control' %>
 	  <%# else %>
@@ -9,7 +10,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.text_area :body, rows: '5', class: 'form-control', autofocus: true %>
+      <%= f.text_area :body, rows: '5', class: 'form-control' %>
       <%= f.input :user_id, as: :hidden, input_html: { value: "#{current_user.id}" } %>
     </div>
 

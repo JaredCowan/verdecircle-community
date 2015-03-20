@@ -9,7 +9,7 @@ class Post < ActiveRecord::Base
             length: { minimum: 3, maximum: 60 }
 
   validates :body, presence: true,
-            length: { minimum: 3, maximum: 4000 }
+            length: { minimum: 3, maximum: 100000 }
 
   validates :topic_id, presence: true
 
@@ -83,6 +83,7 @@ class Post < ActiveRecord::Base
   def tag_list=(names)
     names     = names.split(",").map {|name| name.downcase.strip.parameterize}.uniq.join(",")
     self.tags = names.split(",").map do |n|
+      n = ActionController::Base.helpers.strip_tags(n)
       Tag.where(name: n).first_or_create!
     end
   end
