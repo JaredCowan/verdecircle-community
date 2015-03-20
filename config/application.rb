@@ -18,12 +18,10 @@ Bundler.require(*Rails.groups)
 module VerdeForum
   class Application < Rails::Application
     # Autoload models in subfolders.
-    config.autoload_paths += Dir[Rails.root.join('app', 'models', 'notifyer/**')]
+    config.autoload_paths += Dir[Rails.root.join('app/models/notifyer/**')]
     config.autoload_paths += Dir[Rails.root.join('app/workers/**')]
 
-    # config.autoload_paths += Dir[Rails.root.join('app', 'models', 'concerns', '*/**')]
-
-    # Use sql instead of ruby to support case insensitive indices for postgres
+    # You can change to :sql instead of :ruby to support case insensitive indices for postgres
     config.active_record.schema_format = :ruby
 
     # Cache
@@ -46,8 +44,10 @@ module VerdeForum
     I18n.enforce_available_locales = true
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
+    config.i18n.default_locale = :en
+
+    # Uncomment and edit to add your own locales folder and files to autoload path
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
 
     # Enable faster precompiles
     config.assets.initialize_on_precompile = false

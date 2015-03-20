@@ -28,9 +28,9 @@ class Post < ActiveRecord::Base
       original: ["*x*",      :png]
   }
 
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
-  validates_attachment_file_name :image, :matches => [/png\Z/, /jpg\Z/, /gif\Z/, /jpeg\Z/]
-  validates_attachment :image, :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/gif", "image/png"] }
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates_attachment_file_name :image, matches: [/png\Z/, /jpg\Z/, /gif\Z/, /jpeg\Z/]
+  validates_attachment :image, content_type: { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png"] }
 
   has_many :activities, as: :targetable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
@@ -39,7 +39,6 @@ class Post < ActiveRecord::Base
                            class_name: "Notifyer::Notification",
                            dependent: :destroy
 
-  # has_many :comments, dependent: :destroy
   has_many :comments, -> { order("comments.cached_weighted_score DESC, comments.created_at ASC") }, dependent: :destroy
 
   has_many :taggings, dependent: :destroy

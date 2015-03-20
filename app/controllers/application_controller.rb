@@ -30,7 +30,8 @@ class ApplicationController < ActionController::Base
   include CommonHelper
   include ErrorReportingConcern
   include AuthorizationErrorsConcern
-  
+  include DetectBrowserConcern
+
   # Move flyer method to helper.
   def flyer(style = "notice", options = {})
     options.key?(:value)  ? "" : options.merge!(:value  => I18n.t('gflash.errors.nodefault'))
@@ -67,39 +68,41 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def skip_check_authorization?
-    devise_controller? || is_a?(RailsAdmin::ApplicationController)
-  end
-
-  # Reset response so redirect or render can be called again.
-  # This is an undocumented hack but it works.
-  def reset_response
-    self.instance_variable_set(:@_response_body, nil)
-  end
-
-  # Respond to uncaught exceptions with friendly error message during ajax requets
-  def handle_uncaught_exception(exception)
-    if request.format == :js
-      report_error(exception)
-      flash.now[:error] = Rails.env.development? ? exception.message : I18n.t('errors.unknown')
-      render 'layouts/uncaught_error.js'
-    else
-      raise
+    def skip_check_authorization?
+      devise_controller? || is_a?(RailsAdmin::ApplicationController)
     end
-  end
 
-  def routing_error
-    raise ActionController::RoutingError.new(params[:path])
-  end
+    # Reset response so redirect or render can be called again.
+    # This is an undocumented hack but it works.
+    def reset_response
+      self.instance_variable_set(:@_response_body, nil)
+    end
 
-  def render_not_found
-    render "public/404"
-  end
+    # Respond to uncaught exceptions with friendly error message during ajax requets
+    def handle_uncaught_exception(exception)
+      if request.format == :js
+        report_error(exception)
+        flash.now[:error] = Rails.env.development? ? exception.message : I18n.t('errors.unknown')
+        render 'layouts/uncaught_error.js'
+      else
+        raise
+      end
+    end
+
+    def routing_error
+      raise ActionController::RoutingError.new(params[:path])
+    end
+
+    def render_not_found
+      render "public/404"
+    end
+  # End Protected Methods
 
   private
 
-  def render_404(exception = nil)
-    logger.info "Exception, redirecting: #{exception.message}" if exception
-    redirect_to :root
-  end
+    def render_404(exception = nil)
+      logger.info "Exception, redirecting: #{exception.message}" if exception
+      redirect_to :root
+    end
+  # End Private Methods
 end
