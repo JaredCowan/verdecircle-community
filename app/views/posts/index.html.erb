@@ -4,10 +4,12 @@
   <%= render partial: "partials/welcome" %>
 <% end %>
 
-<div class="form-group">
-  <%= link_to("New Post", new_post_path , class: "btn btn-primary") %>
+<% if user_signed_in? %>
+  <div class="form-group">
+    <%= link_to("New Post", new_post_path , class: "btn btn-primary") %>
+  </div>
   <br>
-</div>
+<% end %>
 <br>
 <% if params[:tag] %>
   <div class="alert alert-info">
