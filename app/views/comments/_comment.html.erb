@@ -30,8 +30,9 @@
                   class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true,
                   title: 'Delete comment', rel: 'tooltip' %>
   <%# end %>
-  <%#= vote.map(&:votable_id).include?(comment.id) %>
-  <%= vote.map(&:votable_id) %>
+  <%#= @likes %>
+  <%= vote_logic_helper(comment) %>
+  <%#= test_logic(comment) %>
   <hr>
 <%# end %>
 <%# comment.each do |comment| %>

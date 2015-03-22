@@ -47,11 +47,11 @@
       <h4 id="comments-count"><%= pluralize(@post.comments.length, 'Comment') %></h4>
   </div>
 </div>
-<%#= vote = @post.votes.map(&:voter_id) %>
-<% vote = @comments.votes(@post).select(:id, :votable_id, :vote_scope) %>
+<%#= @comments.votes(@post).inspect %>
+<%# vote = @comments.votes(@post) %>
 <div id="comments-list">
   <%#= render partial: @comments %>
-  <%= render partial: @post.reload.comments, locals: {vote: vote} %>
+  <%= render partial: @post.reload.comments %>
   <%# @comments.each do |c| %>
     <%#= content_tag_for(:div, c, class: 'visitor') do %>
       <%#= c.body %>

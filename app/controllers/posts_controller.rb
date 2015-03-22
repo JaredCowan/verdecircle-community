@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   respond_to :html, :json, :js
 
   include NotificationConcern if Rails.application.routes.recognize_path('/')[:action] == "dashboard"
+  include PostsLikeableHelper
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   
@@ -31,6 +32,7 @@ class PostsController < ApplicationController
   def show
     @post        = Post.includes(:user, :votes, :tags, :taggings, :favorites, comments: [:user, :votes]).find(params[:id])
     @comments    = @post.comments.includes({user: :votes})
+    @likes       = query_votes(@post)
     @new_comment = @post.comments.new
 
     respond_to do |format|

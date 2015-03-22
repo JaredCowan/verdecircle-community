@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   skip_authorization_check
   before_filter :authenticate_user!
   include NotificationConcern
+  include PostsLikeableHelper
 
   def index
     # created in order to handle renders from this controller, which produce URL 'root/posts/:id/comments'
@@ -10,9 +11,11 @@ class CommentsController < ApplicationController
   end
 
   def create
-    # @post = Post.find(params[:post_id])
-    @post = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
+    @post = Post.find(params[:post_id])
+    # @post = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
     @comment = @post.comments.build(comment_params)
+    @likes = query_votes(@post)
+
     # cbody = auto_link_usernames(@comment.body)
     # @comment.body = %Q(#{cbody})
     if @comment.save
