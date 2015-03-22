@@ -84,13 +84,13 @@ en:
 
   likable:
     posts:
-      like: 'like dis shit'
+      like: 'Up Vote'
       like-link: 'like'
-      unlike: 'unlike dis shit'
+      unlike: 'Up Voted'
       unlike-link: 'unlike'
-      disliked: 'dislike dis shit'
+      disliked: 'Down Vote'
       disliked-link: 'disliked'
-      undisliked: 'undislike dis shit'
+      undisliked: 'Down Voted'
       undisliked-link: 'undislike'
 
   # See rails_admin locale file for more settings

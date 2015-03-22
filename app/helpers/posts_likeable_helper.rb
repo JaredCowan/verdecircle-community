@@ -21,6 +21,24 @@ module PostsLikeableHelper
 
   def vote_logic_helper(object)
     has_voted = @likes.include?(object.id)
+
+    case has_voted
+      when true
+        content_tag_for(:div, object, :like) do
+          content_tag(:div,
+            content_tag(:a, content_tag(:i, " " + I18n.t("likable.posts.like"), class: "fa fa-thumbs-up"), href: like_post_comment_path(@post.id, object.id), data: { method: :put }, class: "btn btn-primary") +
+            content_tag(:a, content_tag(:i, " " + I18n.t("likable.posts.disliked"), class: "fa fa-thumbs-down"), href: dislike_post_comment_path(@post.id, object.id), data: { method: :put }, class: "btn btn-primary"),
+            class: "btn btn-group"
+          )
+        end
+      when false
+        return content_tag_for(:div, object, :like) do
+          content_tag(:a, content_tag(:i, I18n.t("likable.posts.like"), class: "fa fa-thumbs-up"),
+            href: like_post_comment_path(@post.id, object.id), data: { method: :put }, class: "btn btn-primary")
+        end
+      else
+        flash.now[:danger] = "Sorry there was an error"
+    end
   end
 
   # def airdog

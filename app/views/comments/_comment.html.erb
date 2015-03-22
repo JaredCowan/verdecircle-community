@@ -15,7 +15,7 @@
       <%#= comment.votes(Post) %>
     <%# end %>
         <%#= comment.votes.include?(current_user) %>
-          <%#= link_to "Like", like_post_comment_path(comment.post_id, comment), method: :put %>
+          <%#= link_to "Like", like_post_comment_path(comment.post_id, comment) %>
         <%# else %>
           <%#= link_to "UnLike", unlike_post_comment_path(comment.post_id, comment), method: :put %>
         <%# end %>
