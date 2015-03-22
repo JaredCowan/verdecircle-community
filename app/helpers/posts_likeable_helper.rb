@@ -13,6 +13,11 @@ module PostsLikeableHelper
     return {like: like, dislike: dislike}
   end
 
+  def test_logic(object)
+    # @votes = ActsAsVotable::Vote.where("votable_type = ? AND voter_id = ?", "#{object.class.name}", current_user.id).select(:id, :votable_id, :voter_id, :vote_flag).map(&:votable_id).include?(object.id)
+    @votes = object.votes(Post)
+  end
+
   def airdog
     # like = Post.find_by_sql("SELECT posts.id, votes.vote_flag, votes.voter_id FROM posts, votes WHERE votes.voter_id = 3 AND vote_flag = true")
     # like = ActsAsVotable::Vote.find_by_sql("SELECT votes.id, votes.votable_id, votes.votable_type, votes.vote_flag, votes.voter_id FROM votes WHERE votes.voter_id = 3 AND vote_flag = true AND votes.votable_id IN ('" + postId.to_s + "')")

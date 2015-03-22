@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   acts_as_messageable
   acts_as_voter
-  has_paper_trail
+  # has_paper_trail
   acts_as_paranoid
 
   devise :database_authenticatable, :registerable,

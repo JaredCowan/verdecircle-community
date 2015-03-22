@@ -32,23 +32,32 @@
 <% end %>
 <div class="panel panel-default">
     <div class="panel-heading">
-      <% if user_signed_in? %>
-        <% if hidden_logic(@post)[:like] %>
-          <%= link_to "Like", like_post_path(@post), method: :put %>
-        <% else %>
-          <%= link_to "UnLike", unlike_post_path(@post), method: :put %>
-        <% end %>
-        <% if hidden_logic(@post)[:dislike] %>
-          <%= link_to "DisLike", dislike_post_path(@post), method: :put %>
-        <% else %>
-          <%= link_to "Undislike", undislike_post_path(@post), method: :put %>
-        <% end %>
-      <% end %>
-      <h4 id="comments-count"><%= pluralize(@post.comments.count, 'Comment') %></h4>
+      <%# if user_signed_in? %>
+        <%# if hidden_logic(@post)[:like] %>
+          <%#= link_to "Like", like_post_path(@post), method: :put %>
+        <%# else %>
+          <%#= link_to "UnLike", unlike_post_path(@post), method: :put %>
+        <%# end %>
+        <%# if hidden_logic(@post)[:dislike] %>
+          <%#= link_to "DisLike", dislike_post_path(@post), method: :put %>
+        <%# else %>
+          <%#= link_to "Undislike", undislike_post_path(@post), method: :put %>
+        <%# end %>
+      <%# end %>
+      <h4 id="comments-count"><%= pluralize(@post.comments.length, 'Comment') %></h4>
   </div>
 </div>
+<%#= vote = @post.votes.map(&:voter_id) %>
+<% vote = @comments.votes(@post).select(:id, :votable_id, :vote_scope) %>
 <div id="comments-list">
-  <%= render partial: @post.reload.comments %>
+  <%#= render partial: @comments %>
+  <%= render partial: @post.reload.comments, locals: {vote: vote} %>
+  <%# @comments.each do |c| %>
+    <%#= content_tag_for(:div, c, class: 'visitor') do %>
+      <%#= c.body %>
+      <%#= @current_user.find_voted_items.include?(c) %>
+    <%# end %>
+  <%# end %>
 </div>
 
 <% if user_signed_in? %>

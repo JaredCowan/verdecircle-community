@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include ActionController::Live
   skip_authorization_check
   before_filter :authenticate_user!, except: [:index, :show]
   respond_to :html, :json, :js
@@ -28,9 +29,25 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post        = Post.includes(:tags, :taggings, :user, :favorites, comments: [:votes]).find(params[:id])
-    @comments    = @post.comments.includes(:votes)
+    @post        = Post.includes(:user, :votes, :tags, :taggings, :favorites, comments: [:user, :votes]).find(params[:id])
+    @comments    = @post.comments.includes({user: :votes})
     @new_comment = @post.comments.new
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @post,
+        include: [
+          :user,
+          :votes,
+          comments: {
+            include: [
+              :user,
+              :votes
+            ]
+          }
+        ]
+      }
+    end
   end
 
   def new
@@ -106,7 +123,15 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     current_user.create_activity(@post, 'liked')
     @post.liked_by current_user, :vote_weight => 1
-    redirect_to :back
+    # redirect_to :back
+
+    
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { head :no_content }
+      format.js { render layout: 'mobile' }
+    end
   end
 
   def unliked

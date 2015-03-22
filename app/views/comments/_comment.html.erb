@@ -1,30 +1,43 @@
 <%# if comment.quother %>
-    <% comment_class = 'quother' %>
+  <% comment_class = 'quother' %>
 <%# else %>
 	<% comment_class = 'visitor' %>
 <%# end %>
-
+<%#= vote.inspect %>
 <%= div_for comment, class: "#{comment_class}" do %>
   <h4 class="comment-author"><%#= sanitize(comment.author) %><%#= sanitize(" @ <span class='quoth-typography'> quoth</span>") if comment.quother %></h4>
-  <span class="date"><small><%= time_ago_in_words(comment.created_at) %> ago</small></span>
+  <span class="date"><small><%#= time_ago_in_words(comment.created_at) %> ago</small></span>
 
   <p class="comment-content"><%= sanitize comment.body, tags: %w(a), attributes: %w(href) %></p>
-  <% if user_signed_in? %>
-        <% if hidden_logic(comment)[:like] %>
-          <%= link_to "Like", like_post_comment_path(comment.post, comment), method: :put %>
-        <% else %>
-          <%= link_to "UnLike", unlike_post_comment_path(comment.post, comment), method: :put %>
-        <% end %>
-        <% if hidden_logic(comment)[:dislike] %>
-          <%= link_to "DisLike", dislike_post_comment_path(comment.post, comment), method: :put %>
-        <% else %>
-          <%= link_to "Undislike", undislike_post_comment_path(comment.post, comment), method: :put %>
-        <% end %>
-      <% end %>
-  <% if signed_in? && comment.user_id == current_user.id %>
-      <%= link_to '', post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Delete comment?' },
+  <%# if user_signed_in? %>
+    <%# if @post.user.voted_down_on? comment %>
+      <%#= test_logic(comment).inspect %>
+      <%#= comment.votes(Post) %>
+    <%# end %>
+        <%#= comment.votes.include?(current_user) %>
+          <%#= link_to "Like", like_post_comment_path(comment.post_id, comment), method: :put %>
+        <%# else %>
+          <%#= link_to "UnLike", unlike_post_comment_path(comment.post_id, comment), method: :put %>
+        <%# end %>
+        <%# if hidden_logic(comment)[:dislike] %>
+          <%#= link_to "DisLike", dislike_post_comment_path(comment.post, comment), method: :put %>
+        <%# else %>
+          <%#= link_to "Undislike", undislike_post_comment_path(comment.post, comment), method: :put %>
+        <%# end %>
+      <%# end %>
+  <%# if signed_in? && comment.user_id == current_user.id %>
+      <%#= link_to '', post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Delete comment?' },
                   class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true,
                   title: 'Delete comment', rel: 'tooltip' %>
+  <%# end %>
+  <%#= vote.map(&:votable_id).include?(comment.id) %>
+  <%= vote.map(&:votable_id) %>
+  <hr>
+<%# end %>
+<%# comment.each do |comment| %>
+  <%#= div_for comment, class: "#{comment_class}" do %>
+  <%#= content_tag_for(:div, c) do %>
+    <%#= comment.body %>
+    <%#= comment.votes.map(&:voter_id).include?(current_user.id) %>
   <% end %>
-  <hr />
-<% end %>
+<%# end %>
