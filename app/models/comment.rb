@@ -18,8 +18,7 @@ class Comment < ActiveRecord::Base
 
   has_many :votes, class_name: 'ActsAsVotable::Vote', foreign_key: 'votable_id'
 
-  # scope :votes, lambda { ActsAsVotable::Vote.where("votable_type = ? AND votable_id IN (?)", 'Comment', [468, 469, 470]) }
   scope :votes, lambda { |post| ActsAsVotable::Vote.where("votable_type = ? AND votable_id IN (?)", 'Comment', post.comments.where("cached_votes_total > ?", 0E0.floor).ids) }
-  
+
   scope :reported, lambda { ActsAsVotable::Vote.where(vote_scope: 'reported') }
 end
