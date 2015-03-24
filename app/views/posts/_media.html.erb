@@ -17,9 +17,8 @@
           <i class="fa fa-arrow-up"></i> <%= post.cached_votes_up %>
           <i class="fa fa-star"></i> <%= post.favorites.length %>
           <span id="comments-count">
-            <%= link_to pluralize(post.comments.length, 'Comment'), post %>
+            <%= link_to I18n.t("comments", count: post.comments.length), post %>
           </span>
-
         </p>
       </div>
       <div class="col-xs-3 col-sm-2 col-sm-pull-8">

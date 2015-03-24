@@ -3,12 +3,39 @@ en:
     name: 'Verde Circle Community Center'
     company: 'Verde Circle'
 
+  # l Time.now, format: :post
+  time:
+    formats:
+      post: "around %H'ish"
+
+  # Pluralization for comments link
+  comments:
+    zero: "Be the first comment!"
+    one: "One Comment"
+    other: "%{count} Comments"
+
+  # Select menu for posts "current mood"
   post:
-    feelings:
-      1: "Happy"
-      2: "Sad"
-      3: "Mad"
-      4: "I like cats"
+    title: "I'm Feeling&hellip;"
+    mood:
+      happy: "Happy"
+      thankful: "Thankful"
+      annoyed: "Annoyed"
+      sad: "Sad"
+      exhausted: "Exhausted"
+      amused: "Amused"
+      frustrated: "Frustrated"
+      pissed-off: "Pissed-off"
+      determined: "Determined"
+      meh: "Meh"
+      aggravated: "Aggravated"
+      thrilled: "Thrilled"
+      awesome: "Awesome"
+      nervous: "Nervous"
+      surprised: "Surprised"
+      challenged: "Challenged"
+      confused: "Confused"
+      mad: "@!#?@!"
 
   mailboxer:
     message_mailer:
@@ -176,7 +203,9 @@ en:
         edit:
           password: 'New password'
       post:
-        mood: "Current Mood"
+        mood: "My Mood"
+        tag_list: Tags
+        topic: "Categories"
 
     hints:
       user:
