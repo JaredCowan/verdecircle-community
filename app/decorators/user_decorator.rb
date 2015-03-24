@@ -10,13 +10,13 @@ class UserDecorator < Draper::Decorator
     object.username.titleize
   end
 
-  def first_name
-    object.first_name.titleize
-  end
+  # def first_name
+  #   object.first_name.titleize
+  # end
 
-  def last_name
-    object.last_name.titleize
-  end
+  # def last_name
+  #   object.last_name.titleize
+  # end
   
   def fullname
     o = object
