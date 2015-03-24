@@ -1,3 +1,18 @@
+# Custom error handling
+module I18n
+  class MissingTranslationExceptionHandler < ExceptionHandler
+    def call(exception, locale, key, options)
+      if exception.is_a?(MissingTranslation)
+        "Missing #{key}"
+      else
+        super
+      end
+    end
+  end
+end
+
+I18n.exception_handler = I18n::MissingTranslationExceptionHandler.new
+
 # Include metadata to determine which validation caused the error: :taken, :blank, :too_long, etc.
 # Example:
 #   resource.errors.first[1].translation_metadata

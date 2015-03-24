@@ -2,7 +2,7 @@
   <div class="col-xs-12">
     <div class="row">
       <div class="col-xs-3 col-sm-1">
-        <%= image_tag post.user.image_url %>
+        <%#= image_tag post.user.image_url %>
       </div>
       <div class="col-xs-9 col-sm-8 col-sm-push-2">
         <p>
@@ -23,7 +23,7 @@
       </div>
       <div class="col-xs-3 col-sm-2 col-sm-pull-8">
         <ul class="list-unstyled">
-          <li data-trigger="hover click" data-html="true" data-delay="1000" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<%= "#{render partial: 'posts/card', locals: {user: post.user}}" %>">
+          <li class="user-popover-card" id="card<%= post.id %>" data-user-id="<%= post.user.id %>" data-user-name="<%= post.user.username %>" data-trigger="hover click" data-html="true" data-delay="900" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<img src='<%= image_url 'loading.gif' %>'>">
             <%= post.user.username.titleize %>
           </li>
           <li>

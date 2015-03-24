@@ -39,6 +39,11 @@ class UsersController < ApplicationController
   def profile
     @user    = User.find_by(username: params[:username].downcase).decorate
     @actions = User.includes(:posts, :comments, :user_relationships)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @user }
+    end
   end
 
   def not_found

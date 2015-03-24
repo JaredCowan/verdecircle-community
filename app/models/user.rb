@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include Concerns::UserImagesConcern
   include Concerns::UserActivityConcern
 
-  default_scope -> { order('username ASC') }
+  # default_scope -> { order('username ASC') }
 
   acts_as_messageable
   acts_as_voter

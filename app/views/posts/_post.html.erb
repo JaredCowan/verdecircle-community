@@ -13,7 +13,8 @@
 <% end %>
 
 <% view.each do |p| %>
-  <%= render partial: "posts/media", locals: { post: p } %>
+  <%#= render partial: "posts/media", locals: { post: p } %>
+  <%= render_once("posts/media") %>
 <% end %>
 
 <% if !params[:tag] %>
