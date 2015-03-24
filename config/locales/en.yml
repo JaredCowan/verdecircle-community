@@ -192,7 +192,7 @@ en:
         password: 'Password'
         username: 'Username'
       post:
-        subject: "What's your question/thought. Be sort and specific."
+        subject: "What's your question/thought. Be short and specific."
         tag_list: "Tags (separated by commas) e.g., shipping, accounting"
 
     labels:
