@@ -16,7 +16,9 @@ $(function(e) {
         $content.html("Sorry, there was an error loading profile card for '" + username + "'.");
       },
       success: function(response) {
-        $content.html("<h3>" + username + "</h3> <br> <img src='" + response['image_url'] + "'>");
+        var temp = "<h3>" + username + "</h3> <br> <img src='" + response['image_url'] + "'>";
+        $this.addClass("loaded");
+        $content.html(temp);
       }
     });
   });
