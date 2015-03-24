@@ -47,17 +47,14 @@
       <h4 id="comments-count"><%= pluralize(@post.comments.length, 'Comment') %></h4>
   </div>
 </div>
-<%#= @comments.votes(@post).inspect %>
-<%# vote = @comments.votes(@post) %>
+<% if user_signed_in? && @post.comments.length > 15 %>
+  <div id="comment-form">
+    <%= render 'comments/comment_form' %>
+  </div>
+<% end %>
+
 <div id="comments-list">
-  <%#= render partial: @comments %>
   <%= render partial: @post.reload.comments %>
-  <%# @comments.each do |c| %>
-    <%#= content_tag_for(:div, c, class: 'visitor') do %>
-      <%#= c.body %>
-      <%#= @current_user.find_voted_items.include?(c) %>
-    <%# end %>
-  <%# end %>
 </div>
 
 <% if user_signed_in? %>
@@ -68,7 +65,7 @@
 
   <%= link_to 'Edit', edit_post_path(@post) %> |
   <%= link_to 'Back', posts_path %> |
-  <%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %> |
-  <%= link_to 'Soft Delete', post_path(@post), method: :delete, data: { confirm: 'This will only be visible to you and can be restored later.' } %>
-  | <%= link_to "Permanently Delete", super_delete_post_path(@post.id), method: :delete, data: { confirm: 'Are you sure? You Can\'t restore this. Maybe try soft delete.'} %>
+  <%= link_to I18n.t("confirm.delete.title"), post_path(@post), method: :delete, data: { confirm: I18n.t("confirm.basic") } %> |
+  <%= link_to I18n.t("confirm.soft-delete.title"), post_path(@post), method: :delete, data: { confirm: I18n.t("confirm.soft-delete.message") } %>
+  | <%= link_to I18n.t("confirm.hard-delete.title"), super_delete_post_path(@post.id), method: :delete, data: { confirm: I18n.t("confirm.hard-delete.message")} %>
 <% end %>

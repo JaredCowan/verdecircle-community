@@ -5,19 +5,16 @@ class CommentsController < ApplicationController
   include PostsLikeableHelper
 
   def index
-    # created in order to handle renders from this controller, which produce URL 'root/posts/:id/comments'
+    # Created in order to handle renders from this controller, which produce URL 'root/posts/:id/comments'
     post = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
     redirect_to post
   end
 
   def create
     @post = Post.find(params[:post_id])
-    # @post = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
     @comment = @post.comments.build(comment_params)
     @likes = query_votes(@post)
 
-    # cbody = auto_link_usernames(@comment.body)
-    # @comment.body = %Q(#{cbody})
     if @comment.save
       Notifyer::Notification.notify_all(@comment, @post)
       flash.now[:success] = "Your comment has posted"
@@ -39,26 +36,6 @@ class CommentsController < ApplicationController
       end
     end
   end
-
-
-  # def auto_link_usernames(text)
-  #   text = ActionController::Base.helpers.strip_tags(text)
-  #   tagged = []
-  #   body = text.split(" ").each do |b|
-  #     b.gsub! /(?<=\s|^)@[A-Za-z0-9_]+(?=\b)/ do |username|
-  #       name = username.gsub!('@', '')
-  #       user = User.find_by(username: name).present?
-  #       if !tagged.include?(name) && user
-  #         # tagged.push(name)
-  #         b = %Q(<a href='/u/#{name}'>@#{name}</a>)
-  #         # b = '<%= link_to "@#{name}", profile_page_path(user) %>'
-  #       else
-  #         b = %Q(@#{name})
-  #       end
-  #     end
-  #   end
-  #   return body.join(" ")
-  # end
 
   def destroy
     @comment = Comment.find(params[:id])

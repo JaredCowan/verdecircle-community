@@ -3,6 +3,17 @@ en:
     learn-more:
       link: "Click here to learn all the rules and benefits of the %{company_name} point system."
 
+  # Main navigation links
+  nav:
+    home: "Home"
+    dashboard: "My Dashboard"
+    categories: "Categories"
+    favorites: "My Favorites"
+    activity: "Activity Feed"
+    hot-topics: "Hot Topics"
+    feature-request: "Feature Request"
+
+  # Left navigation for links unrelated to community center
   verdecircle:
     navigation-dropdown:
       item1: "<a href='javascript:;'>VerdeCircle.com</a>"

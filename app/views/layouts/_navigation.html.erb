@@ -61,14 +61,20 @@
         </ul>
       </li>
         <li>
-          <%= link_to "Home", :root %>
+          <%= link_to I18n.t("nav.home"), :root %>
         </li>
         <% if user_signed_in? %>
         <li>
-          <%= link_to "My Dashboard", :user_dashboard %>
+          <%= link_to I18n.t("nav.dashboard"), :user_dashboard %>
         </li>
         <li>
-          <%= link_to "Categories", :topics %>
+          <%= link_to I18n.t("nav.categories"), :topics %>
+        </li>
+        <li>
+          <%= link_to I18n.t("nav.hot-topics"), "javascript:;" %>
+        </li>
+        <li>
+          <%= link_to I18n.t("nav.feature-request"), "javascript:;" %>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -122,10 +128,10 @@
               <%= link_to I18n.t('account.edit.link'), edit_user_registration_path %>
             </li>
             <li>
-              <%= link_to "Activity Feed", activities_path %>
+              <%= link_to I18n.t("nav.activity"), activities_path %>
             </li>
             <li>
-              <%= link_to "My Favorites", favorites_path(current_user.username) %>
+              <%= link_to I18n.t("nav.favorites"), favorites_path(current_user.username) %>
             </li>
             <li>
               <%= link_to I18n.t('auth.logout.link'), destroy_user_session_path, rel: :nofollow %>

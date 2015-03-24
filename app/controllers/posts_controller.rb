@@ -125,15 +125,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     current_user.create_activity(@post, 'liked')
     @post.liked_by current_user, :vote_weight => 1
-    # redirect_to :back
-
-    
-
-    respond_to do |format|
-      format.html { redirect_to :back }
-      format.json { head :no_content }
-      format.js { render layout: 'mobile' }
-    end
+    redirect_to :back
   end
 
   def unliked
@@ -170,6 +162,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:subject, :body, :image, :image_delete, :topic_id, :tag_list)
+    params.require(:post).permit(:subject, :body, :image, :image_delete, :topic_id, :tag_list, :mood)
   end
 end

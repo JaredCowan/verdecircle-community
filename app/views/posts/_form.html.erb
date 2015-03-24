@@ -7,7 +7,14 @@
     <div class="panel-body">
       <%= f.input :subject %>
       <%= f.input :tag_list, placeholder: "Tags (separated by commas) e.g., shipping, accounting", wrapper_html: { class: ("has-error" if @post.errors[:tags].any?) }, required: true %>
-      <%= f.association :topic, label: "Categories", include_blank: false, required: true %>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8">
+          <%= f.association :topic, label: "Categories", include_blank: false, required: true %>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <%= f.input :mood, collection: I18n.t("post.feelings").map {|k,v| v},include_blank: false, prompt: "I'm Feeling&hellip;".html_safe, input_html: {class: "select optional form-control"} %>
+        </div>
+      </div>
       <%= f.input :body %>
     </div>
   </div>
