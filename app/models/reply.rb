@@ -1,18 +1,17 @@
-class Comment < ActiveRecord::Base
-  belongs_to :post
+class Reply < ActiveRecord::Base
+  belongs_to :comment
   belongs_to :user
-  acts_as_paranoid
+  # acts_as_paranoid
 
   acts_as_votable
-  has_paper_trail
+  # has_paper_trail
 
-  validates :body, presence: true, length: { minimum: 3, maximum: 100000 }
-  validates :post_id, presence: true
+  validates :body, presence: true, length: { minimum: 1, maximum: 100000 }
+  validates :comment_id, presence: true
   validates :user_id, presence: true
 
   # default_scope -> { order('created_at DESC') }
-
-  has_many :replies, -> { order("replies.cached_weighted_score DESC, replies.created_at ASC") }, dependent: :destroy
+  # default_scope -> { order("comments.cached_weighted_score DESC, comments.created_at ASC") }, dependent: :destroy
   has_many :notifications, as: :notifyable,
                            class_name: "Notifyer::Notification",
                            dependent: :destroy

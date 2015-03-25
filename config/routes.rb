@@ -36,8 +36,18 @@ Rails.application.routes.draw do
         put "dislike", to: "comments#disliked"
         put "undislike", to: "comments#undisliked"
       end
+
+      resources :replies, except: [:show, :edit] do
+        member do
+          put "like", to: "replies#liked"
+          put "unlike", to: "replies#unliked"
+          put "dislike", to: "replies#disliked"
+          put "undislike", to: "replies#undisliked"
+        end
+      end
     end
   end
+
 
   resources :topics, path: '/categories/posts', concerns: :paginatable
   # get '/topics', to: redirect('/topics/posts')
@@ -88,6 +98,7 @@ Rails.application.routes.draw do
   resources :users, path: 'u', only: :show do
     resources :authentications, path: 'accounts'
   end
+
 
   resources :conversations, path: '/messages' do
     member do
