@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
+    # @new_reply = @comment.replies.new
     @likes = query_votes(@post)
 
     if @comment.save

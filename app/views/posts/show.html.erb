@@ -44,7 +44,10 @@
           <%#= link_to "Undislike", undislike_post_path(@post), method: :put %>
         <%# end %>
       <%# end %>
-      <h4 id="comments-count"><%= pluralize(@post.comments.length, 'Comment') %></h4>
+      <h4 id="comments-count">
+        <%= I18n.t("comments", count: @post.comments.count) %>
+        <%#= pluralize(@post.comments.length, 'Comment') %>
+      </h4>
   </div>
 </div>
 <% if user_signed_in? && @post.comments.length > 15 %>
