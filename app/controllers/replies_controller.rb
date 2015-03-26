@@ -12,7 +12,6 @@ class RepliesController < ApplicationController
   end
 
   def create
-    # 20.times { puts params }
     @comment = Comment.find(params[:comment_id])
     @post = @comment.post
     @reply = @comment.replies.build(reply_params)
@@ -54,34 +53,34 @@ class RepliesController < ApplicationController
     end
   end
 
-  # def liked
-  #   @comment = Comment.find(params[:id])
-  #   # current_user.create_activity(@post, 'liked')
-  #   @comment.liked_by current_user, :vote_weight => 1
-  #   redirect_to :back
-  # end
+  def liked
+    @comment = Comment.find(params[:id])
+    # current_user.create_activity(@post, 'liked')
+    @comment.liked_by current_user, :vote_weight => 1
+    redirect_to :back
+  end
 
-  # def unliked
-  #   @comment = Comment.find(params[:id])
-  #   # current_user.destroy_activity(@post, "liked")
-  #   @comment.unliked_by current_user, :vote_weight => 1
-  #   redirect_to :back
-  # end
+  def unliked
+    @comment = Comment.find(params[:id])
+    # current_user.destroy_activity(@post, "liked")
+    @comment.unliked_by current_user, :vote_weight => 1
+    redirect_to :back
+  end
 
-  # def disliked
-  #   @comment = Comment.find(params[:id])
-  #   # current_user.create_activity(@post, 'disliked')
-  #   @comment.disliked_by current_user, :vote_weight => 1
-  #   redirect_to :back
-  # end
+  def disliked
+    @comment = Comment.find(params[:id])
+    # current_user.create_activity(@post, 'disliked')
+    @comment.disliked_by current_user, :vote_weight => 1
+    redirect_to :back
+  end
 
-  # def undisliked
-  #   @comment = Comment.find(params[:id])
-  #   # @activity = Activity.find_by(targetable_id: @post)
-  #   # @activity.destroy!
-  #   @comment.undisliked_by current_user, :vote_weight => 1
-  #   redirect_to :back
-  # end
+  def undisliked
+    @comment = Comment.find(params[:id])
+    # @activity = Activity.find_by(targetable_id: @post)
+    # @activity.destroy!
+    @comment.undisliked_by current_user, :vote_weight => 1
+    redirect_to :back
+  end
 
   private
 

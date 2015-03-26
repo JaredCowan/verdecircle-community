@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
-  if ENV['BASIC_AUTH']
-    user, pass = ENV['BASIC_AUTH'].split(':')
-    http_basic_authenticate_with name: user, password: pass
-  end
+  # if ENV['BASIC_AUTH']
+  #   user, pass = ENV['BASIC_AUTH'].split(':')
+  #   http_basic_authenticate_with name: user, password: pass
+  # end
 
   if Rails.env == "production"
     rescue_from Exception, :with => :render_500
