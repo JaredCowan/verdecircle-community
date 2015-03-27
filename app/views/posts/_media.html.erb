@@ -1,40 +1,65 @@
 <div class="row">
   <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-3 col-sm-1">
-        <%= image_tag post.user.image_url %>
-      </div>
-      <div class="col-xs-9 col-sm-8 col-sm-push-2">
-        <p>
-          <h5><%= link_to post.subject.titleize, post_path(post) %></h5>
-        </p>
-        <p>
-          Category: <%= link_to post.topic.name, topic_path(post) %>
-          Tags: <% post.tags.each do |t| %>
-            <%= link_to t.name.titleize, tag_path(t.name) %>
-          <% end %>
-          <br>
-          <i class="fa fa-arrow-up"></i> <%= post.cached_votes_up %>
-          <i class="fa fa-star"></i> <%= post.favorites.length %>
-          <span id="comments-count">
-            <%= link_to I18n.t("comments", count: post.comments.length), post %>
+    <div class="post-wrapper" id="post<%= post.id %>">
+      <a class="report-link" href="javascript:;" title="flag content as inappropriate">
+        <i class="fa fa-flag"></i>
+      </a>
+      <div class="post-heading">
+        <div class="info-card">
+          <span class="avatar">
+            <a href="<%= profile_url(post.user.username) %>" class="user-popover-card" id="card<%= post.id %>" data-post-id="<%= post.id %>" data-user-id="<%= post.user.id %>" data-user-name="<%= post.user.username %>" data-trigger="hover click" data-html="true" data-delay="900" data-container="body" data-toggle="popover" data-placement="right" data-content="<img src='<%= image_url 'loading.gif' %>'>">
+              <%= image_tag post.user.image_url, alt: "user avatar image" %>
+            </a>
           </span>
-        </p>
+          <span class="username">
+            <a href="<%= profile_url(post.user.username) %>" class="user-popover-card" id="card<%= post.id %>" data-post-id="<%= post.id %>" data-user-id="<%= post.user.id %>" data-user-name="<%= post.user.username %>" data-trigger="hover click" data-html="true" data-delay="900" data-container="body" data-toggle="popover" data-placement="right" data-content="<img src='<%= image_url 'loading.gif' %>'>">
+              <%= post.user.username.titleize %>
+            </a>
+          </span>
+          <span class="date">
+            <%= l post.created_at, format: :post_date %>
+          </span>
+          <br>
+          <span class="time">
+            <%= l post.created_at, format: :post_time %>
+          </span>
+        </div> <!-- END info-card -->
+        <%= link_to post.subject.titleize, post_path(post), class: "post-title", title: "#{truncate(post.body, length: 200)}" %>
+        <br>
+        <span class="post-meta">
+          <span class="category">
+            Category:
+            <%= link_to post.topic.name, topic_path(post), title: "view all post in #{post.topic.name} category" %>
+          </span>
+          <br>
+          <span class="tags">
+            Tags:
+            <%= sanitize(post.tags.map { |t| link_to(t.name, tag_path(t.name), title: "view all post tagged with #{t.name}") }.uniq.join ', ') %>
+          </span>
+        </span>
+      </div> <!-- END post-heading -->
+      <div class="post-body">
+        <article>
+          <%= truncate(post.body, length: 200) { link_to " Continue Reading", post_path(post), title: "continue reading full post"} %>
+        </article>
       </div>
-      <div class="col-xs-3 col-sm-2 col-sm-pull-8">
-        <ul class="list-unstyled">
-          <li class="user-popover-card" id="card<%= post.id %>" data-user-id="<%= post.user.id %>" data-user-name="<%= post.user.username %>" data-trigger="hover click" data-html="true" data-delay="900" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<img src='<%= image_url 'loading.gif' %>'>">
-            <%= post.user.username.titleize %>
-          </li>
-          <li>
-            <%= post.created_at.strftime("%m/%d/%y") %>
-          </li>
-          <li data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="top" data-title="Posted <%= time_ago_in_words(post.created_at) %> ago">
-            <%= post.created_at.strftime("%l:%M%P %Z") %>
-          </li>
-        </ul>
+      <div class="clearfix"></div>
+      <div class="post-footer">
+        <span class="votes">
+          <i class="fa fa-arrow-up"></i>
+          <%= post.cached_votes_up %>
+        </span>
+        <span class="favorites">
+          <i class="fa fa-star"></i>
+          <%= post.favorites.length %>
+        </span>
+        <span class="comments">
+          <i class="fa fa-comment"></i>
+          <a href="javascript:;" title="view comments for post">
+            <%= link_to I18n.t("comments", count: post.comments.length), post %>
+          </a>
+        </span>
       </div>
-    </div>
-  </div>
-</div>
-<hr>
+    </div> <!-- END post-wrapper -->
+  </div> <!-- END col -->
+</div> <!-- END row -->

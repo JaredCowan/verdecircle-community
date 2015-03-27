@@ -5,17 +5,18 @@
 //= require_self
 
 // Core
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 @import "variables";
 @import "depend/bootstrap";
 @import "depend/flashnotifs";
 @import "icons_social";
 @import "auth";
+@import "posts";
 @import "avatar";
 @import "cards";
 @import "footer";
 @import "hacks";
-@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
-@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
 // @import 'font-awesome';
 
 // Plugins

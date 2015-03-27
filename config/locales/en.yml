@@ -6,11 +6,12 @@ en:
   # l Time.now, format: :post
   time:
     formats:
-      post: "around %H'ish"
+      post_time: "%l:%M%P %Z"
+      post_date: "%m/%d/%y"
 
   # Pluralization for comments link
   comments:
-    zero: "Be the first comment!"
+    zero: "0 Comments"
     one: "One Comment"
     other: "%{count} Comments"
 

@@ -1,13 +1,36 @@
-<div class="page-header">
-  <h1>My posts</h1>
-</div>
- 
-<div id="my-posts">
-  <%= render :partial => "post" %>
-</div>
- 
-<div id="infinite-scrolling">
-  <% if !params[:tag] %>
-    <%= paginate @posts %>
-  <% end %>
-</div>
+<div class="row">
+      <div class="col-xs-3 col-sm-1">
+        <%= image_tag post.user.image_url %>
+      </div>
+      <div class="col-xs-9 col-sm-8 col-sm-push-2">
+        <p>
+          <h5><%= link_to post.subject.titleize, post_path(post) %></h5>
+        </p>
+        <p>
+          Category: <%= link_to post.topic.name, topic_path(post) %>
+          Tags: <% post.tags.each do |t| %>
+            <%= link_to t.name.titleize, tag_path(t.name) %>
+          <% end %>
+          <br>
+          <i class="fa fa-arrow-up"></i> <%= post.cached_votes_up %>
+          <i class="fa fa-star"></i> <%= post.favorites.length %>
+          <span id="comments-count">
+            <%= link_to I18n.t("comments", count: post.comments.length), post %>
+          </span>
+        </p>
+      </div>
+      <div class="col-xs-3 col-sm-2 col-sm-pull-8">
+        <ul class="list-unstyled">
+          <li class="user-popover-card" id="card<%= post.id %>" data-user-id="<%= post.user.id %>" data-user-name="<%= post.user.username %>" data-trigger="hover click" data-html="true" data-delay="900" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<img src='<%= image_url 'loading.gif' %>'>">
+            <%= post.user.username.titleize %>
+          </li>
+          <li>
+            <%= post.created_at.strftime("%m/%d/%y") %>
+          </li>
+          <li data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="top" data-title="Posted <%= time_ago_in_words(post.created_at) %> ago">
+            <%= post.created_at.strftime("%l:%M%P %Z") %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>

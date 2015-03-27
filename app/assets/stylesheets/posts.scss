@@ -1,2 +1,67 @@
-// Have not included in application.css.scss
-// Need to setup folder structure
+
+.post-wrapper {
+  position: relative;
+  margin:  4px 4px 15px;
+  background-color: #f6f7f8;
+  border: 1px solid #e1e2e3;
+  box-shadow: 1px 2px 9px #d2d2d2;
+  &:hover {
+    outline: 1px solid green;
+  }
+  .report-link {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    color: #a3a3a3;
+    z-index: 1;
+    &:hover {
+      color: #f00;
+    }
+  }
+  .post-heading {
+    width: 100%;
+    position: relative;
+    padding: 4px 13px 4px 4px;
+    border-bottom: 1px solid #e1e2e3;
+    .info-card {
+      width: 170px;
+      float: left;
+      background-color: #f6f7f8;
+      .username a {
+        font-size: 17px;
+        color: #000;
+      }
+      .avatar {
+        padding-right: 4px;
+        float: left;
+        background: transparent;
+        img {
+          width: 50px;
+          height: 50px;
+        }
+        .date, .time {
+          float: left;
+        }
+      }
+    }
+    .post-title {
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .post-meta {
+      height: 75px;
+    }
+  }
+  .post-body {
+    background-color: #fff;
+    padding: 0 10px 20px;
+    article {
+      white-space: pre-line;
+    }
+  }
+  .post-footer {
+    padding: 5px;
+    text-align: center;
+    border-top: 1px solid #e1e2e3;
+  }
+}
