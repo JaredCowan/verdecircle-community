@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  include ActionController::Live
   skip_authorization_check
   before_filter :authenticate_user!, except: [:index, :show]
   respond_to :html, :json, :js

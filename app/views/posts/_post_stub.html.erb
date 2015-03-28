@@ -1,8 +1,67 @@
 <% @posts.each do |post| %>
-  <div class="post">
-    <h2 class="text-center"><%= link_to post.subject.html_safe, post_path(post) %></h2>
-    <p class="date"><small><%= post.created_at.strftime("%d %B %Y") %> by <%= link_to post.user.username, user_path(post.user) %></small></p>
-    <%= truncate(post.body, length: 0, separator: '---MORE---', escape: false) { link_to 'Continue...', post_path(post) } %>
-  </div>
-  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="post-wrapper" id="post<%= post.id %>">
+        <a class="report-link" href="javascript:;" title="flag content as inappropriate">
+          <i class="fa fa-flag"></i>
+        </a>
+        <div class="post-heading">
+          <div class="info-card">
+            <span class="avatar">
+              <a href="<%= profile_url(post.user.username) %>" class="user-popover-card" id="card<%= post.id %>" data-post-id="<%= post.id %>" data-user-id="<%= post.user.id %>" data-user-name="<%= post.user.username %>" data-trigger="hover click" data-html="true" data-delay="900" data-container="body" data-toggle="popover" data-placement="right" data-content="<img src='<%= image_url 'loading.gif' %>'>">
+                <%= image_tag post.user.image_url, alt: "user avatar image" %>
+              </a>
+            </span>
+            <span class="username">
+              <a href="<%= profile_url(post.user.username) %>" class="user-popover-card" id="card<%= post.id %>" data-post-id="<%= post.id %>" data-user-id="<%= post.user.id %>" data-user-name="<%= post.user.username %>" data-trigger="hover click" data-html="true" data-delay="900" data-container="body" data-toggle="popover" data-placement="right" data-content="<img src='<%= image_url 'loading.gif' %>'>">
+                <%= post.user.username.titleize %>
+              </a>
+            </span>
+            <span class="date">
+              <%= l post.created_at, format: :post_date %>
+            </span>
+            <br>
+            <span class="time">
+              <%= l post.created_at, format: :post_time %>
+            </span>
+          </div> <!-- END info-card -->
+          <%= link_to post.subject.titleize, post_path(post), class: "post-title", title: "#{truncate(post.body, length: 200)}" %>
+          <br>
+          <span class="post-meta">
+            <span class="category">
+              Category:
+              <%= link_to post.topic.pretty_name, topic_path(post.topic), title: "view all post in #{post.topic.pretty_name} category" %>
+            </span>
+            <br>
+            <span class="tags">
+              Tags:
+              <%= sanitize(post.tags.map { |t| link_to(t.name, tag_path(t.name), title: "view all post tagged with #{t.name}") }.uniq.join ', ') %>
+            </span>
+          </span>
+        </div> <!-- END post-heading -->
+        <div class="post-body">
+          <article>
+            <%= truncate(post.body, length: 200) { link_to " Continue Reading", post_path(post), title: "continue reading full post"} %>
+          </article>
+        </div>
+        <div class="clearfix"></div>
+        <div class="post-footer">
+          <span class="votes">
+            <i class="fa fa-arrow-up"></i>
+            <%= post.cached_votes_up %>
+          </span>
+          <span class="favorites">
+            <i class="fa fa-star"></i>
+            <%= post.favorites.length %>
+          </span>
+          <span class="comments">
+            <i class="fa fa-comment"></i>
+            <a href="javascript:;" title="view comments for post">
+              <%= link_to I18n.t("comments", count: post.comments.length), post %>
+            </a>
+          </span>
+        </div>
+      </div> <!-- END post-wrapper -->
+    </div> <!-- END col -->
+  </div> <!-- END row -->
 <% end %>

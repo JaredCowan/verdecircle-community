@@ -31,7 +31,7 @@
 
     <p>
       <h6>
-        <a href="javascript:;">How A Series of Humiliating Events Let to One of the Fastest-growing Startups EVER</a>
+        <a href="javascript:;">How A Series of Humiliating Events Led to One of the Fastest-growing Startups EVER</a>
       </h6>
       <p class="text-right">
         <cite>
@@ -45,44 +45,23 @@
     <p>
       <h3>Categories</h3>
     </p>
-
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-xs-6 category-sidebar">
         <ul class="list-unstyled">
-          <li>
-            <a href="javascript:;">
-              General
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              Vendors
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              Fulfillment
-            </a>
-          </li>
+          <% Topic.first(5).each do |t| %>
+            <li>
+              <%= link_to(t.pretty_name, t) %>
+            </li>
+          <% end %>
         </ul>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-6 category-sidebar">
         <ul class="list-unstyled">
-          <li>
-            <a href="javascript:;">
-              Reports
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              CRM
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              Feature Request
-            </a>
-          </li>
+          <% Topic.last(5).each do |t| %>
+            <li>
+              <%= link_to(t.pretty_name, t) %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>

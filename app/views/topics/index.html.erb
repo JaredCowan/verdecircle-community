@@ -1,44 +1,41 @@
-<% provide(:title, 'Topics') %>
+<% provide(:title, I18n.t("category.title")) %>
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h1 class="text-center">Post Categories</h1>
-    <hr />
+    <h1 class="text-center">
+      <%= I18n.t("category.title") %>
+    </h1>
+    <hr>
 
-    <ul class="blogger-ul">
+    <% if signed_in? && current_user.is_admin? %>
+      <p class="category-create-btn text-center">
+        <%= link_to I18n.t("category.create_button"), new_topic_path, class: 'btn btn-info' %>
+      </p>
+    <% end %>
+    <ul class="list-unstyled category-ul">
       <% @topics.each do |topic| %>
-          <li class="blogger-li">
-            <h2>
-              <%= link_to topic.name, topic_path(topic), class: 'text-warning' %>
-            </h2>
-              <p>
-                <% if topic.posts.any? %>
-	                <% if topic.posts.count == 1 %>
-		                There is
-		            <% else %>
-		                There are
-		            <% end %>
-	                <%= link_to pluralize(topic.posts.count, 'article'), topic_path(topic) %>
-                    on this topic written by
-                    <%= sanitize(topic.posts.map { |p| link_to(p.user.username, user_path(p.user.username)) }.uniq.join ', ') %>
-	            <% else %>
-                    We are currently writing articles on this topic. Check back soon!
-                <% end %>
-              </p>
-              &nbsp;&nbsp;
-              <% if signed_in? %>
-                  <%= link_to '', edit_topic_path(topic), class: 'glyphicon glyphicon-pencil', id: "#{topic.name}_edit",
-                              title: 'Edit this topic', rel: 'tooltip' %>
-                  &nbsp;
-                  <%= link_to '', topic, method: :delete, data: { confirm: "Delete #{topic.name} from the system?" },
-                              class: 'glyphicon glyphicon-trash text-danger', id: "#{topic.name}_delete",
-                              title: 'Delete this topic', rel: 'tooltip' %>
-              <% end %>
-          </li>
+        <li class="category-li">
+          <h2>
+            <%= link_to topic.pretty_name, topic_path(topic), class: 'text-warning' %>
+          </h2>
+          <p>
+            <% if topic.posts.any? %>
+              <%= I18n.t("category.written", count: topic.posts.length) %>
+              <%= link_to I18n.t("category.plural_link", count: topic.posts.length), topic_path(topic) %>
+              <%= I18n.t("category.link_end") %>
+              <%= sanitize(topic.posts.map { |p| link_to(p.user.username, user_path(p.user.username)) }.uniq.join ', ') %>
+            <% else %>
+              <%= I18n.t("category.empty") %>
+            <% end %>
+          </p>
+          &nbsp;&nbsp;
+          <% if signed_in? && current_user.is_admin? %>
+            <%= link_to '', edit_topic_path(topic), class: 'glyphicon glyphicon-pencil', id: "#{topic.pretty_name}_edit", title: I18n.t("category.edit.title"), rel: 'tooltip' %>
+              &nbsp;
+            <%= link_to '', topic, method: :delete, data: { confirm: I18n.t("category.delete.confirm", name: topic.name) }, class: 'glyphicon glyphicon-trash text-danger', id: "#{topic.name}_delete", title: I18n.t("category.deletetitle"), rel: 'tooltip' %>
+          <% end %>
+        </li>
       <% end %>
-      <% if signed_in? %>
-	      <li class="blogger-li"><%= link_to 'Add new topic', new_topic_path, class: 'btn btn-info' %></li>
-	  <% end %>
     </ul>
   </div>
 </div>

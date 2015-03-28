@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end
 
+# { |path_params, req| "/categories/posts/#{path_params[:id]}/page/#{req.params[:page]}" }
   # Posts, Posts likes, Post Comments & Post Comment likes
   resources :posts, concerns: :paginatable do
     member do
@@ -48,14 +49,12 @@ Rails.application.routes.draw do
     end
   end
 
-
-  resources :topics, path: '/categories/posts', concerns: :paginatable
-  # get '/topics', to: redirect('/topics/posts')
+  resources :topics, path: '/categories/posts'
 
   resources :activities, only: [:index, :destroy], concerns: :paginatable
-  
+
   # Route for undoing / redoing changes made to a post
-  post "versions/:id/revert" => "versions#revert", :as => "revert_version"
+  post "versions/:id/revert", to: "versions#revert", as: "revert_version"
 
   # Route for restoring a soft deleted post or permanently deleting it
   post "versions/:id/restore_post" => "versions#restore_post", :as => "restore_post"

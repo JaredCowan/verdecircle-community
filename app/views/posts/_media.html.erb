@@ -29,7 +29,7 @@
         <span class="post-meta">
           <span class="category">
             Category:
-            <%= link_to post.topic.name, topic_path(post), title: "view all post in #{post.topic.name} category" %>
+            <%= link_to post.topic.pretty_name, topic_path(post.topic), title: "view all post in #{post.topic.pretty_name} category" %>
           </span>
           <br>
           <span class="tags">

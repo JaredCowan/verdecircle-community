@@ -38,6 +38,30 @@ en:
       confused: "Confused"
       mad: "@!#?@!"
 
+  category:
+    title: "Categories"
+    create_button: "Add new category"
+    empty: "There are currently no posts in this category."
+    written:
+      one: "There is"
+      other: "There are"
+    plural_link:
+      one: "1 post"
+      other: "%{count} posts"
+    link_end: "in this category written by"
+    new:
+      page_header: "Create new category"
+      warning: "Let's keep the number of topics as small as possible to maintain focus. Only create a new topic if your upcoming article definitely does not belong in any of the existing ones."
+      button: "Save new category"
+    edit:
+      page_header: "Edit name for %{name}"
+      warning: "Please think carefully before changing the name of this category. It may already be used for a number of posts whose content may conflict with the new topic name."
+      title: "Edit this category"
+      button: "Save edit"
+    delete:
+      confirm: "Delete category '%{name}' from the system?"
+      title: "Delete this category"
+
   mailboxer:
     message_mailer:
       subject_new: 'You received a new message at Verde Circle Community Forums'
@@ -195,6 +219,8 @@ en:
       post:
         subject: "What's your question/thought. Be short and specific"
         tag_list: "Tags (separated by commas) e.g., shipping, accounting"
+      topic:
+        name: "Create new category"
 
     labels:
       user:
@@ -207,6 +233,8 @@ en:
         mood: "My Mood"
         tag_list: Tags
         topic: "Categories"
+      topic:
+        name: "Category name"
 
     hints:
       user:

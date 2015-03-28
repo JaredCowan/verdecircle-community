@@ -7,12 +7,12 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find_by(params[:name])
-    @posts = Post.where(topic: @topic)
+    @topic = Topic.includes(:posts).find_by_name(params[:id])
+    @posts = Post.where(topic: @topic).page(params[:page])
   end
 
   def edit
-    @topic = Topic.find_by(params[:name])
+    @topic = Topic.find_by_name(params[:id])
   end
 
   def new
@@ -30,12 +30,12 @@ class TopicsController < ApplicationController
   end
 
   def destroy
-    Topic.find_by(params[:name]).destroy
+    Topic.find_by_name(params[:id]).destroy
     redirect_to topics_path
   end
 
   def update
-    @topic = Topic.find_by(params[:name])
+    @topic = Topic.find_by_name(params[:id])
     if @topic.update_attributes(topic_params)
       flash[:success] = 'Topic name updated.'
       redirect_to topics_path
