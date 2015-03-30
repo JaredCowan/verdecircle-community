@@ -69,40 +69,20 @@
 
   <div class="col-xs-12">
     <p>
-      <h3 class="text-center">Blog Feed</h3>
+      <h3 class="text-center">Blog Posts</h3>
     </p>
 
-    <p>
-      <h6>
-        <a href="javascript:;">Using the Drop-ship Marketplace</a>
-      </h6>
-      <p class="text-right">
-        <cite>
-          Shared by: <a href="javascript:;">Jennifer Tracy</a>
-        </cite>
+    <% Blog.limit(4).each do |blog| %>
+      <p>
+        <h6>
+          <%= link_to blog.subject.titleize, blog_path(blog) %>
+        </h6>
+        <p class="text-right">
+          <cite>
+            Shared by: <%= link_to blog.user.username, profile_page_path(blog.user.username) %>
+          </cite>
+        </p>
       </p>
-    </p>
-
-    <p>
-      <h6>
-        <a href="javascript:;">Get in Focus</a>
-      </h6>
-      <p class="text-right">
-        <cite>
-          Shared by: <a href="javascript:;">Paula Willigar</a>
-        </cite>
-      </p>
-    </p>
-
-    <p>
-      <h6>
-        <a href="javascript:;">Building Automations Rules for Logistics</a>
-      </h6>
-      <p class="text-right">
-        <cite>
-          Shared by: <a href="javascript:;">Jared Tracy</a>
-        </cite>
-      </p>
-    </p>
+    <% end %>
   </div>
 </div>
