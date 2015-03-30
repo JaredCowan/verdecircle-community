@@ -1,6 +1,14 @@
+<br>
 <%= div_for blog do %>
   <%= link_to blog.subject.titleize, blog_path(blog) %>
   <br>
   <%= blog.body %>
 <% end %>
+  <% if user_signed_in? && current_user.is_admin? %>
+    <hr>
+    <div class="btn-group">
+      <%= link_to "Edit", edit_blog_path(blog), class: "btn btn-info" %>
+      <%= link_to "Delete", blog_path(blog), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+    </div>
+  <% end %>
 <br>
