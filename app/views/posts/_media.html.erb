@@ -1,9 +1,29 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="post-wrapper" id="post<%= post.id %>">
-      <a class="report-link" href="javascript:;" title="flag content as inappropriate">
-        <i class="fa fa-flag"></i>
-      </a>
+      <div class="dropdown report-dropdown">
+        <a href="javascript:;" title="flag content as inappropriate" class="report-link dropdown-toggle" id="reportDropdownMenu" data-toggle="dropdown" aria-expanded="true">
+          <i class="fa fa-flag"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="reportDropdownMenu">
+          <li role="presentation" class="dropdown-header">Reason For Reporting?</li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="javascript:;">Wrong Category</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="javascript:;">It's Spam</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="javascript:;">Content Is Pointless</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="javascript:;">I Don't Like It</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="javascript:;">Other</a>
+          </li>
+        </ul>
+      </div>
       <div class="post-heading">
         <div class="info-card">
           <span class="avatar">

@@ -18,7 +18,7 @@ en:
     navigation-dropdown:
       item1: "<a href='javascript:;' rel='no-follow'>VerdeCircle.com</a>"
       item2: "<a href='javascript:;' rel='no-follow'>Thriii</a>"
-      item3: "<a href='javascript:;' rel='no-follow'>Blog</a>"
+      item3: "<a href='/blog' rel='no-follow'>Blog</a>"
       item4: "<a href='javascript:;' rel='no-follow'>Contact</a>"
 
   notifications:
