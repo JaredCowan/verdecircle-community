@@ -30,3 +30,16 @@ en:
       all:
         read: "Mark All As Read"
         unread: "Mark All As Unread"
+
+  simple_form:
+    placeholders:
+      blog:
+        subject: "Subject of blog post - Be short and specific"
+        body: "Content for blog post"
+        tag_list: "Tags (separated by commas) e.g., shipping, accounting"
+
+    labels:
+      blog:
+        subject: "Blog Subject"
+        body: "Blog Content"
+        tag_list: "Tags"

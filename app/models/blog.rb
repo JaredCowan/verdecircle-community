@@ -11,7 +11,7 @@ class Blog < ActiveRecord::Base
 
   validates :user_id, presence: true
 
-  validates :tags, presence: true
+  # validates :tags, presence: true
 
   has_attached_file :image,
     url: "/system/blog/images/:id/:style/:hash.:extension",
@@ -28,11 +28,12 @@ class Blog < ActiveRecord::Base
   validates_attachment_file_name :image, matches: [/png\Z/, /jpg\Z/, /gif\Z/, /jpeg\Z/]
   validates_attachment :image, content_type: { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png"] }
 
-  has_many :taggings, dependent: :destroy
-  has_many :tags, through: :taggings, dependent: :destroy
+  # has_many :taggings, dependent: :destroy
+  # has_many :tags, through: :taggings, dependent: :destroy
 
+  # @private
   before_save :destroy_image?
-  before_save :format_blog_subject # @private
+  before_save :format_blog_subject
 
   paginates_per 15
 
@@ -75,5 +76,9 @@ class Blog < ActiveRecord::Base
 
     def format_blog_subject
       self.subject = subject.downcase
+    end
+
+    def destroy_image?
+      self.image.clear if @image_delete == "1"
     end
 end

@@ -2,24 +2,26 @@ class BlogsController < ApplicationController
   skip_authorization_check
   before_filter :authenticate_user!, except: [:index, :show]
   respond_to :html, :json
+  # Layout used only for verdecircle.com frontend
+  layout "verdecircle"
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
-    @blogs = Blog.includes(:tags, :taggings, :user).page(params[:page])
+    @blogs = Blog.includes(:user).page(params[:page])
 
     respond_to do |format|
       format.html
-      format.json { render json: @blogs, include: [:tags, :user] }
+      format.json { render json: @blogs, include: [:user] }
     end
   end
 
   def show
-    @blog = Blog.includes(:tags, :taggings, :user).find(params[:id])
+    @blog = Blog.includes(:user).find(params[:id])
 
     respond_to do |format|
       format.html
-      format.json { render json: @blog, include: [:tags, :user] }
+      format.json { render json: @blog, include: [:user] }
     end
   end
 
@@ -48,7 +50,7 @@ class BlogsController < ApplicationController
   end
 
   def update
-    @blog = current_user.blogs.find(params[:id])
+    @blog = Blog.find(params[:id])
 
     @blog.transaction do
       @blog.update_attributes(blog_params)
@@ -74,7 +76,7 @@ class BlogsController < ApplicationController
   end
 
   def destroy
-    @blog = current_user.blogs.find(params[:id])
+    @blog = Blog.find(params[:id])
 
     respond_to do |format|
       if @blog.destroy

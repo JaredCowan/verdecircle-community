@@ -1,0 +1,43 @@
+<%= simple_form_for(@blog, html: { class: "form-group", multipart: true }) do |f| %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span>Blog Form</span>
+    </div>
+    <div class="panel-body">
+      <%= f.input :subject %>
+      <div class="row">
+        <div class="col-lg-6">
+          <%#= f.input :tag_list, wrapper_html: { class: ("has-error" if @blog.errors[:tags].any?) }, required: true %>
+        </div>
+      </div>
+      <%= f.input :body %>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= f.label f.object.image? ? "Replace Image" : "Upload Image" %>
+    </div>
+    <div class="panel-body">
+      <%= f.file_field :image %>
+    </div>
+  </div>
+
+  <% if f.object.image? %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+       <div class="checkbox">
+          <%= f.input :image_delete, as: :boolean, label: "Delete Image?" %>
+        </div>
+      </div>
+      <div class="panel-body">
+        <%= image_tag(f.object.image.url, class: "img-responsive img-rounded", alt: "Responsive image") %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

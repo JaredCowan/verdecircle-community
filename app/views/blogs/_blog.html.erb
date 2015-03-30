@@ -1,0 +1,6 @@
+<%= div_for blog do %>
+  <%= link_to blog.subject.titleize, blog_path(blog) %>
+  <br>
+  <%= blog.body %>
+<% end %>
+<br>

@@ -1,0 +1,7 @@
+<% provide(:title, I18n.t("brand.company") + "\s| #{@blog.subject.titleize}") %>
+
+<%= div_for @blog do %>
+  <%= @blog.subject.titleize %>
+  <br>
+  <%= @blog.body %>
+<% end %>

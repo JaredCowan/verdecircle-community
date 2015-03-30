@@ -231,7 +231,7 @@ en:
           password: 'New password'
       post:
         mood: "My Mood"
-        tag_list: Tags
+        tag_list: "Tags"
         topic: "Categories"
       topic:
         name: "Category name"
