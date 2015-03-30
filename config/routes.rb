@@ -18,7 +18,6 @@ Rails.application.routes.draw do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end
 
-# { |path_params, req| "/categories/posts/#{path_params[:id]}/page/#{req.params[:page]}" }
   # Posts, Posts likes, Post Comments & Post Comment likes
   resources :posts, concerns: :paginatable do
     member do
@@ -50,6 +49,8 @@ Rails.application.routes.draw do
   end
 
   resources :topics, path: '/categories/posts'
+
+  resources :blogs, path: '/blog'
 
   resources :activities, only: [:index, :destroy], concerns: :paginatable
 

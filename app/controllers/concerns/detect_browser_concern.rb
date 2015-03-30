@@ -40,7 +40,7 @@ module DetectBrowserConcern
         else
           test = "desktop"
       end
-      5.times { puts "You're using a #{test} device" }
+      1.times { puts "You're using a #{test} device" }
       # End testing
 
       case @agent_view

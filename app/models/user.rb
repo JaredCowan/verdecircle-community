@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :activities, dependent: :destroy
   has_many :user_relationships, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :blogs, dependent: :destroy
 
   has_many :authentications, dependent: :destroy, validate: false, inverse_of: :user do
     def grouped_with_oauth
