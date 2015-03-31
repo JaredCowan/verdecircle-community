@@ -1,0 +1,35 @@
+<%= simple_form_for(Contact.new, html: { class: "form-group", multipart: true }) do |f| %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span>Contact Us</span>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-2">
+          <%= f.input :inquiry, collection: I18n.t("contact.inquiry").map {|k,v| v},include_blank: false %>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+          <%= f.input :name, required: true %>
+        </div>
+        <div class="col-xs-12 col-sm-7 col-lg-4">
+          <%= f.input :email, required: true %>
+        </div>
+        <div class="col-xs-12 col-sm-5 col-lg-2">
+          <%= f.input :phone, required: true %>
+        </div>
+        <div class="col-xs-12">
+          <%= f.input :subject, required: true %>
+        </div>
+        <div class="col-xs-12">
+          <%= f.input :body, required: true %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions text-center">
+    <%= f.button :submit %>
+  </div>
+
+<% end %>

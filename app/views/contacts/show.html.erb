@@ -1,0 +1,8 @@
+<%= div_for @contact do %>
+  Department: <%= @contact.inquiry.titleize %> <br>
+  Name: <%= @contact.name %> <br>
+  Email: <%= @contact.email %> <br>
+  Phone: <%= @contact.phone %> <br>
+  Subject: <%= @contact.subject %> <br>
+  Body: <%= @contact.body %> <br>
+<% end %>

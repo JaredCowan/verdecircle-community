@@ -30,11 +30,8 @@
       <div class="errors__container">
         <%= render 'layouts/messages' %>
       </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-          <%= yield %>
-        </div>
-      </div>
+        <%= yield %>
+
       <footer class="page-footer">
         <% if content_for? :footer %>
           <%= yield :footer %>

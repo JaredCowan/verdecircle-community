@@ -16,10 +16,17 @@ en:
   # Left navigation for links unrelated to community center
   verdecircle:
     navigation-dropdown:
-      item1: "<a href='javascript:;' rel='no-follow'>VerdeCircle.com</a>"
-      item2: "<a href='javascript:;' rel='no-follow'>Thriii</a>"
-      item3: "<a href='/blog' rel='no-follow'>Blog</a>"
-      item4: "<a href='javascript:;' rel='no-follow'>Contact</a>"
+      item1: "<a href='javascript:;'>VerdeCircle.com</a>"
+      item2: "<a href='javascript:;'>Thriii</a>"
+      item3: "<a href='/blog'>Blog</a>"
+      item4: "<a href='/contact'>Contact</a>"
+
+  contact:
+    inquiry:
+      general_questions: "General Questions"
+      sales_questions: "Sales Questions"
+      investor_questions: "Investor Questions"
+      press_inquiry: "Press Inquiry"
 
   notifications:
     view:
@@ -31,14 +38,30 @@ en:
         read: "Mark All As Read"
         unread: "Mark All As Unread"
 
+  helpers:
+    submit:
+      contact:
+        create: "Send"
+
   simple_form:
     placeholders:
+      contact:
+        name: "Your full name"
+        email: "johndoe@example.com"
+        phone: "123-555-5555"
+        subject: "Message Subject"
+        body: "Please explain your reason for contact"
       blog:
         subject: "Subject of blog post - Be short and specific"
         body: "Content for blog post"
         tag_list: "Tags (separated by commas) e.g., shipping, accounting"
-
     labels:
+      contact:
+        name: "Full Name"
+        email: "Email"
+        phone: "Phone"
+        subject: "Subject"
+        body: "Body"
       blog:
         subject: "Blog Subject"
         body: "Blog Content"

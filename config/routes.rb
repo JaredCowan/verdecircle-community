@@ -50,6 +50,9 @@ Rails.application.routes.draw do
 
   resources :topics, path: '/categories/posts'
 
+  resources :contacts, path: '/contact'
+  match '/contacts/submits', to: "contacts#submits", via: :get, as: :contact_submits
+
   resources :blogs, path: '/blog'
 
   resources :activities, only: [:index, :destroy], concerns: :paginatable

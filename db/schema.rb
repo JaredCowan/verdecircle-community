@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330200758) do
+ActiveRecord::Schema.define(version: 20150331185641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,22 @@ ActiveRecord::Schema.define(version: 20150330200758) do
   add_index "comments", ["deleted_at"], name: "index_comments_on_deleted_at", using: :btree
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "contacts", force: true do |t|
+    t.string   "inquiry",    default: "", null: false
+    t.string   "name",       default: "", null: false
+    t.string   "email",      default: "", null: false
+    t.string   "phone",      default: "", null: false
+    t.string   "subject",    default: "", null: false
+    t.text     "body",       default: "", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contacts", ["email"], name: "index_contacts_on_email", using: :btree
+  add_index "contacts", ["inquiry"], name: "index_contacts_on_inquiry", using: :btree
+  add_index "contacts", ["name"], name: "index_contacts_on_name", using: :btree
+  add_index "contacts", ["phone"], name: "index_contacts_on_phone", using: :btree
 
   create_table "favorites", force: true do |t|
     t.integer  "favorable_id"
