@@ -62,6 +62,19 @@ en:
       confirm: "Delete category '%{name}' from the system?"
       title: "Delete this category"
 
+  # Used for rake task `seeds`. See /lib/tasks/export.rake
+  category_names:
+    general_discussion: "general-discussion"
+    customers: "customers"
+    vendors: "vendors"
+    fulfillment: "fulfillment"
+    accounting: "accounting"
+    warehouse: "warehouse"
+    reports: "reports"
+    feature_request: "feature-request"
+    drop_ship_market: "drop-ship-market"
+    company_market: "company-market"
+
   mailboxer:
     message_mailer:
       subject_new: 'You received a new message at Verde Circle Community Forums'

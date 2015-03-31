@@ -7,6 +7,15 @@ class PagesController < ApplicationController
     redirect_to posts_path if user_signed_in?
   end
 
+  # Static views for main verdecircle.com - Blog & Contact have their own model.
+  def index
+    render "index", layout: "verdecircle"
+  end
+
+  def pricing
+    render "pricing", layout: "verdecircle"
+  end
+
   # Preview html email template
   def email
     tpl = (params[:layout] || 'hero').to_sym

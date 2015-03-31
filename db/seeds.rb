@@ -1,3 +1,5 @@
+# Please check /lib/task/export.rake folder for more tasks that create seed data
+# 
 # Create some posts.
 2.times { |i| Post.create(user_id: 3, subject: "Post Lorem #{i}", body: "this is some dummy post text.") }
 
@@ -17,10 +19,4 @@
     subject: Faker::Company.catch_phrase,
     body: Faker::Lorem.paragraph
   )
-end
-
-topic_names = %w(general-discussion customers vendors fulfillment accounting warehouse reports feature-request drop-ship-market company-market)%
-
-topic_names.each do |tn|
-  Topic.create(name: "#{tn}")
 end

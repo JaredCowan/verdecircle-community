@@ -139,6 +139,9 @@ Rails.application.routes.draw do
 
   get '/home', to: 'users#show', as: 'user_home'
 
+  get '/index', to: 'pages#index'
+  get '/pricing', to: 'pages#pricing'
+
   # Dummy preview pages for testing.
   get '/p/test' => 'pages#test', as: 'test'
   get '/p/email' => 'pages#email' if ENV['ALLOW_EMAIL_PREVIEW'].present?
