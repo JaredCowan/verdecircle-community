@@ -79,7 +79,7 @@
         </h6>
         <p class="text-right">
           <cite>
-            Shared by: <%= link_to blog.user.username, profile_page_path(blog.user.username) %>
+            Shared by: <%= link_to blog.user.username, profile_page_path(blog.user.username), data: {hovercard: "#{blog.user.username}"} %>
           </cite>
         </p>
       </p>

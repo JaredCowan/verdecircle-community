@@ -1,32 +1,102 @@
 $(function(e) {
 
-  $("[data-toggle='popover']").on("shown.bs.popover", function(e) {
+  // $("[data-toggle='popover']").on("shown.bs.popover", function(e) {
+  //   var $this    = $(this),
+  //       $popover = $(".popover"),
+  //       $content = $(".popover .popover-content"),
+  //       username = $this.data("user-name"),
+  //       userId   = $this.data("user-id"),
+  //       postId   = $this.data("post-id"),
+  //       cardId   = $this.attr("id");
+  //       loggedIn = (window.currentuser == undefined)
+
+  //   $.ajax({
+  //     type: 'GET',
+  //     url: Routes.post_path(postId),
+  //     dataType: 'json',
+  //     error: function() {
+  //       $content.html("Sorry, there was an error loading profile card for '" + username + "'.");
+  //     },
+  //     success: function(response) {
+  //       if (!loggedIn) {
+  //         var followButton = "<br><hr> <a href='javascript:;' class='btn btn-primary'>Follow</a>";
+  //       } else {
+  //         var followButton = "";
+  //       }
+  //       var temp = "<h3>" + username + "</h3> <br> <img src='" + response['user']['image_url'] + "'>" + followButton;
+  //       $this.addClass("loaded");
+  //       $content.html(temp);
+  //     }
+  //   });
+  // });
+
+  $("[data-hovercard]").on("mouseover", function(e) {
+    var $this = $(this);
+    // console.log($this);
+
+    $this.attr("data-content", "<img src='http://localhost:3000/images/loading.gif'>")
+  });
+
+
+  var originalLeave = $.fn.popover.Constructor.prototype.leave;
+  $.fn.popover.Constructor.prototype.leave = function(obj){
+    var self = obj instanceof this.constructor ?
+      obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+    var container, timeout;
+
+    originalLeave.call(this, obj);
+
+    if(obj.currentTarget) {
+      container = $(obj.currentTarget).siblings('.popover')
+      timeout = self.timeout;
+      container.one('mouseenter', function(){
+        //We entered the actual popover – call off the dogs
+        clearTimeout(timeout);
+        //Let's monitor popover content instead
+        container.one('mouseleave', function(){
+          $.fn.popover.Constructor.prototype.leave.call(self, self);
+        });
+      })
+    }
+  };
+
+  $("[data-hovercard]").on("shown.bs.popover", function(e) {
     var $this    = $(this),
         $popover = $(".popover"),
         $content = $(".popover .popover-content"),
-        username = $this.data("user-name"),
-        userId   = $this.data("user-id"),
-        postId   = $this.data("post-id"),
-        cardId   = $this.attr("id");
-        loggedIn = (window.currentuser == undefined)
+        username = $this.data("hovercard"),
+        // userId   = $this.data("user-id"),
+        // postId   = $this.data("post-id"),
+        // cardId   = $this.attr("id"),
+        loggedIn = (window.currentuser == undefined);
 
     $.ajax({
       type: 'GET',
-      url: Routes.post_path(postId),
+      url: Routes.profile_path(username),
       dataType: 'json',
       error: function() {
-        $content.html("Sorry, there was an error loading profile card for '" + username + "'.");
+        $content.html("<i class='fa fa-exclamation-triangle'></i> Error.");
       },
       success: function(response) {
+        $this.addClass("user-hovercard-parent");
+        $(".popover").addClass("user-hovercard");
         if (!loggedIn) {
           var followButton = "<br><hr> <a href='javascript:;' class='btn btn-primary'>Follow</a>";
         } else {
           var followButton = "";
         }
-        var temp = "<h3>" + username + "</h3> <br> <img src='" + response['user']['image_url'] + "'>" + followButton;
+        var temp = "<img class='img-responsive hovercard-img' src='/images/logo-name-vc.jpg'><div class='media'> <div class='media-left'> <a href='/u/" + response['username'] +"'> <img class='media-object' src='" + response['image_url'] +"'> </a> </div><div class='media-body'> <h4 class='media-heading'> <a href='/u/" + response['username'] +"'>"+ username + "</a></h4>" + followButton + "</div>";
         $this.addClass("loaded");
         $content.html(temp);
       }
     });
+  });
+
+  $('body').popover({
+    selector: '[data-hovercard]',
+    trigger: 'click hover',
+    html: true,
+    placement: 'auto',
+    delay: {show: 50, hide: 400}
   });
 });

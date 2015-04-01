@@ -27,12 +27,12 @@
       <div class="post-heading">
         <div class="info-card">
           <span class="avatar">
-            <a href="<%= profile_url(post.user.username) %>" class="user-popover-card" id="card<%= post.id %>" data-post-id="<%= post.id %>" data-user-id="<%= post.user.id %>" data-user-name="<%= post.user.username %>" data-trigger="hover click" data-html="true" data-delay="900" data-container="body" data-toggle="popover" data-placement="right" data-content="<img src='<%= image_url 'loading.gif' %>'>">
+            <a href="<%= profile_url(post.user.username) %>" data-hovercard="<%= post.user.username %>"}>
               <%= image_tag post.user.image_url, alt: "user avatar image" %>
             </a>
           </span>
           <span class="username">
-            <a href="<%= profile_url(post.user.username) %>" class="user-popover-card" id="card<%= post.id %>" data-post-id="<%= post.id %>" data-user-id="<%= post.user.id %>" data-user-name="<%= post.user.username %>" data-trigger="hover click" data-html="true" data-delay="900" data-container="body" data-toggle="popover" data-placement="right" data-content="<img src='<%= image_url 'loading.gif' %>'>">
+            <a href="<%= profile_url(post.user.username) %>" data-hovercard="<%= post.user.username %>"}>
               <%= post.user.username.titleize %>
             </a>
           </span>

@@ -10,7 +10,6 @@
 */
 //= require jquery_2
 //= require jquery_ujs
-//= 
 //= require jquery-ui
 
 /*!
@@ -58,5 +57,14 @@
 
 // $("img").error().replaceWith("<h5 class='alert alert-danger'>Sorry, that was an error loading image.</h5>")
 
-$('[data-toggle="popover"]').popover()
-$('[data-toggle="tooltip"]').tooltip()
+var ready = function() {
+  scriptLoaded = "loaded"
+  $('[data-toggle="popover"]').popover()
+  $('[data-toggle="tooltip"]').tooltip()
+}
+
+$(document).on('page:load', ready);
+
+if (typeof window.scriptLoaded === 'undefined') {
+  $(document).ready(ready);
+}

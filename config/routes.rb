@@ -117,9 +117,10 @@ Rails.application.routes.draw do
       post :new, to: "user_relationships#create"
     end
   end
-  
+
   scope '/u/:username' do
-    get 'profile', to: "users#profile"
+    # get 'profile', to: "users#profile"
+    get '/', to: "users#profile", path: '', as: :profile
     match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
     match '/followers', to: "user_relationships#index", defaults: { path: 'followers' }, via: :get
     resources :favorites, only: [:index], concerns: :paginatable

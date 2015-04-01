@@ -32,3 +32,33 @@
 .unread {
   background-color: #ff0;
 }
+.user-hovercard .popover-content > .hovercard-img {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+.user-hovercard-parent + .popover {
+  background-color: #fafafa;
+  width: 100%;
+  z-index: 200;
+}
+.user-hovercard > .popover,
+.user-hovercard > .popover-title,
+.user-hovercard > .popover-content {
+  margin: 0;
+  padding: 40px 0 0;
+}
+.user-hovercard > .popover-content {
+  position: relative;
+}
+.user-hovercard > .popover-content .media-heading > a {
+  padding: 0 5px;
+  color: #000;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-shadow: 1px 1px 3px #fff;
+}
+.user-hovercard-parent + .popover .arrow:after {
+  border-bottom-color: #fafafa;
+}
