@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   concern :paginatable do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end
-
+  
   # Posts, Posts likes, Post Comments & Post Comment likes
   resources :posts, concerns: :paginatable do
     member do

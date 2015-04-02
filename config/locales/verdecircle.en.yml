@@ -13,10 +13,18 @@ en:
     hot-topics: "Hot Topics"
     feature-request: "Feature Request"
 
-  # Left navigation for links unrelated to community center
   verdecircle:
+    nav:
+      home: "Home"
+      thriii: "Thriii"
+      forum: "Community Center"
+      blog: "Blog"
+      contact: "Contact"
+      trial: "Free Trial"
+    # Left navigation for links unrelated to community center
+    # See */communitycenter navabar partial
     navigation-dropdown:
-      item1: "<a href='javascript:;'>VerdeCircle.com</a>"
+      item1: "<a href='/index'>VerdeCircle.com</a>"
       item2: "<a href='javascript:;'>Thriii</a>"
       item3: "<a href='/blog'>Blog</a>"
       item4: "<a href='/contact'>Contact</a>"

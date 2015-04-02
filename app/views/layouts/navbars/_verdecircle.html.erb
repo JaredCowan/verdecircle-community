@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="navbar-header">
+    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <button type="button" class="btn btn-success navbar-btn" id="nav-freetrial-btn-mobile">Free Trial</button>
+    <a href="<%= :index %>" class="navbar-brand" title="brand logo">
+      <%= image_tag "verde-circle-icon.png", class: "brand-image", alt: "Company Logo" %>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav navbar-left">
+        <li>
+          <%= link_to I18n.t("verdecircle.nav.home"), :index %>
+        </li>
+        <li>
+          <%= link_to I18n.t("verdecircle.nav.thriii"), "javascript:;" %>
+        </li>
+        <li>
+          <%= link_to I18n.t("verdecircle.nav.forum"), "javascript:;" %>
+        </li>
+        <li>
+          <%= link_to I18n.t("verdecircle.nav.blog"), blogs_path %>
+        </li>
+        <li>
+          <%= link_to I18n.t("verdecircle.nav.contact"), contacts_path %>
+        </li>
+      </ul>
+      <button type="button" class="btn btn-success navbar-btn" id="nav-freetrial-btn-desk">Free Trial</button>
+  </div> <!-- END navbar-collapse -->
+</nav> <!-- END navigation menu -->
