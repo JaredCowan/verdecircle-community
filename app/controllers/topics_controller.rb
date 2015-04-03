@@ -3,12 +3,12 @@ class TopicsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @topics = Topic.all
+    @topics = Topic.includes(posts: [{topic: :posts}, :user])
   end
 
   def show
-    @topic = Topic.includes(:posts).find_by_name(params[:id])
-    @posts = Post.where(topic: @topic).page(params[:page])
+    @topic = Topic.includes(posts: [{topic: :posts}, :user]).find_by_name(params[:id])
+    @posts = Topic.includes(posts: [{comments: :user}, :user, :tags]).find(@topic).posts.where(topic: @topic).page(params[:page])
   end
 
   def edit
