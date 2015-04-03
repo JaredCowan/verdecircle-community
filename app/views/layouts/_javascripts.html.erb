@@ -6,7 +6,6 @@
 <!-- Document ready javascript -->
 <% if content_for? :on_ready %>
   <script>
-
     head.ready(function(){
       <%= yield :on_ready %>
     })

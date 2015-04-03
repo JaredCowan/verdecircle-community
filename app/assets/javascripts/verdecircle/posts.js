@@ -4,7 +4,7 @@ $(function(e) {
     var $this = $(this);
     // console.log($this);
 
-    $this.attr("data-content", "<img src='http://localhost:3000/images/loading.gif'>")
+    $this.attr("data-content", "<img src='/images/loading.gif'>")
   });
 
 
@@ -35,11 +35,14 @@ $(function(e) {
         $popover = $(".popover"),
         $content = $(".popover .popover-content"),
         username = $this.data("hovercard"),
-        loggedIn = (window.currentuser == undefined);
+        loggedIn = (window.currentuser == undefined),
+        protocol = window.location.protocol + "//",
+        host     = window.location.host;
 
     $.ajax({
       type: 'GET',
-      url: Routes.profile_path(username),
+      // url: Routes.profile_path(username),
+      url: protocol + host + '/community/u/' + username + '.json',
       dataType: 'json',
       error: function() {
         $content.html("<i class='fa fa-exclamation-triangle'></i> Error.");
@@ -48,6 +51,7 @@ $(function(e) {
         $this.addClass("user-hovercard-parent");
         $(".popover").addClass("user-hovercard");
         if (!loggedIn) {
+          console.log(loggedIn);
           var followButton = "<br><hr> <a href='javascript:;' class='btn btn-primary'>Follow</a>";
         } else {
           var followButton = "";

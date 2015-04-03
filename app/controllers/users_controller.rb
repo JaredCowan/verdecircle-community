@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
-  before_filter :authenticate_user!
+  include AuthFilterConcern
+  # skip_authorization_check
+  before_filter :authenticate_user!, except: [:index, :show, :profile]
   respond_to :html, :json
 
   include CommonHelper

@@ -24,7 +24,37 @@ Rails.application.routes.draw do
     end
   end
 
+  # =====================================
+  # Routing for Oauth and User
+  # Except Users Profile page
+  # =====================================
+  # 
+  # OAuth
+  oauth_prefix = Rails.application.config.auth.omniauth.path_prefix
+  get "#{oauth_prefix}/:provider/callback" => 'users/oauth#create'
+  get "#{oauth_prefix}/failure" => 'users/oauth#failure'
+  get "#{oauth_prefix}/:provider" => 'users/oauth#passthru', as: 'provider_auth'
+  get oauth_prefix => redirect("#{oauth_prefix}/login")
+
+  # Devise
+  devise_prefix = Rails.application.config.auth.devise.path_prefix
+  devise_for :users, path: devise_prefix,
+    controllers: {registrations: 'users/registrations', sessions: 'users/sessions',
+      passwords: 'users/passwords', confirmations: 'users/confirmations', unlocks: 'users/unlocks'},
+    path_names: {sign_up: 'signup', sign_in: 'login', sign_out: 'logout'}
+  devise_scope :user do
+    get "#{devise_prefix}/after" => 'users/registrations#after_auth', as: 'user_root'
+  end
+  get devise_prefix => redirect('/a/signup')
+
+  # User
+  resources :users, path: 'u', only: :show do
+    resources :authentications, path: 'accounts'
+  end
+
+  # =====================================
   # Routing for Community
+  # =====================================
   scope '/community' do
     scope '/posts' do
       get '/tags/:tag', to: 'posts#index', as: :tag
@@ -94,28 +124,7 @@ Rails.application.routes.draw do
     get '/users', to: 'users#index', as: 'users_page'
     get '/u/:username', to: 'users#profile', as: 'profile_page'
 
-    # OAuth
-    oauth_prefix = Rails.application.config.auth.omniauth.path_prefix
-    get "#{oauth_prefix}/:provider/callback" => 'users/oauth#create'
-    get "#{oauth_prefix}/failure" => 'users/oauth#failure'
-    get "#{oauth_prefix}/:provider" => 'users/oauth#passthru', as: 'provider_auth'
-    get oauth_prefix => redirect("#{oauth_prefix}/login")
-
-    # Devise
-    devise_prefix = Rails.application.config.auth.devise.path_prefix
-    devise_for :users, path: devise_prefix,
-      controllers: {registrations: 'users/registrations', sessions: 'users/sessions',
-        passwords: 'users/passwords', confirmations: 'users/confirmations', unlocks: 'users/unlocks'},
-      path_names: {sign_up: 'signup', sign_in: 'login', sign_out: 'logout'}
-    devise_scope :user do
-      get "#{devise_prefix}/after" => 'users/registrations#after_auth', as: 'user_root'
-    end
-    get devise_prefix => redirect('/a/signup')
-
-    # User
-    resources :users, path: 'u', only: :show do
-      resources :authentications, path: 'accounts'
-    end
+    
 
 
     resources :conversations, path: '/messages' do
@@ -172,15 +181,8 @@ Rails.application.routes.draw do
         get '/', to: "users#dashboard", defaults: { view: 'posts' }, as: :user_dashboard
       end
     end
-
-    # ToDo: Decide which route(no pun intended) I want to take to handle routing errors
-    # 
-    # Handle routing errors
-    ## NEVER PUT ROUTES BELOW THIS LINE
-    # get "*path", to: 'application#routing_error', via: 'get'
-    # get "*path", to: redirect("/")
   end # End of Community scope
 
-  get "", to: "pages#index", as: :verde_root
+  get "/", to: "pages#index", as: :verde_root
   get "*path", to: redirect("404")
 end
