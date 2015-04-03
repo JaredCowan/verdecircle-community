@@ -53,3 +53,7 @@ body {
     display: none;
   }
 }
+.modal-open,
+.modal-open .navbar-fixed-top {
+  margin-right: auto !important;
+}
