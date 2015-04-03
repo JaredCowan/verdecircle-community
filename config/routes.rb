@@ -124,9 +124,6 @@ Rails.application.routes.draw do
     get '/users', to: 'users#index', as: 'users_page'
     get '/u/:username', to: 'users#profile', as: 'profile_page'
 
-    
-
-
     resources :conversations, path: '/messages' do
       member do
         post :reply
