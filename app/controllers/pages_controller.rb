@@ -16,6 +16,10 @@ class PagesController < ApplicationController
     render "pricing", layout: "verdecircle"
   end
 
+  def thriii
+    render "thriii", layout: "verdecircle"
+  end
+
   # Preview html email template
   def email
     tpl = (params[:layout] || 'hero').to_sym

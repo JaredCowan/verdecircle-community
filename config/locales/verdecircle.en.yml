@@ -24,10 +24,10 @@ en:
     # Left navigation for links unrelated to community center
     # See */communitycenter navabar partial
     navigation-dropdown:
-      item1: "<a href='/index'>VerdeCircle.com</a>"
-      item2: "<a href='javascript:;'>Thriii</a>"
-      item3: "<a href='/blog'>Blog</a>"
-      item4: "<a href='/contact'>Contact</a>"
+      verde_circle: "VerdeCircle.com"
+      thriii: "Thriii"
+      blog: "Blog"
+      contact: "Contact"
 
   contact:
     inquiry:

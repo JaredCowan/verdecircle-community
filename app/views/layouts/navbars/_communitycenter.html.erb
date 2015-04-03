@@ -53,11 +53,18 @@
           <%= image_tag "verde-circle-icon.png", class: "brand-image", alt: "Brand" %>
         </a>
         <ul class="dropdown-menu">
-          <% I18n.t('verdecircle.navigation-dropdown').each do |key, link| %>
-            <li>
-              <%= raw link %>
-            </li>
-          <% end %>
+          <li>
+            <%= link_to I18n.t('verdecircle.navigation-dropdown.verde_circle'), verde_root_path %>
+          </li>
+          <li>
+            <%= link_to I18n.t('verdecircle.navigation-dropdown.thriii'), "javascript:;" %>
+          </li>
+          <li>
+            <%= link_to I18n.t('verdecircle.navigation-dropdown.blog'), blogs_path %>
+          </li>
+          <li>
+            <%= link_to I18n.t('verdecircle.navigation-dropdown.contact'), contacts_path %>
+          </li>
         </ul>
       </li>
         <li>
@@ -68,7 +75,7 @@
           <%= link_to I18n.t("nav.dashboard"), :user_dashboard %>
         </li>
         <li>
-          <%= link_to I18n.t("nav.categories"), :topics %>
+          <%= link_to I18n.t("nav.categories"), topics_path %>
         </li>
         <li>
           <%= link_to I18n.t("nav.hot-topics"), "javascript:;" %>
