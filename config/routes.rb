@@ -25,7 +25,6 @@ Rails.application.routes.draw do
   end
 
   # Routing for Community
-  #
   scope '/community' do
     scope '/posts' do
       get '/tags/:tag', to: 'posts#index', as: :tag
