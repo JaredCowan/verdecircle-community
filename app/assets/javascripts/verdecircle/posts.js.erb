@@ -2,9 +2,7 @@ $(function(e) {
   
   $("[data-hovercard]").on("mouseover", function(e) {
     var $this = $(this);
-    // console.log($this);
-
-    $this.attr("data-content", "<img src='/images/loading.gif'>")
+    $this.attr("data-content", "<img src='<%= image_url 'loading.gif' %>'>")
   });
 
 
@@ -56,7 +54,7 @@ $(function(e) {
         } else {
           var followButton = "";
         }
-        var temp = "<img class='img-responsive hovercard-img' src='/images/logo-name-vc.jpg'><div class='media'> <div class='media-left'> <a href='/u/" + response['username'] +"'> <img class='media-object' src='" + response['image_url'] +"'> </a> </div><div class='media-body'> <h4 class='media-heading'> <a href='/u/" + response['username'] +"'>"+ username + "</a></h4>" + followButton + "</div>";
+        var temp = "<img class='img-responsive hovercard-img' src='<%= image_url 'logo-name-vc.jpg' %>'><div class='media'> <div class='media-left'> <a href='/u/" + response['username'] +"'> <img class='media-object' src='" + response['image_url'] +"'> </a> </div><div class='media-body'> <h4 class='media-heading'> <a href='/u/" + response['username'] +"'>"+ username + "</a></h4>" + followButton + "</div>";
         $this.addClass("loaded");
         $content.html(temp);
       }
