@@ -1,0 +1,8 @@
+// tester.css.scss
+body {
+  background-color: #323232 !important;
+}
+
+.nav a::after {
+  content: " <%= User.find(3).username %>";
+}
