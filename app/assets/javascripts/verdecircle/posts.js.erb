@@ -39,8 +39,8 @@ $(function(e) {
 
     $.ajax({
       type: 'GET',
-      // url: Routes.profile_path(username),
-      url: protocol + host + '/community/u/' + username + '.json',
+      url: Routes.profile_path(username),
+      // url: protocol + host + '/community/u/' + username + '.json',
       dataType: 'json',
       error: function() {
         $content.html("<i class='fa fa-exclamation-triangle'></i> Error.");
@@ -49,7 +49,6 @@ $(function(e) {
         $this.addClass("user-hovercard-parent");
         $(".popover").addClass("user-hovercard");
         if (!loggedIn) {
-          console.log(loggedIn);
           var followButton = "<br><hr> <a href='javascript:;' class='btn btn-primary'>Follow</a>";
         } else {
           var followButton = "";
@@ -67,5 +66,32 @@ $(function(e) {
     html: true,
     placement: 'auto',
     delay: {show: 50, hide: 400}
+  });
+
+  $(".report-dropdown .dropdown-menu").on("click", function(e) {
+    e.stopPropagation();
+    var elmTarget = $(e.target),
+        $header   = $(e.delegateTarget.firstElementChild);
+
+    if (!elmTarget.hasClass("dropdown-header")) {
+      // console.log(window.currentuser);
+
+  //     $.ajax({
+  //       type: 'GET',
+  //       url: Routes.profile_path(window.currentuser.username),
+  //       dataType: 'json',
+  //       beforeSend: function() {
+  //         $header.html("<i class='fa fa-spinner fa-pulse'></i> Loading...");
+  //       },
+  //       error: function() {
+  //         $header.text("Sorry, there was an error.");
+  //         $header.nextAll().remove();
+  //       },
+  //       success: function(response) {
+  //         $header.html("<i class='fa fa-check'></i> Thank-you for reporting.");
+  //         $header.nextAll().remove();
+  //       }
+  //     });
+    };
   });
 });

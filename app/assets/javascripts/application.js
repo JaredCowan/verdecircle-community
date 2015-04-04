@@ -57,6 +57,14 @@
 
 // $("img").error().replaceWith("<h5 class='alert alert-danger'>Sorry, that was an error loading image.</h5>")
 
+// $(".report-link").on("click", function(e) {
+//   var elmTarget = $(e.target),
+//       elmId     = $(e.delegateTarget).attr("id");
+
+//       console.log($(this).offsetParent().children().closest("ul").append("<li role='presentation'> <a role='menuitem' tabindex='-1' href='javascript:;'>Content Is Pointless</a> </li>"));
+//   elmTarget.append("<ul style='top: 0; display: block;' class='dropdown-menu dropdown-menu-right' role='menu' aria-labelledby='reportDropdownMenu'> <li role='presentation' class='dropdown-header'>Reason For Reporting?</li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='javascript:;'>Wrong Category</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='javascript:;'>It's Spam</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='javascript:;'>Content Is Pointless</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='javascript:;'>I Don't Like It</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='javascript:;'>Other</a> </li> </ul>");
+// });
+
 var ready = function() {
   scriptLoaded = "loaded"
   $('[data-toggle="popover"]').popover()
