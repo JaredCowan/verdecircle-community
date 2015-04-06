@@ -65,10 +65,10 @@
     <%= render 'comments/comment_form' %>
   </div>
 
-
   <%= link_to 'Edit', edit_post_path(@post) %> |
   <%= link_to 'Back', posts_path %> |
   <%= link_to I18n.t("confirm.delete.title"), post_path(@post), method: :delete, data: { confirm: I18n.t("confirm.basic") } %> |
   <%= link_to I18n.t("confirm.soft-delete.title"), post_path(@post), method: :delete, data: { confirm: I18n.t("confirm.soft-delete.message") } %>
-  | <%= link_to I18n.t("confirm.hard-delete.title"), super_delete_post_path(@post.id), method: :delete, data: { confirm: I18n.t("confirm.hard-delete.message")} %>
+  | <%= link_to I18n.t("confirm.hard-delete.title"), super_delete_post_path(@post.id), method: :delete, data: { confirm: I18n.t("confirm.hard-delete.message"), confirm_modal: "#delete-post"} %>
+  <%= render 'layouts/destroy_modal', id: 'delete-post', i18n_prefix: 'confirm.destroy' %>
 <% end %>

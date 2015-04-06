@@ -21,8 +21,8 @@
 //= require turbolinks
 //= require nprogress
 //= require nprogress-turbolinks
+//= require rails_confirm_dialog
 //= require gritter
-
 //= require jquery.scrollto
 
 //= require js-routes

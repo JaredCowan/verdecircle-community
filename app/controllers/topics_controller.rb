@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     if @topic.save
-      flash[:success] = 'New topic created.'
+      flash[:success] = 'New category created.'
       redirect_to topics_path
     else
       render 'topics/new'
@@ -31,13 +31,14 @@ class TopicsController < ApplicationController
 
   def destroy
     Topic.find_by_name(params[:id]).destroy
+    flash[:success] = 'Category has been deleted.'
     redirect_to topics_path
   end
 
   def update
     @topic = Topic.find_by_name(params[:id])
     if @topic.update_attributes(topic_params)
-      flash[:success] = 'Topic name updated.'
+      flash[:success] = 'Category updated.'
       redirect_to topics_path
     else
       render 'topics/edit'

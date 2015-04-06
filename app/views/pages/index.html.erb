@@ -1,9 +1,87 @@
-<div class="row">
-  <div class="col-xs-12">
-    <img class="img-responsive" src="//placehold.it/1500x450&text=Promo+Video">
+<div class="row hidden-xs intro-icon-wrapper">
+  <div class="col-xs-4">
+    <ul class="list-unstyled list-inline">
+      <li>
+        <i class="intro-icon fa fa-cloud"></i>
+      </li>
+      <li class="intro-icon-text">
+        Anytime, Anywhere Access
+      </li>
+    </ul>
   </div>
-
-  <div class="col-xs-12">
-    <img class="img-responsive" src="//placehold.it/1500x450&text=Other+GiberGaber">
+  <div class="col-xs-4"> 
+    <ul class="list-unstyled list-inline">
+      <li>
+        <i class="intro-icon fa fa-lightbulb-o"></i>
+      </li>
+      <li class="intro-icon-text">
+        Business Intelligence
+      </li>
+    </ul>
+  </div>
+  <div class="col-xs-4">
+    <ul class="list-unstyled list-inline">
+      <li>
+        <i class="intro-icon fa fa-smile-o"></i>
+      </li>
+      <li class="intro-icon-text">
+        FREE Customer Service
+      </li>
+    </ul>
+    <br>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-xs-12" id="intro-video-container">
+    <div class="embed-responsive embed-responsive-16by9" id="intro-video">
+      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Jp6AF__EwKQ?rel=0&amp;controls=0&amp;showinfo=0" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="intro-freetrial-content">
+    <a href="javascript:;" class="into-freetrial-btn btn btn-verde-blue btn-block">
+      Start Your Free Trial
+    </a>
+    <p>
+      No Credit Card Required
+    </p>
+  </div>
+</div>
+
+<div class="row intro-media-support">
+  <div class="col-xs-4">
+    <img class="img-responsive fb-logo" src="//az721473.vo.msecnd.net/cdn/images/FreshBooks_logo.png">
+  </div>
+  <div class="col-xs-4 ss-logo">
+    <img class="img-responsive" src="//az721473.vo.msecnd.net/cdn/images/ShipStation-Logo.png">
+  </div>
+  <div class="col-xs-4 i-logo">
+    <img class="img-responsive" src="//az721473.vo.msecnd.net/cdn/images/intuit.gif">
+  </div>
+</div>
+
+<% provide(:footer) do %>
+  <ul>
+    <li>
+      <%= link_to "Terms", terms_path %>
+    </li>
+    <li>
+      <%= link_to "Privacy", privacy_path %>
+    </li>
+    <li>
+      <%= link_to "Legal", "javascript:;" %>
+    </li>
+    <li>
+      <%= link_to "Address", contacts_path %>
+    </li>
+    <li>
+      <%= link_to "Press &amp; Media".html_safe, "javascript:;" %>
+    </li>
+    <li>
+      <%= link_to "Careers", "javascript:;" %>
+    </li>
+  </ul>
+<% end %>

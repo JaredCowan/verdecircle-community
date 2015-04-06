@@ -40,7 +40,6 @@ $(function(e) {
     $.ajax({
       type: 'GET',
       url: Routes.profile_path(username),
-      // url: protocol + host + '/community/u/' + username + '.json',
       dataType: 'json',
       error: function() {
         $content.html("<i class='fa fa-exclamation-triangle'></i> Error.");
