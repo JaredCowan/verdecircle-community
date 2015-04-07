@@ -62,6 +62,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
+    # @post.
     @post.subject = ActionController::Base.helpers.strip_tags(@post.subject)
     @post.body = ActionController::Base.helpers.strip_tags(@post.body)
 

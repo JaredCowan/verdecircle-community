@@ -11,10 +11,10 @@
           <%= f.input :tag_list, wrapper_html: { class: ("has-error" if @post.errors[:tags].any?) }, required: true %>
         </div>
         <div class="col-xs-12 col-sm-8 col-lg-4">
-          <%= f.association :topic, include_blank: false, required: true %>
+          <%= f.input :topic_id, collection: Topic.all.map {|n| [n.name.titleize, n.id]}, include_blank: false, required: true %>
         </div>
         <div class="col-xs-12 col-sm-4 col-lg-2">
-          <%= f.input :mood, collection: I18n.t("post.mood").map {|k,v| v},include_blank: true, prompt: I18n.t("post.title").html_safe, input_html: {class: "select optional form-control"} %>
+          <%= f.input :mood, collection: I18n.t("post.mood").map {|k,v| v}, include_blank: true, prompt: I18n.t("post.title").html_safe, input_html: {class: "select optional form-control"} %>
         </div>
       </div>
       <%= f.input :body %>
