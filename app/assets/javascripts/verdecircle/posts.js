@@ -1,10 +1,4 @@
 $(function(e) {
-  
-  $("[data-hovercard]").on("mouseover", function(e) {
-    var $this = $(this);
-    $this.attr("data-content", "<img src='/images/loading.gif'>")
-  });
-
 
   var originalLeave = $.fn.popover.Constructor.prototype.leave;
   $.fn.popover.Constructor.prototype.leave = function(obj){
@@ -27,15 +21,30 @@ $(function(e) {
       })
     }
   };
+  
+  $("[data-hovercard]").on("mouseover", function(e) {
+    var $this = $(this),
+        $popover = $(".popover");
+    $this.attr("data-content", "<img src='/images/loading.gif'>")
+  });
+
+
+  $("[data-hovercard]").on("show.bs.popover", function(e) {
+    var $popover = $(".popover");
+    $popover.length > 0 ? $popover.last().remove() : "";
+  });
 
   $("[data-hovercard]").on("shown.bs.popover", function(e) {
+    
     var $this    = $(this),
         $popover = $(".popover"),
         $content = $(".popover .popover-content"),
         username = $this.data("hovercard"),
         loggedIn = (window.currentuser == undefined),
         protocol = window.location.protocol + "//",
-        host     = window.location.host;
+        host     = window.location.host,
+        followButton,
+        template;
 
     $.ajax({
       type: 'GET',
@@ -47,14 +56,10 @@ $(function(e) {
       success: function(response) {
         $this.addClass("user-hovercard-parent");
         $(".popover").addClass("user-hovercard");
-        if (!loggedIn) {
-          var followButton = "<br><hr> <a href='javascript:;' class='btn btn-primary'>Follow</a>";
-        } else {
-          var followButton = "";
-        }
-        var temp = "<img class='img-responsive hovercard-img' src='/images/logo-name-vc.jpg'><div class='media'> <div class='media-left'> <a href='/u/" + response['username'] +"'> <img class='media-object' src='" + response['image_url'] +"'> </a> </div><div class='media-body'> <h4 class='media-heading'> <a href='/u/" + response['username'] +"'>"+ username + "</a></h4>" + followButton + "</div>";
+        followButton = loggedIn ? "" : "<br><hr> <a href='javascript:;' class='btn btn-primary'>Follow</a>";
+        template = "<img class='img-responsive hovercard-img' src='/images/logo-name-vc.jpg'><div class='media'> <div class='media-left'> <a href='/u/" + response['username'] +"'> <img class='media-object' src='" + response['image_url'] +"'> </a> </div><div class='media-body'> <h4 class='media-heading'> <a href='/u/" + response['username'] +"'>"+ username + "</a></h4>" + followButton + "</div>";
         $this.addClass("loaded");
-        $content.html(temp);
+        $content.html(template);
       }
     });
   });
@@ -63,34 +68,63 @@ $(function(e) {
     selector: '[data-hovercard]',
     trigger: 'click hover',
     html: true,
-    placement: 'auto',
+    placement: 'bottom',
     delay: {show: 50, hide: 400}
   });
 
   $(".report-dropdown .dropdown-menu").on("click", function(e) {
     e.stopPropagation();
+    var elmTarget = $(e.target);
+  });
+
+  // $(".report-link").on("click", function(e) {
+  //   e.preventDefault();
+  //   var $header = $(".report-dropdown.open .dropdown-header"),
+  //       $list   = $(e.delegateTarget.nextElementSibling.children);
+  //   $.ajax({
+  //     type: 'GET',
+  //     url: Routes.ajax_path(),
+  //     dataType: 'json',
+      // beforeSend: function() {
+      //   // $header.html("<i class='fa fa-spinner fa-pulse'></i> Sending...");
+      // },
+      // error: function() {
+      //   // $header.html("<i class='fa fa-exclamation-triangle'></i> Error.");
+      //   // $header.nextAll().remove();
+      // },
+      // success: function(response) {
+        // console.log($(e.delegateTarget.nextElementSibling.children));
+        // $header.html("<i class='fa fa-check'></i> Thank-you for reporting.");
+        // $header.nextAll().remove();
+        // $list.after(response.link);
+      // }
+    // });
+  // });
+
+  $(".report-dropdown .dropdown-menu a").on("click", function(e) {
+    e.preventDefault();
+    var id = this.href.split("/").pop();
     var elmTarget = $(e.target),
-        $header   = $(e.delegateTarget.firstElementChild);
-
-    if (!elmTarget.hasClass("dropdown-header")) {
-      // console.log(window.currentuser);
-
-  //     $.ajax({
-  //       type: 'GET',
-  //       url: Routes.profile_path(window.currentuser.username),
-  //       dataType: 'json',
-  //       beforeSend: function() {
-  //         $header.html("<i class='fa fa-spinner fa-pulse'></i> Loading...");
-  //       },
-  //       error: function() {
-  //         $header.text("Sorry, there was an error.");
-  //         $header.nextAll().remove();
-  //       },
-  //       success: function(response) {
-  //         $header.html("<i class='fa fa-check'></i> Thank-you for reporting.");
-  //         $header.nextAll().remove();
-  //       }
-  //     });
-    };
+        $header   = $(".report-dropdown.open .dropdown-header")
+    $.ajax({
+      type: 'GET',
+      url: Routes.report_path(id),
+      dataType: 'json',
+      beforeSend: function() {
+        $header.html("<i class='fa fa-spinner fa-pulse'></i> Sending...");
+      },
+      error: function(response) {
+        if (response.status == 302) {
+          $header.html("<i class='fa fa-exclamation-triangle'></i> " + response.responseJSON.reason + ".");
+        } else {
+          $header.html("<i class='fa fa-exclamation-triangle'></i> Error.");
+        }
+        $header.nextAll().remove();
+      },
+      success: function() {
+        $header.html("<i class='fa fa-check'></i> Thank-you for reporting.");
+        $header.nextAll().remove();
+      }
+    });
   });
 });

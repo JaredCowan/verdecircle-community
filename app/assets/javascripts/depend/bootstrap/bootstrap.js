@@ -1734,7 +1734,7 @@ if (typeof jQuery === 'undefined') {
     return Popover.DEFAULTS
   }
 
-  Popover.prototype.setContent = function () {
+  Popover.prototype.setContent = function (e) {
     var $tip    = this.tip()
     var title   = this.getTitle()
     var content = this.getContent()

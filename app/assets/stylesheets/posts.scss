@@ -49,24 +49,28 @@
     padding: 4px 13px 4px 4px;
     border-bottom: 1px solid #e1e2e3;
     .info-card {
+      // position: relative;
       width: 170px;
       float: left;
       background-color: #f6f7f8;
-      .username a {
+      .username > a {
         font-size: 17px;
         color: #000;
       }
-      &.avatar {
+      & .avatar {
         padding-right: 4px;
         float: left;
         background: transparent;
-        img {
+        > a {
+          display: inline-block;
+        }
+        > img {
           width: 50px;
           height: 50px;
         }
-        .date, .time {
-          float: left;
-        }
+      }
+      .date, .time {
+        float: left;
       }
     }
     .post-title {

@@ -62,7 +62,6 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
-    # @post.
     @post.subject = ActionController::Base.helpers.strip_tags(@post.subject)
     @post.body = ActionController::Base.helpers.strip_tags(@post.body)
 
@@ -147,6 +146,13 @@ class PostsController < ApplicationController
     @activity = Activity.find_by(targetable_id: @post)
     @activity.destroy!
     @post.undisliked_by current_user, :vote_weight => 1
+    redirect_to :back
+  end
+
+  def report
+    @post = Post.find(params[:id])
+    @post.disliked_by current_user, vote_scope: "reported"
+    10.times { puts params }
     redirect_to :back
   end
 

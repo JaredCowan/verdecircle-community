@@ -41,4 +41,10 @@ class PagesController < ApplicationController
   def error
     redirect_to root_path if flash.empty?
   end
+
+  def ajax
+    respond_to do |format|
+      format.json { render json: {link: "<li role='presentation'> <a role='menuitem' tabindex='-1' href='<%= url_for report_path(post) %>'>Wrong Category</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='<%= url_for report_path(post) %>'>It's Spam</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='<%= url_for report_path(post) %>'>Content Is Pointless</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='<%= url_for report_path(post) %>'>I Don't Like It</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='<%= url_for report_path(post) %>'>Other</a> </li>"} }
+    end
+  end
 end

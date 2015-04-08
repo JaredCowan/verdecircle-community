@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include AuthFilterConcern
   # skip_authorization_check
-  before_filter :authenticate_user!, except: [:index, :show, :profile]
+  before_filter :authenticate_user!, except: [:index, :show, :profile, :report]
   respond_to :html, :json
 
   include CommonHelper
@@ -44,6 +44,23 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @user }
+    end
+  end
+
+  def report
+    post     = Post.find(params[:id])
+    hasVoted = post.votes.where("vote_scope = ? AND voter_id = ?", "reported", current_user.id)
+
+    if hasVoted.length < 1
+      post.disliked_by current_user, vote_scope: "reported"
+
+      respond_to do |format|
+        format.json { render json: post, status: 200 }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: {reason: "Already Reported"}, status: 302 }
+      end
     end
   end
 

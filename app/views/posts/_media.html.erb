@@ -8,19 +8,19 @@
         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="reportDropdownMenu">
           <li role="presentation" class="dropdown-header">Reason For Reporting?</li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="javascript:;">Wrong Category</a>
+            <a role="menuitem" tabindex="-1" href="<%= url_for report_path(post) %>">Wrong Category</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="javascript:;">It's Spam</a>
+            <a role="menuitem" tabindex="-1" href="<%= url_for report_path(post) %>">It's Spam</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="javascript:;">Content Is Pointless</a>
+            <a role="menuitem" tabindex="-1" href="<%= url_for report_path(post) %>">Content Is Pointless</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="javascript:;">I Don't Like It</a>
+            <a role="menuitem" tabindex="-1" href="<%= url_for report_path(post) %>">I Don't Like It</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="javascript:;">Other</a>
+            <a role="menuitem" tabindex="-1" href="<%= url_for report_path(post) %>">Other</a>
           </li>
         </ul>
       </div>
