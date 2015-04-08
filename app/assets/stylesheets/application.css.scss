@@ -28,4 +28,21 @@
 body {
   position: relative;
 }
-
+.secondary-nav-dropdown {
+  .navbar-brand {
+    position: relative;
+    .brand-image-icon-layer {
+      position: absolute;
+      top: 20px;
+      left: 21.3px;
+      font-size: 14px;
+      color: #9b9b9b;
+    }
+  }
+  & .dropdown:visited, & .dropdown:hover, & .dropdown:active, & .dropdown:focus,
+  & .open {
+    .brand-image-icon-layer {
+      color: #323232;
+    }
+  }
+}
