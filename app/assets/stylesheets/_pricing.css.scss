@@ -1,0 +1,352 @@
+.pricing-table {
+  background: #eeeeee;
+  text-align: center;
+  padding: 0 0 25px 0;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.pricing-table.most-popular {
+  top: -20px;
+  position: relative;
+}
+
+.most-popular {
+  background: #f77b6f;
+  color: #fff;
+}
+
+.most-popular h1 {
+  font-size: 25px !important;
+  padding-bottom: 10px;
+  padding-top: 17px !important;
+}
+
+.most-popular h2 {
+  background: #d76b61;
+  margin-top: 20px !important;
+}
+
+.most-popular ul li {
+  border-bottom: 1px dotted #d76b61 !important;
+}
+
+.most-popular .price-actions .btn {
+  background: #d76b61;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.pricing-table .price-actions .btn {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background: #acacac;
+  color: #fff;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  text-shadow: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.pricing-head h1 {
+  font-size: 18px;
+  font-weight: 300;
+  padding-top: 15px;
+}
+
+.pricing-head h2 {
+  padding: 30px 0;
+  background: #777777;
+  color: #fff;
+  font-size: 50px;
+  font-weight: 100;
+}
+
+.pricing-table ul {
+  margin: 15px 0;
+  padding: 0;
+}
+
+.pricing-table ul li {
+  border-bottom: 1px dotted #CCCCCC;
+  margin: 0 2em;
+  padding: 1em 0;
+  text-align: center;
+  font-weight: 300;
+}
+
+.pricing-head span.note {
+  display: inline;
+  font-size: 25px;
+  line-height: 0.8em;
+  position: relative;
+  top: -18px;
+}
+
+.pricing-quotation, .team-info {
+  background: #EEEEEE;
+  padding: 20px 20px 35px 20px;
+  margin-bottom: 100px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.pricing-quotation h3, .team-info h3 {
+  font-weight: 300;
+}
+
+.pricing-quotation p, .team-info p {
+  margin-bottom: 0px;
+}
+
+.pricing-plan, .team-info-wrap {
+  position: relative;
+}
+
+.pricing-quotation:before, .team-info:before {
+  background-color: #EEEEEE;
+  border-color: #EEEEEE;
+  -webkit-border-image: none;
+       -o-border-image: none;
+          border-image: none;
+  border-right: 1px solid #EEEEEE;
+  border-style: none;
+  top: -7px;
+  content: "";
+  display: block;
+  height: 14px;
+  left: 48%;
+  position: absolute;
+  -ms-transform: rotate(45deg);
+   -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  width: 15px;
+}
+/* Pricing */
+.pricing-container {
+  margin-top: 100px;
+}
+.feature-head {
+  cursor: default;
+}
+.pricing-table {
+  margin-bottom: 50px;
+  padding-bottom: 15px;
+  cursor: default;
+}
+.pricing-table .popover-title,
+.pricing-table .popover-content {
+  color: #000;
+}
+.pricing-table.most-popular {
+  background-color: rgb(140,214,0);
+}
+.pricing-head h1 {
+  font-size: 22px;
+  color: #494949;
+}
+.most-popular .pricing-head h1 {
+  color: #fff;
+}
+.pricing-head h2,
+.most-popular h2 {
+  padding: 40px 0;
+  background-color: #2c3bad;
+}
+.pricing-head h5 {
+  margin-top: -45px;
+  margin-right: -125px;
+  color: #777;
+}
+.most-popular .pricing-head  h5 {
+  margin: -45px auto 0;
+  width: 200px;
+  text-align: right;
+}
+.pricing-table .price-actions .btn {
+  background-color: #2c3bad;
+  text-shadow: 2px 2px 1px #2c3bad;
+  opacity: .80;
+  -webkit-box-shadow: .7px .7px 0px .7px #777 !important;
+          box-shadow: .7px .7px 0px .7px #777 !important;
+}
+.pricing-table .price-actions .btn:hover {
+  background-color: #2c3bad;
+  opacity: 1;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+.pricing-table ul li {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 .1px 0px #323232;
+}
+.pricing-table ul li:first-child {
+  margin-top: 25px;
+}
+.feature-head {
+  padding: 50px 0;
+}
+
+.feature-head h1{
+  color: #475168;
+  font-size: 30px;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-top: 0;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.feature-head p{
+  color: #8a8b8b;
+  font-size: 18px;
+  font-weight: 300;
+}
+/*.pricing-even-3-row {
+  padding: 2.4em 0 !important;
+}*/
+@media all and (max-width: 1200px) {
+  .first-pricing-row li:nth-child(1),
+  .second-pricing-row li:nth-child(1) {
+    padding: 1.8em 0 !important;
+  }
+  .first-pricing-row li:nth-child(3),
+  .second-pricing-row li:nth-child(3) {
+    padding: 3em 0 !important;
+  }
+  .second-pricing-row li:nth-child(5) {
+    padding: 1.8em 0 !important;
+  }
+}
+@media all and (max-width: 992px) {
+  .thrid-pricing-row li:nth-child(1) {
+    padding: 1.7em 0 !important;
+  }
+  .first-pricing-row li:nth-child(5),
+  .first-pricing-row li:nth-child(8),
+  .first-pricing-row li:nth-child(9),
+  .thrid-pricing-row li:nth-child(5) {
+    padding: 1.7em 0 !important;
+  }
+  .first-pricing-row li:nth-child(3) {
+    padding: 3.7em 0 !important;
+  }
+  .second-pricing-row li:nth-child(3) {
+    padding: 4.4em 0 !important;
+  }
+}
+@media all and (min-width: 1200px) {
+  .first-pricing-row li:nth-child(3),
+  .second-pricing-row li:nth-child(3) {
+    padding: 2.5em 0 !important;
+  }
+}
+.most-popular ul li {
+  border-bottom-color: #2c3bad !important;
+  /*text-shadow: 0 0 .3px #000;*/
+  margin-top: 0 !important;
+  color: #000;
+}
+.pricing-table .add-ons {
+  cursor: default;
+}
+.pricing-table .add-on-header {
+  margin: 5px 0;
+  padding: 20px;
+  font-weight: 100;
+  font-size: 40px;
+  border: none;
+  text-transform: uppercase;
+  background-color: #777;
+  color: #fff;
+}
+.pricing-table .add-ons li {
+  position: relative;
+  margin: 0 1em;
+  text-transform: capitalize;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.add-ons li > span {
+  display: inline-block;
+  width: 75%;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.add-ons .extra-info-popup .cmp-popup {
+display: none;
+}
+.add-ons li.extra-info-popup:hover {
+overflow: visible;
+}
+.add-ons li.extra-info-popup:hover .cmp-popup {
+  display: inline-block;
+}
+.cmp-popup {
+  position: absolute;
+  min-width: 90px;
+  max-width: 300px;
+  min-height: 50px;
+  display: block;
+  background-color: #fafafa;
+  color: #000;
+  bottom: 120%;
+  text-align: left;
+  border: 1px solid #3a3a3a;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 7px #000;
+          box-shadow: 1px 1px 7px #000;
+  padding: 10px;
+  z-index: 800;
+  left: 0px;
+  text-transform: none;
+  margin-right: -15px;
+  margin-left: -15px;
+  right: 0;
+  letter-spacing: 0.3px;
+  white-space: normal;
+  word-break: break-word;
+}
+.extra-info-popup .cmp-popup li {
+  white-space: normal;
+  word-break: break-word;
+}
+.cmp-popup::after {
+  position: absolute;
+  bottom: 19px;
+  right: 0;
+  left: 0;
+  height: 0;
+  display: block;
+  width: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  font-family: FontAwesome;
+  font-size: 34px;
+  content: "\f0d7";
+  color: #fafafa;
+  text-shadow: 0px 2px 2px #000;
+}
+.cmp-popup > .cmp-header {
+  display: block;
+  margin: -10px -10px 6px -10px;
+  padding: 5px;
+  text-align: center;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom: 1px solid #bbb;
+  background-color: #e7e7e7;
+  color: #000;
+}
