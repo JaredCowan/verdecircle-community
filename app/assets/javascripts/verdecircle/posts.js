@@ -57,7 +57,7 @@ $(function(e) {
         $this.addClass("user-hovercard-parent");
         $(".popover").addClass("user-hovercard");
         followButton = loggedIn ? "" : "<br><hr> <a href='javascript:;' class='btn btn-primary'>Follow</a>";
-        template = "<img class='img-responsive hovercard-img' src='/images/logo-name-vc.jpg'><div class='media'> <div class='media-left'> <a href='/u/" + response['username'] +"'> <img class='media-object' src='" + response['image_url'] +"'> </a> </div><div class='media-body'> <h4 class='media-heading'> <a href='/u/" + response['username'] +"'>"+ username + "</a></h4>" + followButton + "</div>";
+        template = "<img class='img-responsive hovercard-img' src='/images/logo-name-vc.jpg'><div class='media'> <div class='media-left'> <a href='" + Routes.profile_path(username) + "'> <img class='media-object' src='" + response['image_url'] +"'> </a> </div><div class='media-body'> <h4 class='media-heading'> <a href='" + Routes.profile_path(username) + "'>" + username + "</a></h4>" + followButton + "</div>";
         $this.addClass("loaded");
         $content.html(template);
       }
