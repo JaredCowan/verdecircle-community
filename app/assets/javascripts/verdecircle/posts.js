@@ -112,6 +112,7 @@ $(function(e) {
       dataType: 'json',
       beforeSend: function() {
         $header.html("<i class='fa fa-spinner fa-pulse'></i> Sending...");
+        $header.nextAll().remove();
       },
       error: function(response) {
         if (response.status == 302) {
@@ -119,11 +120,9 @@ $(function(e) {
         } else {
           $header.html("<i class='fa fa-exclamation-triangle'></i> Error.");
         }
-        $header.nextAll().remove();
       },
       success: function() {
         $header.html("<i class='fa fa-check'></i> Thank-you for reporting.");
-        $header.nextAll().remove();
       }
     });
   });
