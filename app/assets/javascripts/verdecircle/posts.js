@@ -111,8 +111,8 @@ $(function(e) {
       url: Routes.report_path(id),
       dataType: 'json',
       beforeSend: function() {
-        $header.html("<i class='fa fa-spinner fa-pulse'></i> Sending...");
         $header.nextAll().remove();
+        $header.html("<i class='fa fa-spinner fa-pulse'></i> Sending...");
       },
       error: function(response) {
         if (response.status == 302) {
