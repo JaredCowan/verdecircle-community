@@ -71,10 +71,14 @@
   -webkit-border-radius:0 0 4px 4px;
 }
 
-.blog-img img {
-  width: 100%;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
+.blog-img {
+  max-height: 300px;
+  min-height: 1px;
+  overflow: hidden;
+  img {
+    width: 100%;
+    border-radius: 4px;
+  }
 }
 
 .blog-item h1, .blog-item h1 a {
