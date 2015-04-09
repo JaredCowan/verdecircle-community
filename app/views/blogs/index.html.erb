@@ -1,2 +1,19 @@
 <% provide(:title, I18n.t("brand.company") + "\s| Blog") %>
-<%= render @blogs %>
+<div class="row" id="blog-page">
+  <div class="col-lg-9 ">
+    <%= render @blogs %>
+
+    <div class="text-center">
+      <ul class="pagination">
+        <li><a href="#">«</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">»</a></li>
+      </ul>
+    </div>
+  </div>
+  <%= render "blog_sidebar" %>
+</div>

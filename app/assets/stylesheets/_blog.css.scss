@@ -1,0 +1,162 @@
+/*blog*/
+@media (min-width: 1400px) {
+  #blog-page {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.blog-item {
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px dashed #ddd;
+}
+
+.date-wrap, .comnt-wrap {
+  margin-bottom: 20px;
+}
+
+.media img {
+  -webkit-box-shadow: 1px 2px 5px 1px #777;
+          box-shadow: 1px 2px 5px 1px #777;
+}
+
+.blog-img,
+.date-wrap, 
+.comnt-wrap {
+  -webkit-box-shadow: 0 1px 20px -4px #000;
+          box-shadow: 0 1px 20px -4px #000;
+}
+
+.blog-post .media {
+  display: inline-block;
+}
+
+.date-wrap span, .comnt-wrap span {
+  display: block;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.date-wrap .date {
+  font-size:30px;
+  font-weight: 300;
+  background: rgb(140,214,0);
+  color: #fff;
+  border-radius: 4px 4px 0 0;
+  -webkit-border-radius: 4px 4px 0 0;
+}
+
+.date-wrap .month {
+  font-size:16px;
+  font-weight: 300;
+  background: #2c3bad;
+  color: #fff;
+  border-radius: 0 0 4px 4px ;
+  -webkit-border-radius: 0 0 4px 4px ;
+}
+
+.comnt-wrap .comnt-ico {
+  background: rgb(140,214,0);
+  color: #fff;
+  border-radius: 4px 4px 0 0;
+  -webkit-border-radius: 4px 4px 0 0;
+  font-size: 20px;
+}
+.comnt-wrap .value {
+  background: #2c3bad;
+  color: #fff;
+  border-radius: 0 0 4px 4px;
+  -webkit-border-radius:0 0 4px 4px;
+}
+
+.blog-img img {
+  width: 100%;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.blog-item h1, .blog-item h1 a {
+  font-size:25px;
+  color: #475168;
+  font-weight: 300;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.blog-item .btn-danger {
+  background-color: #2c3bad;
+  border-color: #777;
+}
+
+.blog-item h1 {
+  margin-bottom: 20px;
+  line-height: 35px;
+}
+
+.blog-item h1 a:hover {
+  text-decoration: underline;
+}
+
+.author {
+  margin:25px 0 30px 0;
+  font-size: 16px;
+}
+
+.author a, .shate-view a {
+  color: #475168;
+}
+
+.shate-view {
+  margin-top:20px ;
+}
+
+.shate-view ul li {
+  margin-bottom: 5px;
+}
+
+.blog-side-item h3 {
+  margin-top: 30px;
+  color: #475268;
+  font-size: 18px;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.blog-side-item ul li {
+  margin-bottom: 5px;
+  border-bottom:1px solid #efefef;
+  line-height: 35px;
+}
+
+.blog-side-item ul li a{
+  display: inline-block;
+  width: 100%;
+}
+
+.media p {
+  line-height: normal;
+}
+
+ul.tag  {
+  display: inline-block;
+  width: 100%;
+}
+
+ul.tag li {
+  float: left;
+  margin: 10px 10px 0 0;
+  border-bottom: none;
+}
+ul.tag li a {
+  border: 1px solid #e8e8e8;
+  padding: 0 10px;
+  border-radius:4px ;
+  -webkit-border-radius:4px ;
+}
+
+.media img.media-object {
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  height: 80px;
+  width: 80px;
+}

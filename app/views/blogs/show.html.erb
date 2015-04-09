@@ -5,4 +5,4 @@
   <br>
   <%= @blog.body %>
 <% end %>
-<%= link_to "Edit", edit_blog_path(@blog) %>
+<%= link_to "Edit", edit_blog_path(@blog) if user_signed_in? %>

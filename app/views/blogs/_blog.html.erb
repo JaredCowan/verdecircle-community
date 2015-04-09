@@ -1,14 +1,57 @@
-<br>
-<%= div_for blog do %>
-  <%= link_to blog.subject.titleize, blog_path(blog) %>
-  <br>
-  <%= blog.body %>
-<% end %>
-  <% if user_signed_in? && current_user.is_admin? %>
-    <hr>
-    <div class="btn-group">
-      <%= link_to "Edit", edit_blog_path(blog), class: "btn btn-info" %>
-      <%= link_to "Delete", blog_path(blog), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+<%= div_for(blog, class: "blog-item") do %> <!-- Blog Content start-->
+  <div class="row">
+    <div class="col-lg-2 col-sm-2">
+      <div class="date-wrap">
+        <span class="date">
+          <%= blog.created_at.strftime("%A") %>
+        </span>
+        <span class="month">
+          <%= blog.created_at.strftime("%b %e, %Y") %>
+        </span>
+      </div>
+      <% if user_signed_in? && current_user.is_admin? %>
+        <div class="comnt-wrap">
+          <span class="comnt-ico">
+            <%= link_to "Edit", edit_blog_path(blog), class: "btn btn-info" %>
+          </span>
+          <span class="value">
+            <%= link_to "Delete", blog_path(blog), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+          </span>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-<br>
+    <div class="col-lg-10 col-sm-10">
+      <div class="blog-img">
+        <!-- <img src="http:"> -->
+        <%= link_to(image_tag(blog.image.url, class: "img-responsive"), blog_path(blog)) if blog.image? %>
+        <%= link_to(image_tag("/images/logo-name-vc.jpg", class: "img-responsive"), blog_path(blog)) unless blog.image? %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2 col-sm-2 text-right">
+      <div class="author">
+        By <%= link_to blog.user.username.titleize, profile_page_path(blog.user.username) %>
+      </div>
+      <!-- <ul class="list-unstyled">
+        <li><a href="javascript:;"><em>travel</em></a></li>
+        <li><a href="javascript:;"><em>tour</em></a></li>
+        <li><a href="javascript:;"><em>recreation</em></a></li>
+        <li><a href="javascript:;"><em>tourism</em></a></li>
+      </ul> -->
+      <!-- <div class="shate-view">
+        <ul class="list-unstyled">
+          <li><a href="javascript:;">209 View</a></li>
+          <li><a href="javascript:;">23 Share</a></li>
+        </ul>
+      </div> -->
+    </div>
+    <div class="col-lg-10 col-sm-10">
+      <h1>
+        <%= link_to blog.subject.titleize, blog_path(blog) %>
+      </h1>
+      <%= content_tag(:p, blog.body, class: "blog-body") %>
+      <%= link_to "Continue Reading", blog_path(blog), class: "btn btn-danger" %>
+    </div>
+  </div>
+<% end %> <!--END Blog Content -->
