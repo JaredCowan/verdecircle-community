@@ -56,7 +56,9 @@ Rails.application.routes.draw do
   # Routing for Community
   # =====================================
   scope '/community' do
-    get "/ajax", to: "pages#ajax", as: :ajax, defaults: {format: :json}
+    scope "/ajax", as: :ajax, defaults: {format: :json} do
+      get '/notifications', to: "pages#ajax", defaults: {get: :notifications}
+    end
     get "/report/:id", to: "users#report", as: :report
     scope '/posts' do
       get '/tags/:tag', to: 'posts#index', as: :tag

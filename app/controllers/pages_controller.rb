@@ -43,8 +43,13 @@ class PagesController < ApplicationController
   end
 
   def ajax
+    @msgType = params[:unread] == "false" ? "read" : "unread"
+    @user  = current_user
+    @notifications = @user.send(params[:get]).send(@msgType)
+    @notifications.length < 1 ? @notifications = "You have no #{@msgType.capitalize} notifications" : ""
     respond_to do |format|
-      format.json { render json: {link: "<li role='presentation'> <a role='menuitem' tabindex='-1' href='<%= url_for report_path(post) %>'>Wrong Category</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='<%= url_for report_path(post) %>'>It's Spam</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='<%= url_for report_path(post) %>'>Content Is Pointless</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='<%= url_for report_path(post) %>'>I Don't Like It</a> </li> <li role='presentation'> <a role='menuitem' tabindex='-1' href='<%= url_for report_path(post) %>'>Other</a> </li>"} }
+      format.json { render json: @notifications }
     end
+    10.times { puts params }
   end
 end
