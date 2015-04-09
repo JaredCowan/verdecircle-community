@@ -16,9 +16,12 @@
  * Bootstrap
 */
 //= require depend/bootstrap/bootstrap
-//= require jquery.turbolinks
+ 
+//=require jquery.turbolinks 
+//=require turbolinks
 
-//= require turbolinks
+//= require depend/pagepiling
+
 //= require nprogress
 //= require nprogress-turbolinks
 //= require rails_confirm_dialog
@@ -69,6 +72,9 @@ var ready = function() {
   scriptLoaded = "loaded"
   $('[data-toggle="popover"]').popover()
   $('[data-toggle="tooltip"]').tooltip()
+  $("#pagepile-loading").fadeOut(1000, function() {
+    $(this).remove();
+  });
 }
 
 $(document).on('page:load', ready);

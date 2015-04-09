@@ -28,9 +28,6 @@
 // Overrides
 @import "overrides";
 
-body {
-  position: relative;
-}
 .secondary-nav-dropdown {
   .navbar-brand {
     position: relative;
@@ -47,5 +44,85 @@ body {
     .brand-image-icon-layer {
       color: #323232;
     }
+  }
+}
+#pagepile-loading {
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 400;
+  > h1 {
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    right: 0;
+    left: 0;
+    text-align: center;
+  }
+}
+#menu {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 350;
+  width: 451px;
+  margin: 0 auto;
+  background-color: #323232;
+  padding: 5px;
+  border-radius: 4px;
+  opacity: .1;
+  transition: all 1s;
+  &:hover {
+    top: 70px;
+    opacity: 1;
+  }
+  &.nav-pills > li > a,
+  &.nav-pills > li > a:focus {
+    color: #fafafa;
+    background-color: transparent;
+    text-transform: capitalize;
+  }
+  &.nav-pills > li > a:hover {
+    color: #323232;
+    background-color: lighten($verde-green, 10%);
+  }
+  &.nav-pills > li.active > a,
+  &.nav-pills > li.active > a:hover,
+  &.nav-pills > li.active > a:focus {
+    color: #323232;
+    background-color: $verde-green;
+  }
+}
+.mobile #menu {
+  display: none;
+}
+@media (max-width: 550px) {
+  #menu {
+    display: none;
+  }
+}
+#pp-nav .pp-tooltip {
+  color: #323232;
+  text-transform: capitalize;
+}
+#pagepile {
+  margin-top: 0;
+  margin-left: -14px;
+  .pp-section {
+    padding: 5px;
+  }
+  #section1, #section3, #section5 {
+    background: #fff url('/images/verde-circle-logo-name-centered.png') no-repeat fixed center;
+  }
+  #section2, #section4 {
+   background: #fff url('/images/sampledash.jpg') no-repeat fixed center; 
+  }
+  #section1, #section2, #section3, #section4, #section5 {
+    background-size: cover;
   }
 }
