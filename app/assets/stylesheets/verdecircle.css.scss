@@ -117,3 +117,30 @@
     }
   }
 }
+
+.controller__contacts {
+  .contact-page-map {
+    margin-top: -14px;
+    padding-bottom: 20px;
+  }
+  .contact-page-address-wrapper {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    > .address {
+      text-align: center;
+    }
+    .contact-form textarea {
+      height: 200px;
+      resize: vertical !important;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .controller__contacts .contact-page-address-wrapper > .address {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

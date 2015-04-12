@@ -77,6 +77,29 @@ var ready = function() {
   });
 }
 
+//google map
+function initialize() {
+    var myLatlng = new google.maps.LatLng(33.9896579, -118.4659666);
+
+    var mapOptions = {
+      zoom: 15,
+      scrollwheel: false,
+      center: myLatlng,
+      // mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeControlOptions: {
+        mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+      }
+    }
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'Thriii'
+    });
+  }
+  // google.maps.event.addDomListener(document, 'ready', initialize);
+
 $(document).on('page:load', ready);
 
 if (typeof window.scriptLoaded === 'undefined') {
