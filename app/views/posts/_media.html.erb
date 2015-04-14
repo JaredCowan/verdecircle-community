@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <div class="post-wrapper" id="<%= "#{post.id}-#{post.subject}".parameterize %>">
+    <div class="post-wrapper" id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-feed="{<%= %Q("id":"#{post.id}","subject":"#{post.subject.parameterize}","user_id":"#{post.user_id}","topic":"#{post.topic_id}","votes":"#{post.cached_votes_total}") %>}">
       <div class="dropdown report-dropdown">
         <a href="javascript:;" title="flag content as inappropriate" class="report-link dropdown-toggle" id="reportDropdownMenu" data-post-id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-toggle="dropdown" aria-expanded="true">
           <i class="fa fa-flag"></i>

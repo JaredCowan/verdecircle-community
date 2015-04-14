@@ -23,7 +23,7 @@
     <%= yield :head %>
     <%= render 'layouts/airbrake' %>
   </head>
-  <body class="controller__<%= controller_name %> action__<%= action_name %>">
+  <body class="controller__<%= controller_name %> action__<%= action_name %>" data-user="{<%= %Q("cu":{"i":"#{current_user.id if user_signed_in?}","un":"#{current_user.username if user_signed_in?}"}) %>}">
     <%= render 'layouts/navbars/communitycenter' %>
     <div class="container-fluid">
       <div class="errors__container">
