@@ -145,6 +145,11 @@ html.desktop .test-popup {
     margin: 0;
     width:100%;
     background-color: #323232;
+    .test-popup-header-text {
+      display: inline;
+      margin-left: 12%;
+      color: #fff;
+    }
   }
   > .test-popup-content {
     padding-top: 0;

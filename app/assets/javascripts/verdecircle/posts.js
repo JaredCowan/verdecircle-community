@@ -216,7 +216,7 @@ $(function() {
     if ($(".test-popup").length > 0) {
       $(".test-popup").remove();
     }
-    $("body").append("<div class='test-popup'><div class='test-popup-header'><a class='test-popup-btn btn btn-info' href='javascript:;'>Cancel</button></div><div class='test-popup-content'></div></div>")
+    $("body").append("<div class='test-popup'><div class='test-popup-header'><a class='test-popup-btn btn btn-info' href='javascript:;'>Cancel</a><h5 class='test-popup-header-text text-center'>Help Us Understand</h5></div><div class='test-popup-content'></div></div>")
     $("body").addClass("dont-scroll-body");
     closeLayover();
     var temp = ""
