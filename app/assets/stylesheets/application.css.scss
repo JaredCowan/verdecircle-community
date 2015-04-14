@@ -28,6 +28,19 @@
 // Overrides
 @import "overrides";
 
+html {
+  &.desktop body.dont-scroll-body,
+  &.mobile body.dont-scroll-body {
+    overflow-y: hidden;
+  }
+  &.desktop body.dont-scroll-body {
+    margin-right: 15px;
+    > .navbar {
+      padding-right: 35px;
+    }
+  }
+}
+
 .secondary-nav-dropdown {
   .navbar-brand {
     position: relative;

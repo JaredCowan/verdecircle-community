@@ -1,27 +1,20 @@
 <div class="row">
   <div class="col-xs-12">
-    <div class="post-wrapper" id="post<%= post.id %>">
+    <div class="post-wrapper" id="<%= "#{post.id}-#{post.subject}".parameterize %>">
       <div class="dropdown report-dropdown">
-        <a href="javascript:;" title="flag content as inappropriate" class="report-link dropdown-toggle" id="reportDropdownMenu" data-toggle="dropdown" aria-expanded="true">
+        <a href="javascript:;" title="flag content as inappropriate" class="report-link dropdown-toggle" id="reportDropdownMenu" data-post-id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-toggle="dropdown" aria-expanded="true">
           <i class="fa fa-flag"></i>
         </a>
         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="reportDropdownMenu">
-          <li role="presentation" class="dropdown-header">Reason For Reporting?</li>
-          <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="<%= url_for report_path(post) %>">Wrong Category</a>
+          <li role="presentation" class="dropdown-header text-center">
+            <i class="fa fa-cog fa-spin"></i>&nbsp;Options
           </li>
-          <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="<%= url_for report_path(post) %>">It's Spam</a>
-          </li>
-          <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="<%= url_for report_path(post) %>">Content Is Pointless</a>
-          </li>
-          <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="<%= url_for report_path(post) %>">I Don't Like It</a>
-          </li>
-          <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="<%= url_for report_path(post) %>">Other</a>
-          </li>
+          <div class="list-group report-link-li">
+            <a role="menuitem" href="javascript:;" tabindex="-1" class="list-group-item">
+              <h6 class="list-group-item-heading">Report This</h6>
+              <p class="list-group-item-text">View More Options &hellip;</p>
+            </a>
+          </div>
         </ul>
       </div>
       <div class="post-heading">
