@@ -97,7 +97,7 @@ $(function() {
     $(".report-dropdown .dropdown-menu .report-link-li > a").on("click", function(e) {
       e.preventDefault();
       var id = $this[0].dataset.postId;
-      window.location.hash = "&soft=reported&type=post&id=" + id + "";
+      history.pushState({}, null, "?soft=reported&type=post&id=" + id);
       reportLinkDropdown(e, id);
     });
     // console.log($(e.currentTarget.nextElementSibling));
@@ -122,18 +122,20 @@ $(function() {
   });
 
   function closeLayover() {
-    $(".test-popup-btn").on("click", function(e) {
-      window.location.hash = "_=_";
+    $(".test-popup-btn").on("click", function() {
+      var endUrl = {url: window.location.origin + window.location.pathname}
+      history.pushState(endUrl.url, null, endUrl.url);
       $(".test-popup").fadeOut(200, function() {
         $("body").removeClass("dont-scroll-body");
-        $("body").trigger("layover:removed");
         this.remove();
+        $("body").trigger("layover:removed");
       });
     });
   }
 
   function closeLayoverById(id) {
-    window.location.hash = "_=_";
+    var endUrl = {url: window.location.origin + window.location.pathname}
+    history.pushState(endUrl.url, null, endUrl.url);
     $(".test-popup").fadeOut(200, function() {
       $("body").removeClass("dont-scroll-body");
       $(id).trigger("layover:removed");
@@ -142,10 +144,11 @@ $(function() {
   }
 
   function ajaxReportData(object, header, id) {
-    $(".list-group-item").on("click", function(e) {
+    $("[data-ajax='report']").on("click", function(e) {
       var targetDropdown = $("[data-post-id='" + id + "']")[0],
           postWrapper = $("#" + id + " > .dropdown"),
           li = $("#" + id + " > .dropdown .dropdown-menu .dropdown-header");
+      console.log(e);
       $.ajax({
         type: 'GET',
         url: Routes.report_path(id),
@@ -183,33 +186,33 @@ $(function() {
       listHeadClass = "list-group-item-heading",
       listItemClass = "list-group-item-text";
 
-  var reportList = ["<div class=\"list-group\">",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
-      "<a class=" + listAClass + " role='menuitem' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> It's Spam </h4> <p class=" + listItemClass + "> You think it doesn't belong on this site and it's spam </p></a></div>"];
+    var reportList = ["<div class=\"list-group\">",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> Wrong Category </h4><p class=" + listItemClass + "> You think they posted this in the wrong category. </p></a>",
+      "<a class=" + listAClass + " role='menuitem' data-ajax='report' tabindex='-1' href='javascript:;'><h4 class=" + listHeadClass + "> It's Spam      </h4><p class=" + listItemClass + "> You think it doesn't belong on this site and it's spam </p></a></div>"];
 
     var _top = $(document).scrollTop(),
       _height = $(window).innerHeight() + 60;
@@ -225,6 +228,6 @@ $(function() {
     };
     $(".test-popup-content").html(temp);
 
-    ajaxReportData($(".test-popup"), $header, id, e);
+    ajaxReportData($(".test-popup"), $header, id);
   }
 });
