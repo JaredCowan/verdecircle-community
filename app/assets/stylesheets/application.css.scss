@@ -41,6 +41,11 @@ html {
   }
 }
 
+textarea.form-control {
+  resize: vertical !important;
+  min-height: 80px !important;
+}
+
 .secondary-nav-dropdown {
   .navbar-brand {
     position: relative;
@@ -76,6 +81,9 @@ html {
     left: 0;
     text-align: center;
   }
+}
+#pp-nav {
+  display: none;
 }
 #menu {
   position: absolute;

@@ -8,7 +8,7 @@
       <%= f.input :subject %>
       <div class="row">
         <div class="col-lg-6">
-          <%= f.input :tag_list, wrapper_html: { class: ("has-error" if @post.errors[:tags].any?) }, required: true %>
+          <%= f.input :tag_list, wrapper_html: { class: ("has-error has-feedback" if @post.errors[:tags].any?) }, required: true %>
         </div>
         <div class="col-xs-12 col-sm-8 col-lg-4">
           <%= f.input :topic_id, collection: Topic.all.map {|n| [n.name.titleize, n.id]}, include_blank: false, required: true %>

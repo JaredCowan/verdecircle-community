@@ -30,29 +30,49 @@ end
 SimpleForm.setup do |config|
   config.boolean_style = :nested
 
-  config.wrappers :bootstrap3, tag: 'div', class: 'form-group', error_class: 'has-error',
+  config.wrappers :bootstrap3, tag: 'div', class: 'form-group', error_class: 'has-error has-feedback',
       defaults: { input_html: { class: 'default_class' } } do |b|
 
     b.use :html5
     b.use :min_max
     b.use :maxlength
-    b.use :placeholder
+    b.optional :placeholder
 
     b.optional :pattern
     b.optional :readonly
 
     b.use :label_input
+    b.wrapper :error_wrapper, tag: 'span', class: 'separator' do |e|
+      e.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
+      e.use :error, wrap_with: { tag: 'span', class: 'help-block has-error' }
+      # b.wrapper :error_icon, tag: 'span', class: 'glyphicon glyphicon-remove form-control-feedback' do |wrap| end
+    end
+  end
+
+  config.wrappers :fancyplaceholders, tag: 'div', class: 'form-group', error_class: 'has-error has-feedback',
+      defaults: { input_html: { class: 'default_class' } } do |b|
+
+    b.use :html5
+    b.use :min_max
+    b.use :maxlength
+    b.optional :placeholder
+
+    b.optional :pattern
+    b.optional :readonly
+
+    b.use :input
+    b.use :label
     b.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
     b.use :error, wrap_with: { tag: 'span', class: 'help-block has-error' }
   end
 
-  config.wrappers :prepend, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :prepend, tag: 'div', class: 'form-group', error_class: 'has-error has-feedback' do |b|
     b.use :html5
-    b.use :placeholder
+    b.optional :placeholder
     b.wrapper tag: 'div', class: 'controls' do |input|
       input.wrapper tag: 'div', class: 'input-group' do |prepend|
-    prepend.use :label , class: 'input-group-addon' ###Please note setting class here fro the label does not currently work (let me know if you know a workaround as this is the final hurdle)
         prepend.use :input
+        prepend.use :label , class: 'input-group-addon' ###Please note setting class here fro the label does not currently work (let me know if you know a workaround as this is the final hurdle)
       end
       input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
       input.use :error, wrap_with: { tag: 'span', class: 'help-block has-error' }
@@ -61,11 +81,11 @@ SimpleForm.setup do |config|
 
   config.wrappers :append, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
-    b.use :placeholder
+    b.optional :placeholder
     b.wrapper tag: 'div', class: 'controls' do |input|
       input.wrapper tag: 'div', class: 'input-group' do |prepend|
         prepend.use :input
-    prepend.use :label , class: 'input-group-addon' ###Please note setting class here fro the label does not currently work (let me know if you know a workaround as this is the final hurdle)
+        prepend.use :label , class: 'input-group-addon' ###Please note setting class here fro the label does not currently work (let me know if you know a workaround as this is the final hurdle)
       end
       input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
       input.use :error, wrap_with: { tag: 'span', class: 'help-block has-error' }

@@ -5,7 +5,9 @@ class Post < ActiveRecord::Base
   default_scope -> { order('created_at DESC') }
 
   validates :subject, presence: true,
-            length: { minimum: 3, maximum: 60 }
+            length: { within: 10..60,
+            too_short: "must have be at least %{count} characters in length",
+            too_long: "must be no longer than %{count} characters in length" }
 
   validates :body, presence: true,
             length: { minimum: 3, maximum: 100000 }
@@ -13,6 +15,9 @@ class Post < ActiveRecord::Base
   validates :topic_id, presence: true
 
   validates :tags, presence: true
+  validate :tag_length_error_validator
+
+  validate :is_user_spaming?, if: Proc.new { |c| c.user.is_admin? }, on: [:create]
 
   acts_as_votable
   has_paper_trail
@@ -102,5 +107,40 @@ class Post < ActiveRecord::Base
 
   def destroy_image?
     self.image.clear if @image_delete == "1"
+  end
+
+  def is_user_spaming?
+    user_posts     = Post.where("user_id = ? AND created_at > ?", user_id, Time.now - 3.hours)
+    reported_posts = Post.reported.where("created_at > ? AND votable_id IN (?)", Time.now - 2.days, user_posts.map(&:id))
+    if user_posts.length >= 5 || reported_posts.length >= 3
+      self.errors.clear
+      self.errors[:base] << "Are system has detected spam from your account. Please try again later."
+    end
+  end
+
+  def tag_length_error_validator
+    tags = tag_list.split(", ")
+    max_tags_count_per_post_error = true unless tags.length <= 5
+    errors_array = []
+
+    tags.each do |t|
+      _t_length = t.delete("-").length
+
+      case _t_length
+      when 20..(1.0/0.0)
+        _length_in_words, _min_max, _count = "long", "maximum", "25"
+        has_min_max_length_error = true
+      when 0..3
+        _length_in_words, _min_max, _count = "short", "minimum", "5"
+        has_min_max_length_error = true
+      end
+
+      errors_array.push("Your tag '#{t.truncate(35)}' is too #{_length_in_words}. The #{_min_max} is #{_count} characters") if has_min_max_length_error
+    end
+
+    errors_array.push("Please limit your tags count to only 5 (You currently have '#{tags.length}')") if max_tags_count_per_post_error
+    
+    self.errors[:tags] << "have #{errors_array.length}" + "\serror".pluralize(errors_array.length) unless errors_array.empty?
+    errors_array.each {|e| self.errors[:base] << "#{e}"}
   end
 end

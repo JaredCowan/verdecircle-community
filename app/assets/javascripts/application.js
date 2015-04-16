@@ -73,13 +73,77 @@ var ready = function() {
   scriptLoaded = "loaded"
   $('[data-toggle="popover"]').popover()
   $('[data-toggle="tooltip"]').tooltip()
-  $("#pagepile-loading").fadeOut(1000, function() {
+  $("#pagepile-loading").fadeOut(1500, function() {
     $(this).remove();
   });
+  formHasErrorWithFeedback();
+  $("textarea.form-control")
+    .on("keydown focus blur", function(e) {
+      var $this     = $(this);
+      $this[0].rows = $this[0].value.split("\n").length + 2;
+      var lines = $this[0].value.split("\n");
+      $.each(lines, function(i, v) {
+        $this[0].rows += Math.floor(v.length / ($this.width() / 6.7825));
+      });
+  });
 }
+
 
 $(document).on('page:load', ready);
 
 if (typeof window.scriptLoaded === 'undefined') {
   $(document).ready(ready);
 }
+
+var formHasErrorWithFeedback = function() {
+  $.each($(".has-error.has-feedback"), function(e){
+    var $this     = $(this)
+      errorTemplate = '<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span><span id="inputError2Status" class="sr-only">(error)</span>';
+    $this.append(errorTemplate);
+  });
+}
+
+
+// $(".desktop input").on("mouseover", function(e) {
+//   var $this  = $(this),
+//       $label = $this.parent().find("label");
+//   console.log($this, e);
+//   $label.addClass("fancyplaceholder");
+//   $this.on("mouseout", function(e) {
+//     $label.removeClass("fancyplaceholder");
+//   });
+// });
+
+$(".form-control").on("mouseover hover focus", function(e) {
+  var $this  = $(this),
+      $input = $this[0],
+      $label = $this.parent().find("label");
+  // console.log($this);
+  $label.addClass("fancyplaceholderin");
+  // $label.toggle( ":hover" );
+  $this.on("focus", function() {
+    // console.log($this);
+  });
+  setTimeout(function() {
+    $this.toggleClass( "focused", $this.is( ":focus" ) );
+  }, 0 );
+  $this.on("mouseleave blur", function() {
+    // console.log($input.value.length);
+    if ($input.value.length === 0) {
+        $label.removeClass("fancyplaceholderin");
+      $label.addClass("fancyplaceholderout");
+      // $this.animate({opacity: 1}, 600, function() {
+      //   $label.removeClass("fancyplaceholderin");
+      //   $label.removeClass("fancyplaceholderout");
+      // });
+      setTimeout(function() {
+        $label.removeClass("fancyplaceholderout");
+      }, 400 );
+    }
+  });
+});
+
+
+
+
+

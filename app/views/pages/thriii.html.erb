@@ -3,18 +3,23 @@
 <% end %>
 
 <% provide(:on_ready) do %>
-  $('#pagepile').pagepiling({
-    menu: '#menu',
-    anchors: ['features', 'inventory', 'accounting', 'orders', 'logistics'],
-    sectionsColor: ['#fafafa', '#fafafa', '#fafafa', '#fafafa', '#fafafa'],
-    loopTop: false,
-    loopBottom: true,
-    navigation: {
-      'textColor': '#323232',
-      'bulletsColor': '#ccc',
-      'position': 'right',
-      'tooltips': ['features', 'inventory', 'accounting', 'orders', 'logistics']
+  $(document).on("page:load", function() {
+    var loadThriiiPagePile = function() {
+      $('#pagepile').pagepiling({
+        menu: '#menu',
+        anchors: ['features', 'inventory', 'accounting', 'orders', 'logistics'],
+        sectionsColor: ['#fafafa', '#fafafa', '#fafafa', '#fafafa', '#fafafa'],
+        loopTop: false,
+        loopBottom: true,
+        navigation: {
+          'textColor': '#323232',
+          'bulletsColor': '#ccc',
+          'position': 'right',
+          'tooltips': ['features', 'inventory', 'accounting', 'orders', 'logistics']
+        }
+      });
     }
+    loadThriiiPagePile();
   });
 <% end %>
 
@@ -61,3 +66,28 @@
   <div class="section" id="section5">
   </div>
 </div>
+
+<script>
+  window.onload = function() {
+    console.log("ready");
+    window.loadThriiiPagePile = function() {
+      $('#pagepile').pagepiling({
+        menu: '#menu',
+        anchors: ['features', 'inventory', 'accounting', 'orders', 'logistics'],
+        sectionsColor: ['#fafafa', '#fafafa', '#fafafa', '#fafafa', '#fafafa'],
+        loopTop: false,
+        loopBottom: true,
+        navigation: {
+          'textColor': '#323232',
+          'bulletsColor': '#ccc',
+          'position': 'right',
+          'tooltips': ['features', 'inventory', 'accounting', 'orders', 'logistics']
+        }
+      });
+    }
+    // setInterval(function () {alert("Hello")}, 3000);
+    window.setTimeout(function(){
+      loadThriiiPagePile();
+    }, 200);
+  };
+</script>

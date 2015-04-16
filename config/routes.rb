@@ -51,7 +51,13 @@ Rails.application.routes.draw do
   resources :users, path: 'u', only: :show do
     resources :authentications, path: 'accounts'
   end
-
+  
+  thriii_prefix = "/thriii"
+  match "#{thriii_prefix}/features",   to: redirect("#{thriii_prefix}#features"),   via: :get
+  match "#{thriii_prefix}/inventory",  to: redirect("#{thriii_prefix}#inventory"),  via: :get
+  match "#{thriii_prefix}/accounting", to: redirect("#{thriii_prefix}#accounting"), via: :get
+  match "#{thriii_prefix}/orders",     to: redirect("#{thriii_prefix}#orders"),     via: :get
+  match "#{thriii_prefix}/logistics",  to: redirect("#{thriii_prefix}#logistics"),  via: :get
   # =====================================
   # Routing for Community
   # =====================================

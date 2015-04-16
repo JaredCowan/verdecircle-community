@@ -53,7 +53,7 @@
 
             //events
             afterLoad: null,
-            onLeave: null,
+            onLeave: function() { setTimeout(function() { history.pushState({}, "/thriii#" + window.location.href.split("#")[1], "/thriii/" + window.location.href.split("#")[1]); }, 15 )},
             afterRender: null
         }, custom);
 

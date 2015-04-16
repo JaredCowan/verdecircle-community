@@ -52,6 +52,10 @@ en:
         create: "Send"
 
   simple_form:
+    required:
+      text: 'required'
+      mark: '*'
+      html: '<span title="required">*</span>'
     placeholders:
       contact:
         name: "Your full name"
