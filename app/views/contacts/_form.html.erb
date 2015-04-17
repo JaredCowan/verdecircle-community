@@ -10,7 +10,7 @@
           <%= f.input :inquiry, collection: I18n.t("contact.inquiry").map {|k,v| v},include_blank: false %>
         </div>
         <div class="col-xs-12 col-sm-6">
-          <%= f.input :name, label_html: { class: "placeholder", placeholder: "Article is", alt: "New Article" }, input_html: {required: ""} %>
+          <%= f.input :name, required: true %>
         </div>
         <div class="col-xs-12 col-sm-7">
           <%= f.input :email, required: true %>

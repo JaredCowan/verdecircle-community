@@ -114,7 +114,7 @@ class Post < ActiveRecord::Base
     reported_posts = Post.reported.where("created_at > ? AND votable_id IN (?)", Time.now - 2.days, user_posts.map(&:id))
     if user_posts.length >= 5 || reported_posts.length >= 3
       self.errors.clear
-      self.errors[:base] << "Are system has detected spam from your account. Please try again later."
+      self.errors[:base] << "Our system has detected spam from your account. Please try again later."
     end
   end
 

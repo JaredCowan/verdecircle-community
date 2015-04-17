@@ -53,7 +53,7 @@
           <%= image_tag "verde-circle-icon.png", class: "brand-image", alt: "secondary navigation dropdown menu" %>
           <i class="brand-image-icon-layer fa fa-bars"></i>
         </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="secondaryDropdownNav">
+        <ul class="dropdown-menu animated flipInX" role="menu" aria-labelledby="secondaryDropdownNav">
           <li role="presentation" tabindex="-1">
             <%= link_to I18n.t('verdecircle.navigation-dropdown.verde_circle'), verde_root_path %>
           </li>
@@ -96,7 +96,7 @@
             </span>
             <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu animated flipInX">
             <li>
               <%= link_to I18n.t("notifications.view.all"), notifications_path(current_user.username) %>
               <%= link_to I18n.t("notifications.mark.all.read"), mark_all_read_notifications_path(current_user.username), method: :post %>
@@ -120,7 +120,7 @@
             <%= render 'users/avatar', size: :tiny %> My Account
             <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu animated flipInX">
             <% if current_user.is_admin? %>
               <li>
                 <%= link_to I18n.t('admin.link'), rails_admin_path, data: {"no-turbolink" => true} %>

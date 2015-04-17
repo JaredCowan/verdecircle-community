@@ -17,8 +17,131 @@
 // Import bootstrap variables to make all variables available from this file.
 // Useful for situations where only this file is imported.
 // @import "bootstrap/variables";
-$verde-green: rgb(140,214,0);
-$verde-blue: #2c3bad;
-$verde-baby-blue: rgb(0, 136, 255);
-$avatar-background-color: #333;
-$avatar-default-color: darken($avatar-background-color, 20%);
+
+// Default & verde colors
+$black-base:                                         #0a0a0a;
+$white-base:                                         #fafafa;
+
+$gray-base:                           darken($white-base, 4); // #f0f0f0
+$gray-darker:                        darken($white-base, 17); // #cfcfcf
+$gray-dark:                          darken($white-base, 79); // #303030
+
+$verde-green:                                        #8cd600;
+$verde-green-darker:                 darken($verde-green, 3); // #7fc200
+$verde-green-dark:                   darken($verde-green, 7); // #71ad00
+
+$verde-blue:                                         #2c3bad;
+$verde-blue-lighter:                                 #0087FD;
+$verde-blue-light:     saturate(lighten($verde-blue, 10), 4); // #3b4cd3
+
+$verde-navy-blue:                                    #34495e;
+$verde-navy-blue-darker:         darken($verde-navy-blue, 3); // #2d4052
+$verde-navy-blue-dark:           darken($verde-navy-blue, 6); // #283848
+
+$verde-teal:                                         #1abc9c;
+$verde-teal-darker:                   darken($verde-teal, 2); // #18af91
+$verde-teal-dark:                     darken($verde-teal, 8); // #14947b
+
+$verde-primary:                                      #3498db;
+$verde-primary-darker:             darken($verde-primary, 3); // #2691d9
+$verde-primary-dark:               darken($verde-primary, 7); // #2385c7
+
+$verde-success:                                      #2ecc71;
+$verde-success-darker:             darken($verde-success, 3); // #2bbf6a
+$verde-success-dark:               darken($verde-success, 7); // #27af61
+
+$verde-info:                                         #5bc0de;
+$verde-info-darker:                   darken($verde-info, 4); // #48b9da
+$verde-info-dark:                     darken($verde-info, 9); // #33b1d6
+
+$verde-warning:                                      #f0ad4e;
+$verde-warning-darker:             darken($verde-warning, 4); // #eea43a
+$verde-warning-dark:               darken($verde-warning, 8); // #ed9b27
+
+$verde-danger:                                       #e74c3c;
+$verde-danger-darker:               darken($verde-danger, 3); // #e53f2e
+$verde-danger-dark:                 darken($verde-danger, 6); // #e43320
+
+
+$avatar-background-color:                         $gray-dark;
+$avatar-default-color:   darken($avatar-background-color, 6); // #1f1f1f
+
+// Media query breakpoints
+$screen-xs-min:                                        767px;
+$screen-sm-min:                                        768px;
+$screen-md-min:                                        992px;
+$screen-lg-min:                                       1200px;
+$screen-xs-max:                         ($screen-sm-min - 1);
+$screen-sm-max:                         ($screen-md-min - 1);
+$screen-md-max:                         ($screen-lg-min - 1);
+
+// Fonts
+$font-weight-base:                                    normal;
+$font-weight-lighter:                                    300;
+$font-weight-light:                                      400;
+$font-weight-heavy:                                      500;
+
+$font-family-sans-pro:        "Open Sans", "Source Sans Pro";
+$font-family-sans-serif:  $font-family-sans-pro, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif: Georgia, "Times New Roman", Times, serif;
+$font-family-base:                   $font-family-sans-serif;
+$font-family-headings:       "Fjalla One", $font-family-base;
+
+$font-size-base:                                        14px;
+$font-size-small:             ceil(($font-size-base * 0.85)); // ~12px
+$font-size-large:             ceil(($font-size-base * 1.25)); // ~18px
+
+$font-size-h1:                floor(($font-size-base * 2.6)); // ~36px
+$font-size-h2:               floor(($font-size-base * 2.15)); // ~30px
+$font-size-h3:                 ceil(($font-size-base * 1.7)); // ~24px
+$font-size-h4:                ceil(($font-size-base * 1.25)); // ~18px
+$font-size-h5:                               $font-size-base;
+$font-size-h6:                ceil(($font-size-base * 0.85)); // ~12px
+
+// Border radius
+$border-radius-base:                                     4px;
+$border-radius-small:              ($border-radius-base - 1); // 3px
+$border-radius-large:              ($border-radius-base + 2); // 6px
+
+// Text shadows
+$text-shadow-sm: 1px 1px 1px                      $gray-dark;
+
+// Buttons
+$btn-font-weight:                          $font-weight-base;
+
+$btn-default-color:                              $white-base;
+$btn-default-bg:                                $gray-darker;
+$btn-default-border:                              $gray-dark;
+
+$btn-primary-color:                           $verde-primary;
+$btn-primary-bg:                       $verde-primary-darker;
+$btn-primary-border:                     $verde-primary-dark;
+
+$btn-success-color:                           $verde-success;
+$btn-success-bg:                       $verde-success-darker;
+$btn-success-border:                     $verde-success-dark;
+
+$btn-info-color:                                 $verde-info;
+$btn-info-bg:                             $verde-info-darker;
+$btn-info-border:                           $verde-info-dark;
+
+$btn-warning-color:                           $verde-warning;
+$btn-warning-bg:                       $verde-warning-darker;
+$btn-warning-border:                     $verde-warning-dark;
+
+$btn-danger-color:                             $verde-danger;
+$btn-danger-bg:                         $verde-danger-darker;
+$btn-danger-border:                       $verde-danger-dark;
+
+$btn-link-disabled-color:                         $gray-base;
+
+$btn-verde-green-bg:                            $verde-green;
+$btn-verde-green-bg-hover:               $verde-green-darker;
+$btn-verde-green-border-color:             $verde-green-dark;
+
+$btn-verde-blue-bg:                              $verde-blue;
+$btn-verde-blue-bg-hover:                $verde-green-darker;
+$btn-verde-blue-border-color:              $verde-green-dark;
+
+
+

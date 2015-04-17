@@ -22,7 +22,35 @@ $(function() {
     }
   };
   
-  $("[data-hovercard]").on("mouseover", function(e) {
+  $("body").popover({
+    selector: '[data-hovercard]',
+    trigger: 'click hover',
+    html: true,
+    placement: 'bottom',
+    delay: {show: 100, hide: 9999900}
+  });
+
+  $("[data-hovercard]").on("mousemove", function(e) {
+    var $this  = $(this),
+        $popover = $(".popover"),
+        $arrow = $(".arrow"),
+        x      = e.clientX,
+        winWidth = window.innerWidth,
+        width  = $this.width(),
+        left   = $this.offset().left,
+        right  = left + width,
+        posPopover = e.clientX < (winWidth / 2) ? ($this.position().left / left - 2) : (width - width * 2.7 / 1.39601),
+        mouse  = e.clientX < (winWidth / 2) ?  (e.offsetX + 9) : (e.offsetX + width);
+
+    $popover.css({
+      left: posPopover + "px"
+    });
+    $arrow.css({
+      left: mouse > 10 ? (mouse + "px") : (16 + "px")
+    });
+  });
+
+  $.each($("[data-hovercard]"), function() {
     var $this = $(this),
         $popover = $(".popover");
     $this.attr("data-content", "<img src='/images/loading.gif'>")
@@ -35,7 +63,7 @@ $(function() {
   });
 
   $("[data-hovercard]").on("shown.bs.popover", function(e) {
-    
+
     var $this    = $(this),
         $popover = $(".popover"),
         $content = $(".popover .popover-content"),
@@ -50,26 +78,21 @@ $(function() {
       type: 'GET',
       url: Routes.profile_path(username),
       dataType: 'json',
+      beforeSend: function() {
+        $this.addClass("user-hovercard-parent");
+        $(".popover").addClass("user-hovercard");
+      },
       error: function() {
         $content.html("<i class='fa fa-exclamation-triangle'></i> Error.");
       },
       success: function(response) {
-        $this.addClass("user-hovercard-parent");
-        $(".popover").addClass("user-hovercard");
+        
         followButton = loggedIn ? "" : "<br><hr> <a href='javascript:;' class='btn btn-primary'>Follow</a>";
         template = "<img class='img-responsive hovercard-img' src='/images/logo-name-vc.jpg'><div class='media'> <div class='media-left'> <a href='" + Routes.profile_path(username) + "'> <img class='media-object' src='" + response['image_url'] +"'> </a> </div><div class='media-body'> <h4 class='media-heading'> <a href='" + Routes.profile_path(username) + "'>" + username + "</a></h4>" + followButton + "</div>";
         $this.addClass("loaded");
         $content.html(template);
       }
     });
-  });
-
-  $('body').popover({
-    selector: '[data-hovercard]',
-    trigger: 'click hover',
-    html: true,
-    placement: 'bottom',
-    delay: {show: 50, hide: 400}
   });
 
   $(".report-dropdown .dropdown-menu").on("click", function(e) {

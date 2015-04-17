@@ -6,7 +6,7 @@
           <a href="javascript:;" title="flag content as inappropriate" class="report-link dropdown-toggle" id="reportDropdownMenu" data-post-id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-toggle="dropdown" aria-expanded="true">
             <i class="fa fa-flag"></i>
           </a>
-          <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="reportDropdownMenu">
+          <ul class="dropdown-menu dropdown-menu-right animated flipInX" role="menu" aria-labelledby="reportDropdownMenu">
             <li role="presentation" class="dropdown-header text-center">
               <i class="fa fa-cog fa-spin"></i>&nbsp;Options
             </li>
@@ -22,12 +22,12 @@
       <div class="post-heading">
         <div class="info-card">
           <span class="avatar">
-            <a href="<%= profile_url(post.user.username) %>" data-hovercard="<%= post.user.username %>"}>
+            <a href="<%= profile_url(post.user.username) %>" data-hovercard="<%= post.user.username %>">
               <%= image_tag post.user.image_url, alt: "user avatar image" %>
             </a>
           </span>
           <span class="username">
-            <a href="<%= profile_url(post.user.username) %>" data-hovercard="<%= post.user.username %>"}>
+            <a href="<%= profile_url(post.user.username) %>" data-hovercard="<%= post.user.username %>">
               <%= post.user.username.titleize %>
             </a>
           </span>
