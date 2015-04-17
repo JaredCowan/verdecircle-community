@@ -12,9 +12,7 @@ $(function() {
       container = $(obj.currentTarget).siblings('.popover')
       timeout = self.timeout;
       container.one('mouseenter', function(){
-        //We entered the actual popover – call off the dogs
         clearTimeout(timeout);
-        //Let's monitor popover content instead
         container.one('mouseleave', function(){
           $.fn.popover.Constructor.prototype.leave.call(self, self);
         });
@@ -27,26 +25,26 @@ $(function() {
     trigger: 'click hover',
     html: true,
     placement: 'bottom',
-    delay: {show: 100, hide: 9999900}
+    delay: {show: 100, hide: 400}
   });
 
   $("[data-hovercard]").on("mousemove", function(e) {
-    var $this  = $(this),
-        $popover = $(".popover"),
-        $arrow = $(".arrow"),
-        x      = e.clientX,
-        winWidth = window.innerWidth,
-        width  = $this.width(),
-        left   = $this.offset().left,
-        right  = left + width,
+    var $this      = $(this),
+        e          = e,
+        $popover   = $(".popover"),
+        $arrow     = $(".arrow"),
+        winWidth   = window.innerWidth,
+        width      = $this.width(),
+        left       = $this.offset().left,
         posPopover = e.clientX < (winWidth / 2) ? ($this.position().left / left - 2) : (width - width * 2.7 / 1.39601),
-        mouse  = e.clientX < (winWidth / 2) ?  (e.offsetX + 9) : (e.offsetX + width);
+        posMouse   = (function() { var x = (e.clientX < (winWidth / 2) ? (e.offsetX + 9) : (e.offsetX + width)); return x > 10 ? x : 16; })();
 
     $popover.css({
       left: posPopover + "px"
     });
+
     $arrow.css({
-      left: mouse > 10 ? (mouse + "px") : (16 + "px")
+      left: posMouse + "px"
     });
   });
 

@@ -3,7 +3,7 @@ class Users::SessionsController < Devise::SessionsController
   prepend_before_filter :force_reset_session, only: :destroy
 
   def new
-    @failed = params[:failed]
+    @failed   = params[:failed]
     @provider = params[:provider]
     return render 'failed' if @failed
     super
