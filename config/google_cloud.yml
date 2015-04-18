@@ -1,0 +1,17 @@
+# defaults: &defaults
+#   provider: "Google"
+#   google_storage_access_key_id: "GOOGL22PTCJVKKZNAQAO"
+#   google_storage_secret_access_key: "ZmbdZxrbCsrUgJajUzR9dXu8fzSQ66rsq73HMjKT"
+
+development:
+  provider: "Google"
+  google_storage_access_key_id: "GOOGL22PTCJVKKZNAQAO"
+  google_storage_secret_access_key: "ZmbdZxrbCsrUgJajUzR9dXu8fzSQ66rsq73HMjKT"
+test:
+  provider: "Google"
+  google_storage_access_key_id: "GOOGL22PTCJVKKZNAQAO"
+  google_storage_secret_access_key: "ZmbdZxrbCsrUgJajUzR9dXu8fzSQ66rsq73HMjKT"
+production:
+  provider: "Google"
+  google_storage_access_key_id: "GOOGL22PTCJVKKZNAQAO"
+  google_storage_secret_access_key: "ZmbdZxrbCsrUgJajUzR9dXu8fzSQ66rsq73HMjKT"

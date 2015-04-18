@@ -7,7 +7,9 @@ class PostsController < ApplicationController
   include PostsLikeableHelper
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  
+  # rescue_from Excon::Errors::NotFound, with: :dump_file
+  rescue_from TypeError, with: :dump_file
+
   def index
     if params[:tag]
       begin
@@ -22,7 +24,7 @@ class PostsController < ApplicationController
 
       respond_to do |format|
         format.html
-        # format.js
+        format.js
         format.json { render json: @posts, include: [:comments, :user, :votes, :activities] }
       end
     end
@@ -63,29 +65,41 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     @post.subject = ActionController::Base.helpers.strip_tags(@post.subject)
-    @post.body = ActionController::Base.helpers.strip_tags(@post.body)
+    @post.body    = ActionController::Base.helpers.strip_tags(@post.body)
+
 
     respond_to do |format|
-      if @post.save
-        current_user.create_activity(@post, 'created')
-        format.html { redirect_to @post }
-        format.json { render json: @post, post: :created, location: @post }
-        flash[:success] = "Post was successfully created."
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, post: :unprocessable_entity }
-        flash.now[:danger] = "#{@post.errors.count} error(s) prohibited this post from being saved: #{@post.errors.full_messages.join(', ')}"
-      end
+      # ActiveRecord::Base.transaction do
+          # @post.image = nil rescue nil
+        begin
+          if @post.save
+            # @post.image = params[:post][:image]
+            # current_user.create_activity(@post, 'created')
+            format.html { render :show }
+            format.json { render json: @post, post: :created, location: @post }
+            # flash.now[:success] = "Post was successfully created."
+          else
+            @post.image_delete = "1"
+            @post.image = nil
+            format.html { render :new }
+            format.json { render json: @post.errors, post: :unprocessable_entity }
+            # flash.now[:danger] = "#{@post.errors.count} error(s) prohibited this post from being saved: #{@post.errors.full_messages.join(', ')}"
+          end
+        end
+      # end
     end
   end
 
   def update
     @post = current_user.posts.find(params[:id])
     @post.transaction do
-      @post.update_attributes(post_params)
-      current_user.create_activity(@post, 'updated')
-      unless @post.valid? || (@post.valid? && @post.image && !@post.image.valid?)
-        raise ActiveRecord::Rollback
+      begin
+        @post.update_attributes(post_params)
+        rescue ActiveRecord::RecordInvalid
+        current_user.create_activity(@post, 'updated')
+        unless @post.valid? || (@post.valid? && @post.image && !@post.image.valid?)
+          raise ActiveRecord::Rollback
+        end
       end
     end
     
@@ -168,6 +182,12 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:subject, :body, :image, :image_delete, :topic_id, :tag_list, :mood)
+    params.require(:post).permit(:subject, :body, :image_delete, :topic_id, :tag_list, :mood)
+  end
+
+  def dump_file
+    @post.image = nil
+    @post.image_file_name = nil
+    render :new
   end
 end

@@ -55,7 +55,8 @@ class VersionsController < ApplicationController
     post = Post.with_deleted.find(params[:id])
     post.really_destroy!
     flash.keep[:success] = "Post was permanently deleted."
-    redirect_to posts_path
+    redirectPath = request.env["HTTP_REFERER"] ||= posts_path
+    redirect_to redirectPath
   end
 
   # Restore a comment that has been deleted.
@@ -72,6 +73,15 @@ class VersionsController < ApplicationController
     comment = Comment.with_deleted.find(params[:id])
     comment.really_destroy!
     flash.keep[:success] = "Comment was permanently deleted."
+    redirectPath = request.env["HTTP_REFERER"] ||= posts_path
+    redirect_to redirectPath
+  end
+
+  def super_delete_all_comments
+    Comment.deleted.each do |c|
+      c.really_destroy!
+    end
+    flash.keep[:success] = "All soft deleted comments were permanently deleted."
     redirectPath = request.env["HTTP_REFERER"] ||= posts_path
     redirect_to redirectPath
   end

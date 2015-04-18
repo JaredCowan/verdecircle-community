@@ -4,6 +4,8 @@ class Post < ActiveRecord::Base
 
   default_scope -> { order('created_at DESC') }
 
+  # before_save :hash_filename
+
   validates :subject, presence: true,
             length: { within: 10..60,
             too_short: "must have be at least %{count} characters in length",
@@ -15,18 +17,23 @@ class Post < ActiveRecord::Base
   validates :topic_id, presence: true
 
   validates :tags, presence: true
+  validates :tag_list, presence: true
   validate :tag_length_error_validator
-
-  validate :is_user_spaming?, if: Proc.new { |c| c.user.is_admin? }, on: [:create]
 
   acts_as_votable
   has_paper_trail
   acts_as_paranoid
-  
+
+  # validate :is_user_spaming?, if: Proc.new { |c| c.user.is_admin? }, on: [:create]
+
   has_attached_file :image,
-    url: "/system/posts/images/:id/:style/:hash.:extension",
+    # path: "user-content/uploads/" << SecureRandom.urlsafe_base64(7, false) << ":class:id" << SecureRandom.urlsafe_base64(7, false) << "/:style/:hash.:extension",
+    path: "user-content/uploads/:class/:id/:style/:hash.:extension",
     hash_secret: "hashedSecretString",
-    preserve_files: "false",
+    preserve_files: "true",
+    storage: :fog,
+    fog_credentials: "#{Rails.root}/config/google_cloud.yml",
+    fog_directory: "verde-cdn",
     styles: {
       thumb:    ["100x100#", :png],
       small:    ["150x150>", :png],
@@ -59,6 +66,13 @@ class Post < ActiveRecord::Base
   before_save :format_post
 
   paginates_per 2
+
+  def hash_filename
+    if !(self.image && self.image_file_name.nil?)
+      ext = File.extname(self.image_file_name)
+      return self.image_file_name = SecureRandom.urlsafe_base64(40, false) + ext
+    end
+  end
 
   def image_delete
     @image_delete ||= "0"
@@ -114,7 +128,7 @@ class Post < ActiveRecord::Base
     reported_posts = Post.reported.where("created_at > ? AND votable_id IN (?)", Time.now - 2.days, user_posts.map(&:id))
     if user_posts.length >= 5 || reported_posts.length >= 3
       self.errors.clear
-      self.errors[:base] << "Our system has detected spam from your account. Please try again later."
+      self.errors[:post] << "Our system has detected spam from your account. Please try again later."
     end
   end
 

@@ -4,11 +4,11 @@ module Concerns::UserActivityConcern
   def create_activity(item, action)
     callingKlass = item.class.name
 
-    Activity.create(user_id: item.user_id,
-                    action: action,
-                    targetable_id: item.id,
-                    targetable_type: callingKlass
-    ) # End Create Activity
+    # Activity.create(user_id: item.user_id,
+    #                 action: action,
+    #                 targetable_id: item.id,
+    #                 targetable_type: callingKlass
+    # )
 
     # a = activity
     # u = User.find(a.user_id)

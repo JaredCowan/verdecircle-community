@@ -6,8 +6,8 @@ class CommentsController < ApplicationController
 
   def index
     # Created in order to handle renders from this controller, which produce URL 'root/posts/:id/comments'
-    post = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
-    redirect_to post
+    @post = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
+    redirect_to @post
   end
 
   def create

@@ -30,6 +30,7 @@ gem 'dalli' # memcached
 # gem 'schema_plus' # add better index and foreign key support
 gem 'jbuilder'
 gem 'rake', '>=10.3.2'
+gem 'fog' # File uploads to google cloud storage
 
 # Assets
 gem 'sass-rails'

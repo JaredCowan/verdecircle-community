@@ -1,4 +1,4 @@
-<%= simple_form_for(@post, html: { class: "form-group", multipart: true }) do |f| %>
+<%= simple_form_for(@post, html: { class: "form-group", multipart: false }) do |f| %>
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -8,7 +8,8 @@
       <%= f.input :subject %>
       <div class="row">
         <div class="col-lg-6">
-          <%= f.input :tag_list, wrapper_html: { class: ("has-error has-feedback" if @post.errors[:tags].any?) }, required: true %>
+          <%= f.input :tag_list, required: true %>
+          <%#= f.input :tag_list, wrapper_html: { class: ("has-error has-feedback" if @post.errors[:tags].any?) }, required: true %>
         </div>
         <div class="col-xs-12 col-sm-8 col-lg-4">
           <%= f.input :topic_id, collection: Topic.all.map {|n| [n.name.titleize, n.id]}, include_blank: false, required: true %>
@@ -23,14 +24,14 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <%= f.label f.object.image? ? "Replace Image" : "Upload Image" %>
+      <%#= f.label f.object.image? ? "Replace Image" : "Upload Image" %>
     </div>
     <div class="panel-body">
       <%= f.file_field :image %>
     </div>
   </div>
 
-  <% if f.object.image? %>
+  <% if @post.image? %>
     <div class="panel panel-default">
       <div class="panel-heading">
        <div class="checkbox">
@@ -38,7 +39,9 @@
         </div>
       </div>
       <div class="panel-body">
-        <%= image_tag(f.object.image.url, class: "img-responsive img-rounded", alt: "Responsive image") %>
+        <%# img = "#{f.object.image.url}" %>
+        <%= image_tag(@post.image.url, class: "img-responsive img-rounded", alt: "Responsive image") %>
+        <%#= image_tag("//verde-cdn.storage.googleapis.com/user-content/uploads/posts/947/original/256977d7fca93e69bc2671ffa8d4f216d760a1a3.png", class: "img-responsive img-rounded", alt: "Responsive image") %>
       </div>
     </div>
   <% end %>
@@ -47,3 +50,5 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+<%= debug(params) %>
+<%= debug(@post) %>
