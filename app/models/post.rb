@@ -16,9 +16,8 @@ class Post < ActiveRecord::Base
 
   validates :topic_id, presence: true
 
-  validates :tags, presence: true
   validates :tag_list, presence: true
-  validate :tag_length_error_validator
+  # validate :tag_length_error_validator
 
   acts_as_votable
   has_paper_trail
@@ -27,7 +26,6 @@ class Post < ActiveRecord::Base
   # validate :is_user_spaming?, if: Proc.new { |c| c.user.is_admin? }, on: [:create]
 
   has_attached_file :image,
-    # path: "user-content/uploads/" << SecureRandom.urlsafe_base64(7, false) << ":class:id" << SecureRandom.urlsafe_base64(7, false) << "/:style/:hash.:extension",
     path: "user-content/uploads/:class/:id/:style/:hash.:extension",
     hash_secret: "hashedSecretString",
     preserve_files: "true",
@@ -154,7 +152,7 @@ class Post < ActiveRecord::Base
 
     errors_array.push("Please limit your tags count to only 5 (You currently have '#{tags.length}')") if max_tags_count_per_post_error
     
-    self.errors[:tags] << "have #{errors_array.length}" + "\serror".pluralize(errors_array.length) unless errors_array.empty?
+    self.errors[:tag] << "have #{errors_array.length}" + "\serror".pluralize(errors_array.length) unless errors_array.empty?
     errors_array.each {|e| self.errors[:base] << "#{e}"}
   end
 end
