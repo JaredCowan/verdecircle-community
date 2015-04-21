@@ -6,7 +6,9 @@
 
 <% if user_signed_in? %>
   <div class="form-group">
-    <%= link_to("New Post", new_post_path , class: "btn btn-primary") %>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newPost">
+      New Post
+    </button>
   </div>
   <br>
 <% end %>
@@ -24,3 +26,17 @@
 <% if !params[:tag] %>
   <%= paginate @posts %>
 <% end %>
+
+<div class="modal fade" id="newPost" tabindex="-1" role="dialog" aria-labelledby="newPostModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="newPostModal">&nbsp;</h4>
+      </div>
+      <div class="modal-body">
+        <%= render "form" %>
+      </div>
+    </div>
+  </div>
+</div>
