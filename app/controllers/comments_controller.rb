@@ -18,11 +18,11 @@ class CommentsController < ApplicationController
 
     if @comment.save
       Notifyer::Notification.notify_all(@comment, @post)
-      flash.now[:success] = "Your comment has posted"
+      # flash.now[:success] = "Your comment has posted"
       @new_comment = @post.comments.new
       respond_to do |format|
         format.html do
-          flash[:success] = 'Your comment has been posted.'
+          # flash[:success] = 'Your comment has been posted.'
           redirect_to @post
         end
         format.js
@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
     @comment.destroy
     respond_to do |format|
       format.html do
-        flash.keep[:success] = 'Comment deleted.'
+        # flash.keep[:success] = 'Comment deleted.'
         redirect_to @post
       end
       format.js

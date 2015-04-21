@@ -35,6 +35,7 @@
 //= require imagesloaded
 //= require avatar.errors
 
+//= require verdecircle/report_link
 //= require verdecircle/navbar
 //= require verdecircle/messaging
 //= require verdecircle/userscripts
@@ -88,7 +89,6 @@ var ready = function() {
       });
   });
 }
-
 
 $(document).on('page:load', ready);
 

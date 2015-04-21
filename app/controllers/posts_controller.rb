@@ -67,13 +67,12 @@ class PostsController < ApplicationController
     @post.subject = ActionController::Base.helpers.strip_tags(@post.subject)
     @post.body    = ActionController::Base.helpers.strip_tags(@post.body)
 
-
     respond_to do |format|
       if @post.save
         current_user.create_activity(@post, 'created')
-        format.html { render :show }
+        format.html { redirect_to @post }
         format.json { render json: @post, post: :created, location: @post }
-        flash.now[:success] = "Post was successfully created."
+        flash[:success] = "Post was successfully created."
       else
         @post.image_delete = "1"
         @post.image = nil

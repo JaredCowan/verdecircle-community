@@ -18,6 +18,11 @@
     <%= render partial: "replies/reply", collection: comment.replies, locals: {comment: comment} %>
 
     <% if user_signed_in? %>
+      <%= vote_logic_helper(comment) %>
+      <% if comment.user == current_user %>
+        <%= link_to '', post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Delete comment?', confirm_modal: "#delete-post" }, class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true, title: 'Delete comment', rel: 'tooltip' %>
+      <% end %>
+
       <div id="reply-form<%= comment.id %>">
         <%= render 'replies/reply_form', locals: {comment: comment} %>
       </div>
@@ -40,12 +45,6 @@
           <%#= link_to "Undislike", undislike_post_comment_path(comment.post, comment), method: :put %>
         <%# end %>
       <%# end %>
-  <%# if signed_in? && comment.user_id == current_user.id %>
-      <%#= link_to '', post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Delete comment?' },
-                  class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true,
-                  title: 'Delete comment', rel: 'tooltip' %>
-  <%# end %>
-  <%= vote_logic_helper(comment) %>
   <%#= test_logic(comment) %>
   <hr>
 <%# end %>

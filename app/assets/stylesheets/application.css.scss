@@ -203,17 +203,16 @@ textarea.form-control {
     opacity: 1;
   }
 }
-
-.navbar-inverse li {
-  > a {
+.navbar-inverse {
+  .dropdown-menu {
+    background-color: $gray-dark;
+    li > a:not(.btn) {
     color: $white-base;
     &:hover {
       color: $black-base;
       background-color: $verde-green;
     }
   }
-  > .dropdown-menu {
-    background-color: $gray-dark;
   }
 }
 
