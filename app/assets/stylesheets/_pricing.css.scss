@@ -38,9 +38,9 @@
         line-height: 40px;
         margin-bottom: 0;
         cursor: pointer;
-        font-size: 13px;
+        font-size: $font-size-small;
         color: $gray-dark;
-        font-weight: 500;
+        font-weight: $font-weight-heavy;
       }
     }
   }
@@ -55,13 +55,13 @@
   -webkit-border-radius: 5px;
   overflow: hidden;
   perspective: 1000;
-  transition: 0.6s;
+  transition: 0.5s;
   transform-style: preserve-3d;
   &.monthly {
-    animation: cd-rotate-monthly 0.6s;
+    animation: cd-rotate-monthly 0.5s;
   }
   &.yearly {
-    animation: cd-rotate-yearly 0.6s;
+    animation: cd-rotate-yearly 0.5s;
   }
 }
 
@@ -138,6 +138,15 @@
   font-size: 18px;
   font-weight: 300;
   padding-top: 15px;
+}
+
+.pricing-head h5 {
+  width: 200px;
+  margin: -45px auto 0;
+  padding-top: 3px;
+  padding-right: 15px;
+  color: $gray-darken;
+  text-align: right;
 }
 
 .pricing-head > .monthly-pricing,
@@ -249,11 +258,13 @@
   padding: 40px 0;
   background-color: #2c3bad;
 }
-.pricing-head h5 {
-  margin-top: -45px;
-  margin-right: -125px;
-  color: #777;
-}
+// .pricing-head h5 {
+//   margin-top: -45px;
+//   margin-right: -125px;
+//   padding-top: 3px;
+//   padding-right: 15px;
+//   color: #777;
+// }
 .most-popular .pricing-head  h5 {
   margin: -45px auto 0;
   width: 200px;

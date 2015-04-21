@@ -14,7 +14,6 @@ $(function() {
 });
 
 
-
 // $(function() {
 //   var pusher = new Pusher('136065ba56ec3683eddd');
 //   var notifications = pusher.subscribe('notifications');

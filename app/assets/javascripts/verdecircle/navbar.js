@@ -100,5 +100,6 @@ function mobileNavbar() {
     lastScrollTop = _scrollTop;
   }
 };
-
-$(document).on("ready page:load", mobileNavbar);
+if ($("html").hasClass("mobile")) {
+  $(document).on("ready page:load", mobileNavbar);
+}
