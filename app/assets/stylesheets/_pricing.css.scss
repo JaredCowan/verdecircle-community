@@ -1,3 +1,51 @@
+#pricing-page {
+  .pricing-switcher {
+    margin: 10px auto 30px;
+    text-align: center;
+    user-select: none;
+    .fieldset {
+      display: inline-block;
+      position: relative;
+      padding: 2px;
+      border: 1px solid $verde-blue-light; 
+      border-radius: $border-radius-large;
+      > input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+      }
+      .price-switch-btn {
+        position: absolute;
+        top: 2px;
+        height: 40px;
+        width: 90px;
+        background-color: $verde-green;
+        border-radius: $border-radius-large;
+        transition: all 0.6s;
+        &.monthly {
+          left: 2px;
+        }
+        &.yearly {
+          left: 92px;
+        }
+      }
+      > label {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        float: left;
+        width: 90px;
+        height: 40px;
+        line-height: 40px;
+        margin-bottom: 0;
+        cursor: pointer;
+        font-size: 13px;
+        color: $gray-dark;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
 .pricing-table {
   background: #eeeeee;
   text-align: center;
@@ -6,6 +54,39 @@
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   overflow: hidden;
+  perspective: 1000;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  &.monthly {
+    animation: cd-rotate-monthly 0.6s;
+  }
+  &.yearly {
+    animation: cd-rotate-yearly 0.6s;
+  }
+}
+
+@keyframes cd-rotate-monthly {
+  0% {
+    transform: perspective(2000px) rotateY(180deg);
+  }
+  70% {
+    transform: perspective(2000px) rotateY(-20deg);
+  }
+  100% {
+    transform: perspective(2000px) rotateY(0);
+  }
+}
+
+@keyframes cd-rotate-yearly {
+  0% {
+    transform: perspective(1000px) rotateY(-180deg);
+  }
+  70% {
+    transform: perspective(1000px) rotateY(20deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(0);
+  }
 }
 
 .pricing-table.most-popular {
@@ -59,12 +140,16 @@
   padding-top: 15px;
 }
 
-.pricing-head h2 {
+.pricing-head > .monthly-pricing,
+.pricing-head > .yearly-pricing {
   padding: 30px 0;
-  background: #777777;
+  background: $verde-blue;
   color: #fff;
   font-size: 50px;
   font-weight: 100;
+}
+.pricing-head > .yearly-pricing {
+  display: none;
 }
 
 .pricing-table ul {
