@@ -204,3 +204,16 @@ textarea.form-control {
   }
 }
 
+.navbar-inverse li {
+  > a {
+    color: $white-base;
+    &:hover {
+      color: $black-base;
+      background-color: $verde-green;
+    }
+  }
+  > .dropdown-menu {
+    background-color: $gray-dark;
+  }
+}
+

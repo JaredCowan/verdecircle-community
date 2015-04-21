@@ -2,7 +2,7 @@
   <% @notifications = Notifyer::Notification.find_by_sql("SELECT * FROM notifications FULL OUTER JOIN users ON notifications.user_id=users.id WHERE users.id IN ('" + current_user.id.to_s  + "')") %>
   <% @unread = @notifications.map(&:is_read).reject {|n| n == true}.count %>
 <% end %>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="navbar-header">
     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
       <span class="sr-only">Toggle navigation</span>
