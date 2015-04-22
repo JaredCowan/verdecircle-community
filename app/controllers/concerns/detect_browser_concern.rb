@@ -19,7 +19,7 @@ module DetectBrowserConcern
       agent = request.headers["HTTP_USER_AGENT"].downcase
 
       # Default layout
-      @agent_view = "application"
+      @agent_view = "desktop"
 
       # Check for user_agent match in MOBILE_BROWSERS array
       # 
@@ -31,7 +31,7 @@ module DetectBrowserConcern
       end
 
       # Assign default if @agent_view is still not defined
-      @agent_view ||= "application"
+      @agent_view ||= "desktop"
 
       # Just for testing
       case @agent_view
@@ -47,7 +47,7 @@ module DetectBrowserConcern
         when "mobile"
           return "mobile"
         else
-          return "application"
+          return "desktop"
       end
     end
   # End Private Methods

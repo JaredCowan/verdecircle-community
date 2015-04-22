@@ -2,25 +2,6 @@
 @import "pricing";
 @import "blog";
 
-.btn-verde-green {
-  color: #fff;
-  background-color: $verde-green;
-  border-color: darken($verde-green, 10%);
-  &:visited, &:hover, &:active, &:focus {
-    color: #fff;
-    background-color: lighten($verde-green, 10%);
-  }
-}
-.btn-verde-blue {
-  color: #fff;
-  background-color: $verde-blue;
-  border-color: darken($verde-blue, 10%);
-  &:visited, &:hover, &:active, &:focus {
-    color: #fff;
-    background-color: lighten($verde-blue, 10%);
-  }
-}
-
 .intro-icon-wrapper {
   max-width: 755px;
   margin-left: auto;

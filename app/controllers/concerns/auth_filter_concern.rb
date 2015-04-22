@@ -9,7 +9,7 @@ module AuthFilterConcern
 
     def check_authorization
       user_logged_in = current_user.nil?
-      action = params[:action]
+      action         = params[:action]
 
       if user_logged_in && action == ("profile" || "index" || "show")
         return true

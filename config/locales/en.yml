@@ -6,7 +6,7 @@ en:
   # l Time.now, format: :post
   time:
     formats:
-      post_time: "%l:%M%P %Z"
+      post_time: "%l:%M%P"
       post_date: "%m/%d/%y"
 
   # Pluralization for comments link

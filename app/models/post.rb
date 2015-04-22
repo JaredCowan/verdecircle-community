@@ -57,7 +57,7 @@ class Post < ActiveRecord::Base
   has_many :votes, class_name: 'ActsAsVotable::Vote', foreign_key: 'votable_id', dependent: :destroy
   has_many :reported, -> { where votes: { vote_scope: 'reported'} }, class_name: 'ActsAsVotable::Vote', foreign_key: 'votable_id', dependent: :destroy
   has_many :versions, -> { where versions: { item_type: 'Post'} }, class_name: 'PaperTrail::Version', foreign_key: 'item_id', dependent: :destroy
-  
+
   scope :reported, lambda { ActsAsVotable::Vote.where(vote_scope: 'reported') }
 
   before_save :destroy_image?

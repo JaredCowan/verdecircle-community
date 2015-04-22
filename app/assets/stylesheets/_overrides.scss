@@ -133,7 +133,7 @@ body {
   }
 }
 html.desktop .report-dropdown > .dropdown-menu {
-  width: 220px;
+  min-width: 220px;
 }
 html.mobile .report-dropdown > .dropdown-menu {
   width: 100%;
@@ -153,7 +153,7 @@ html.desktop .test-popup {
     height: 56px;
     padding: 11px;
     margin: 0;
-    width:100%;
+    width: 100%;
     background-color: #323232;
     .test-popup-header-text {
       display: inline;
@@ -192,4 +192,42 @@ html.desktop .test-popup {
   }
 }
 
+.btn {
+  color: $white-base;
+  font-family: $font-family-sans-serif;
+  font-weight: $font-weight-heavy;
+  &:hover, &:focus, &:active {
+    color: $white-base;
+  }
+}
 
+.btn-primary {
+  background-color: $verde-navy-blue;
+  border-color: $verde-navy-blue;
+  &:hover, &:focus, &:active {
+    background-color: $verde-navy-blue-dark;
+  }
+}
+
+.btn-success {
+  background-color: $verde-success;
+  border-color: $verde-success-dark;
+  &:hover, &:focus, &:active {
+    background-color: $verde-success-darker;
+  }
+}
+
+.btn-verde-green {
+  background-color: $verde-green;
+  border-color: $verde-green-dark;
+  &:visited, &:hover, &:active, &:focus {
+    background-color: $verde-green-dark;
+  }
+}
+.btn-verde-blue {
+  background-color: $verde-blue;
+  border-color: $verde-blue-light;
+  &:visited, &:hover, &:active, &:focus {
+    background-color: $verde-blue-light;
+  }
+}

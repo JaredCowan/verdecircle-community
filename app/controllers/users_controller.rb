@@ -30,8 +30,6 @@ class UsersController < ApplicationController
   def dashboard
     if user_signed_in?
       @user = User.includes(:posts, :comments, :favorites, posts: [{comments: :votes}, :votes]).find(current_user)
-      p
-
     else
       redirect_to :user_home
     end

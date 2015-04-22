@@ -16,6 +16,14 @@ module ApplicationHelper
     end
   end
 
+  def is_desktop?
+    return @agent_view == "desktop" ? true : false if defined? @agent_view
+  end
+
+  def is_mobile?
+    return !is_desktop? if defined? @agent_view
+  end
+
   def brand_name
     return "#{I18n.t('brand.name')}"
   end

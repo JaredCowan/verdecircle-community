@@ -7,8 +7,8 @@ class PostsController < ApplicationController
   include PostsLikeableHelper
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  rescue_from Excon::Errors::NotFound, with: :dump_file
-  rescue_from TypeError, with: :dump_file
+  # rescue_from Excon::Errors::NotFound, with: :dump_file
+  # rescue_from TypeError, with: :dump_file
 
   def index
     if params[:tag]
@@ -35,6 +35,7 @@ class PostsController < ApplicationController
     @comments    = @post.comments.includes({user: :votes})
     @likes       = query_votes(@post)
     @new_comment = @post.comments.new
+
 
     respond_to do |format|
       format.html

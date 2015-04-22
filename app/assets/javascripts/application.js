@@ -78,16 +78,23 @@ var ready = function() {
   $("#pagepile-loading").fadeOut(1500, function() {
     $(this).remove();
   });
+
   formHasErrorWithFeedback();
-  $("textarea.form-control")
-    .on("keydown focus blur", function(e) {
-      var $this     = $(this);
-      $this[0].rows = $this[0].value.split("\n").length + 2;
-      var lines = $this[0].value.split("\n");
-      $.each(lines, function(i, v) {
-        $this[0].rows += Math.floor(v.length / ($this.width() / 6.7825));
-      });
+
+  $("textarea.form-control").on("keydown focus blur", function(e) {
+    var $this     = $(this),
+        _lines    = $this[0].value.split("\n"),
+        _rows     = _lines.length + 2;
+    $.each(_lines, function(i, v) {
+      _rows += Math.floor(v.length / ($this.width() / 6.7825));
+    });
   });
+
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+  }, 5000);
 }
 
 $(document).on('page:load', ready);
