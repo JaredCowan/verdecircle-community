@@ -8,11 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="<%= brand_name %>">
     <meta name="author" content="<%= brand_name %>">
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : I18n.t('brand.name') %>">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : I18n.t('brand.company') %>">
     <meta property="og:type" content="website">
     <!-- <meta property="og:image" content=""> -->
-    <meta property="og:site_name" content="<%= brand_name %>">
+    <meta property="og:site_name" content="<%= I18n.t('brand.company') %>">
     <meta name="robots" content="index, follow">
+    <link rel="image_src" href="<%= image_url 'images/verde-circle-logo-name-centered.png' %>">
+    <link rel="image_src" href="<%= image_url 'images/verde-circle-icon.png' %>">
+    <link rel="image_src" href="<%= image_url 'images/thriii-circle-icon.png' %>">
     <title><%= content_for?(:title) ? yield(:title) : view_bag_title %></title>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => :true %>
     <%= stylesheet_link_tag 'verdecircle', media: 'all', 'data-turbolinks-track' => :true %>

@@ -1,0 +1,4 @@
+var $comments_list = $('#comments-list');
+var $comment_form = $('#comment-form');
+$comments_list.html('<%= escape_javascript(render partial: "comment_index") %>');
+$comment_form.show();

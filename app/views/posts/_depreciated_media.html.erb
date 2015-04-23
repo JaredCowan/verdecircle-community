@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="post-wrapper" id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-feed="{<%= %Q("id":"#{post.id}","subject":"#{post.subject.parameterize}","user_id":"#{post.user_id}","topic":"#{post.topic_id}","votes":"#{post.cached_votes_total}") %>}">
+      <% if user_signed_in? %>
+        <div class="dropdown report-dropdown">
+          <a href="javascript:;" title="flag content as inappropriate" class="report-link dropdown-toggle" id="reportDropdownMenu" data-post-id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-toggle="dropdown" aria-expanded="true">
+            <i class="fa fa-flag"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right animated flipInX" role="menu" aria-labelledby="reportDropdownMenu">
+            <li role="presentation" class="dropdown-header text-center">
+              <i class="fa fa-cog fa-spin"></i>&nbsp;Options
+            </li>
+            <div class="list-group report-link-li">
+              <a role="menuitem" href="javascript:;" tabindex="-1" class="list-group-item report-menu-option">
+                <h5 class="list-group-item-heading">Report This</h5>
+                <p class="list-group-item-text">View More Options &hellip;</p>
+              </a>
+            </div>
+          </ul>
+        </div>
+      <% end %>
+      <div class="post-heading">
+        <div class="info-card">
+          <span class="avatar">
+            <a href="<%= profile_url(post.user.username) %>" data-hovercard="<%= post.user.username %>">
+              <%= image_tag post.user.image_url, alt: "user avatar image" %>
+            </a>
+          </span>
+          <span class="username">
+            <a href="<%= profile_url(post.user.username) %>" data-hovercard="<%= post.user.username %>">
+              <%= post.user.username.titleize %>
+            </a>
+          </span>
+          <span class="date">
+            <%= l post.created_at, format: :post_date %>
+          </span>
+          <br>
+          <span class="time">
+            <%= l post.created_at, format: :post_time %>
+          </span>
+        </div> <!-- END info-card -->
+        <%= link_to post.subject.titleize, post_path(post), class: "post-title", title: "#{truncate(post.body, length: 200)}" %>
+        <br>
+        <span class="post-meta">
+          <span class="category">
+            Category:
+            <%= link_to post.topic.pretty_name, topic_path(post.topic), title: "view all post in #{post.topic.pretty_name} category" %>
+          </span>
+          <br>
+          <span class="tags">
+            Tags:
+            <%= sanitize(post.tags.map { |t| link_to(t.name, tag_path(t.name), title: "view all post tagged with #{t.name}") }.uniq.join ', ') %>
+          </span>
+        </span>
+      </div> <!-- END post-heading -->
+      <div class="post-body">
+        <article>
+          <%= truncate(post.body, length: 200) { link_to " Continue Reading", post_path(post), title: "continue reading full post"} %>
+        </article>
+      </div>
+      <div class="clearfix"></div>
+      <div class="post-footer">
+        <span class="votes">
+          <i class="fa fa-arrow-up"></i>
+          <%= post.cached_votes_up %>
+        </span>
+        <span class="favorites">
+          <i class="fa fa-star"></i>
+          <%= post.favorites.length %>
+        </span>
+        <span class="comments">
+          <i class="fa fa-comment"></i>
+          <a href="javascript:;" title="view comments for post">
+            <%= link_to I18n.t("comments", count: post.comments.length), post %>
+          </a>
+        </span>
+      </div>
+    </div> <!-- END post-wrapper -->
+  </div> <!-- END col -->
+</div> <!-- END row -->

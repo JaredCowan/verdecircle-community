@@ -50,11 +50,6 @@
       </h4>
   </div>
 </div>
-<% if user_signed_in? && @post.comments.length > 15 %>
-  <div id="comment-form">
-    <%= render 'comments/comment_form' %>
-  </div>
-<% end %>
 
 <div id="comments-list">
   <%= render partial: @post.reload.comments %>

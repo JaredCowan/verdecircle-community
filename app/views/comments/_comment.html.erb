@@ -14,6 +14,7 @@
   <h6 id="replies-count">
     <%= pluralize(comment.replies.length, 'Reply') %>
   </h6>
+  <%= link_to "Show Replies", post_comment_path(@post, comment), remote: true %>
   <div class="well replies" id="replies-list<%= comment.id %>">
     <%= render partial: "replies/reply", collection: comment.replies, locals: {comment: comment} %>
 

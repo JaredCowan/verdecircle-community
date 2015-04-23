@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <div class="post-wrapper" id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-feed="{<%= %Q("id":"#{post.id}","subject":"#{post.subject.parameterize}","user_id":"#{post.user_id}","topic":"#{post.topic_id}","votes":"#{post.cached_votes_total}") %>}">
+    <div class="post-row post-wrapper-v2" id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-feed="{<%= %Q("id":"#{post.id}","subject":"#{post.subject.parameterize}","user_id":"#{post.user_id}","topic":"#{post.topic_id}","votes":"#{post.cached_votes_total}") %>}">
       <% if user_signed_in? %>
         <div class="dropdown report-dropdown">
           <a href="javascript:;" title="flag content as inappropriate" class="report-link dropdown-toggle" id="reportDropdownMenu" data-post-id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-toggle="dropdown" aria-expanded="true">
@@ -19,62 +19,56 @@
           </ul>
         </div>
       <% end %>
-      <div class="post-heading">
-        <div class="info-card">
-          <span class="avatar">
-            <a href="<%= profile_url(post.user.username) %>" data-hovercard="<%= post.user.username %>">
-              <%= image_tag post.user.image_url, alt: "user avatar image" %>
-            </a>
-          </span>
-          <span class="username">
-            <a href="<%= profile_url(post.user.username) %>" data-hovercard="<%= post.user.username %>">
-              <%= post.user.username.titleize %>
-            </a>
-          </span>
-          <span class="date">
+      <div class="post-meta col-xs-2">
+        <%= link_to(image_tag(post.user.image_url, alt: "user avatar image"), profile_url(post.user.username), data: { hovercard: "#{post.user.username}"}, class: "post-avatar") %>
+        <div class="date">
             <%= l post.created_at, format: :post_date %>
-          </span>
-          <br>
-          <span class="time">
-            <%= l post.created_at, format: :post_time %>
-          </span>
-        </div> <!-- END info-card -->
-        <%= link_to post.subject.titleize, post_path(post), class: "post-title", title: "#{truncate(post.body, length: 200)}" %>
-        <br>
-        <span class="post-meta">
-          <span class="category">
-            Category:
-            <%= link_to post.topic.pretty_name, topic_path(post.topic), title: "view all post in #{post.topic.pretty_name} category" %>
-          </span>
-          <br>
-          <span class="tags">
-            Tags:
-            <%= sanitize(post.tags.map { |t| link_to(t.name, tag_path(t.name), title: "view all post tagged with #{t.name}") }.uniq.join ', ') %>
-          </span>
-        </span>
-      </div> <!-- END post-heading -->
-      <div class="post-body">
-        <article>
-          <%= truncate(post.body, length: 200) { link_to " Continue Reading", post_path(post), title: "continue reading full post"} %>
-        </article>
+        </div>
+        <div class="time">
+          <%= l post.created_at, format: :post_time %>
+        </div>
       </div>
-      <div class="clearfix"></div>
-      <div class="post-footer">
-        <span class="votes">
-          <i class="fa fa-arrow-up"></i>
-          <%= post.cached_votes_up %>
-        </span>
-        <span class="favorites">
-          <i class="fa fa-star"></i>
-          <%= post.favorites.length %>
-        </span>
-        <span class="comments">
-          <i class="fa fa-comment"></i>
-          <a href="javascript:;" title="view comments for post">
-            <%= link_to I18n.t("comments", count: post.comments.length), post %>
-          </a>
-        </span>
+      <div class="post-body col-xs-9">
+        <div class="post-subject">
+          <h3>
+            <%= link_to post.subject.titleize, post_path(post), class: "post-title", title: "#{truncate(post.body, length: 200)}" %>
+          </h3>
+        </div>
+        <div class="post-meta-extended">
+          <ul class="list-inline">
+            <li class="post-username">
+              <%= link_to(post.user.username.titleize, profile_url(post.user.username), data: { hovercard: "#{post.user.username}"}) %>
+            </li>
+            <span>&ndash;</span>
+            <li class="post-user-points" data-toggle="tooltip" data-trigger="hover focus" data-placement="top" title="Points for <%= post.user.username.titleize %>">
+              <i class="fa fa-trophy"></i> <%= number_with_delimiter(rand(1500), delimiter: ",") %>
+            </li>
+            <span>&ndash;</span>
+            <li class="post-category">
+              <%= link_to post.topic.pretty_name, topic_path(post.topic), data: { toggle: "tooltip", title: "View all post in #{post.topic.pretty_name} category", trigger: "hover focus", placement: "top"} %>
+            </li>
+          </ul>
+          <div class="post-tags">
+            <%= post.tags.map { |t| link_to(t.name, tag_path(t.name), data: { toggle: "tooltip", title: "View all posts tagged with #{t.name}", trigger: "hover focus", placement: "top"})}.uniq.join(" ").html_safe %>
+          </div>
+        </div>
       </div>
-    </div> <!-- END post-wrapper -->
-  </div> <!-- END col -->
-</div> <!-- END row -->
+      <div class="col-xs-12 post-media">
+        <%= truncate(post.body, length: 300) { link_to "\sContinue Reading", post_path(post), title: "Continue reading full post"} %>
+      </div>
+      <div class="col-xs-12 post-footer">
+        <ul class="list-inline">
+          <li class="post-comments">
+            <i class="fa fa-comments"></i> <%= link_to(I18n.t("comments", count: post.comments.length + post.comments.map {|r| r.replies[0] }.compact.length), post, data: { html: true, toggle: "#{post.comments.length > 0 ? 'tooltip' : ''}", title: "<ul class='list-unstyled'> #{post.comments.limit(8).map {|c| c.user.username}.uniq.each {|un| "<li>#{un}</li>"}.join('<br>')} </ul>", trigger: "hover focus", placement: "bottom"}) %>
+          </li>
+          <li class="post-votes" data-toggle="tooltip" data-trigger="hover focus" data-placement="bottom" title="<%= pluralize(post.cached_votes_total, 'person') %> have voted">
+            <i class="fa fa-thumbs-up"></i> <%= post.cached_votes_total %>
+          </li>
+          <li class="post-favorites" data-toggle="tooltip" data-trigger="hover focus" data-placement="bottom" title="Bookmarked by <%= pluralize(post.favorites.length, 'person') %>">
+            <i class="fa fa-bookmark"></i> <%= post.favorites.length %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

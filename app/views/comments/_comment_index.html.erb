@@ -1,0 +1,6 @@
+<% @comments.each do |comment| %>
+  <%= div_for comment do %>
+    <%= link_to "Show Replies", post_comment_path(@post, comment), remote: true %>
+    <%= debug(comment) %>
+  <% end %>
+<% end %>

@@ -6,8 +6,15 @@ class CommentsController < ApplicationController
 
   def index
     # Created in order to handle renders from this controller, which produce URL 'root/posts/:id/comments'
-    @post = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
-    redirect_to @post
+    @post     = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
+    @comments = @post.comments.includes({user: :votes})
+    # redirect_to @post
+
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render json: @comments }
+    end
   end
 
   def create
@@ -18,14 +25,11 @@ class CommentsController < ApplicationController
 
     if @comment.save
       Notifyer::Notification.notify_all(@comment, @post)
-      # flash.now[:success] = "Your comment has posted"
       @new_comment = @post.comments.new
       respond_to do |format|
-        format.html do
-          # flash[:success] = 'Your comment has been posted.'
-          redirect_to @post
-        end
+        format.html { redirect_to @post }
         format.js
+        format.json { render json: @post }
       end
     else
       @new_comment = @comment
@@ -34,8 +38,29 @@ class CommentsController < ApplicationController
       respond_to do |format|
         format.html { render @post }
         format.js { render action: 'failed_save'}
+        format.json { render json: @post.errors, post: :unprocessable_entity }
       end
     end
+  end
+
+  def show
+    @post        = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
+    @comment     = @post.comments.includes({user: :votes}).find(params[:id])
+    @comments    = @post.comments.includes({user: :votes})
+    @replies     = @comment.replies
+
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render json: @comment }
+    end
+
+    rescue ActiveRecord::RecordNotFound
+      respond_to do |format|
+        format.html { redirect_to @post }
+        format.json { render text: "Not Found", comment: :unprocessable_entity }
+        flash.keep[:danger] = "Sorry, this comment has been deleted or has moved"
+      end
   end
 
   def destroy
@@ -44,7 +69,6 @@ class CommentsController < ApplicationController
     @comment.destroy
     respond_to do |format|
       format.html do
-        # flash.keep[:success] = 'Comment deleted.'
         redirect_to @post
       end
       format.js
