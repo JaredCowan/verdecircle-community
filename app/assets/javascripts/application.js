@@ -16,6 +16,8 @@
  * Bootstrap
 */
 //= require depend/bootstrap/bootstrap
+//= require depend/scroll
+//= require verdecircle/load_posts
  
 //=require jquery.turbolinks 
 //=require turbolinks
@@ -151,7 +153,16 @@ $(".form-control").on("mouseover hover focus", function(e) {
   });
 });
 
-
-
-
+function ajaxRequestSent() {
+  $("a[data-remote]")
+    .on('ajax:before', function(e){
+      $(e.currentTarget).find("i").remove();
+      $(e.currentTarget).append(" <i class='fa fa-spinner fa-spin'></i>");
+    })
+    .on('ajax:error', function(e){
+      $(e.currentTarget).find("i").remove();
+      $(e.currentTarget).append(" <i class='fa fa-exclamation-triangle'></i>");
+    });
+} 
+$(document).on("ready page:update", ajaxRequestSent);
 

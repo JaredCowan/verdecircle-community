@@ -63,7 +63,7 @@ class Post < ActiveRecord::Base
   before_save :destroy_image?
   before_save :format_post
 
-  paginates_per 2
+  paginates_per 10
 
   def hash_filename
     if !(self.image && self.image_file_name.nil?)

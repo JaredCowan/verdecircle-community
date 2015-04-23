@@ -36,7 +36,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.use :min_max
     b.use :maxlength
-    b.optional :placeholder
+    b.use :placeholder
 
     b.optional :pattern
     b.optional :readonly
@@ -55,7 +55,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.use :min_max
     b.use :maxlength
-    b.optional :placeholder
+    b.use :placeholder
 
     b.optional :pattern
     b.optional :readonly
@@ -68,7 +68,7 @@ SimpleForm.setup do |config|
 
   config.wrappers :prepend, tag: 'div', class: 'form-group', error_class: 'has-error has-feedback' do |b|
     b.use :html5
-    b.optional :placeholder
+    b.use :placeholder
     b.wrapper tag: 'div', class: 'controls' do |input|
       input.wrapper tag: 'div', class: 'input-group' do |prepend|
         prepend.use :input

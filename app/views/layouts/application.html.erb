@@ -11,6 +11,7 @@
     <meta property="og:type" content="website">
     <!-- <meta property="og:image" content=""> -->
     <meta property="og:site_name" content="<%= brand_name %>">
+    <link rel="image_src" href="<%= image_url 'images/verde-circle-logo-name-centered.png' %>">
     <meta name="robots" content="index, follow">
     <title><%= content_for?(:title) ? yield(:title) : view_bag_title %></title>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>

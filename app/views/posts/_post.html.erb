@@ -1,21 +1,74 @@
-<% view = params[:tag] ? @posttag : @posts %>
-
-<% if user_signed_in? %>
-  <div class="form-group">
-    <%= link_to("New Post", new_post_path , class: "btn btn-primary") %>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="post-row post-wrapper-v2" id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-feed="{<%= %Q("id":"#{post.id}","subject":"#{post.subject.parameterize}","user_id":"#{post.user_id}","topic":"#{post.topic_id}","votes":"#{post.cached_votes_total}") %>}">
+      <% if user_signed_in? %>
+        <div class="dropdown report-dropdown">
+          <a href="javascript:;" title="flag content as inappropriate" class="report-link dropdown-toggle" id="reportDropdownMenu" data-post-id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-toggle="dropdown" aria-expanded="true">
+            <i class="fa fa-flag"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right animated flipInX" role="menu" aria-labelledby="reportDropdownMenu">
+            <li role="presentation" class="dropdown-header text-center">
+              <i class="fa fa-cog fa-spin"></i>&nbsp;Options
+            </li>
+            <div class="list-group report-link-li">
+              <a role="menuitem" href="javascript:;" tabindex="-1" class="list-group-item report-menu-option">
+                <h5 class="list-group-item-heading">Report This</h5>
+                <p class="list-group-item-text">View More Options &hellip;</p>
+              </a>
+            </div>
+          </ul>
+        </div>
+      <% end %>
+      <div class="post-meta col-xs-2">
+        <%= link_to(image_tag(post.user.image_url, alt: "user avatar image"), profile_url(post.user.username), data: { hovercard: "#{post.user.username}"}, class: "post-avatar") %>
+        <div class="date">
+            <%= l post.created_at, format: :post_date %>
+        </div>
+        <div class="time">
+          <%= l post.created_at, format: :post_time %>
+        </div>
+      </div>
+      <div class="post-body col-xs-9">
+        <div class="post-subject">
+          <h3>
+            <%= link_to post.subject.titleize, post_path(post), class: "post-title", title: "#{truncate(post.body, length: 200)}" %>
+          </h3>
+        </div>
+        <div class="post-meta-extended">
+          <ul class="list-inline">
+            <li class="post-username">
+              <%= link_to(post.user.username.titleize, profile_url(post.user.username), data: { hovercard: "#{post.user.username}"}) %>
+            </li>
+            <span>&ndash;</span>
+            <li class="post-user-points" data-toggle="tooltip" data-trigger="hover focus" data-placement="top" title="Points for <%= post.user.username.titleize %>">
+              <i class="fa fa-trophy"></i> <%= number_with_delimiter(rand(1500), delimiter: ",") %>
+            </li>
+            <span>&ndash;</span>
+            <li class="post-category">
+              <%= link_to post.topic.pretty_name, topic_path(post.topic), data: { toggle: "tooltip", title: "View all post in #{post.topic.pretty_name} category", trigger: "hover focus", placement: "top"} %>
+            </li>
+          </ul>
+          <div class="post-tags">
+            <%= post.tags.map { |t| link_to(t.name, tag_path(t.name), data: { toggle: "tooltip", title: "View all posts tagged with #{t.name}", trigger: "hover focus", placement: "top"})}.uniq.join(" ").html_safe %>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 post-media">
+        <%= truncate(post.body, length: 300) { link_to "\sContinue Reading", post_path(post), title: "Continue reading full post"} %>
+      </div>
+      <div class="col-xs-12 post-footer">
+        <ul class="list-inline">
+          <li class="post-comments">
+            <i class="fa fa-comments"></i> <%= link_to(I18n.t("comments", count: post.comments.length + post.comments.map {|r| r.replies[0] }.compact.length), post, data: { html: true, toggle: "#{post.comments.length > 0 ? 'tooltip' : ''}", title: "<ul class='list-unstyled'> #{post.comments.limit(8).map {|c| c.user.username}.uniq.each {|un| "<li>#{un}</li>"}.join('<br>')} </ul>", trigger: "hover focus", placement: "bottom"}) %>
+          </li>
+          <li class="post-votes" data-toggle="tooltip" data-trigger="hover focus" data-placement="bottom" title="<%= pluralize(post.cached_votes_total, 'person') %> have voted">
+            <i class="fa fa-thumbs-up"></i> <%= post.cached_votes_total %>
+          </li>
+          <li class="post-favorites" data-toggle="tooltip" data-trigger="hover focus" data-placement="bottom" title="Bookmarked by <%= pluralize(post.favorites.length, 'person') %>">
+            <i class="fa fa-bookmark"></i> <%= post.favorites.length %>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-<% end %>
-<br>
-<% if params[:tag] %>
-  <div class="alert alert-info">
-    <%= "You're viewing post tagged with '#{params[:tag]}'" %> <%= link_to("Back to view all posts", posts_path, class: "pull-right") %>
-  </div>
-<% end %>
-
-<% view.each do |p| %>
-  <%= render partial: "posts/media", locals: { post: p } %>
-<% end %>
-
-<% if !params[:tag] %>
-  <%= paginate @posts %>
-<% end %>
+</div>

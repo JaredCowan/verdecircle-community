@@ -1,0 +1,26 @@
+var $post_form = $("[data-ajax='newPostForm']");
+var temp = '<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">' +
+           '<i class="fa fa-times fa-rotate"></i>' +
+           '<span class="sr-only">Toggle Dropdown</span>' +
+           '</button>' +
+           '<ul class="dropdown-menu" role="menu">' +
+           '<li><a href="javascript:;" onclick="cancelNewPostAndReset();"><i class="fa fa-ban"></i> Cancel &amp; Close</a></li>' +
+           '</ul>' +
+           '</div>';
+
+function cancelNewPostAndReset() {
+  $("#new_post_form").fadeOut(800, function() {
+    $(this).remove();
+    $("#new_post_btn").show();
+    $post_form.addClass("text-center");
+  });
+}
+$post_form.removeClass("text-center")
+  .find("i").remove();
+$("#new_post_btn").fadeOut(0, function(){ $(this).hide();});
+$post_form.append('<%= escape_javascript(render partial: "form") %>');
+$("#new_post_form").hide().fadeIn(1000);
+
+$post_form.find(".form-actions")
+  .prop("class", "btn-group")
+  .append(temp);

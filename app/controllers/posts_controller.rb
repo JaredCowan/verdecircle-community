@@ -13,7 +13,8 @@ class PostsController < ApplicationController
   def index
     if params[:tag]
       begin
-        @posttag = Post.tagged_with(params[:tag]).decorate
+        # @posttag = Post.tagged_with(params[:tag]).page(params[:page]).decorate
+        @posts = Post.tagged_with(params[:tag]).page(params[:page]).decorate
       rescue ActiveRecord::RecordNotFound  
         flash.keep[:danger] = "Sorry, we couldn't find anything with that tag."
         @notFoundReturnUrl = request.env["HTTP_REFERER"] ||= posts_path
@@ -35,7 +36,6 @@ class PostsController < ApplicationController
     @comments    = @post.comments.includes({user: :votes})
     @likes       = query_votes(@post)
     @new_comment = @post.comments.new
-
 
     respond_to do |format|
       format.html

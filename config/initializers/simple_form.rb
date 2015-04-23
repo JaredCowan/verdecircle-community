@@ -19,7 +19,7 @@ SimpleForm.setup do |config|
 
     # Calculates placeholders automatically from I18n
     # You can also pass a string as f.input placeholder: "Placeholder"
-    b.optional :placeholder
+    b.use :placeholder
 
     ## Optional extensions
     # They are disabled unless you pass `f.input EXTENSION_NAME => :lookup`
@@ -28,13 +28,13 @@ SimpleForm.setup do |config|
     # extensions by default, you can change `b.optional` to `b.use`.
 
     # Calculates maxlength from length validations for string inputs
-    b.optional :maxlength
+    b.use :maxlength
 
     # Calculates pattern from format validations for string inputs
     b.optional :pattern
 
     # Calculates min and max from length validations for numeric inputs
-    b.optional :min_max
+    b.use :min_max
 
     # Calculates readonly automatically from readonly attributes
     b.optional :readonly

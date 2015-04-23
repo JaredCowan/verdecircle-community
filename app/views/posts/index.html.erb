@@ -1,12 +1,12 @@
-<% view = params[:tag] ? @posttag : @posts %>
+<%# view = params[:tag] ? @posttag : @posts %>
 
 <% content_for :welcome do %>
   <%= render partial: "partials/welcome" %>
 <% end %>
 
 <% if user_signed_in? %>
-  <div class="text-center">
-    <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
+  <div class="text-center" data-ajax="newPostForm">
+    <%= link_to "New Post", new_post_path, class: "btn btn-primary", id: "new_post_btn", remote: true %>
   </div>
 <% end %>
 
@@ -16,10 +16,21 @@
   </div>
 <% end %>
 
-<% view.each do |p| %>
-  <%= render partial: "media", locals: { post: p } %>
-<% end %>
+<div id="posts-container">
+  <div class="posts-scroll-placeholder">
+    <%# view.each do |p| %>
+      <%#= render partial: "media", locals: { post: p } %>
+    <%# end %>
+    <%# view.each do |p| %>
+      <%= render partial: @posts %>
+    <%# end %>
+  </div>
 
-<% unless params[:tag] %>
-  <%= paginate @posts %>
-<% end %>
+
+  <%# unless params[:tag] %>
+    <div class="pagination">
+      <%= link_to_next_page @posts, "Load More", class: "btn btn-primary", remote: true %>
+    </div>
+  <%# end %>
+</div>
+

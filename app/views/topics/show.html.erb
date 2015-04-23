@@ -5,8 +5,15 @@
 	<h1 class="text-center"><span class="quoth-typography">Category:</span>
 	  <span class="text-warning"><%= @topic.pretty_name %></span></h1>
     <hr>
-    <%= render partial: 'posts/post_stub' %>
+    <div id="posts-container">
+      <div class="posts-scroll-placeholder">
+        <%= render partial: @posts %>
+      </div>
+
+      <div class="pagination">
+        <%= link_to_next_page @posts, 'Load More', class: 'btn btn-primary', params: {controller: 'posts', action: 'index'}, remote: true %>
+      </div>
+    </div>
   </div>
 </div>
 
-<%= paginate @posts %>

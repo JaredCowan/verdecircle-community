@@ -1,7 +1,2 @@
-$('#my-posts').append('<%= j render @posts %>');
-<% if @posts.next_page %>
-  $('.pagination').replaceWith('<%= j paginate @posts %>');
-<% else %>
-  // $(window).off('scroll');
-  $('.pagination').remove();
-<% end %>
+$("#posts-container .posts-scroll-placeholder").append('<%= escape_javascript(render partial: @posts) %>');
+$('.pagination').html('<%= escape_javascript(link_to_next_page @posts, "Load More", class: "btn btn-primary", remote: true) %>');

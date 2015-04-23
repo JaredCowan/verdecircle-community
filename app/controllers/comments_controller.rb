@@ -5,13 +5,12 @@ class CommentsController < ApplicationController
   include PostsLikeableHelper
 
   def index
-    # Created in order to handle renders from this controller, which produce URL 'root/posts/:id/comments'
     @post     = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
     @comments = @post.comments.includes({user: :votes})
-    # redirect_to @post
+    @params   = params
 
     respond_to do |format|
-      format.html
+      format.html { redirect_to @post }
       format.js
       format.json { render json: @comments }
     end
@@ -29,7 +28,7 @@ class CommentsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to @post }
         format.js
-        format.json { render json: @post }
+        format.json { render json: @comment }
       end
     else
       @new_comment = @comment
@@ -50,15 +49,26 @@ class CommentsController < ApplicationController
     @replies     = @comment.replies
 
     respond_to do |format|
-      format.html
+      format.html { redirect_to @post }
       format.js
-      format.json { render json: @comment }
+      format.json { render json: @comment, 
+        include: [
+          :versions,
+          :user,
+          :votes,
+          replies: {
+            include: [
+              :votes
+            ]
+          }
+        ]
+      }
     end
 
     rescue ActiveRecord::RecordNotFound
       respond_to do |format|
         format.html { redirect_to @post }
-        format.json { render text: "Not Found", comment: :unprocessable_entity }
+        format.json { render text: "{'Not Found': 'Fuck Head'}", comment: :unprocessable_entity }
         flash.keep[:danger] = "Sorry, this comment has been deleted or has moved"
       end
   end

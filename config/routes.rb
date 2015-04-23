@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   match "#{thriii_prefix}/accounting", to: redirect("#{thriii_prefix}#accounting"), via: :get
   match "#{thriii_prefix}/orders",     to: redirect("#{thriii_prefix}#orders"),     via: :get
   match "#{thriii_prefix}/logistics",  to: redirect("#{thriii_prefix}#logistics"),  via: :get
+
   # =====================================
   # Routing for Community
   # =====================================
