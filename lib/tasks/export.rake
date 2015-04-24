@@ -20,14 +20,29 @@ namespace :export do
     end
   end
 
-  desc "Create posts."
+  desc "Create users."
+  task :create_users => :environment do
+
+    # 1.times do |n|
+    #   User.create(
+    #     id: User.last.id + 500,
+    #     first_name: Faker::Name.first_name,
+    #     last_name: Faker::Name.last_name,
+    #     email: Faker::Internet.safe_email,
+    #     username: Faker::Internet.user_name("#{Faker::Name.first_name}#{Faker::Lorem.words(1).sort[0]} #{Faker::Name.last_name}", %w(_)),
+    #     encrypted_password: BCrypt::Password.create('secret', cost: 12)
+    #   )
+    # end
+  end
+
+  desc "Create posts, with comments and replies."
   task :create_posts => :environment do
 
     postAry, cmntAry = [], []
     10.times do |n|
       Post.create(
         user_id: User.all.map(&:id).sample,
-        subject: Faker::Lorem.words(4).join(', '),
+        subject: Faker::Lorem.words(4).join(' '),
         body: Faker::Lorem.paragraph(7),
         topic_id: Topic.all.map(&:id).sample,
         tag_list: Faker::Lorem.words(5).join(', ')
