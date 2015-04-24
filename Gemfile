@@ -149,7 +149,7 @@ group :development, :test do
   # Testing
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
-  gem 'ffaker'
+  # gem 'ffaker'
   # gem 'capybara-webkit'
   # gem 'poltergeist'           # alternative to capybara-webkit
   # gem 'capybara-firebug'
