@@ -12,7 +12,7 @@ en:
   # Pluralization for comments link
   comments:
     zero: "0 Comments"
-    one: "One Comment"
+    one: "%{count} Comment"
     other: "%{count} Comments"
 
   # Select menu for posts "current mood"

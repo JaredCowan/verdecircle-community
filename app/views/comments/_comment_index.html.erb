@@ -1,6 +1,30 @@
 <% @comments.each do |comment| %>
-  <%= div_for comment do %>
+  <%#= div_for comment do %>
+    <%#= link_to "Show Replies", post_comment_path(@post, comment), remote: true %>
+    <%#= debug(comment) %>
+    <%#= render partial: "comments/comment", object: comment %>
+  <%# end %>
+
+  <%= div_for comment, class: "comment_#{comment.id}" do %>
+    <h4 class="comment-author"><%#= sanitize(comment.author) %><%#= sanitize(" @ <span class='quoth-typography'> quoth</span>") if comment.quother %></h4>
+    <span class="date"><small><%= time_ago_in_words(comment.created_at) %> ago</small></span>
+
+    <p class="comment-content">
+      <%= sanitize comment.body, tags: %w(a), attributes: %w(href) %>
+    </p>
+    <h6 id="replies-count">
+      <%= pluralize(comment.replies.length, 'Reply') %>
+    </h6>
     <%= link_to "Show Replies", post_comment_path(@post, comment), remote: true %>
-    <%= debug(comment) %>
+    <!-- <div class="well replies" id="replies-list<%= comment.id %>"> -->
+      <%#= render partial: "replies/reply", collection: comment.replies, locals: {comment: comment} %>
+
+      <% if user_signed_in? %>
+        <%#= vote_logic_helper(comment) %>
+        <% if comment.user == current_user %>
+          <%= link_to '', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Delete comment?', confirm_modal: "#delete-post" }, class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true, title: 'Delete comment', rel: 'tooltip' %>
+          <%= link_to '', edit_post_comment_path(@post, comment), class: 'glyphicon glyphicon-pencil text-info', id: "#{comment.id}_edit", remote: true, title: 'Edit Comment' %>
+        <% end %>
+      <% end %>
   <% end %>
 <% end %>

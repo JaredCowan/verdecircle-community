@@ -1,0 +1,2 @@
+var $comment_div = $('#comment_<%= escape_javascript(params[:id]) %>');
+$('#comments-list').html('<%= escape_javascript(render partial: "comment_index") %>');

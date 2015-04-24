@@ -88,6 +88,10 @@ class Post < ActiveRecord::Base
     "#{id}-#{subject.parameterize}"
   end
 
+  def counter
+    return comments.map(&:id).compact.length
+  end
+
   def tag_list
     tags.map(&:name).join(", ")
   end

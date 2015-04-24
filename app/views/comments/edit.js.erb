@@ -1,0 +1,4 @@
+var $comment_div = $('#comment_<%= escape_javascript(params[:id]) %>');
+$comment_div.html('<%= escape_javascript(render partial: "comment_form") %>');
+var $submitBtn = $comment_div.find("[type='Submit']");
+$submitBtn.val("Save");

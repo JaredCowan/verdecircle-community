@@ -86,7 +86,7 @@ Rails.application.routes.draw do
         delete "unfavorite", to: "favorites#remove_favorite", defaults: { className: 'Post' }
       end
 
-      resources :comments, except: [:edit] do
+      resources :comments do
         member do
           put "like", to: "comments#liked"
           put "unlike", to: "comments#unliked"

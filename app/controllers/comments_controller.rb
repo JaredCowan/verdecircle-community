@@ -17,13 +17,14 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.build(comment_params)
+    @post     = Post.find(params[:post_id])
+    @comments = @post.comments
+    @comment  = @post.comments.build(comment_params)
+    @likes    = query_votes(@post)
     # @new_reply = @comment.replies.new
-    @likes = query_votes(@post)
 
     if @comment.save
-      Notifyer::Notification.notify_all(@comment, @post)
+      # Notifyer::Notification.notify_all(@comment, @post)
       @new_comment = @post.comments.new
       respond_to do |format|
         format.html { redirect_to @post }
@@ -37,16 +38,46 @@ class CommentsController < ApplicationController
       respond_to do |format|
         format.html { render @post }
         format.js { render action: 'failed_save'}
-        format.json { render json: @post.errors, post: :unprocessable_entity }
+        format.json { render json: error, comment: :unprocessable_entity }
+      end
+    end
+  end
+
+  def edit
+    @post        = Post.find(params[:post_id])
+    @comment     = @post.comments.find(params[:id])
+    @new_comment = @comment
+
+    respond_to do |format|
+      format.html { redirect_to @post }
+      format.js
+      format.json { render json: @comment }
+    end
+  end
+
+  def update
+    @post     = Post.find(params[:post_id])
+    @comments = @post.comments
+    @comment  = @comments.find(params[:id])
+
+    respond_to do |format|
+      if @comment.update_attributes(comment_params) && @comment.user == current_user
+        format.html { redirect_to @post }
+        format.js
+        format.json { render json: @comment }
+      else
+        format.html { redirect_to @post }
+        format.js   { render action: 'failed_save'}
+        format.json { render json: @comment.errors, comment: :unprocessable_entity }
       end
     end
   end
 
   def show
-    @post        = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
-    @comment     = @post.comments.includes({user: :votes}).find(params[:id])
-    @comments    = @post.comments.includes({user: :votes})
-    @replies     = @comment.replies
+    @post     = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
+    @comment  = @post.comments.includes({user: :votes}).find(params[:id])
+    @comments = @post.comments.includes({user: :votes})
+    @replies  = @comment.replies
 
     respond_to do |format|
       format.html { redirect_to @post }
@@ -68,20 +99,26 @@ class CommentsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       respond_to do |format|
         format.html { redirect_to @post }
-        format.json { render text: "{'Not Found': 'Fuck Head'}", comment: :unprocessable_entity }
+        format.json { render text: "{'404': 'Not Found'}", comment: :unprocessable_entity }
         flash.keep[:danger] = "Sorry, this comment has been deleted or has moved"
       end
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
-    @post = @comment.post
-    @comment.destroy
+    @post     = Post.find(params[:post_id])
+    @comments = @post.comments
+    @comment  = @comments.find(params[:id])
+
     respond_to do |format|
-      format.html do
-        redirect_to @post
+      if @comment.destroy
+        format.html { redirect_to @post }
+        format.js
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @post }
+        format.js
+        format.json { head :no_content }
       end
-      format.js
     end
   end
 

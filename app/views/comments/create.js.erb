@@ -1,8 +1,5 @@
 var comments_list = $('#comments-list');
 comments_list.append('<%= escape_javascript(render partial: @comment) %>');
 comments_list.find('div:last-of-type').addClass('last-comment');
-$('#comments-count').html('<%= escape_javascript(pluralize(@post.comments.length, 'Comment')) %>');
+$('#comments-count').html('<%= escape_javascript(pluralize(@post.counter, 'Comment')) %>');
 $('#comment-form').html('<%= escape_javascript(render('comments/comment_form')) %>');
-//$('#comment_author').val('');
-//$('#comment_email').val('');
-//$('#comment_content').val('');

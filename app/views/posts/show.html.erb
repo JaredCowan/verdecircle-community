@@ -45,14 +45,15 @@
         <%# end %>
       <%# end %>
       <h4 id="comments-count">
-        <%= I18n.t("comments", count: @post.comments.count) %>
+        <%= I18n.t("comments", count: @post.counter) %>
         <%#= pluralize(@post.comments.length, 'Comment') %>
       </h4>
   </div>
 </div>
 
 <div id="comments-list">
-  <%= render partial: @post.reload.comments %>
+  <%#= render partial: @comments %>
+  <%= render partial: "comments/comment_index", object: @comments %>
 </div>
 
 <% if user_signed_in? %>

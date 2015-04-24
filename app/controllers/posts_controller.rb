@@ -12,9 +12,14 @@ class PostsController < ApplicationController
 
   def index
     if params[:tag]
-      begin
         # @posttag = Post.tagged_with(params[:tag]).page(params[:page]).decorate
+      begin
         @posts = Post.tagged_with(params[:tag]).page(params[:page]).decorate
+        respond_to do |format|
+          format.html
+          format.js
+          format.json { render json: @post }
+        end
       rescue ActiveRecord::RecordNotFound  
         flash.keep[:danger] = "Sorry, we couldn't find anything with that tag."
         @notFoundReturnUrl = request.env["HTTP_REFERER"] ||= posts_path
@@ -64,7 +69,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
+    @post         = current_user.posts.new(post_params)
     @post.subject = ActionController::Base.helpers.strip_tags(@post.subject)
     @post.body    = ActionController::Base.helpers.strip_tags(@post.body)
 
@@ -75,8 +80,8 @@ class PostsController < ApplicationController
         format.json { render json: @post, post: :created, location: @post }
         flash[:success] = "Post was successfully created."
       else
-        @post.image_delete = "1"
-        @post.image = nil
+        # @post.image_delete = "1"
+        # @post.image        = nil
         format.html { render :new }
         format.json { render json: @post.errors, post: :unprocessable_entity }
         flash.now[:danger] = "#{@post.errors.count} error(s) prohibited this post from being saved: #{@post.errors.full_messages.join(', ')}"
