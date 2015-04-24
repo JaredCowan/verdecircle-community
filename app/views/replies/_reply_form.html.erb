@@ -9,7 +9,11 @@
     </div>
 
     <div class="form-group">
-      <%= f.text_area :body, rows: '3', class: 'form-control' %>
+      <% if params.has_key?("reply") %>
+        <%= f.input :body, rows: '3', class: 'form-control', autofocus: true %>
+      <% else %>
+        <%= f.input :body, rows: '3', class: 'form-control' %>
+      <% end %>
       <%= f.input :user_id, as: :hidden, input_html: { value: "#{current_user.id}" } %>
 
     </div>

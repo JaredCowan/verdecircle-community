@@ -1,4 +1,8 @@
-<%= link_to "Show Replies", post_comments_path(@post), remote: true %>
-<%= debug(params) %>
-<%= debug(@comment) %>
-<%= debug(@replies) %>
+<%= link_to "Hide Replies", post_comments_path(@post), remote: true %>
+
+<div class="well replies" id="replies-list<%= @comment.id %>">
+  <%= render partial: "replies/reply", collection: @comment.replies, locals: {comment: @comment} %>
+</div>
+<div id="reply-form">
+  <%= render 'replies/reply_form', locals: {comment: @comment} %>
+</div>

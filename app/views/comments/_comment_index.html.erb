@@ -1,12 +1,5 @@
 <% @comments.each do |comment| %>
-  <%#= div_for comment do %>
-    <%#= link_to "Show Replies", post_comment_path(@post, comment), remote: true %>
-    <%#= debug(comment) %>
-    <%#= render partial: "comments/comment", object: comment %>
-  <%# end %>
-
-  <%= div_for comment, class: "comment_#{comment.id}" do %>
-    <h4 class="comment-author"><%#= sanitize(comment.author) %><%#= sanitize(" @ <span class='quoth-typography'> quoth</span>") if comment.quother %></h4>
+  <%= div_for comment, class: "well comment_#{comment.id}" do %>
     <span class="date"><small><%= time_ago_in_words(comment.created_at) %> ago</small></span>
 
     <p class="comment-content">
@@ -15,10 +8,8 @@
     <h6 id="replies-count">
       <%= pluralize(comment.replies.length, 'Reply') %>
     </h6>
-    <%= link_to "Show Replies", post_comment_path(@post, comment), remote: true %>
-    <!-- <div class="well replies" id="replies-list<%= comment.id %>"> -->
-      <%#= render partial: "replies/reply", collection: comment.replies, locals: {comment: comment} %>
-
+    <%= link_to "Reply", post_comment_path(@post, comment, reply: true), remote: true %>
+    <%= link_to "Show More", post_comment_path(@post, comment), remote: true %>
       <% if user_signed_in? %>
         <%#= vote_logic_helper(comment) %>
         <% if comment.user == current_user %>
@@ -26,5 +17,11 @@
           <%= link_to '', edit_post_comment_path(@post, comment), class: 'glyphicon glyphicon-pencil text-info', id: "#{comment.id}_edit", remote: true, title: 'Edit Comment' %>
         <% end %>
       <% end %>
+      <!-- <div class="well replies" id="replies-list<%= comment.id %>"> -->
+      <%#= render partial: "replies/reply", collection: comment.replies, locals: {comment: comment} %>
+    <!-- </div> -->
+    <!-- <div id="reply-form<%= comment.id %>">
+        <%#= render 'replies/reply_form', locals: {comment: comment} %>
+      </div> -->
   <% end %>
 <% end %>

@@ -11,9 +11,8 @@
     <%= sanitize reply.body, tags: %w(a), attributes: %w(href) %>
   </p>
   <% if signed_in? && reply.user_id == current_user.id %>
-      <%= link_to '', post_comment_reply_path(comment.post.id, comment, reply), method: :delete, data: { confirm: 'Delete comment?' },
-                  class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true,
-                  title: 'Delete comment', rel: 'tooltip' %>
+    <%= link_to '', post_comment_reply_path(comment.post.id, comment, reply), method: :delete, data: { confirm: 'Delete comment?', confirm_modal: "#delete-post" }, class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true, title: 'Delete comment', rel: 'tooltip' %>
   <% end %>
   <hr>
 <% end %>
+
