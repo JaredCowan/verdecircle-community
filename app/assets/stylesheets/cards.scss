@@ -1,10 +1,9 @@
 .card__user {
+  @extend %module;
   position: relative;
-  padding: 10px;
+  padding: 5px 2px 5px 75px !important;
   margin: 0 10px 10px 0;
   overflow: hidden;
-  background-color: #f4f4f4;
-  border-radius: 5px;
 
   .avatar {
     position: absolute;
@@ -36,10 +35,6 @@
   margin-top: 5px;
   a {
     margin-right: 2px;
-
-    @extend .btn;
-    @extend .btn-default;
-    @extend .btn-xs;
   }
 }
 

@@ -2,11 +2,11 @@
 <% return_to ||= nil %>
 <%= render layout: 'users/card', locals: {user: authentication, size: size, username: username, profile_url: authentication.profile_url, target: '_blank'} do %>
   <div class="card__actions">
-    <%= link_to [current_user, authentication], data: {confirm: I18n.t('auth.destroy.prompt'), confirm_modal: disconnect_modal}, method: :delete, rel: 'tooltip', title: I18n.t('auth.destroy.tooltip') do %>
+    <%= link_to [current_user, authentication], data: {confirm: I18n.t('auth.destroy.prompt'), confirm_modal: disconnect_modal}, method: :delete, rel: 'tooltip', title: I18n.t('auth.destroy.tooltip'), class: "btn btn-primary" do %>
       <i class="glyphicon glyphicon-remove-circle"></i>
       <%= I18n.t('auth.destroy.link') %>
     <% end %>
-    <%= link_to provider_auth_path(authentication.provider, origin: return_to), data: {flow: 'connect'}, rel: 'tooltip', title: I18n.t('auth.reconnect.tooltip') do %>
+    <%= link_to provider_auth_path(authentication.provider, origin: return_to), data: {flow: 'connect'}, rel: 'tooltip', title: I18n.t('auth.reconnect.tooltip'), class: "btn btn-primary" do %>
       <i class="glyphicon glyphicon-repeat"></i>
       <%= I18n.t('auth.reconnect.link') %>
     <% end %>
