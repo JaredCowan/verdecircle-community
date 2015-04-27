@@ -3,6 +3,10 @@ en:
     name: 'Verde Circle Community Center'
     company: 'Verde Circle'
 
+  communitycenter:
+    title: " VerdeCircle | Small Business cloud-based SaaS solutions for simplifying and optimizing operations"
+    description: "Small Business cloud-based SaaS solutions for simplifying and optimizing operations"
+
   # l Time.now, format: :post
   time:
     formats:

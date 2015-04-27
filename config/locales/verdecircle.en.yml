@@ -1,4 +1,8 @@
 en:
+  sales:
+    title: "VerdeCircle | Small Business cloud-based SaaS solutions for simplifying and optimizing operations"
+    description: "Small Business cloud-based SaaS solutions for simplifying and optimizing operations"
+
   point-system:
     learn-more:
       link: "Click here to learn all the rules and benefits of the %{company_name} point system."
