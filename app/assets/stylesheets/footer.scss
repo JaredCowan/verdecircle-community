@@ -1,22 +1,40 @@
-.page-footer {
-  padding: 20px 10px;
-  margin: 100px -15px 0;
-  text-align: center;
-  border-top: 1px solid #333;
-  background-color: #fff;
-  ul {
-    margin: 0;
-
-    @extend .list-unstyled;
+.verdecircle-footer {
+  width: 100%;
+  background: $verde-green;
+  color: $gray-dark;
+  padding: 50px 0;
+  margin-top: 50px;
+  border-top: 1px solid $verde-green-darker;
+  .footer-header {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-transform: uppercase;
   }
-  li {
-    display: inline-block;
-    margin: 0 10px;
+  .corporate-links a,
+  address a {
+    color: $verde-navy-blue-dark;
+    font-weight: $font-weight-light;
   }
-  a {
-    color: #000;
-    &:hover {
-      color: #000;
+  .social-link-footer {
+    width: 130px;
+    > li {
+      float: left;
+      margin: 0 10px 10px 0;
+      > a {
+        color: $white-base;
+        background: $gray-dark;
+        padding: 8px;
+        width: 50px;
+        height: 50px;
+        float: left;
+        text-align: center;
+        font-size: $font-size-larger;
+        transition: all .3s ease;
+        &:hover {
+          background: $verde-blue;
+          transition: all .3s ease;
+        }
+      }
     }
   }
 }

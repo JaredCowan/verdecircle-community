@@ -4,7 +4,7 @@ class PagesController < ApplicationController
 
   def home
     @posts = Post.includes(:votes, :comments, :tags, :topic, :favorites, {user: :votes}).order(:created_at).page(params[:page]).decorate
-    redirect_to posts_path if user_signed_in?
+    redirect_to posts_path # if user_signed_in?
   end
 
   # Static views for main verdecircle.com - Blog & Contact have their own model.

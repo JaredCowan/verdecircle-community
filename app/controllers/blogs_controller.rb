@@ -2,8 +2,7 @@ class BlogsController < ApplicationController
   skip_authorization_check
   before_filter :authenticate_user!, except: [:index, :show]
   respond_to :html, :json
-  # Layout used only for verdecircle.com frontend
-  layout "verdecircle"
+  layout "verdecircle" # Layout used only for verdecircle.com frontend / sales site
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 

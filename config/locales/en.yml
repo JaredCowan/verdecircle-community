@@ -273,6 +273,7 @@ en:
       previous: "&lsaquo; Prev"
       next: "Next &rsaquo;"
       truncate: "&hellip;"
+      end: "End"
   helpers:
     page_entries_info:
       one_page:

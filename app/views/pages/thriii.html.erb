@@ -1,5 +1,5 @@
 <% provide(:stylesheets) do %>
-<%= stylesheet_link_tag 'depend/pagepiling', media: 'all', 'data-turbolinks-track' => :true %>
+  <%= stylesheet_link_tag 'depend/pagepiling', media: 'all', 'data-turbolinks-track' => :true %>
 <% end %>
 
 <% provide(:on_ready) do %>
@@ -69,7 +69,6 @@
 
 <script>
   window.onload = function() {
-    console.log("ready");
     window.loadThriiiPagePile = function() {
       $('#pagepile').pagepiling({
         menu: '#menu',

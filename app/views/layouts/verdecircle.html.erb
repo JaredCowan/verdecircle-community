@@ -36,15 +36,9 @@
         <%= render 'layouts/messages' %>
       </div>
         <%= yield %>
+    </div> <!-- END .container-fluid -->
 
-      <footer class="page-footer">
-        <% if content_for? :footer %>
-          <%= yield :footer %>
-        <% else %>
-          <%= render 'layouts/footer' %>
-        <% end %>
-      </footer>
-    </div>
+    <%= render 'layouts/footers/verdecircle' %>
     <%= render 'layouts/javascripts' %>
     <%= render 'layouts/analytics' %>
   </body>

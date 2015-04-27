@@ -48,42 +48,25 @@
       Start Your Free Trial
     </a>
     <p>
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-credit-card fa-stack-1x"></i>
+        <i class="fa fa-ban fa-stack-2x text-danger"></i>
+      </span>
       No Credit Card Required
     </p>
   </div>
 </div>
 
-<div class="row intro-media-support">
-  <div class="col-xs-4">
-    <img class="img-responsive fb-logo" src="<%= image_url 'freshbooks-logo.png' %>">
-  </div>
-  <div class="col-xs-4 ss-logo">
-    <img class="img-responsive" src="<%= image_url 'shipstation-logo.png' %>">
-  </div>
-  <div class="col-xs-4 i-logo">
-    <img class="img-responsive" src="<%= image_url 'intuit-logo.gif' %>">
+<div class="row intro-media-wrapper">
+  <div class="intro-media-support">
+    <div class="col-xs-4">
+      <img class="img-responsive fb-logo" src="<%= image_url 'freshbooks-logo.png' %>">
+    </div>
+    <div class="col-xs-4 ss-logo">
+      <img class="img-responsive" src="<%= image_url 'shipstation-logo.png' %>">
+    </div>
+    <div class="col-xs-4 i-logo">
+      <img class="img-responsive" src="<%= image_url 'intuit-logo.gif' %>">
+    </div>
   </div>
 </div>
-
-<% provide(:footer) do %>
-  <ul>
-    <li>
-      <%= link_to "Terms", terms_path %>
-    </li>
-    <li>
-      <%= link_to "Privacy", privacy_path %>
-    </li>
-    <li>
-      <%= link_to "Legal", "javascript:;" %>
-    </li>
-    <li>
-      <%= link_to "Address", contacts_path %>
-    </li>
-    <li>
-      <%= link_to "Press &amp; Media".html_safe, "javascript:;" %>
-    </li>
-    <li>
-      <%= link_to "Careers", "javascript:;" %>
-    </li>
-  </ul>
-<% end %>

@@ -10,10 +10,14 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin' if defined? RailsAdmin
 
+  concern :pager do
+    get '(page/:page)', action: :index, on: :collection, as: ''
+  end
+
   resources :contacts, path: '/contact'
   match '/contacts/submits', to: "contacts#submits", via: :get, as: :contact_submits
 
-  resources :blogs, path: '/blog'
+  resources :blogs, path: '/blog', concerns: :pager
 
   get '/index', to: 'pages#index'
   get '/pricing', to: 'pages#pricing'

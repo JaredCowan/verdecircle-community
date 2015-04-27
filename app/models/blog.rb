@@ -35,7 +35,7 @@ class Blog < ActiveRecord::Base
   before_save :destroy_image?
   before_save :format_blog_subject
 
-  paginates_per 15
+  paginates_per 10
 
   def to_param
     "#{id}-#{subject.parameterize}"

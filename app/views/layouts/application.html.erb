@@ -9,7 +9,6 @@
     <meta name="author" content="<%= brand_name %>">
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : I18n.t('brand.name') %>">
     <meta property="og:type" content="website">
-    <!-- <meta property="og:image" content=""> -->
     <meta property="og:site_name" content="<%= brand_name %>">
     <link rel="image_src" href="<%= image_url 'images/verde-circle-logo-name-centered.png' %>">
     <meta name="robots" content="index, follow">
@@ -39,17 +38,10 @@
           <%= yield %>
         </div>
         <%= render partial: "layouts/sidebar" %>
-      </div>
-      <footer class="page-footer">
-        <% if content_for? :footer %>
-          <%= yield :footer %>
-        <% else %>
-          <%= render 'layouts/footer' %>
-        <% end %>
-      </footer>
-    </div>
+      </div> <!-- END .row -->
+    </div> <!-- END .container-fluid -->
+    <%= render 'layouts/footers/verdecircle' %>
     <%= render 'layouts/javascripts' %>
     <%= render 'layouts/analytics' %>
-    <!-- <script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script> -->
   </body>
 </html>
