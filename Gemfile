@@ -34,7 +34,7 @@ gem 'fog' # File uploads to google cloud storage
 
 # Assets
 gem 'sass-rails'
-gem 'haml-rails'
+# gem 'haml-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'headjs-rails'
