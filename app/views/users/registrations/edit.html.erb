@@ -1,0 +1,16 @@
+<div class="auth__form">
+  <%= render 'layouts/account_tabs' %>
+  <% if devise_mapping.confirmable? and not resource.confirmed? %>
+    <div class="alert alert-warning alert-dismissable">
+      <button aria-hidden="<%= true %>" class="close" data-dismiss="alert">&times;</button>
+      <p>
+        <%= I18n.t 'devise.registrations.signed_up_but_unconfirmed' %>
+      </p>
+      <p>
+        <%= button_to I18n.t('auth.confirm.submit'), confirmation_path(resource_name), class: 'btn btn-warning btn-xs' %>
+      </p>
+    </div>
+  <% end %>
+  <%= render 'users/registrations/form', show_all: true %>
+  <%= render 'users/shared/links', disable_signup: true %>
+</div>

@@ -1,0 +1,70 @@
+<%# "This view is the heart of the registration page..."  %>
+<%# "Multiple actions render this view" %>
+<%# "States:" %>
+<%# "   User has connected an auth provider but has not yet completed registration" %>
+<%# "   User has clicked on the Sign up link" %>
+<%# "   User submitted registration form but there was an error" %>
+
+<% if resource.email.present? %>
+  <% login_link = link_to I18n.t('auth.login.link'), add_to_url(new_user_session_path, email: resource.email) %>
+<% else %>
+  <% login_link = link_to I18n.t('auth.login.link'), new_user_session_path %>
+<% end %>
+
+<% if @failed %>
+  <%= render 'users/registrations/failed', provider: @provider %>
+<% end %>
+
+<div class="auth__form">
+  <% unless @auth %>
+    <h3 class="title">
+      <%= I18n.t('auth.signup.title').html_safe %>
+      <div class="help-block">
+        <%= I18n.t('auth.signup.help', login_link: login_link).html_safe %>
+      </div>
+    </h3>
+    <%= render 'authentications/providers', flow: 'signup', icons: true, color: true %>
+    <div class="auth__or">
+      <hr>
+      <span>or</span>
+    </div>
+  <% else # @auth %>
+    <h2>
+      <%= render 'users/avatar', size: :thumb, user: @auth %>
+      <%= "Hi, #{@auth.display_name}" %>
+    </h2>
+    <p>
+      Not you?
+      <%= link_to 'Reset', destroy_user_session_path, rel: :nofollow, class: 'btn btn-default btn-xs' %>
+    </p>
+    <% unless @existing_account %>
+      <p>
+        <%= "We filled in some of your details from #{@auth.provider_name}. Please confirm and sign up." %>
+      </p>
+    <% end %>
+  <% end %>
+  <% if @existing_account %>
+    <% if provider = @existing_account.authentications.first.try(:provider) %>
+      <% url = provider_auth_path(provider, flow: 'login') %>
+      <% login_with_link = link_to I18n.t('auth.login.link_with', provider: Authentication.provider_name(provider)), url %>
+    <% else %>
+      <% login_with_link = login_link %>
+    <% end %>
+    <div class="alert alert-warning">
+      <%= I18n.t('auth.signup.email_taken', login_link: login_with_link).html_safe %>
+    </div>
+  <% end %>
+  <%= render 'users/registrations/form', hide_password: @auth.present? %>
+  <div class="auth__links">
+    <%= "By signing up, you agree to the" %>
+    <%= link_to "Terms", terms_path %>
+    <%= "and" %>
+    <%= link_to "Privacy", privacy_path %>
+    <%= "." %>
+  </div>
+  <%= render "users/social/facepile" %>
+</div>
+
+<% content_for :on_ready do %>
+  $('input[name="user[email]"]').on('click keydown', function(){$(this).closest('form').find('.collapse').addClass('in')});
+<% end %>
