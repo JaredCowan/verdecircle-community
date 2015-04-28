@@ -22,13 +22,13 @@ class PagesController < ApplicationController
 
   # Preview html email template
   def email
-    tpl = (params[:layout] || 'hero').to_sym
-    tpl = :hero unless [:email, :hero, :simple, :new].include? tpl
+    template = (params[:layout] || 'email').to_sym
+    # template = :hero unless [:email, :hero, :simple, :new].include? template
     file = 'user_mailer/welcome_email'
     @user = (defined?(FactoryGirl) \
       ? User.new( FactoryGirl.attributes_for :user )
       : User.new( email: 'test@example.com', first_name: 'John', last_name: 'Smith' ))
-    render file, layout: "emails/#{tpl}"
+    render file, layout: "emails/#{template}"
     if params[:premail] == 'true'
       puts "\n!!! USING PREMAILER !!!\n\n"
       pre = Premailer.new(response_body[0],  warn_level: Premailer::Warnings::SAFE, with_html_string: true)

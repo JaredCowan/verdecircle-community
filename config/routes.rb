@@ -35,10 +35,10 @@ Rails.application.routes.draw do
   # 
   # OAuth
   oauth_prefix = Rails.application.config.auth.omniauth.path_prefix
-  get "#{oauth_prefix}/:provider/callback" => 'users/oauth#create'
-  get "#{oauth_prefix}/failure" => 'users/oauth#failure'
-  get "#{oauth_prefix}/:provider" => 'users/oauth#passthru', as: 'provider_auth'
-  get oauth_prefix => redirect("#{oauth_prefix}/login")
+  get "#{oauth_prefix}/:provider/callback", to: 'users/oauth#create'
+  get "#{oauth_prefix}/failure", to: 'users/oauth#failure'
+  get "#{oauth_prefix}/:provider", to: 'users/oauth#passthru', as: 'provider_auth'
+  get oauth_prefix, to: redirect("#{oauth_prefix}/login")
 
   # Devise
   devise_prefix = Rails.application.config.auth.devise.path_prefix
@@ -47,9 +47,9 @@ Rails.application.routes.draw do
       passwords: 'users/passwords', confirmations: 'users/confirmations', unlocks: 'users/unlocks'},
     path_names: {sign_up: 'signup', sign_in: 'login', sign_out: 'logout'}
   devise_scope :user do
-    get "#{devise_prefix}/after" => 'users/registrations#after_auth', as: 'user_root'
+    get "#{devise_prefix}/after", to: 'users/registrations#after_auth', as: 'user_root'
   end
-  get devise_prefix => redirect('/a/signup')
+  get devise_prefix, to: redirect('/a/signup')
 
   # User
   resources :users, path: 'u', only: :show do
@@ -179,9 +179,13 @@ Rails.application.routes.draw do
 
     get '/home', to: 'users#show', as: 'user_home'
 
-    # Dummy preview pages for testing.
-    get '/p/test' => 'pages#test', as: 'test'
-    get '/p/email' => 'pages#email' if ENV['ALLOW_EMAIL_PREVIEW'].present?
+    # Dummy preview page for testing.
+    get '/p/test', to: 'pages#test', as: 'test'
+
+    # Preview email templates
+    #
+    # <Site Path>/community/p/email?layout=<Layout Name>
+    get '/p/email', to: 'pages#email' if ENV['ALLOW_EMAIL_PREVIEW'].present?
 
     get 'robots.:format' => 'robots#index'
 

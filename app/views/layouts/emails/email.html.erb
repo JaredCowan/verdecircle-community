@@ -20,7 +20,8 @@
                       <table class="twelve columns">
                         <tr>
                           <td class="six sub-columns">
-                            <img src="http://placehold.it/200x50"/>
+                            <!-- <img src="http://placehold.it/200x50"> -->
+                            <%= image_tag "/images/logo-name-vc.jpg" %>
                           </td>
                           <td align="right" class="six sub-columns last" style="text-align:right; vertical-align:middle;">
                             <span class="template-label">
@@ -57,7 +58,7 @@
                             </p>
                             <% end %>
                             <% if @image_url %>
-                            <img height="300" src="<%= @image_url %>" width="580"/>
+                              <img height="300" src="<%= @image_url %>" width="580"/>
                             <% end %>
                           </td>
                           <td class="expander"></td>
