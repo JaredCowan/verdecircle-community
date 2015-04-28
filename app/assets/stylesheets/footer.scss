@@ -9,6 +9,7 @@
     margin-top: 0;
     margin-bottom: 20px;
     text-transform: uppercase;
+    color: $verde-navy-blue-dark;
   }
   .corporate-links a,
   address a {
@@ -22,7 +23,7 @@
       margin: 0 10px 10px 0;
       > a {
         color: $white-base;
-        background: $gray-dark;
+        background: $verde-blue;
         padding: 8px;
         width: 50px;
         height: 50px;
@@ -31,7 +32,7 @@
         font-size: $font-size-larger;
         transition: all .3s ease;
         &:hover {
-          background: $verde-blue;
+          background: $verde-blue-light;
           transition: all .3s ease;
         }
       }

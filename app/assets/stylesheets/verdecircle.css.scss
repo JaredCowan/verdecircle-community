@@ -6,7 +6,7 @@
   max-width: 755px;
   margin-left: auto;
   margin-right: auto;
-  color: $verde-blue-lighter;
+  color: $verde-blue;
   .list-inline {
     text-align: center;
   }
@@ -66,7 +66,8 @@
 
 .intro-media-wrapper {
   padding: 50px 0;
-  background-color: $white-base;
+  background-color: #fff;
+  margin-bottom: -50px;
   .intro-media-support {
     max-width: 900px;
     margin-left: auto;

@@ -13,15 +13,20 @@
 }
 #pricing-page {
   .pricing-switcher {
+    @extend %module;
     margin: 10px auto 30px;
     text-align: center;
     user-select: none;
+    .switcher-header {
+      color: $verde-purple;
+    }
     .fieldset {
       display: inline-block;
       position: relative;
+      margin: 10px 0;
       padding: 2px;
       background-color: $white-base;
-      border: 1px solid $verde-blue-light; 
+      border: 1px solid $verde-purple; 
       border-radius: $border-radius-large;
       > input[type="radio"] {
         position: absolute;
@@ -254,7 +259,29 @@
   margin-top: 100px;
 }
 .feature-head {
+  @extend %module;
   cursor: default;
+  position: relative;
+  z-index: 1;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("/images/thriii-circle-icon.png") top center no-repeat;
+    background-size: contain;
+    z-index: -1;
+    opacity: .2;
+  }
+  > h1 {
+    font-size: 30px;
+    color: $verde-green;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-top: 0;
+  }
 }
 .pricing-table {
   margin-bottom: 50px;
@@ -268,10 +295,10 @@
 .pricing-table.most-popular {
   background-color: rgb(140,214,0);
 }
-.pricing-head h1 {
-  font-size: 22px;
-  color: #494949;
-}
+// .pricing-head h1 {
+//   font-size: 22px;
+//   color: #494949;
+// }
 .most-popular .pricing-head h1 {
   color: #fff;
 }
@@ -318,14 +345,14 @@
   padding: 50px 0;
 }
 
-.feature-head h1{
-  color: #475168;
-  font-size: 30px;
-  font-weight: 300;
-  text-transform: uppercase;
-  margin-top: 0;
-  font-family: 'Fjalla One', sans-serif;
-}
+// .feature-head h1{
+//   color: #475168;
+//   font-size: 30px;
+//   font-weight: 300;
+//   text-transform: uppercase;
+//   margin-top: 0;
+//   font-family: 'Fjalla One', sans-serif;
+// }
 
 .feature-head p{
   color: #8a8b8b;
