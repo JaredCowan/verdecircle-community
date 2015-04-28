@@ -5,6 +5,11 @@
   .yearly .list-unstyled .monthly-pricing {
     display: none;
   }
+  .pricing-table.most-popular.monthly > .pricing-head { 
+    > h1 {
+      margin-bottom: 27px;
+    }
+  }
 }
 #pricing-page {
   .pricing-switcher {
@@ -327,56 +332,52 @@
   font-size: 18px;
   font-weight: 300;
 }
-/*.pricing-even-3-row {
-  padding: 2.4em 0 !important;
-}*/
-@media all and (max-width: 1200px) {
-  .first-pricing-row li:nth-child(1),
-  .second-pricing-row li:nth-child(1) {
-    padding: 1.8em 0 !important;
-  }
-  .first-pricing-row li:nth-child(3),
-  .second-pricing-row li:nth-child(3) {
-    padding: 3em 0 !important;
-  }
-  .second-pricing-row li:nth-child(5) {
-    padding: 1.8em 0 !important;
-  }
-}
-@media all and (max-width: 992px) {
-  .thrid-pricing-row li:nth-child(1) {
-    padding: 1.7em 0 !important;
-  }
-  .first-pricing-row li:nth-child(5),
-  .first-pricing-row li:nth-child(8),
-  .first-pricing-row li:nth-child(9),
-  .thrid-pricing-row li:nth-child(5) {
-    padding: 1.7em 0 !important;
-  }
-  .first-pricing-row li:nth-child(3) {
-    padding: 3.7em 0 !important;
-  }
-  .second-pricing-row li:nth-child(3) {
-    padding: 4.4em 0 !important;
-  }
-}
-@media all and (min-width: 1200px) {
-  .first-pricing-row li:nth-child(3),
-  .second-pricing-row li:nth-child(3) {
-    padding: 2.5em 0 !important;
-  }
-}
+
+// @media all and (max-width: 1200px) {
+//   .first-pricing-row li:nth-child(1),
+//   .second-pricing-row li:nth-child(1) {
+//     padding: 1.8em 0 !important;
+//   }
+//   .first-pricing-row li:nth-child(3),
+//   .second-pricing-row li:nth-child(3) {
+//     padding: 3em 0 !important;
+//   }
+//   .second-pricing-row li:nth-child(5) {
+//     padding: 1.8em 0 !important;
+//   }
+// }
+// @media all and (max-width: 992px) {
+//   .thrid-pricing-row li:nth-child(1) {
+//     padding: 1.7em 0 !important;
+//   }
+//   .first-pricing-row li:nth-child(5),
+//   .first-pricing-row li:nth-child(8),
+//   .first-pricing-row li:nth-child(9),
+//   .thrid-pricing-row li:nth-child(5) {
+//     padding: 1.7em 0 !important;
+//   }
+//   .first-pricing-row li:nth-child(3) {
+//     padding: 3.7em 0 !important;
+//   }
+//   .second-pricing-row li:nth-child(3) {
+//     padding: 4.4em 0 !important;
+//   }
+// }
+// @media all and (min-width: 1200px) {
+//   .first-pricing-row li:nth-child(3),
+//   .second-pricing-row li:nth-child(3) {
+//     padding: 2.5em 0 !important;
+//   }
+// }
 .most-popular ul li {
   border-bottom-color: #2c3bad !important;
   /*text-shadow: 0 0 .3px #000;*/
-  margin-top: 0 !important;
   color: #000;
 }
 .pricing-table .add-ons {
   cursor: default;
 }
 .pricing-table .add-on-header {
-  margin: 5px 0;
   padding: 20px;
   font-weight: 100;
   font-size: 40px;
