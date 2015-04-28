@@ -106,7 +106,7 @@ gem 'sinatra', require: false
 # Utils
 gem 'addressable'
 gem 'settingslogic'
-gem 'faker'
+gem 'ffaker'
 
 group :development do
   # Docs
