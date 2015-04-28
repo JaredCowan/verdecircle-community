@@ -7,7 +7,7 @@
     var loadThriiiPagePile = function() {
       $('#pagepile').pagepiling({
         menu: '#menu',
-        anchors: ['features', 'inventory', 'accounting', 'orders', 'logistics'],
+        anchors: ['features', 'inventory', 'orders', 'fulfillment', 'accounting'],
         sectionsColor: ['#fafafa', '#fafafa', '#fafafa', '#fafafa', '#fafafa'],
         loopTop: false,
         loopBottom: true,
@@ -15,7 +15,7 @@
           'textColor': '#323232',
           'bulletsColor': '#ccc',
           'position': 'right',
-          'tooltips': ['features', 'inventory', 'accounting', 'orders', 'logistics']
+          'tooltips': ['features', 'inventory', 'orders', 'fulfillment', 'accounting']
         }
       });
     }
@@ -39,14 +39,14 @@
   <li role="presentation" data-menuanchor="inventory">
     <a href="#inventory">inventory</a>
   </li>
-  <li role="presentation" data-menuanchor="accounting">
-    <a href="#accounting">accounting</a>
-  </li>
   <li role="presentation" data-menuanchor="orders">
     <a href="#orders">orders</a>
   </li>
-  <li role="presentation" data-menuanchor="logistics">
-    <a href="#logistics">logistics</a>
+  <li role="presentation" data-menuanchor="fulfillment">
+    <a href="#fulfillment">fulfillment</a>
+  </li>
+  <li role="presentation" data-menuanchor="accounting">
+    <a href="#accounting">accounting</a>
   </li>
 </ul>
 
@@ -72,7 +72,7 @@
     window.loadThriiiPagePile = function() {
       $('#pagepile').pagepiling({
         menu: '#menu',
-        anchors: ['features', 'inventory', 'accounting', 'orders', 'logistics'],
+        anchors: ['features', 'inventory', 'orders', 'fulfillment', 'accounting'],
         sectionsColor: ['#fafafa', '#fafafa', '#fafafa', '#fafafa', '#fafafa'],
         loopTop: false,
         loopBottom: true,
@@ -80,7 +80,7 @@
           'textColor': '#323232',
           'bulletsColor': '#ccc',
           'position': 'right',
-          'tooltips': ['features', 'inventory', 'accounting', 'orders', 'logistics']
+          'tooltips': ['features', 'inventory', 'orders', 'fulfillment', 'accounting']
         }
       });
     }
