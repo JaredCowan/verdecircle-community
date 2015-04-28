@@ -156,4 +156,13 @@ $btn-verde-blue-bg-hover:                $verde-green-darker;
 $btn-verde-blue-border-color:              $verde-green-dark;
 
 
+%module {
+  background-color: $white-base;
+  border-radius: $border-radius-large;
+  padding: 5px 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 3px 1px $gray-darker;
+}
+
 

@@ -1,5 +1,5 @@
 <% resource.email = params[:email] unless resource.email.present? %>
-<%= signup_link = link_to I18n.t('auth.signup.link'), new_user_registration_path %>
+<% signup_link = link_to I18n.t('auth.signup.link'), new_user_registration_path %>
 
 <div class="auth__form">
   <h3 class="title">

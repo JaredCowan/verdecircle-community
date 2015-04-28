@@ -59,7 +59,6 @@ body {
   margin-right: auto !important;
 }
 
-
 .brand-image {
   width: 25px;
 }
@@ -229,5 +228,20 @@ html.desktop .test-popup {
   border-color: $verde-blue-light;
   &:visited, &:hover, &:active, &:focus {
     background-color: $verde-blue-light;
+  }
+}
+
+.dropdown-menu-dark {
+  background-color: $gray-dark;
+  > li {
+    > a {
+      color: $white-base;
+      background-color: $gray-dark;
+      &:hover, &:focus {
+        color: $gray-dark;
+        text-decoration: none;
+        background-color: $verde-green;
+      }
+    }
   }
 }

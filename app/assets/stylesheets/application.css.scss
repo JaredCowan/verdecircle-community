@@ -17,7 +17,6 @@
 @import "icons_social";
 @import "sidebar";
 @import "auth";
-@import "posts";
 @import "postsv2";
 @import "posts_show";
 @import "avatar";
@@ -70,15 +69,6 @@ h6 {
   font-weight: $font-weight-ultra-heavy;
 }
 
-%module {
-  background-color: $white-base;
-  border-radius: $border-radius-large;
-  padding: 5px 2px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  box-shadow: 1px 1px 3px 1px $gray-darker;
-}
-
 .welcome-header {
   @extend %module;
   text-align: center;
@@ -89,7 +79,6 @@ h6 {
     padding: 0 15px;
   }
 }
-
 
 textarea.form-control {
   resize: vertical !important;
@@ -107,7 +96,10 @@ textarea.form-control {
       color: #9b9b9b;
     }
   }
-  & .dropdown:visited, & .dropdown:hover, & .dropdown:active, & .dropdown:focus,
+  & .dropdown:visited,
+  & .dropdown:hover,
+  & .dropdown:active,
+  & .dropdown:focus,
   & .open {
     .brand-image-icon-layer {
       color: #323232;
@@ -141,9 +133,9 @@ textarea.form-control {
   left: 0;
   right: 0;
   z-index: 350;
-  width: 451px;
+  width: 461px;
   margin: 0 auto;
-  background-color: #323232;
+  background-color: $gray-dark;
   padding: 5px;
   border-radius: 4px;
   opacity: .1;
@@ -159,13 +151,13 @@ textarea.form-control {
     text-transform: capitalize;
   }
   &.nav-pills > li > a:hover {
-    color: #323232;
+    color: $gray-dark;
     background-color: lighten($verde-green, 10%);
   }
   &.nav-pills > li.active > a,
   &.nav-pills > li.active > a:hover,
   &.nav-pills > li.active > a:focus {
-    color: #323232;
+    color: $gray-dark;
     background-color: $verde-green;
   }
 }
@@ -178,7 +170,7 @@ textarea.form-control {
   }
 }
 #pp-nav .pp-tooltip {
-  color: #323232;
+  color: $gray-dark;
   text-transform: capitalize;
 }
 #pagepile {
@@ -198,7 +190,6 @@ textarea.form-control {
   }
 }
 
-
 .flipInX {
   backface-visibility: visible !important;
   animation-name: flipInX;
@@ -211,44 +202,31 @@ textarea.form-control {
 
 @-webkit-keyframes flipInX {
   0% {
-    -webkit-transform: perspective(400px)rotateX(90deg);
     transform: perspective(400px)rotateX(90deg);
     opacity: 0;
   }
   40% {
-      -webkit-transform: perspective(400px)rotateX(-10deg);
       transform: perspective(400px)rotateX(-10deg);
   }
   70% {
-      -webkit-transform: perspective(400px)rotateX(10deg);
       transform: perspective(400px)rotateX(10deg);
   }
   100% {
-      -webkit-transform: perspective(400px)rotateX(0);
-      transform: perspective(400px)rotateX(0);
       opacity: 1;
   }
 }
 @keyframes flipInX {
   0% {
-    -webkit-transform: perspective(400px)rotateX(90deg);
-    -ms-transform: perspective(400px)rotateX(90deg);
     transform: perspective(400px)rotateX(90deg);
     opacity: 0;
   }
   40% {
-    -webkit-transform: perspective(400px)rotateX(-10deg);
-    -ms-transform: perspective(400px)rotateX(-10deg);
     transform: perspective(400px)rotateX(-10deg);
   }
   70% {
-    -webkit-transform: perspective(400px)rotateX(10deg);
-    -ms-transform: perspective(400px)rotateX(10deg);
     transform: perspective(400px)rotateX(10deg);
   }
   100% {
-    -webkit-transform: perspective(400px)rotateX(0);
-    -ms-transform: perspective(400px)rotateX(0);
     transform: perspective(400px)rotateX(0);
     opacity: 1;
   }
@@ -257,12 +235,12 @@ textarea.form-control {
   .dropdown-menu {
     background-color: $gray-dark;
     li > a:not(.btn) {
-    color: $white-base;
-    &:hover {
-      color: $black-base;
-      background-color: $verde-green;
+      color: $white-base;
+      &:hover {
+        color: $black-base;
+        background-color: $verde-green;
+      }
     }
-  }
   }
 }
 

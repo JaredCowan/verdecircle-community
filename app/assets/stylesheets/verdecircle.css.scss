@@ -113,11 +113,15 @@
     margin-left: auto;
     margin-right: auto;
     > .address {
+      @extend %module;
       text-align: center;
     }
-    .contact-form textarea {
-      height: 200px;
-      resize: vertical !important;
+    .contact-form-wrapper {
+      @extend %module;
+      .contact-form textarea {
+        height: 200px;
+        resize: vertical !important;
+      }
     }
   }
 }
