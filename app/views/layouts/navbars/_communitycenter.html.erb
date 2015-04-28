@@ -1,6 +1,7 @@
 <% if user_signed_in? %>
-  <% @notifications = Notifyer::Notification.find_by_sql("SELECT * FROM notifications FULL OUTER JOIN users ON notifications.user_id=users.id WHERE users.id IN ('" + current_user.id.to_s  + "')") %>
-  <% @unread = @notifications.map(&:is_read).reject {|n| n == true}.count %>
+  <% @notifications = Notifyer::Notification.find_by_sql("SELECT * FROM notifications FULL OUTER JOIN users ON notifications.user_id = " + current_user.id.to_s + "WHERE users.id = " + current_user.id.to_s  + "") %>
+  <% @unread = @notifications.map(&:is_read).reject {|n| n == true}.length %>
+  <% @unread_count ||= @notifications.map(&:is_read).reject {|n| n == true}.length %>
 <% end %>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="navbar-header">
@@ -88,10 +89,10 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown hidden-xs">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="label label-info">
-              <i class="fa fa-comment"></i>
+            <span class="label label-primary">
+              <i class="fa fa-comments"></i>
               <span id="notificationsCount">
-                <%= @unread_count %>
+                <%= @unread_count if @unread_count > 0 %>
               </span>
             </span>
             <b class="caret"></b>

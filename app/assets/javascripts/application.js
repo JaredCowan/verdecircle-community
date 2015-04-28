@@ -163,6 +163,7 @@ function ajaxRequestSent() {
       $(e.currentTarget).find("i").remove();
       $(e.currentTarget).append(" <i class='fa fa-exclamation-triangle'></i>");
     });
-} 
+}
+
 $(document).on("ready page:update", ajaxRequestSent);
 

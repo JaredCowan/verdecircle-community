@@ -1,3 +1,11 @@
+.controller__pages {
+  .monthly .list-unstyled .yearly-pricing {
+    display: none;
+  }
+  .yearly .list-unstyled .monthly-pricing {
+    display: none;
+  }
+}
 #pricing-page {
   .pricing-switcher {
     margin: 10px auto 30px;
@@ -7,6 +15,7 @@
       display: inline-block;
       position: relative;
       padding: 2px;
+      background-color: $white-base;
       border: 1px solid $verde-blue-light; 
       border-radius: $border-radius-large;
       > input[type="radio"] {
@@ -47,21 +56,29 @@
 }
 
 .pricing-table {
-  background: #eeeeee;
+  @extend %module;
   text-align: center;
   padding: 0 0 25px 0;
   border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
   overflow: hidden;
   perspective: 1000;
   transition: 0.5s;
   transform-style: preserve-3d;
   &.monthly {
     animation: cd-rotate-monthly 0.5s;
+    > .erp-six-month-free {
+      display: none;
+    }
   }
   &.yearly {
     animation: cd-rotate-yearly 0.5s;
+    > .erp-six-month-free {
+      color: $verde-green;
+      background-color: $gray-dark;
+      margin: 0 0 -20px 0;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
   }
 }
 
