@@ -3,8 +3,8 @@ $(".pricing-switcher label").on("click", function(e) {
       $switchBtn      = $(".price-switch-btn"),
       $monthlyInput   = $("#monthly:checked"),
       $yearlyInput    = $("#yearly:checked"),
-      $monthlyPricing = $(".pricing-table > .monthly-pricing"),
-      $yearlyPricing  = $(".pricing-table > .yearly-pricing"),
+      $monthlyPricing = $(".controller__pages .monthly-pricing"),
+      $yearlyPricing  = $(".controller__pages .yearly-pricing"),
       $pricingTable   = $(".pricing-table");
 
   switch($this[0].previousElementSibling.id) {
