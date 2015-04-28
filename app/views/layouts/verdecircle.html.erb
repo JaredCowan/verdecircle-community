@@ -13,6 +13,7 @@
     <meta property="og:site_name" content="<%= I18n.t('brand.company') %>">
     <meta name="robots" content="index, follow">
     <link rel="image_src" href="<%= image_url 'images/verde-circle-logo-name-centered.png' %>">
+    <%= favicon_link_tag %>
     <title>
       <%= content_for?(:title) ? yield(:title) : I18n.t('sales.title') %>
     </title>
