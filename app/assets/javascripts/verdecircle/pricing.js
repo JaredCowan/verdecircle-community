@@ -5,7 +5,7 @@ $(".pricing-switcher label").on("click", function(e) {
       $yearlyInput    = $("#yearly:checked"),
       $monthlyPricing = $(".controller__pages .monthly-pricing"),
       $yearlyPricing  = $(".controller__pages .yearly-pricing"),
-      $pricingTable   = $(".pricing-table");
+      $pricingTable   = $(".has-options");
 
   switch($this[0].previousElementSibling.id) {
     case "monthly":
@@ -35,7 +35,7 @@ $(".pricing-switcher input").on("click", function(e) {
       $yearlyInput    = $("#yearly:checked"),
       $monthlyPricing = $(".controller__pages .monthly-pricing"),
       $yearlyPricing  = $(".controller__pages .yearly-pricing"),
-      $pricingTable   = $(".pricing-table");
+      $pricingTable   = $(".has-options");
 
   switch($this[0].id) {
     case "monthly":

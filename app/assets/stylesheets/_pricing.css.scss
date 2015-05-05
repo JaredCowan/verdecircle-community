@@ -1,13 +1,13 @@
 .controller__pages {
-  .monthly .list-unstyled .yearly-pricing {
+  .monthly .yearly-pricing {
     display: none;
   }
-  .yearly .list-unstyled .monthly-pricing {
+  .yearly .monthly-pricing {
     display: none;
   }
   .pricing-table.most-popular.monthly > .pricing-head { 
     > h1 {
-      margin-bottom: 27px;
+      margin-bottom: 30px;
     }
   }
 }
@@ -121,31 +121,31 @@
   position: relative;
 }
 
-.most-popular {
-  background: #f77b6f;
-  color: #fff;
-}
+// .most-popular {
+//   background: #f77b6f;
+//   color: #fff;
+// }
 
 .most-popular h1 {
   font-size: 25px !important;
-  padding-bottom: 10px;
+  padding-bottom: 0;
   padding-top: 17px !important;
 }
 
-.most-popular h2 {
-  background: #d76b61;
-  margin-top: 20px !important;
-}
+// .most-popular h2 {
+//   background: #d76b61;
+//   margin-top: 20px !important;
+// }
 
-.most-popular ul li {
-  border-bottom: 1px dotted #d76b61 !important;
-}
+// .most-popular ul li {
+//   border-bottom: 1px dotted #d76b61 !important;
+// }
 
-.most-popular .price-actions .btn {
-  background: #d76b61;
-  margin: 10px 0;
-  cursor: pointer;
-}
+// .most-popular .price-actions .btn {
+//   background: #d76b61;
+//   margin: 10px 0;
+//   cursor: pointer;
+// }
 
 .pricing-table .price-actions .btn {
   border-radius: 5px;
@@ -176,6 +176,7 @@
   text-align: right;
 }
 
+.pricing-head > h2,
 .pricing-head > .monthly-pricing,
 .pricing-head > .yearly-pricing {
   padding: 30px 0;
@@ -209,57 +210,51 @@
   top: -18px;
 }
 
-.pricing-quotation, .team-info {
-  background: #EEEEEE;
-  padding: 20px 20px 35px 20px;
-  margin-bottom: 100px;
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
+// .pricing-quotation, .team-info {
+//   background: #EEEEEE;
+//   padding: 20px 20px 35px 20px;
+//   margin-bottom: 100px;
+//   display: inline-block;
+//   width: 100%;
+//   text-align: center;
+//   border-radius: 5px;
+//   -moz-border-radius: 5px;
+//   -webkit-border-radius: 5px;
+// }
 
-.pricing-quotation h3, .team-info h3 {
-  font-weight: 300;
-}
+// .pricing-quotation h3, .team-info h3 {
+//   font-weight: 300;
+// }
 
-.pricing-quotation p, .team-info p {
-  margin-bottom: 0px;
-}
+// .pricing-quotation p, .team-info p {
+//   margin-bottom: 0px;
+// }
 
-.pricing-plan, .team-info-wrap {
-  position: relative;
-}
+// .pricing-plan, .team-info-wrap {
+//   position: relative;
+// }
 
-.pricing-quotation:before, .team-info:before {
-  background-color: #EEEEEE;
-  border-color: #EEEEEE;
-  -webkit-border-image: none;
-       -o-border-image: none;
-          border-image: none;
-  border-right: 1px solid #EEEEEE;
-  border-style: none;
-  top: -7px;
-  content: "";
-  display: block;
-  height: 14px;
-  left: 48%;
-  position: absolute;
-  -ms-transform: rotate(45deg);
-   -o-transform: rotate(45deg);
-      transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  width: 15px;
-}
-/* Pricing */
-.pricing-container {
-  margin-top: 100px;
-}
+// .pricing-quotation:before, .team-info:before {
+//   background-color: #EEEEEE;
+//   border-color: #EEEEEE;
+//   border-image: none;
+//   border-right: 1px solid #EEEEEE;
+//   border-style: none;
+//   top: -7px;
+//   content: "";
+//   display: block;
+//   height: 14px;
+//   left: 48%;
+//   position: absolute;
+//   transform: rotate(45deg);
+//   width: 15px;
+// }
+// .pricing-container {
+//   margin-top: 100px;
+// }
 .feature-head {
   @extend %module;
+  padding: 50px 0;
   cursor: default;
   position: relative;
   z-index: 1;
@@ -275,10 +270,15 @@
     z-index: -1;
     opacity: .2;
   }
+  p {
+    color: $gray-darken;
+    font-size: $font-size-large;
+    font-weight: $font-weight-lighter;
+  }
   > h1 {
-    font-size: 30px;
+    font-size: $font-size-h2;
     color: $verde-green;
-    font-weight: 300;
+    font-weight: $font-weight-lighter;
     text-transform: uppercase;
     margin-top: 0;
   }
@@ -290,23 +290,23 @@
 }
 .pricing-table .popover-title,
 .pricing-table .popover-content {
-  color: #000;
+  color: $black-base;
 }
 .pricing-table.most-popular {
-  background-color: rgb(140,214,0);
+  background-color: $verde-green;
+}
+.most-popular .pricing-head h1 {
+  color: $white-base;
 }
 // .pricing-head h1 {
 //   font-size: 22px;
 //   color: #494949;
 // }
-.most-popular .pricing-head h1 {
-  color: #fff;
-}
-.pricing-head h2,
-.most-popular h2 {
-  padding: 40px 0;
-  background-color: #2c3bad;
-}
+// .pricing-head h2,
+// .most-popular h2 {
+//   padding: 40px 0;
+//   background-color: #2c3bad;
+// }
 // .pricing-head h5 {
 //   margin-top: -45px;
 //   margin-right: -125px;
@@ -323,14 +323,12 @@
   background-color: #2c3bad;
   text-shadow: 2px 2px 1px #2c3bad;
   opacity: .80;
-  -webkit-box-shadow: .7px .7px 0px .7px #777 !important;
-          box-shadow: .7px .7px 0px .7px #777 !important;
+  box-shadow: .7px .7px 0px .7px #777 !important;
 }
 .pricing-table .price-actions .btn:hover {
   background-color: #2c3bad;
   opacity: 1;
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 .pricing-table ul li {
   font-family: 'Source Sans Pro', sans-serif;
@@ -341,9 +339,8 @@
 .pricing-table ul li:first-child {
   margin-top: 25px;
 }
-.feature-head {
-  padding: 50px 0;
-}
+
+
 
 // .feature-head h1{
 //   color: #475168;
@@ -353,12 +350,6 @@
 //   margin-top: 0;
 //   font-family: 'Fjalla One', sans-serif;
 // }
-
-.feature-head p{
-  color: #8a8b8b;
-  font-size: 18px;
-  font-weight: 300;
-}
 
 // @media all and (max-width: 1200px) {
 //   .first-pricing-row li:nth-child(1),
@@ -448,8 +439,7 @@ overflow: visible;
   text-align: left;
   border: 1px solid #3a3a3a;
   border-radius: 5px;
-  -webkit-box-shadow: 1px 1px 7px #000;
-          box-shadow: 1px 1px 7px #000;
+  box-shadow: 1px 1px 7px $black-base;
   padding: 10px;
   z-index: 800;
   left: 0px;
@@ -479,7 +469,7 @@ overflow: visible;
   font-size: 34px;
   content: "\f0d7";
   color: #fafafa;
-  text-shadow: 0px 2px 2px #000;
+  text-shadow: 0px 2px 2px $black-base;
 }
 .cmp-popup > .cmp-header {
   display: block;
@@ -490,5 +480,5 @@ overflow: visible;
   border-top-left-radius: 5px;
   border-bottom: 1px solid #bbb;
   background-color: #e7e7e7;
-  color: #000;
+  color: $black-base;
 }
