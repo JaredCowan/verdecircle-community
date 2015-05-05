@@ -7,8 +7,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <button type="button" class="btn btn-success navbar-btn" id="nav-freetrial-btn-mobile">Get Thriii</button>
-      <a href="<%= url_for pricing_path %>" class="btn btn-info navbar-btn" id="nav-pricing-btn-mobile">Pricing</a>
+      <a href="<%= url_for pricing_path %>" class="btn btn-success navbar-btn" id="nav-freetrial-btn-mobile">Get Thriii</a>
+      <!-- <a href="<%#= url_for pricing_path %>" class="btn btn-info navbar-btn" id="nav-pricing-btn-mobile">Pricing</a> -->
       <a href="<%= verde_root_path %>" class="navbar-brand" title="brand logo">
         <%= image_tag "verde-circle-icon.png", class: "brand-image", alt: "Company Logo" %>
       </a>
@@ -34,9 +34,9 @@
         <span data-no-turbolink>
           <a href="<%= url_for pricing_path %>" class="btn btn-success navbar-btn" id="nav-freetrial-btn-desk">Get Thriii</a>
         </span>
-        <% if content_for? :pricing_btn %>
-          <%= yield :pricing_btn %>
-        <% end %>
+        <%# if content_for? :pricing_btn %>
+          <%#= yield :pricing_btn %>
+        <%# end %>
     </div> <!-- END navbar-collapse -->
   </div> <!-- END container -->
 </nav> <!-- END navigation menu -->
