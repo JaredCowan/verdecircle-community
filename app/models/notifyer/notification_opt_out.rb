@@ -5,6 +5,5 @@ module Notifyer
 
     belongs_to :user
     belongs_to :notifyable, polymorphic: true
-
   end
 end
