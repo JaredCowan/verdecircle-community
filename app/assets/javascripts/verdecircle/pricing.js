@@ -11,6 +11,7 @@ $(".pricing-switcher label").on("click", function(e) {
     case "monthly":
       $switchBtn.addClass("monthly").removeClass("yearly");
       $pricingTable.addClass("monthly").removeClass("yearly");
+      $(".pricing-table").first().css({"opacity": 1});
       setTimeout(function() {
         $yearlyPricing.hide();
         $monthlyPricing.show();
@@ -19,6 +20,7 @@ $(".pricing-switcher label").on("click", function(e) {
     case "yearly":
       $pricingTable.removeClass("monthly").addClass("yearly");
       $switchBtn.removeClass("monthly").addClass("yearly");
+      $(".pricing-table").first().css({"opacity": 0.3});
       setTimeout(function() {
         $monthlyPricing.hide();
         $yearlyPricing.show();
@@ -41,6 +43,7 @@ $(".pricing-switcher input").on("click", function(e) {
     case "monthly":
       $switchBtn.addClass("monthly").removeClass("yearly");
       $pricingTable.addClass("monthly").removeClass("yearly");
+      $(".pricing-table").first().css({"opacity": 1});
       setTimeout(function() {
         $yearlyPricing.hide();
         $monthlyPricing.show();
@@ -49,6 +52,7 @@ $(".pricing-switcher input").on("click", function(e) {
     case "yearly":
       $pricingTable.removeClass("monthly").addClass("yearly");
       $switchBtn.removeClass("monthly").addClass("yearly");
+      $(".pricing-table").first().css({"opacity": 0.3});
       setTimeout(function() {
         $monthlyPricing.hide();
         $yearlyPricing.show();

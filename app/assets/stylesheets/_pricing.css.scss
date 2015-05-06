@@ -67,6 +67,7 @@
 
 .pricing-table {
   @extend %module;
+  position: relative;
   text-align: center;
   padding: 0 0 25px 0;
   border-radius: 5px;
