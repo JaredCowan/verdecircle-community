@@ -21,11 +21,17 @@ class PagesController < ApplicationController
   end
 
   def show_startups_pricing
-    render "pages/pricing/show_startups_pricing", layout: false
+    respond_to do |format|
+      format.html { redirect_to "/pricing" }
+      format.js { render "pages/pricing/show_startups_pricing", layout: false }
+    end
   end
 
   def hide_startups_pricing
-    render "pages/pricing/hide_startups_pricing", layout: false
+    respond_to do |format|
+      format.html { redirect_to "/pricing" }
+      format.js { render "pages/pricing/hide_startups_pricing", layout: false }
+    end
   end
 
   # Preview html email template
