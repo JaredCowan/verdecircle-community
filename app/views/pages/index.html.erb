@@ -37,7 +37,15 @@
 <div class="row">
   <div class="col-xs-12" id="intro-video-container">
     <div class="embed-responsive embed-responsive-16by9" id="intro-video">
-      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Jp6AF__EwKQ?rel=0&amp;controls=0&amp;showinfo=0" allowfullscreen></iframe>
+      <div class="intro-video-overlay">
+        <h1> Don't have time for a video? </h1>
+        <p class="meta-text">
+          Checkout our quick view of all the great benefits Thriii can bring to your business!
+        </p>
+        <%= link_to "Skip To Features", thriii_page_index_path, class: "btn btn-verde-green", tabindex: 0, data: { no_turbolink: true} %>
+        <%= link_to "Close", "javascript: $('.intro-video-overlay').remove();", class: "close-video-overlay" %>
+      </div>
+      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Jp6AF__EwKQ?rel=0&amp;controls=0&amp;showinfo=0&amp;modestbranding=1" allowfullscreen></iframe>
     </div>
   </div>
 </div>

@@ -14,23 +14,8 @@ $(function() {
 });
 
 
-// $(function() {
-//   var pusher = new Pusher('136065ba56ec3683eddd');
-//   var notifications = pusher.subscribe('notifications');
-//   u = window.currentuser;
-  
-  // $("<li> <time class='cbp_tmtime'><span>" + o.created_at + "</span></time> <div class='cbp_tmicon cbp_tmicon-phone'> </div> <div class='cbp_tmlabel'> <h2>" + o.userdata + "</h2>" + o.action + " a " + o.targetable_type.toLowerCase() + "</div> </li>").prependTo( ".cbp_tmtimeline li:first");
-  // notifications.bind('activity', function(data) {
-  //   o = data
-  //   jQuery(function() { 
-  //     jQuery.gritter.add({ image: '/assets/success.png', title: 'Success', text: "" + o.userdata + " " + o.action + " a " + o.targetable_type.toLowerCase() + "." });
-  //   });
-  // });
-
-  // notifications.bind('message', function(data) {
-  //   o = data
-  //     jQuery(function() { 
-  //       jQuery.gritter.add({ image: '/assets/success.png', title: 'Success', text: "" + o.userdata + " sent you a new message." });
-  //     });
-  // });
-// });
+$(function() {
+  $(".embed-responsive-item").on("click", function() {
+    console.log(this);
+  });
+});
