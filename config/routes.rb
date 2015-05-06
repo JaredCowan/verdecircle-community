@@ -21,10 +21,14 @@ Rails.application.routes.draw do
 
   get '/index', to: 'pages#index'
   get '/pricing', to: 'pages#pricing'
+  match '/pricing/month', to: redirect('/pricing?view=month'), via: :get
+  match '/pricing/year', to: redirect('/pricing?view=year'), via: :get
 
   resources :pages, only: [:index], path: "", as: 'page' do
     collection do
       get "thriii"
+      get "show_startups_pricing"
+      get "hide_startups_pricing"
     end
   end
 

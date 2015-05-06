@@ -153,17 +153,17 @@ $(".form-control").on("mouseover hover focus", function(e) {
   });
 });
 
-function ajaxRequestSent() {
+function ajaxLinkLoader() {
   $("a[data-remote]")
-    .on('ajax:before', function(e){
+    .not("[data-loader='false']").on('ajax:before', function(e){
       $(e.currentTarget).find("i").remove();
       $(e.currentTarget).append(" <i class='fa fa-spinner fa-spin'></i>");
     })
-    .on('ajax:error', function(e){
+    .not("[data-loader='false']").on('ajax:error', function(e){
       $(e.currentTarget).find("i").remove();
       $(e.currentTarget).append(" <i class='fa fa-exclamation-triangle'></i>");
     });
 }
 
-$(document).on("ready page:update", ajaxRequestSent);
+$(document).on("ready page:update", ajaxLinkLoader);
 

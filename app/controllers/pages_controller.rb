@@ -20,6 +20,14 @@ class PagesController < ApplicationController
     render "thriii", layout: "verdecircle"
   end
 
+  def show_startups_pricing
+    render "pages/pricing/show_startups_pricing", layout: false
+  end
+
+  def hide_startups_pricing
+    render "pages/pricing/hide_startups_pricing", layout: false
+  end
+
   # Preview html email template
   def email
     template = (params[:layout] || 'email').to_sym

@@ -7,7 +7,7 @@
   }
   .pricing-table.most-popular.monthly > .pricing-head { 
     > h1 {
-      margin-bottom: 30px;
+      margin-bottom: 38px;
     }
   }
 }
@@ -91,8 +91,43 @@
       padding-bottom: 5px;
     }
   }
+  &.most-popular {
+    top: -20px;
+    > .i-heart-startups-logo {
+      position: absolute;
+      width: 75px;
+      top: 0;
+      right: 0;
+      z-index: 1;
+    }
+  }
 }
-
+.i-heart-startups-logo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  > img {
+    width: 140px;
+  }
+}
+.remove-special-startups-pricing {
+  display: block;
+  > h4 {
+    color: $verde-green;
+    background-color: $gray-dark;
+    margin: 0 0 -20px 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  &:hover {
+    text-decoration: none;
+    > h4 {
+      color: $verde-green-darker;
+      background-color: $default-color;
+    }
+  }
+}
 @keyframes cd-rotate-monthly {
   0% {
     transform: perspective(2000px) rotateY(180deg);
@@ -117,10 +152,10 @@
   }
 }
 
-.pricing-table.most-popular {
-  top: -20px;
-  position: relative;
-}
+// .pricing-table.most-popular {
+//   top: -20px;
+//   position: relative;
+// }
 
 // .most-popular {
 //   background: #f77b6f;
@@ -128,25 +163,10 @@
 // }
 
 .most-popular h1 {
-  font-size: 25px !important;
+  // font-size: 25px !important;
   padding-bottom: 0;
   padding-top: 17px !important;
 }
-
-// .most-popular h2 {
-//   background: #d76b61;
-//   margin-top: 20px !important;
-// }
-
-// .most-popular ul li {
-//   border-bottom: 1px dotted #d76b61 !important;
-// }
-
-// .most-popular .price-actions .btn {
-//   background: #d76b61;
-//   margin: 10px 0;
-//   cursor: pointer;
-// }
 
 .pricing-table .price-actions .btn {
   border-radius: 5px;
@@ -163,17 +183,18 @@
 }
 
 .pricing-head h1 {
-  font-size: 18px;
+  font-size: $font-size-h1;
   font-weight: 300;
   padding-top: 15px;
+  color: $verde-purple;
 }
 
 .pricing-head h5 {
   width: 200px;
-  margin: -45px auto 0;
+  margin: -35px auto -10px;
   padding-top: 3px;
   padding-right: 15px;
-  color: $gray-darken;
+  color: $verde-teal;
   text-align: right;
 }
 
@@ -295,6 +316,12 @@
 }
 .pricing-table.most-popular {
   background-color: $verde-green;
+  &.startups {
+    .pricing-head > h2,
+    .add-on-header {
+      background-color: $verde-purple;
+    }
+  }
 }
 .most-popular .pricing-head h1 {
   color: $white-base;
@@ -316,7 +343,7 @@
 //   color: #777;
 // }
 .most-popular .pricing-head  h5 {
-  margin: -45px auto 0;
+  margin: -35px auto -10px;
   width: 200px;
   text-align: right;
 }
@@ -391,7 +418,7 @@
 .most-popular ul li {
   border-bottom-color: #2c3bad !important;
   /*text-shadow: 0 0 .3px #000;*/
-  color: #000;
+  color: $black-base;
 }
 .pricing-table .add-ons {
   cursor: default;

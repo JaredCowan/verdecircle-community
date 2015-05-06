@@ -60,3 +60,21 @@ $(".pricing-switcher input").on("click", function(e) {
       break;
   }
 });
+
+var whatView = function() {
+  var $monthlySwitch = $("#monthly"),
+      $yearlySwitch  = $("#yearly"),
+      currentView    = $(".pricing-switcher input:checked")[0].id,
+      requestedView  = window.location.search.split("=").pop(),
+      renderView     = requestedView === "year" ? "yearly" : "monthly",
+      toggleView     = requestedView.length > 0 ? renderView : currentView;
+
+  $("#" + toggleView).trigger("click");
+}
+$(document).one("page:load, ready", function() {
+  whatView();
+});
+
+$(".pricing-switcher input").on("change", function() {
+  whatView();
+});

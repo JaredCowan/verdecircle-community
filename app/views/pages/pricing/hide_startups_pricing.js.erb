@@ -1,0 +1,8 @@
+var view = $(".pricing-switcher").find("input:checked")[0].id;
+var $pricing_table = $(".startups").parents().first();
+$pricing_table.replaceWith('<%= escape_javascript(render partial: "pages/pricing/erp") %>');
+var $pricing_table = $(".micro-erp");
+var pricing_table_class = view === "monthly" ? "monthly" : "yearly";
+$pricing_table.removeClass("monthly");
+$("#" + pricing_table_class).trigger("click")
+$pricing_table.addClass(pricing_table_class);

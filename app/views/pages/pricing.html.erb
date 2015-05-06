@@ -6,19 +6,20 @@
     </div>
   </div>
 
-  <div class="col-xs-12">
+  <div class="col-xs-12" data-no-turbolink>
     <div class="pricing-switcher">
       <h3 class="switcher-header">
         Choose Plan Billing Cycle
       </h3>
       <p class="fieldset" tabindex="0">
-        <input type="radio" name="duration" value="monthly" id="monthly" checked="">
+        <input type="radio" name="duration" value="monthly" id="monthly" checked>
         <label accesskey="m" for="monthly">Monthly</label>
         <input type="radio" name="duration" value="yearly" id="yearly">
         <label accesskey="y" for="yearly">Yearly</label>
         <span class="price-switch-btn monthly"></span>
       </p>
     </div>
+    <%= link_to(image_tag('/images/i-heart-startups-black.png', alt: 'i heart startups logo'), show_startups_pricing_page_index_path, data: {remote: true, loader: false}, class: 'i-heart-startups-logo') %>
   </div>
   
   <%= render "pages/pricing/freemium" %>
