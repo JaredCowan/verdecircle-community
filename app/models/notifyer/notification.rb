@@ -18,20 +18,22 @@ module Notifyer
     class << self
       # Creator is the object that triggered notification
       # Object is the notifyable object
-      def notify_all(creator, object)
+      def notify_all(object, target, user)
         # Array where we will push all the users to notify
         notifyUserIds = []
         # Owner of the master object
-        owner = [] << object.user.id.to_s
+        owner = [] << target.user.id.to_s
         # Class name of the object
-        klass    = object.class.name.constantize
-        comments = object.comments.map(&:user_id).uniq
+        klass    = target.class.name.constantize
+        comments = target.comments.map(&:user_id).uniq
 
-        notifyUserIds = owner.push(comments).flatten!.delete_if {|n| n == creator.user.id or n == nil}
+        notifyUserIds = comments
+        # .delete_if {|n| n == creator.user.id or n == nil}
 
-        optouts = Notifyer::NotificationOptOut.where(notifyable_id: object.id, notifyable_type: "#{klass}")
+        # optouts = Notifyer::NotificationOptOut.where(notifyable_id: target.id, notifyable_type: "#{klass}").map(&:user_id)
+        optouts = target.optouts.map(&:user_id).uniq
         optouts.each do |optout|
-          notifyUserIds = notifyUserIds.delete(optout.user_id)
+          notifyUserIds = notifyUserIds.delete(optout)
         end
 
         # notifyUserIds.each do |notif|
@@ -39,10 +41,16 @@ module Notifyer
         #                                 notifyable_id: object.id, notifyable_type: "#{klass}"
         #   )
         # end
-        puts creator.class.name
-        puts ""
-        puts ""
-        puts object
+        # puts creator.class.name
+        # puts ""
+        # puts ""
+        # puts object
+        20.times { puts object }
+        20.times { puts target }
+        20.times { puts user }
+        # 5.times { puts optouts }
+        5.times { puts notifyUserIds }
+        # 5.times { puts comments }
       end
 
       def notify_user(creator, object, action)

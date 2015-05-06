@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     # @new_reply = @comment.replies.new
 
     if @comment.save
-      # Notifyer::Notification.notify_all(@comment, @post)
+      # Notifyer::Notification.notify_all(@comment, @post, current_user)
       @new_comment = @post.comments.new
       respond_to do |format|
         format.html { redirect_to @post }
