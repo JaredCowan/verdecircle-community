@@ -49,6 +49,7 @@ class Post < ActiveRecord::Base
   has_many :notifications, as: :notifyable,
                            class_name: "Notifyer::Notification",
                            dependent: :destroy
+  # has_many :optouts, class_name: "Notifyer::NotificationOptOuts", dependent: :destroy
 
   has_many :comments, -> { order("comments.cached_weighted_score DESC, comments.created_at ASC") }, dependent: :destroy
 
@@ -106,6 +107,10 @@ class Post < ActiveRecord::Base
 
   def format_post
     self.subject = subject.downcase
+  end
+
+  def optouts
+    Notifyer::NotificationOptOut.where(notifyable_id: self.id)
   end
 
   class << self

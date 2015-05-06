@@ -1,15 +1,15 @@
 class CreateNotificationOptOuts < ActiveRecord::Migration
   def change
     create_table :notification_opt_outs do |t|
-      t.integer :user_id, null: false, default: ''
+      t.belongs_to :user, null: false, index: true
+
+      t.references :notification, null: false, index: true
 
       t.integer :notifyable_id, null: false, default: ''
       t.string  :notifyable_type, null: false, default: ''
 
       t.timestamps
     end
-
-    add_index :notification_opt_outs, :user_id
 
     # Define index name as auto-generated one is too long & exceeds 63 character limit
     add_index :notification_opt_outs, [:notifyable_id, :notifyable_type],

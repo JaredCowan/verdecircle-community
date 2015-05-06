@@ -8,7 +8,7 @@ module Notifyer
     belongs_to :user
     belongs_to :sender, class_name: "User", foreign_key: "sender_id"
     belongs_to :notifyable, polymorphic: true
-    has_many :optouts, class_name: "Notifyer::NotificationOptOut", foreign_key: "notifyable_id"
+    # has_many :optouts, class_name: "Notifyer::NotificationOptOut", foreign_key: "notification_id"
 
     # Basic scopes for common queries
     scope :unread,       lambda { where(is_read: false) }

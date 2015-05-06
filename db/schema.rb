@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506055336) do
+ActiveRecord::Schema.define(version: 20150506060318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,6 +166,19 @@ ActiveRecord::Schema.define(version: 20150506055336) do
 
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
+
+  create_table "notification_opt_outs", force: true do |t|
+    t.integer  "user_id",                      null: false
+    t.integer  "notification_id",              null: false
+    t.integer  "notifyable_id",   default: 0,  null: false
+    t.string   "notifyable_type", default: "", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notification_opt_outs", ["notification_id"], name: "index_notification_opt_outs_on_notification_id", using: :btree
+  add_index "notification_opt_outs", ["notifyable_id", "notifyable_type"], name: "index_notification_opt_outs_on_notifyable_id_type", using: :btree
+  add_index "notification_opt_outs", ["user_id"], name: "index_notification_opt_outs_on_user_id", using: :btree
 
   create_table "notifications", force: true do |t|
     t.integer  "user_id"
