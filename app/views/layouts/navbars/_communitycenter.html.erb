@@ -49,8 +49,8 @@
   <% end %>
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav navbar-left secondary-nav-dropdown">
-      <li class="dropdown hidden-xs">
-        <a href="javascript:;" class="navbar-brand dropdown-toggle" data-toggle="dropdown" id="secondaryDropdownNav" title="secondary navigation dropdown menu">
+      <li class="dropdown hidden-xs" tabindex="0" aria-haspopup="true">
+        <a href="javascript:;" tabindex="0" class="navbar-brand dropdown-toggle" data-toggle="dropdown" id="secondaryDropdownNav" title="secondary navigation dropdown menu">
           <%= image_tag "verde-circle-icon.png", class: "brand-image", alt: "secondary navigation dropdown menu" %>
           <i class="brand-image-icon-layer fa fa-bars"></i>
         </a>

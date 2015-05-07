@@ -14,7 +14,9 @@ body {
     white-space: nowrap;
   }
 }
-
+.navbar-right {
+  margin-right: 0;
+}
 // Postion loading spinner at bottom right
 #nprogress .spinner {
   top: auto;

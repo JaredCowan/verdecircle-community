@@ -114,4 +114,11 @@
       background: #08c;
     }
   }
+  &[data-provider=google_oauth2] {
+    background-color: #d73d32;
+    border-color: #e4271a;
+    &:hover {
+      background-color: #e4271a;
+    }
+  }
 }
