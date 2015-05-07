@@ -17,11 +17,11 @@ class FavoritesController < ApplicationController
                     favorable_type: klass,
     )
 
-    Activity.create(user_id: userId,
-                    action: "favorited",
-                    targetable_id: objectId,
-                    targetable_type: klass
-    ) # End Create Activity
+    # Activity.create(user_id: userId,
+    #                 action: "favorited",
+    #                 targetable_id: objectId,
+    #                 targetable_type: klass
+    # ) # End Create Activity
 
     gflash success: "Added to your favorites!"
 
@@ -36,7 +36,7 @@ class FavoritesController < ApplicationController
     objectId = params[:id]
     @object  = klass.constantize.first
 
-    current_user.activities.where("targetable_id = ? AND targetable_type = ?", objectId, klass).first.destroy!
+    # current_user.activities.where("targetable_id = ? AND targetable_type = ?", objectId, klass).first.destroy!
     current_user.favorites.where("favorable_id = ? AND favorable_type = ?", objectId, klass).first.destroy!
 
     gflash success: "Removed from your favorites!"

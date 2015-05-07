@@ -142,22 +142,22 @@ class PostsController < ApplicationController
 
   def unliked
     @post = Post.find(params[:id])
-    current_user.destroy_activity(@post, "liked")
+    # current_user.destroy_activity(@post, "liked")
     @post.unliked_by current_user, :vote_weight => 1
     redirect_to :back
   end
 
   def disliked
     @post = Post.find(params[:id])
-    current_user.create_activity(@post, 'disliked')
+    # current_user.create_activity(@post, 'disliked')
     @post.disliked_by current_user, :vote_weight => 1
     redirect_to :back
   end
 
   def undisliked
-    @post = Post.find(params[:id])
-    @activity = Activity.find_by(targetable_id: @post)
-    @activity.destroy!
+    @post     = Post.find(params[:id])
+    # @activity = Activity.where("targetable_id = ?", @post.id)
+    # @activity.destroy
     @post.undisliked_by current_user, :vote_weight => 1
     redirect_to :back
   end

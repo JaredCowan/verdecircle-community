@@ -23,7 +23,7 @@ module Concerns::UserActivityConcern
   end
 
   def destroy_activity(object, action_type)
-    Activity.where("targetable_id = ? AND action = ?", object.id, action_type).first.destroy!
+    Activity.where("targetable_id = ? AND action = ?", object.id, action_type).first.destroy
     # puts caller[0][/`([^']*)'/, 1]
   end
 end

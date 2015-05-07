@@ -63,13 +63,6 @@ Rails.application.routes.draw do
   thriii_prefix = "/thriii"
   get "#{thriii_prefix}(/*path)", to: redirect("#{thriii_prefix}#%{path}")
 
-  # Depreciated
-    # match "#{thriii_prefix}/features",    to: redirect("#{thriii_prefix}#features"),    via: :get
-    # match "#{thriii_prefix}/inventory",   to: redirect("#{thriii_prefix}#inventory"),   via: :get
-    # match "#{thriii_prefix}/accounting",  to: redirect("#{thriii_prefix}#accounting"),  via: :get
-    # match "#{thriii_prefix}/orders",      to: redirect("#{thriii_prefix}#orders"),      via: :get
-    # match "#{thriii_prefix}/fulfillment", to: redirect("#{thriii_prefix}#fulfillment"), via: :get
-
   # =====================================
   # Routing for Community
   # =====================================

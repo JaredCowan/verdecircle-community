@@ -7,12 +7,26 @@ module DetectBrowserConcern
 
     if Rails.env == "development"
       before_filter :detect_browser
+      before_filter :test_action
     end
   end
 
   private
     # Array for matching user_agent to mobile device definitions
-    MOBILE_BROWSERS = %w(iphone ipad android ipod opera mini blackberry palm hiptop avantgo plucker xiino blazer elaine windows\ ce;\ ppc; windows\ ce;\ smartphone; windows\ ce;\ iemobile up.browser up.link mmp symbian smartphone midp wap vodafone o2 pocket kindle mobile pda psp treo)
+    MOBILE_BROWSERS   = %w(iphone ipad android ipod opera mini blackberry palm hiptop avantgo plucker xiino blazer elaine windows\ ce;\ ppc; windows\ ce;\ smartphone; windows\ ce;\ iemobile up.browser up.link mmp symbian smartphone midp wap vodafone o2 pocket kindle mobile pda psp treo)
+    WHITELIST_ACTIONS = %w(liked unliked disliked undisliked)
+
+    def test_action
+      action   = params[:action]
+
+      if WHITELIST_ACTIONS.include?(action)
+        klass    = params[:controller].classify.constantize
+        param_id = params[:id]
+        object   = klass.find(param_id)
+
+        20.times { puts action }
+      end
+    end
 
     def detect_browser
       # Assign user_agent
