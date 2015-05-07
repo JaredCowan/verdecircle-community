@@ -202,3 +202,54 @@
     margin-right: auto;
   }
 }
+
+
+
+
+.navbar-green {
+  background-color: $verde-green;
+  border: 1ps solid $verde-green-dark;
+  .navbar-toggle {
+    border-color: $verde-green-dark;
+    &:hover, &:focus {
+      background-color: $verde-green;
+    }
+    .icon-bar {
+      background-color: $verde-blue;
+    }
+  }
+  .navbar-nav > li {
+    margin: 3px;
+    > a {
+      color: $white-base;
+      border-radius: $border-radius-large;
+      transition: all .6s;
+      &:hover, &:focus {
+        color: $white-base;
+        background-color: $verde-blue;
+      }
+    }
+  }
+}
+.navbar-brand {
+  margin-left: -19px !important;
+  padding: 0;
+}
+.brand-image {
+  width: 150px;
+}
+@media (max-width: $screen-xs-max) {
+  .navbar-brand {
+    margin-left: -4px !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+

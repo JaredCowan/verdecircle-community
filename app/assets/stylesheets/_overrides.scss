@@ -219,14 +219,14 @@ html.desktop .test-popup {
 .btn-verde-green {
   background-color: $verde-green;
   border-color: $verde-green-dark;
-  &:visited, &:hover, &:active, &:focus {
+  &:hover, &:active, &:focus {
     background-color: $verde-green-dark;
   }
 }
 .btn-verde-blue {
   background-color: $verde-blue;
   border-color: $verde-blue-light;
-  &:visited, &:hover, &:active, &:focus {
+  &:hover, &:active, &:focus {
     background-color: $verde-blue-light;
   }
 }

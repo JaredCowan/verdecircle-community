@@ -52,6 +52,10 @@ class PagesController < ApplicationController
     end
   end
 
+  def test
+    render "test", layout: "mobile"
+  end
+
   def error
     redirect_to root_path if flash.empty?
   end
