@@ -253,7 +253,14 @@ textarea.form-control {
 .fa-rotate {
   animation: rotater 2s infinite cubic-bezier(0.89, 0.28, 0.35, 0.79);
 }
-
+#favorite-action-buttons {
+  > a {
+    display: inline;
+    .fa-star {
+      color: yellow;
+    }
+  }
+}
 @keyframes pulsate {
   0% {transform: scale(1);}
   50% {transform: scale(1.2);}

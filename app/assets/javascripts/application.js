@@ -27,7 +27,7 @@
 //= require nprogress
 //= require nprogress-turbolinks
 //= require rails_confirm_dialog
-//= require gritter
+//= require depend/flash_notifs
 //= require jquery.scrollto
 
 //= require js-routes
@@ -48,20 +48,6 @@
  * common scripts load last!
 */
 //= require verdecircle/commonscripts
-
-// jQuery(function() {
-//   if ($('#infinite-scrolling').size() > 0) {
-//     var more_posts_url = $('.pagination .next a').attr('href');
-//     $(window).on('scroll', function() {
-//       return more_posts_url;
-//     });
-//     if (more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
-//       $('.pagination').html('<img src="http://www.toidesignz.com/images/ajax-loader.gif" alt="Loading..." title="Loading..." />');
-//       $.getScript(more_posts_url);
-//     }
-//     return;
-//   }
-// });
 
 // $("img").error().replaceWith("<h5 class='alert alert-danger'>Sorry, that was an error loading image.</h5>")
 
@@ -91,12 +77,6 @@ var ready = function() {
       _rows += Math.floor(v.length / ($this.width() / 6.7825));
     });
   });
-
-  // window.setTimeout(function() {
-  //   $(".alert").fadeTo(500, 0).slideUp(500, function(){
-  //       $(this).remove(); 
-  //   });
-  // }, 5000);
 }
 
 $(document).on('page:load', ready);
@@ -166,4 +146,3 @@ function ajaxLinkLoader() {
 }
 
 $(document).on("ready page:update", ajaxLinkLoader);
-

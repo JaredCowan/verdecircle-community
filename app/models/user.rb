@@ -87,6 +87,10 @@ class User < ActiveRecord::Base
     email
   end
 
+  def favorited?(object)
+    object.favorites.map(&:user_id).include?(id)
+  end
+
   # Override Devise to allow for Authentication or password.
   #
   # An invalid authentication is allowed for a new record since the record

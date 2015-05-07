@@ -1,0 +1,5 @@
+var $favorite_buttons = $("#favorite-action-buttons");
+var $flash_messages   = $(".errors__container");
+
+$flash_messages.html('<%= escape_javascript(render partial: "layouts/messages") %>');
+$favorite_buttons.html('<%= escape_javascript(render partial: "favorites/buttons") %>');

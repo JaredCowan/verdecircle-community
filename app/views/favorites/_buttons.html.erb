@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+  <% @post = @post ||= @object %>
+
+  <% if current_user.favorited?(@post) %>
+    <%= link_to "<i class='fa fa-star fa-lg'></i> Favorited".html_safe, unfavorite_post_path(@post.id), method: :delete, class: "btn btn-primary remove-favorite", tabindex: 0, data: { remote: true, loader: false } %>
+  <% else %>
+    <%= link_to "<i class='fa fa-star-o fa-lg'></i> Favorite".html_safe, favorite_post_path(@post.id), method: :put, class: "btn btn-primary add-favorite", tabindex: 0, data: { remote: true, loader: false } %>
+  <% end %>
+<% end %>

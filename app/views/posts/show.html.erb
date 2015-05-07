@@ -1,11 +1,8 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <span>Post Form</span>
-    <span class="pull-right">
-      <% if user_signed_in? %>
-        <%= link_to "Favorite Post", favorite_post_path(@post.id), method: :put, class: "fa fa-star" %>
-        <%= link_to "Remove Favorite", unfavorite_post_path(@post.id), method: :delete, class: "fa fa-star" %>
-      <% end %>
+    <span class="pull-right" id="favorite-action-buttons">
+      <%= render partial: "favorites/buttons" %>
     </span>
   </div>
   <div class="panel-body">

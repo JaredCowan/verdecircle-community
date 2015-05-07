@@ -7,9 +7,10 @@ class FavoritesController < ApplicationController
   end
 
   def add_favorite
-    klass    = params[:className].constantize.to_s
+    klass    = params[:className].classify.constantize.to_s
     userId   = current_user.id
     objectId = params[:id]
+    @object  = klass.constantize.first
 
     Favorite.create(user_id: userId,
                     favorable_id: objectId,
@@ -22,18 +23,27 @@ class FavoritesController < ApplicationController
                     targetable_type: klass
     ) # End Create Activity
 
-    flash.keep[:success] = "Added to your favorites!"
-    redirect_to :back
+    gflash success: "Added to your favorites!"
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js { render "favorites/render_buttons", layout: false }
+    end
   end
 
   def remove_favorite
-    klass    = params[:className].constantize.to_s
+    klass    = params[:className].classify.constantize.to_s ||= params[:controller].classify.constantize.to_s
     objectId = params[:id]
+    @object  = klass.constantize.first
 
     current_user.activities.where("targetable_id = ? AND targetable_type = ?", objectId, klass).first.destroy!
     current_user.favorites.where("favorable_id = ? AND favorable_type = ?", objectId, klass).first.destroy!
 
-    flash.keep[:success] = "Removed from favorites!"
-    redirect_to :back
+    gflash success: "Removed from your favorites!"
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js { render "favorites/render_buttons", layout: false }
+    end
   end
 end

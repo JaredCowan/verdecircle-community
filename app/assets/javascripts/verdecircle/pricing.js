@@ -71,10 +71,13 @@ var whatView = function() {
 
   $("#" + toggleView).trigger("click");
 }
-$(document).one("page:load, ready", function() {
-  whatView();
-});
 
-$(".pricing-switcher input").on("change", function() {
-  whatView();
-});
+if ($("body").hasClass("action__pricing")) {
+  $(document).one("page:load, ready", function() {
+    whatView();
+  });
+
+  $(".pricing-switcher input").on("change", function() {
+    whatView();
+  });
+}
