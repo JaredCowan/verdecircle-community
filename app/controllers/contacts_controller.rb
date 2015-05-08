@@ -4,10 +4,13 @@ class ContactsController < ApplicationController
   skip_authorization_check
   before_filter :authenticate_user!, only: [:show]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
   def index
     # Index Page
     respond_to do |format|
       format.html
+      format.js
     end
   end
 
@@ -28,12 +31,14 @@ class ContactsController < ApplicationController
     @contact = Contact.new
 
     respond_to do |format|
-      format.html { redirect_to controller: "contacts", action: "index" }
+      format.html
+      format.js
     end
   end
 
   def show
-    if user_signed_in? && current_user.is_admin?
+    @return_to = request.env["HTTP_REFERER"] ||= contacts_path
+    if user_signed_in? && !current_user.is_admin?
       @contact = Contact.find(params[:id])
 
       respond_to do |format|
@@ -41,7 +46,7 @@ class ContactsController < ApplicationController
         format.json { render json: @contact }
       end
     else
-      redirect_to controller: "contacts", action: "index"
+      redirect_to @return_to
     end
   end
 
@@ -50,11 +55,15 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to controller: "contacts", action: "index"  }
         flash.now[:success] = "Message successfully sent."
+        format.html { redirect_to controller: "contacts", action: "index", format: :html }
+        format.js { render controller: "contacts", action: "index", format: :js }
+        format.json
       else
-        format.html { redirect_to controller: "contacts", action: "index" }
         flash.now[:danger] = "#{@contact.errors.count} error(s) prohibited this message from being sent: #{@contact.errors.full_messages.join(', ')}"
+        format.html
+        format.js { render :new, status: 200 }
+        format.json
       end
     end
   end
@@ -77,5 +86,9 @@ class ContactsController < ApplicationController
 
     def contact_params
       params.require(:contact).permit(:inquiry, :name, :email, :phone, :subject, :body)
+    end
+
+    def not_found
+      redirect_to controller: :contacts, action: :index
     end
 end

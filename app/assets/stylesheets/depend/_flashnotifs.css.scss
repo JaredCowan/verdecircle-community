@@ -111,10 +111,10 @@
 }
 
 .gritter-close {
-  display:none;
+  // display:none;
   position:absolute;
-  top:5px;
-  right: 3px;
+  top: -5px;
+  right: -5px;
   cursor:pointer;
   width:30px;
   height:30px;

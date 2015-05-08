@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
 
   # Devise, require authenticate by default
   before_filter :authenticate_user!
+  # before_filter :build_url
 
   # CanCan, check authorization unless authorizing with devise
   check_authorization unless: :skip_check_authorization?
@@ -65,6 +66,11 @@ class ApplicationController < ActionController::Base
 
     puts options
   end
+
+  # def build_url
+  #   session[:return_to] = request.env["HTTP_REFERER"] unless request.env["HTTP_REFERER"].blank?
+  #   request.env['QUERY_STRING'] = add_to_url(request.env['REQUEST_URI'], return_to: session[:return_to])
+  # end
 
   protected
 

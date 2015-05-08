@@ -1,4 +1,6 @@
-<%= simple_form_for(Contact.new, html: { class: "form-group", multipart: true }) do |f| %>
+<% contact = @contact ||= Contact.new %>
+
+<%= simple_form_for(contact, html: { class: "form-group", multipart: true }, remote: true) do |f| %>
 
   <div class="panel panel-default">
     <div class="panel-heading">

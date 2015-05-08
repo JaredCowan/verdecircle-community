@@ -1,6 +1,14 @@
 <% provide(:title, I18n.t("brand.company") + "\s| Blog") %>
 <div class="row" id="blog-page">
-  <div class="col-lg-9 ">
+  <div class="col-xs-12 clearfix">
+    <center>
+      <%= link_to "Create New Blog", new_blog_path, class: "btn btn-lg btn-verde-blue" if user_signed_in? %>
+    </center>
+  </div>
+  <br>
+  <hr>
+
+  <div class="col-lg-9">
     <%= render @blogs %>
 
     <div class="text-center">

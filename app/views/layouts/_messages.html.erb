@@ -1,11 +1,53 @@
 <% flash.each do |name, msg| %>
   <% if msg.is_a?(String) and msg.present? %>
     <% type = (['info', 'success', 'warning', 'danger'].include?(name.to_s) ? name : 'info') %>
-    <div class="alert-<%= type %> alert alert-dismissable">
-      <button aria-hidden="<%= true %>" class="close" data-dismiss="alert">&times;</button>
-      <%= msg %>
+    <% type = "success" if type === "info" %>
+    <% type = "error"  if type === "danger" %>
+    <!-- <div class="alert-<%#= type %> alert alert-dismissable">
+      <button aria-hidden="<%#= true %>" class="close" data-dismiss="alert">&times;</button>
+      <%#= msg %>
+    </div> -->
+    <div id="gritter-notice-wrapper" onmouseenter="clearGritterTimeout();" class="bottom-right">
+      <div id="gritter-item-00" class="gritter-item-wrapper">
+        <div class="gritter-item gritter-css3">
+          <div class="gritter-close" tabindex="0" onclick="closeGritter();"></div>
+          <img src="/assets/<%= type %>.png" class="gritter-image">
+          <div class="gritter-with-image">
+            <!-- <span class="gritter-title"><%= type %></span> -->
+            <p>
+              <%= msg %>
+            </p>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+      </div>
     </div>
   <% end %>
 <% end %>
 
 <%= gflash nodom_wrap: true %>
+
+<script>
+  gritterWrapper = document.getElementById("gritter-notice-wrapper");
+
+  closeGritter = function() {
+    $.gritter.removeAll();
+  };
+
+  setGritterTimeout = function() {
+    _gritterTimeout = window.setTimeout(function() {
+      $.gritter.removeAll();
+    }, 5000);
+  };
+
+  clearGritterTimeout = function() {
+    window.clearTimeout(_gritterTimeout);
+
+    gritterWrapper.onmouseleave = function() {
+      setGritterTimeout();
+    };
+  };
+
+  setGritterTimeout();
+
+</script>
