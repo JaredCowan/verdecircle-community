@@ -1,0 +1,5 @@
+var $flash_messages = $(".errors__container");
+var $action_button  = $("#admin_user_actions");
+
+$flash_messages.html('<%= escape_javascript(render partial: "layouts/messages") %>');
+$action_button.html('<%= escape_javascript(render("users/shared/admin_user_actions")) %>');

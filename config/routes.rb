@@ -70,6 +70,7 @@ Rails.application.routes.draw do
     scope "/ajax", as: :ajax, defaults: {format: :json} do
       get '/notifications', to: "pages#ajax", defaults: {get: :notifications}
     end
+
     get "/report/:id", to: "users#report", as: :report
     scope '/posts' do
       get '/tags/:tag', to: 'posts#index', as: :tag
@@ -78,7 +79,13 @@ Rails.application.routes.draw do
     concern :paginatable do
       get '(page/:page)', action: :index, on: :collection, as: ''
     end
-    
+
+    resources :users, path: "u", param: :username, only: :make_employee do
+      member do
+        put "make_employee", to: "users#make_employee"
+      end
+    end
+
     # Posts, Posts likes, Post Comments & Post Comment likes
     resources :posts, concerns: :paginatable do
       member do

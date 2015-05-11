@@ -1,0 +1,8 @@
+<% _is_employed = @user.is_employee? %>
+<% _id          = @user.username %>
+<% _btn_text    = _is_employed ? "Remove Employee" : "Make Employee" %>
+<% _class       = _is_employed ? "danger" : "success" %>
+
+<% if current_user && current_user.is_admin? %>
+  <%= link_to _btn_text, make_employee_user_path(_id, is_employee: _is_employed), data: { remote: true }, class: "btn btn-#{_class}", method: :put %>
+<% end %>

@@ -53,6 +53,8 @@ class User < ActiveRecord::Base
                      class_name: "Notifyer::NotificationOptOut",
                      foreign_key: 'user_id'
 
+  scope :employees, lambda { User.where("is_employee = ?", true) }
+
   # Class Methods
   class << self
     # Case insensitive email lookup.

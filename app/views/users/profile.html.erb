@@ -1,6 +1,9 @@
 <h1>Profile Page</h1>
 <h1><%= @user.username %></h1>
-<%= follow_link_helper(@user, {class: 'btn btn-primary'}) %>
+  <%= follow_link_helper(@user, {class: 'btn btn-primary'}) %>
+  <div id="admin_user_actions">
+    <%= render partial: "users/shared/admin_user_actions" %>
+  </div>
 <br>
 
 <br>

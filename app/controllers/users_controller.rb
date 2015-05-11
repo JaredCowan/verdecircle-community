@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   include AuthFilterConcern
   # skip_authorization_check
   before_filter :authenticate_user!, except: [:index, :show, :profile, :report]
-  respond_to :html, :json
+  respond_to :html, :json, :js
 
   include CommonHelper
 
@@ -58,6 +58,34 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         format.json { render json: {reason: "Already Reported"}, status: 302 }
+      end
+    end
+  end
+
+  def make_employee
+    @user    = User.find_by(username: params[:username].downcase)
+
+    if current_user.is_admin?
+      action = params[:is_employee] === "true" ? false : true
+      @user.update(is_employee: action)
+
+      case action
+      when true
+        flash.now[:success] = "User is now an employee."
+      when false
+        flash.now[:success] = "User is no longer an employee."
+      end
+
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js { render "users/js/make_employee" }
+      end
+    else
+      flash.now[:danger] = "Sorry, you're not authorized to perform this."
+
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js { render "users/js/make_employee" }
       end
     end
   end
