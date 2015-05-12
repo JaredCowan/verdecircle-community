@@ -12,7 +12,7 @@ module DetectBrowserConcern
 
   private
     # Array for matching user_agent to mobile device definitions
-    MOBILE_BROWSERS   = %w(iphone ipad android ipod opera mini blackberry palm hiptop avantgo plucker xiino blazer elaine windows\ ce;\ ppc; windows\ ce;\ smartphone; windows\ ce;\ iemobile up.browser up.link mmp symbian smartphone midp wap vodafone o2 pocket kindle mobile pda psp treo)
+    MOBILE_BROWSERS   = %w(iphone ipad android ipod opera mini blackberry palm hiptop avantgo plucker xiino blazer elaine windows\ ce;\ ppc; windows\ ce;\ smartphone; windows\ ce;\ iemobile up.browser up.link mmp symbian smartphone midp wap vodafone o2 pocket kindle mobile pda psp treo).freeze
 
     def detect_browser
       # Assign user_agent

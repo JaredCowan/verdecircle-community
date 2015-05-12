@@ -5,7 +5,7 @@ module VotableConcern
     before_filter :render_action
   end
 
-  WHITELIST_ACTIONS = %w(liked unliked disliked undisliked)
+  WHITELIST_ACTIONS = %w(liked unliked disliked undisliked).freeze
 
   def render_action
     @action = params[:action]
@@ -18,20 +18,20 @@ module VotableConcern
       20.times { puts params }
       case @action
       when "liked"
-        liked(@object, @id, @klass, @action)
+        liked(@object, @action)
       when "unliked"
-        unliked(@object, @id, @klass, @action)
+        unliked(@object, @action)
       when "disliked"
-        disliked(@object, @id, @klass, @action)
+        disliked(@object, @action)
       when "undisliked"
-        undisliked(@object, @id, @klass, @action)
+        undisliked(@object, @action)
       when "report"
-        report(@object, @id, @klass, @action)
+        report(@object, @action)
       end
     end
   end
 
-  def liked(object, id, klass, action)
+  def liked(object, action)
     object.liked_by current_user, :vote_weight => 1
     respond_to do |format|
       format.html { redirect_to :back }
@@ -39,7 +39,7 @@ module VotableConcern
     end
   end
 
-  def unliked(object, id, klass, action)
+  def unliked(object, action)
     object.unliked_by current_user, :vote_weight => 1
     respond_to do |format|
       format.html { redirect_to :back }
@@ -47,7 +47,7 @@ module VotableConcern
     end
   end
 
-  def disliked(object, id, klass, action)
+  def disliked(object, action)
     # current_user.create_activity(object, 'disliked')
     object.disliked_by current_user, :vote_weight => 1
     respond_to do |format|
@@ -56,7 +56,7 @@ module VotableConcern
     end
   end
 
-  def undisliked(object, id, klass, action)
+  def undisliked(object, action)
     # @activity = Activity.where("targetable_id = ?", object.id)
     # @activity.destroy
     object.undisliked_by current_user, :vote_weight => 1
@@ -66,7 +66,7 @@ module VotableConcern
     end
   end
 
-  def report(object, id, klass, action)
+  def report(object, action)
     object.disliked_by current_user, vote_scope: "reported"
     redirect_to :back
   end
