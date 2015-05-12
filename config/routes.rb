@@ -201,7 +201,7 @@ Rails.application.routes.draw do
 
     root 'pages#home'
 
-    resources :dashboards, only: :index, path: "dashboard"
+    resources :dashboards, only: :index, path: "dashboard", concerns: :paginatable
 
   end # End of Community scope
 
