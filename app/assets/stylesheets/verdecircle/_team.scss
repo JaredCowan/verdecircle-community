@@ -1,0 +1,61 @@
+.team_wrapper {
+  max-width: $screen-sm-max;
+  margin-left: auto;
+  margin-right: auto;
+  .section-head {
+    @extend %module;
+    text-align: center;
+    padding-bottom: 25px;
+    .header {
+      color: $verde-purple;
+    }
+    .intro {
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 5px 20px;
+      font-size: $font-size-med;
+    }
+  }
+  .user_div {
+    @extend %module;
+    margin: 15px 5px;
+    padding: 15px;
+    .avatar {
+      > img {
+        width: 75px;
+        height: 75px;
+      }
+    }
+    .meta {
+      display: inline-block;
+      line-height: 30px;
+      vertical-align: middle;
+      .username, .fa {
+        font-size: $font-size-h3;
+      }
+      .username {
+        &:hover, &:focus {
+          color: $verde-teal;
+          text-decoration: none;
+        }
+      }
+      .fa {
+        width: 21px;
+        margin: 5px;
+      }
+      .job-title {
+        font-size: $font-size-h1;
+        vertical-align: inherit;
+      }
+      .job-title, .fa {
+        color: $verde-purple;
+      }
+    }
+    .bio {
+      color: $black-base;
+      font-size: $font-size-med;
+      line-height: 22px;
+      white-space: pre-line;
+    }
+  }
+}

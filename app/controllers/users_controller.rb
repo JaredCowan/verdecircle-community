@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include AuthFilterConcern
   # skip_authorization_check
-  before_filter :authenticate_user!, except: [:index, :show, :profile, :report]
+  before_filter :authenticate_user!, except: [:index, :show, :profile, :employees, :make_employee, :report]
   respond_to :html, :json, :js
 
   include CommonHelper
@@ -62,8 +62,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def employees
+    @employees = User.employees
+
+    respond_to do |format|
+      format.html { render "users/employees/index", layout: "verdecircle" }
+    end
+  end
+
   def make_employee
-    @user    = User.find_by(username: params[:username].downcase)
+    @user = User.find_by_username(params[:username].downcase)
 
     if current_user.is_admin?
       action = params[:is_employee] === "true" ? false : true

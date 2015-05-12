@@ -59,7 +59,9 @@ Rails.application.routes.draw do
   resources :users, path: 'u', only: :show do
     resources :authentications, path: 'accounts'
   end
-  
+
+  match '/team', to: "users#employees", via: :get, as: :employees
+
   thriii_prefix = "/thriii"
   get "#{thriii_prefix}(/*path)", to: redirect("#{thriii_prefix}#%{path}")
 

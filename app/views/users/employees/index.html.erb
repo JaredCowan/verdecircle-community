@@ -1,0 +1,30 @@
+<div class="row team_wrapper">
+  <div class="section-head">
+    <h1 class="header"> Our Team </h1>
+    <article class="intro">
+      We’re obsessed with delivering exceptional service at all times. Each Verde Circle employee goes through an extensive screening process to ensure they have the right fit of skill set, personality, and passion to deliver an outstanding experience for each customer.
+    </article>
+  </div>
+
+  <div class="col-xs-12">
+    <% @employees.each do |e| %>
+      <%= div_for e, class: "col-xs-12 user_div" do %>
+        <div class="avatar img-circle">
+          <%= image_tag e.image_url(size: :small, ssl: request.ssl?), alt: "user avatar" %>
+        </div>
+        <div class="meta">
+          <%= link_to "@#{e.username.titleize}", profile_page_path(e.username), class: "username" %>
+          <i class="fa fa-arrow-right fa-lg"></i>
+          <span class="job-title">
+            <%= "CEO &amp; President".html_safe %>
+          </span>
+        </div> <!-- END .meta -->
+        <article class="bio">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at elementum enim. Sed a justo ligula. Integer tempus non metus ac ornare. Vestibulum tempor eros a lacus pharetra pellentesque. Donec vel malesuada felis. Curabitur ut orci nec turpis mattis malesuada. Suspendisse eu sodales leo, sed interdum lectus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent vulputate tortor id fermentum porttitor.
+
+          Duis ullamcorper condimentum convallis. Integer id lacus ultrices, lacinia lacus sed, rutrum risus. Quisque dapibus diam ac eros mollis molestie. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc magna felis, eleifend non lorem eu, vulputate scelerisque arcu. Curabitur sed hendrerit metus, vitae posuere felis. Sed in turpis pharetra, volutpat est consequat, congue diam. Nulla varius porttitor commodo. Integer mollis mauris ut magna porttitor vehicula. Integer venenatis suscipit risus in ultricies.
+        </article>
+      <% end %> <!-- END .user_div -->
+    <% end %> <!-- END each method -->
+  </div> <!-- END .col-xx-xx -->
+</div> <!-- END .team-wrapper -->
