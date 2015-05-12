@@ -1,0 +1,16 @@
+<% @post ||= @object %>
+
+<div id="votable-buttons-wrapper">
+  <% if user_signed_in? %>
+    <% if current_user.voted_up_on? @post %>
+      <%= link_to "Liked", unlike_post_path(@post), method: :put, data: { remote: true, loader: false}, class: "btn btn-success" %>
+    <% else %>
+      <%= link_to "Like", like_post_path(@post), method: :put, data: { remote: true, loader: false}, class: "btn btn-primary" %>
+    <% end %>
+    <% if current_user.voted_down_on? @post %>
+      <%= link_to "Disliked", undislike_post_path(@post), method: :put, data: { remote: true, loader: false}, class: "btn btn-danger" %>
+    <% else %>
+      <%= link_to "DisLike", dislike_post_path(@post), method: :put, data: { remote: true, loader: false}, class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+</div>

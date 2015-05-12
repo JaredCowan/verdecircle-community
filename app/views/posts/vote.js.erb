@@ -1,0 +1,7 @@
+var $flash_messages = $(".errors__container");
+var $partial_view   = $("#votable-buttons-wrapper");
+
+$flash_messages.html('<%= escape_javascript(render partial: "layouts/messages") %>');
+
+$partial_view.replaceWith('<%= escape_javascript(render("posts/vote_buttons")) %>');
+

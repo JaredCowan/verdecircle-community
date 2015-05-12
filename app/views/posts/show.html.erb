@@ -30,18 +30,7 @@
 <% end %>
 <div class="panel panel-default">
     <div class="panel-heading">
-      <% if user_signed_in? %>
-        <%# if hidden_logic(@post)[:like] %>
-          <%= link_to "Like", like_post_path(@post), method: :put %>
-        <%# else %>
-          <%= link_to "UnLike", unlike_post_path(@post), method: :put %>
-        <%# end %>
-        <%# if hidden_logic(@post)[:dislike] %>
-          <%= link_to "DisLike", dislike_post_path(@post), method: :put %>
-        <%# else %>
-          <%= link_to "Undislike", undislike_post_path(@post), method: :put %>
-        <%# end %>
-      <% end %>
+      <%= render partial: "posts/vote_buttons" %>
       <h4 id="comments-count">
         <%= I18n.t("comments", count: @post.counter) %>
         <%#= pluralize(@post.comments.length, 'Comment') %>

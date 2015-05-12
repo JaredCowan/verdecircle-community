@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   include NotificationConcern if Rails.application.routes.recognize_path('/')[:action] == "dashboard"
   include PostsLikeableHelper
+  include VotableConcern
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   # rescue_from Excon::Errors::NotFound, with: :dump_file
@@ -133,41 +134,41 @@ class PostsController < ApplicationController
     end
   end
 
-  def liked
-    @post = Post.find(params[:id])
-    current_user.create_activity(@post, 'liked')
-    @post.liked_by current_user, :vote_weight => 1
-    redirect_to :back
-  end
+  # def liked
+  #   @post = Post.find(params[:id])
+  #   current_user.create_activity(@post, 'liked')
+  #   @post.liked_by current_user, :vote_weight => 1
+  #   redirect_to :back
+  # end
 
-  def unliked
-    @post = Post.find(params[:id])
-    # current_user.destroy_activity(@post, "liked")
-    @post.unliked_by current_user, :vote_weight => 1
-    redirect_to :back
-  end
+  # def unliked
+  #   @post = Post.find(params[:id])
+  #   # current_user.destroy_activity(@post, "liked")
+  #   @post.unliked_by current_user, :vote_weight => 1
+  #   redirect_to :back
+  # end
 
-  def disliked
-    @post = Post.find(params[:id])
-    # current_user.create_activity(@post, 'disliked')
-    @post.disliked_by current_user, :vote_weight => 1
-    redirect_to :back
-  end
+  # def disliked
+  #   @post = Post.find(params[:id])
+  #   # current_user.create_activity(@post, 'disliked')
+  #   @post.disliked_by current_user, :vote_weight => 1
+  #   redirect_to :back
+  # end
 
-  def undisliked
-    @post     = Post.find(params[:id])
-    # @activity = Activity.where("targetable_id = ?", @post.id)
-    # @activity.destroy
-    @post.undisliked_by current_user, :vote_weight => 1
-    redirect_to :back
-  end
+  # def undisliked
+  #   @post     = Post.find(params[:id])
+  #   # @activity = Activity.where("targetable_id = ?", @post.id)
+  #   # @activity.destroy
+  #   @post.undisliked_by current_user, :vote_weight => 1
+  #   redirect_to :back
+  # end
 
-  def report
-    @post = Post.find(params[:id])
-    @post.disliked_by current_user, vote_scope: "reported"
-    10.times { puts params }
-    redirect_to :back
-  end
+  # def report
+  #   @post = Post.find(params[:id])
+  #   @post.disliked_by current_user, vote_scope: "reported"
+  #   10.times { puts params }
+  #   redirect_to :back
+  # end
 
   def undo_link
     view_context.link_to("undo", revert_version_path(@post.versions.scoped.last), :method => :post)
