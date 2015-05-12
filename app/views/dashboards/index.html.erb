@@ -1,0 +1,107 @@
+<% @view ||= "posts" %>
+
+index.html.erb
+
+<%= debug(params) %>
+
+<div class="media">
+  <div class="media-left">
+    <a href="javascript:;">
+      <img class="media-object img-rounded" src="<%= @user.image_url %>" alt="User Avatar">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading"><%= @user.username.titleize %></h4>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="list-group">
+            <a href="javascript:;" class="list-group-item active">
+              <h4 class="list-group-item-heading">
+                <p>
+                  &nbsp;
+                  <span class="pull-left">
+                    Category
+                  </span>
+                  <span class="pull-right">
+                    Total
+                  </span>
+                </p>
+              </h4>
+            </a>
+            <a href="<%= add_to_url(dashboards_path, soft: 'posts') %>" class="list-group-item list-group-select active" data-remote="true">
+              <span class="badge" data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="left" data-title="Total posts count.">
+                <%= @user.posts.length %>
+              </span>
+              <span data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="right" data-title="Your posts have earned you a total of <%= pluralize(@user.posts.map(&:cached_votes_up).sum, "point") %>.">
+                Posts:
+              </span>
+            </a>
+            <a href="<%= add_to_url(dashboards_path, soft: 'comments') %>" class="list-group-item list-group-select" data-remote="true">
+              <span class="badge" data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="left" data-title="Total comments count.">
+                <%= @user.comments.length %>
+              </span>
+              <span data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="right" data-title="Your comments have earned you a total of <%= pluralize(@user.comments.map(&:cached_votes_up).sum, "point") %>.">
+                Comments:
+              </span>
+            </a>
+            <a href="<%= add_to_url(dashboards_path, soft: 'bestanswers') %>" class="list-group-item list-group-select" data-remote="true">
+              <span class="badge"  data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="left" data-title="Total best answers count.">
+                0
+              </span>
+              <span data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="right" data-title="Your best answers have earned you a total of <%= pluralize(0, "point") %>.">
+                Best Answers:
+              </span>
+            </a>
+            <a href="<%= add_to_url(dashboards_path, soft: 'favorites') %>" class="list-group-item list-group-select" data-remote="true">
+              <span class="badge"  data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="left" data-title="Total favorites count.">
+                <%= @user.favorites.length %>
+              </span>
+              <span data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="right" data-title="You don't earn points on favorites.">
+                Favorites:
+              </span>
+            </a>
+            <a href="<%= add_to_url(dashboards_path, soft: 'votes') %>" class="list-group-item list-group-select" data-remote="true">
+              <span class="badge"  data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="left" data-title="Total votes count.">
+                <%= @user.votes.length %>
+              </span>
+              <span data-trigger="hover click" data-container="body" data-toggle="tooltip" data-placement="right" data-title="Your votes have earned you a total of <%= pluralize(@user.votes.map(&:vote_weight).sum, "point") %>.">
+                Votes:
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="list-group">
+            <a href="javascript:;" class="list-group-item active">
+              <h4 class="list-group-item-heading">
+                <p class="text-center">
+                  Points Summary
+                </p>
+              </h4>
+            </a>
+            <a href="javascript:;" class="list-group-item" data-trigger="hover click" data-container="body" data-toggle="popover" data-placement="top" data-content="Total number of points you have earned from all your activity.">
+              <span class="badge">1,564</span>
+              Points Earned:
+            </a>
+            <a href="javascript:;" class="list-group-item" data-trigger="hover click" data-container="body" data-toggle="popover" data-placement="top" data-content="Total number of points you have redeemed towards rewards.">
+              <span class="badge">1,000</span>
+              Points used:
+            </a>
+            <a href="javascript:;" class="list-group-item" data-trigger="hover click" data-container="body" data-toggle="popover" data-placement="top" data-content="Total number of redemable points you have available.">
+              <span class="badge">564</span>
+              Balance:
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div id="dashboard-partial-view">
+      <%= render partial: "dashboards/views/#{@view}" %>
+    </div>
+  </div>
+</div>

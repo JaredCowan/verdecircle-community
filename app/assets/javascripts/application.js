@@ -137,11 +137,11 @@ function ajaxLinkLoader() {
   $("a[data-remote]")
     .not("[data-loader='false']").on('ajax:before', function(e){
       $(e.currentTarget).find("i").remove();
-      $(e.currentTarget).append(" <i class='fa fa-spinner fa-spin'></i>");
+      $(e.currentTarget).append(" <i class='fa fa-spinner fa-spin ajax-loader-icon'></i>");
     })
     .not("[data-loader='false']").on('ajax:error', function(e){
       $(e.currentTarget).find("i").remove();
-      $(e.currentTarget).append(" <i class='fa fa-exclamation-triangle'></i>");
+      $(e.currentTarget).append(" <i class='fa fa-exclamation-triangle ajax-loader-icon'></i>");
     });
 }
 

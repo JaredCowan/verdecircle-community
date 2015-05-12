@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :contacts, path: '/contact'
+
   match '/contacts/submits', to: "contacts#submits", via: :get, as: :contact_submits
 
   resources :blogs, path: '/blog', concerns: :pager
@@ -200,12 +201,8 @@ Rails.application.routes.draw do
 
     root 'pages#home'
 
-    scope '/dashboard' do
-      get '/', to: redirect("/dashboard/posts")
-      scope '/:view' do
-        get '/', to: "users#dashboard", defaults: { view: 'posts' }, as: :user_dashboard
-      end
-    end
+    resources :dashboards, only: :index, path: "dashboard"
+
   end # End of Community scope
 
   get "/", to: "pages#index", as: :verde_root

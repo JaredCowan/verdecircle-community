@@ -30,6 +30,10 @@ class UsersController < ApplicationController
   def dashboard
     if user_signed_in?
       @user = User.includes(:posts, :comments, :favorites, posts: [{comments: :votes}, :votes]).find(current_user)
+
+      respond_to do |format|
+        format.html { render :dashboard, layout: "no_sidebar" }
+      end
     else
       redirect_to :user_home
     end

@@ -5,7 +5,7 @@
 <% end %>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="navbar-header">
-    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"> 
       <span class="sr-only">Toggle navigation</span>
       <% if user_signed_in? %>
         <%= render 'users/avatar', size: :tiny %>
@@ -74,7 +74,7 @@
         </li>
         <% if user_signed_in? %>
         <li>
-          <%= link_to I18n.t("nav.dashboard"), :user_dashboard %>
+          <%= link_to I18n.t("nav.dashboard"), dashboards_path %>
         </li>
         <li>
           <%= link_to I18n.t("nav.categories"), topics_path %>

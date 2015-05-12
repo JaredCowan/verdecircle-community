@@ -1,0 +1,22 @@
+var $flash_messages = $(".errors__container");
+var $partial_view   = $("#dashboard-partial-view");
+var $ajax_loaders   = $(".ajax-loader-icon");
+var $select_menu    = $(".list-group-select");
+var $active_link    = $("a[href='<%= add_to_url(dashboards_path, soft: @view) %>'");
+var view            = "<%= @view %>";
+
+$.each($ajax_loaders, function() {
+  this.remove();
+});
+
+$.each($select_menu, function() {
+  $(this).removeClass("active");
+});
+
+$active_link.addClass("active");
+
+history.pushState({}, null, "?soft=" + view);
+
+$flash_messages.html('<%= escape_javascript(render partial: "layouts/messages") %>');
+
+$partial_view.html('<%= escape_javascript(render("dashboards/views/#{@view}")) %>');
