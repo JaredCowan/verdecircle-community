@@ -5,7 +5,7 @@
 <%# end %>
 <%#= vote.inspect %>
 <%= div_for comment, class: "#{comment_class}" do %>
-  <h4 class="comment-author"><%#= sanitize(comment.author) %><%#= sanitize(" @ <span class='quoth-typography'> quoth</span>") if comment.quother %></h4>
+  <h4 class="comment-author"><%= comment.user.username %><%#= sanitize(" @ <span class='quoth-typography'> quoth</span>") if comment.quother %></h4>
   <span class="date"><small><%= time_ago_in_words(comment.created_at) %> ago</small></span>
 
   <p class="comment-content">
@@ -20,7 +20,7 @@
 
     <% if user_signed_in? %>
       <%#= vote_logic_helper(comment) %>
-      <% if comment.user == current_user %>
+      <% if is_owner?(comment) %>
         <%= link_to '', post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Delete comment?', confirm_modal: "#delete-post" }, class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true, title: 'Delete comment', rel: 'tooltip' %>
         <%= link_to '', edit_post_comment_path(comment.post, comment), class: 'glyphicon glyphicon-pencil text-info', id: "#{comment.id}_edit", remote: true, title: 'Edit Comment' %>
       <% end %>
