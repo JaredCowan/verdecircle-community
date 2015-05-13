@@ -1,4 +1,4 @@
-$(function() {
+reportLinkFunction = function() {
   // $(".report-dropdown .dropdown-menu").on("click", function(e) {
   //   e.stopPropagation();
   // });
@@ -25,7 +25,7 @@ $(function() {
     $(".report-dropdown .dropdown-menu .report-link-li > a").on("click", function(e) {
       e.preventDefault();
       var id = $this[0].dataset.postId;
-      history.pushState({}, null, "?soft=reported&type=post&id=" + id);
+      // history.pushState({}, null, "?soft=reported&type=post&id=" + id);
       reportLinkDropdown(e, id);
     });
     // console.log($(e.currentTarget.nextElementSibling));
@@ -97,6 +97,11 @@ $(function() {
         },
         success: function() {
           li.html("<i class='fa fa-check'></i> Thank-you for reporting.");
+        },
+        complete: function() {
+          window.setTimeout(function() {
+            $(".dropdown.open").dropdown("toggle");
+          }, 3000);
         }
       })
       .done(function(data) {
@@ -136,4 +141,6 @@ $(function() {
 
     ajaxReportData($(".test-popup"), $header, id);
   }
-});
+};
+
+$(document).on("ready", reportLinkFunction())

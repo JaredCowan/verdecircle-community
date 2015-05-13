@@ -15,15 +15,14 @@
     <meta name="robots" content="index, follow">
     <%= favicon_link_tag %>
     <title><%= content_for?(:title) ? yield(:title) : view_bag_title %></title>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
     <!--[if lt IE 9]
-      <%= javascript_include_tag 'ie', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'ie' %>
     -->
     <%= csrf_meta_tags %>
-    <%= javascript_include_tag 'head', 'data-turbolinks-track' => true %>
-    <%= headjs_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'head' %>
+    <%= javascript_include_tag 'application' %>
     <%= yield :head %>
-    <%= render 'layouts/airbrake' %>
   </head>
   <body class="controller__<%= controller_name %> action__<%= action_name %>" data-user="{<%= %Q("cu":{"i":"#{current_user.id if user_signed_in?}","un":"#{current_user.username if user_signed_in?}"}) %>}">
     <%= render 'layouts/navbars/communitycenter' %>
@@ -41,6 +40,9 @@
         </div>
       </div> <!-- END .row -->
     </div> <!-- END .container-fluid -->
+
+    <%= javascript_include_tag 'global' %>
+    <%= javascript_include_tag 'community_center' %>
     <%= render 'layouts/footers/verdecircle' %>
     <%= render 'layouts/javascripts' %>
     <%= render 'layouts/analytics' %>

@@ -101,5 +101,5 @@ function mobileNavbar() {
   }
 };
 if ($("html").hasClass("mobile")) {
-  $(document).on("ready page:load", mobileNavbar);
+  $(document).on("ready", mobileNavbar);
 }

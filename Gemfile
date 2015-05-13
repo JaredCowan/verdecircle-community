@@ -54,8 +54,6 @@ gem 'aws-sdk', '~> 1.5.7'
 
 # Javascript
 gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 gem 'nprogress-rails'
 gem 'modernizr-rails'
@@ -115,7 +113,7 @@ group :development do
   # Errors
   gem 'better_errors'
   gem 'binding_of_caller'     # extra features for better_errors
-  # gem 'meta_request'          # for rails_panel chrome extension
+  # gem 'meta_request'        # for rails_panel chrome extension
 
   # Deployment
   # gem 'capistrano'
@@ -149,7 +147,6 @@ group :development, :test do
   # Testing
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
-  # gem 'ffaker'
   # gem 'capybara-webkit'
   # gem 'poltergeist'           # alternative to capybara-webkit
   # gem 'capybara-firebug'
