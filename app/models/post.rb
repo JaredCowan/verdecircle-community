@@ -89,6 +89,7 @@ class Post < ActiveRecord::Base
     "#{id}-#{subject.parameterize}"
   end
 
+  #  Depreciated
   def counter
     return comments.map(&:id).compact.length
   end

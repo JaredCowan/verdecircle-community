@@ -13,9 +13,8 @@ class PostsController < ApplicationController
 
   def index
     if params[:tag]
-        # @posttag = Post.tagged_with(params[:tag]).page(params[:page]).decorate
       begin
-        @posts = Post.tagged_with(params[:tag]).page(params[:page]).decorate
+        @posts = Post.includes(:topic, user: [:favorites, :user_relationships], comments: [{ votes: :voter }, :user, replies: [{ votes: :voter }, :user ], ], tags: [:taggings ], favorites: [:user ] ).tagged_with(params[:tag]).page(params[:page]).decorate
         respond_to do |format|
           format.html
           format.js
@@ -27,7 +26,7 @@ class PostsController < ApplicationController
         redirect_to @notFoundReturnUrl
       end
     else
-      @posts = Post.includes(:votes, :tags, :topic, :favorites, user: [:votes], comments: [:user]).order(:created_at).page(params[:page]).decorate
+      @posts = Post.includes(:topic, user: [:favorites, :user_relationships], comments: [{ votes: :voter }, :user, replies: [{ votes: :voter }, :user ], ], tags: [:taggings ], favorites: [:user ] ).page(params[:page]).decorate
 
       respond_to do |format|
         format.html
@@ -38,8 +37,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post        = Post.includes(:user, :votes, :tags, :taggings, :favorites, comments: [:user, :votes]).find(params[:id])
-    @comments    = @post.comments.includes({user: :votes})
+    @post        = Post.includes(:topic, user: [:favorites, :user_relationships], comments: [{ votes: :voter }, :user, replies: [{ votes: :voter }, :user ], ], tags: [:taggings ], favorites: [:user ] ).find(params[:id])
+    @comments    = @post.comments.includes({user: :votes}, :replies)
     @likes       = query_votes(@post)
     @new_comment = @post.comments.new
 
@@ -133,42 +132,6 @@ class PostsController < ApplicationController
       end
     end
   end
-
-  # def liked
-  #   @post = Post.find(params[:id])
-  #   current_user.create_activity(@post, 'liked')
-  #   @post.liked_by current_user, :vote_weight => 1
-  #   redirect_to :back
-  # end
-
-  # def unliked
-  #   @post = Post.find(params[:id])
-  #   # current_user.destroy_activity(@post, "liked")
-  #   @post.unliked_by current_user, :vote_weight => 1
-  #   redirect_to :back
-  # end
-
-  # def disliked
-  #   @post = Post.find(params[:id])
-  #   # current_user.create_activity(@post, 'disliked')
-  #   @post.disliked_by current_user, :vote_weight => 1
-  #   redirect_to :back
-  # end
-
-  # def undisliked
-  #   @post     = Post.find(params[:id])
-  #   # @activity = Activity.where("targetable_id = ?", @post.id)
-  #   # @activity.destroy
-  #   @post.undisliked_by current_user, :vote_weight => 1
-  #   redirect_to :back
-  # end
-
-  # def report
-  #   @post = Post.find(params[:id])
-  #   @post.disliked_by current_user, vote_scope: "reported"
-  #   10.times { puts params }
-  #   redirect_to :back
-  # end
 
   def undo_link
     view_context.link_to("undo", revert_version_path(@post.versions.scoped.last), :method => :post)

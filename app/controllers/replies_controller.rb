@@ -1,12 +1,12 @@
 class RepliesController < ApplicationController
   skip_authorization_check
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:index, :show]
   # include NotificationConcern
   # include PostsLikeableHelper
 
   def index
     # Created in order to handle renders from this controller, which produce URL 'root/posts/:id/comments'
-    post = Comment.includes(:user, :post).find(params[:comment_id]).post
+    post = Comment.includes(:user, :post, :replies).find(params[:comment_id]).post
     10.times {puts params}
     redirect_to post
   end

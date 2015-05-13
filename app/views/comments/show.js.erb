@@ -1,4 +1,4 @@
 var $comments_list = $('#comments-list');
 var $comment_form = $('#comment-form');
-$comments_list.html('<%= escape_javascript(render partial: "comment_show") %>');
+$comments_list.html('<%= escape_javascript(render partial: "comments/comment_show") %>');
 $comment_form.hide();

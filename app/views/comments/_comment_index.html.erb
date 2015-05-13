@@ -8,20 +8,14 @@
     <h6 id="replies-count">
       <%= pluralize(comment.replies.length, 'Reply') %>
     </h6>
-    <%= link_to "Reply", post_comment_path(@post, comment, reply: true), remote: true %>
+    <%= link_to "Reply", post_comment_path(@post, comment, reply: true), remote: true if user_signed_in? %>
     <%= link_to "Show More", post_comment_path(@post, comment), remote: true %>
       <% if user_signed_in? %>
         <%#= vote_logic_helper(comment) %>
-        <% if comment.user == current_user %>
+        <% if is_owner?(comment) %>
           <%= link_to '', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Delete comment?', confirm_modal: "#delete-post" }, class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true, title: 'Delete comment', rel: 'tooltip' %>
           <%= link_to '', edit_post_comment_path(@post, comment), class: 'glyphicon glyphicon-pencil text-info', id: "#{comment.id}_edit", remote: true, title: 'Edit Comment' %>
         <% end %>
       <% end %>
-      <!-- <div class="well replies" id="replies-list<%= comment.id %>"> -->
-      <%#= render partial: "replies/reply", collection: comment.replies, locals: {comment: comment} %>
-    <!-- </div> -->
-    <!-- <div id="reply-form<%= comment.id %>">
-        <%#= render 'replies/reply_form', locals: {comment: comment} %>
-      </div> -->
   <% end %>
 <% end %>

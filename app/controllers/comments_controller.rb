@@ -1,12 +1,12 @@
 class CommentsController < ApplicationController
   skip_authorization_check
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except:[:index, :show]
   include NotificationConcern
   include PostsLikeableHelper
 
   def index
-    @post     = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
-    @comments = @post.comments.includes({user: :votes})
+    @post     = Post.includes(:user, comments: [:user, :votes, :replies]).find(params[:post_id])
+    @comments = @post.comments.includes({user: :votes}, :replies)
     @params   = params
 
     respond_to do |format|
@@ -74,9 +74,9 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @post     = Post.includes(:user, comments: [:user, :votes]).find(params[:post_id])
-    @comment  = @post.comments.includes({user: :votes}).find(params[:id])
-    @comments = @post.comments.includes({user: :votes})
+    @post     = Post.includes(:user, comments: [:user, :votes, :replies]).find(params[:post_id])
+    @comment  = @post.comments.includes({user: :votes}, :replies).find(params[:id])
+    @comments = @post.comments.includes({user: :votes}, :replies)
     @replies  = @comment.replies
 
     respond_to do |format|

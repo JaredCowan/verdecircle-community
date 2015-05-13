@@ -34,9 +34,26 @@ module ApplicationHelper
     end
   end
 
-  # def username
-  #   current_user.username.titleize
-  # end
+  # Authorize user as owner of object or allow/disallow admin
+  def is_owner?(object, no_admin = false)
+    if current_user && current_user.id === object.user.id && (object.user.is_admin? || !no_admin)
+      return true
+    elsif is_admin? && !no_admin
+      return true
+    else
+      return false
+    end
+  rescue
+    return false
+  end
+
+  def pluralize_without_count(count, singular, plural = nil)
+    if count == 1
+      singular
+    else
+       plural || singular.pluralize
+    end
+  end
 
   def email
     current_user.email

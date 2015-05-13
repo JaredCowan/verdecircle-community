@@ -3,6 +3,9 @@
 <div class="well replies" id="replies-list<%= @comment.id %>">
   <%= render partial: "replies/reply", collection: @comment.replies, locals: {comment: @comment} %>
 </div>
-<div id="reply-form">
-  <%= render 'replies/reply_form', locals: {comment: @comment} %>
-</div>
+
+<% if user_signed_in? %>
+  <div id="reply-form">
+    <%= render 'replies/reply_form', locals: {comment: @comment} %>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
-<%# view = params[:tag] ? @posttag : @posts %>
+<% _tag ||= params[:tag] %>
+<% _post ||= @posts %>
 
 <% content_for :welcome do %>
   <%= render partial: "partials/welcome" %>
@@ -10,27 +11,19 @@
   </div>
 <% end %>
 
-<% if params[:tag] %>
+<% if _tag %>
   <div class="alert alert-info">
-    <%= "You're viewing post tagged with '#{params[:tag]}'" %> <%= link_to("Back to view all posts", posts_path, class: "pull-right") %>
+    <%= "You're viewing post tagged with '#{_tag}'" %> <%= link_to("Back to view all posts", posts_path, class: "pull-right") %>
   </div>
 <% end %>
 
 <div id="posts-container">
   <div class="posts-scroll-placeholder">
-    <%# view.each do |p| %>
-      <%#= render partial: "media", locals: { post: p } %>
-    <%# end %>
-    <%# view.each do |p| %>
-      <%= render partial: @posts %>
-    <%# end %>
+    <%= render partial: _post %>
   </div>
 
 
-  <%# unless params[:tag] %>
-    <div class="pagination">
-      <%= link_to_next_page @posts, "Load More", class: "btn btn-primary", remote: true %>
-    </div>
-  <%# end %>
+  <div class="pagination">
+    <%= link_to_next_page _post, "Load More", class: "btn btn-primary", remote: true %>
+  </div>
 </div>
-

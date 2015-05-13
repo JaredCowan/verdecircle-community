@@ -1,3 +1,5 @@
+<% post ||= @posts %>
+
 <div class="row">
   <div class="col-xs-12">
     <div class="post-row post-wrapper-v2" id="<%= "#{post.id}-#{post.subject}".parameterize %>" data-feed="{<%= %Q("id":"#{post.id}","subject":"#{post.subject.parameterize}","user_id":"#{post.user_id}","topic":"#{post.topic_id}","votes":"#{post.cached_votes_total}") %>}">
@@ -59,13 +61,16 @@
       <div class="col-xs-12 post-footer">
         <ul class="list-inline">
           <li class="post-comments">
-            <i class="fa fa-comments"></i> <%= link_to(I18n.t("comments", count: post.comments.length + post.comments.map {|r| r.replies[0] }.compact.length), post, data: { html: true, toggle: "#{post.comments.length > 0 ? 'tooltip' : ''}", title: "<ul class='list-unstyled'> #{post.comments.limit(8).map {|c| c.user.username}.uniq.each {|un| "<li>#{un}</li>"}.join('<br>')} </ul>", trigger: "hover focus", placement: "bottom"}) %>
+            <i class="fa fa-comments"></i>
+            <%= link_to I18n.t("comments", count: post.comments.length) %>
           </li>
-          <li class="post-votes" data-toggle="tooltip" data-trigger="hover focus" data-placement="bottom" title="<%= pluralize(post.cached_votes_total, 'person') %> have voted">
-            <i class="fa fa-thumbs-up"></i> <%= post.cached_votes_total %>
+          <li class="post-votes" data-toggle="tooltip" data-trigger="hover focus" data-placement="bottom" title="<%= pluralize(post.cached_votes_total, 'person') %> <%= pluralize_without_count(post.cached_votes_total, 'has', 'have') %> voted">
+            <i class="fa fa-thumbs-up"></i>
+            <%= post.cached_votes_total %>
           </li>
           <li class="post-favorites" data-toggle="tooltip" data-trigger="hover focus" data-placement="bottom" title="Bookmarked by <%= pluralize(post.favorites.length, 'person') %>">
-            <i class="fa fa-star"></i> <%= post.favorites.length %>
+            <i class="fa fa-star"></i>
+            <%= post.favorites.length %>
           </li>
         </ul>
       </div>
