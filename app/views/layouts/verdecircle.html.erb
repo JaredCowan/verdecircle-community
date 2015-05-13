@@ -17,17 +17,17 @@
     <title>
       <%= content_for?(:title) ? yield(:title) : I18n.t('sales.title') %>
     </title>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => :true %>
-    <%= stylesheet_link_tag 'verdecircle', media: 'all', 'data-turbolinks-track' => :true %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag 'verdecircle', media: 'all' %>
     <% if content_for :stylesheets %>
       <%= yield :stylesheets %>
     <% end %>
     <!--[if lt IE 9]
-      <%= javascript_include_tag 'ie', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'ie' %>
     -->
     <%= csrf_meta_tags %>
-    <%= javascript_include_tag 'head', 'data-turbolinks-track' => :true %>
-    <%= headjs_include_tag 'application', 'data-turbolinks-track' => :true %>
+    <%= javascript_include_tag "head" %>
+    <%= javascript_include_tag "application" %>
     <%= yield :head %>
   </head>
   <body class="controller__<%= controller_name %> action__<%= action_name %>" data-feed="{<%= %Q("current_user":{"id":"#{current_user.id if user_signed_in?}","username":"#{current_user.username if user_signed_in?}"}) %>}">
@@ -39,6 +39,8 @@
         <%= yield %>
     </div> <!-- END .container-fluid -->
 
+    <%= javascript_include_tag 'global' %>
+    <%= javascript_include_tag 'verde_circle' %>
     <%= render 'layouts/footers/verdecircle' %>
     <%= render 'layouts/javascripts' %>
     <%= render 'layouts/analytics' %>

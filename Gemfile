@@ -54,8 +54,6 @@ gem 'aws-sdk', '~> 1.5.7'
 
 # Javascript
 gem 'jquery-rails'
-# gem 'turbolinks'
-# gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 gem 'nprogress-rails'
 gem 'modernizr-rails'

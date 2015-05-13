@@ -1,31 +1,6 @@
 <% provide(:stylesheets) do %>
-  <%= stylesheet_link_tag 'depend/pagepiling', media: 'all', 'data-turbolinks-track' => :true %>
+  <%= stylesheet_link_tag 'depend/pagepiling', media: 'all' %>
 <% end %>
-
-<% provide(:on_ready) do %>
-  $(document).on("page:load", function() {
-    var loadThriiiPagePile = function() {
-      $('#pagepile').pagepiling({
-        menu: '#menu',
-        anchors: ['features', 'inventory', 'orders', 'fulfillment', 'accounting'],
-        sectionsColor: ['#fafafa', '#fafafa', '#fafafa', '#fafafa', '#fafafa'],
-        loopTop: false,
-        loopBottom: true,
-        navigation: {
-          'textColor': '#323232',
-          'bulletsColor': '#ccc',
-          'position': 'right',
-          'tooltips': ['features', 'inventory', 'orders', 'fulfillment', 'accounting']
-        }
-      });
-    }
-    loadThriiiPagePile();
-  });
-<% end %>
-
-<%# provide(:pricing_btn) do %>
-  <!-- <a href="<%#= url_for pricing_path %>" class="btn btn-info navbar-btn" id="nav-pricing-btn-desk">Pricing</a> -->
-<%# end %>
 
 <div id="pagepile-loading">
   <h1>
@@ -66,27 +41,3 @@
   <div class="section" id="section5">
   </div>
 </div>
-
-<script>
-  window.onload = function() {
-    window.loadThriiiPagePile = function() {
-      $('#pagepile').pagepiling({
-        menu: '#menu',
-        anchors: ['features', 'inventory', 'orders', 'fulfillment', 'accounting'],
-        sectionsColor: ['#fafafa', '#fafafa', '#fafafa', '#fafafa', '#fafafa'],
-        loopTop: false,
-        loopBottom: true,
-        navigation: {
-          'textColor': '#323232',
-          'bulletsColor': '#ccc',
-          'position': 'right',
-          'tooltips': ['features', 'inventory', 'orders', 'fulfillment', 'accounting']
-        }
-      });
-    }
-    // setInterval(function () {alert("Hello")}, 3000);
-    window.setTimeout(function(){
-      loadThriiiPagePile();
-    }, 200);
-  };
-</script>

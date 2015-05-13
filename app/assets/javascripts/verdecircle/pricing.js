@@ -73,7 +73,7 @@ var whatView = function() {
 }
 
 if ($("body").hasClass("action__pricing")) {
-  $(document).one("page:load, ready", function() {
+  $(document).one("ready", function() {
     whatView();
   });
 
