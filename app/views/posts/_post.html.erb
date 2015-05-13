@@ -62,7 +62,7 @@
         <ul class="list-inline">
           <li class="post-comments">
             <i class="fa fa-comments"></i>
-            <%= link_to I18n.t("comments", count: post.comments.length) %>
+            <%= link_to I18n.t("comments", count: post.comments.length), post_path(post) %>
           </li>
           <li class="post-votes" data-toggle="tooltip" data-trigger="hover focus" data-placement="bottom" title="<%= pluralize(post.cached_votes_total, 'person') %> <%= pluralize_without_count(post.cached_votes_total, 'has', 'have') %> voted">
             <i class="fa fa-thumbs-up"></i>
