@@ -3,14 +3,14 @@
     <div class="pricing-head animated flipInX">
       <h1> Thriii Freemium </h1>
       <h2>
-        <span class="note">$</span>0<sub>month</sub>
+        <span class="note">$</span><%= @f_monthly_price %><sub>month</sub>
       </h2>
-      <h5>Includes 1 user</h5>
+      <h5>Includes <%= pluralize(@f_m_includes_users, "user") %></h5>
     </div>
     <ul class="list-unstyled first-pricing-row">
       <li>
         <span>
-          $20 each additional user
+          $<%= @f_m_add_users %> each additional user
         </span>
       </li>
       <li>Sync w/ShipStation</li>
@@ -25,25 +25,25 @@
     <ul class="list-unstyled add-ons">
       <h2 class="add-on-header">Add-ons</h2>
       <li>
-        <span>CSV Export</span> + $10
+        <span>CSV Export</span> + $<%= @f_m_csv_export %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Ideal for flash sales, presales and sell in advance.
         </div>
-        <span>Inventory Holds</span> &ndash;&nbsp;Free
+        <span>Inventory Holds</span> &ndash;&nbsp;<%= @f_m_inventory_holds %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Merge multiple orders into a single invoice simplifying your accounting.
         </div>
-        <span>Invoice Consolidation</span> + $10
+        <span>Invoice Consolidation</span> + $<%= @f_m_invoice_consolidation %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Automate drop-ship purchase orders for out of stock items or items that are shipped directly by your suppliers.
         </div>
-        <span>Drop-Ship Automation</span> + $10
+        <span>Drop-Ship Automation</span> + $<%= @f_m_drop_ship_automation %>
       </li>
     </ul> <!-- END .add-ons -->
 
@@ -53,37 +53,37 @@
         <div class="cmp-popup">
           Manage product specifications and easily export data for major retailers like Overstock.com etc.
         </div>
-        <span>Advanced Item Catalog</span> + $10
+        <span>Advanced Item Catalog</span> + $<%= @f_m_advanced_item_catalog %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Serialize and lot production of products.
         </div>
-        <span>Serial Numbers</span> + $20
+        <span>Serial Numbers</span> + $<%= @f_m_serial_numbers %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Group products, build sellable products from parts with support for reassembly.
         </div>
-        <span>Kits/Builds</span> + $20
+        <span>Kits/Builds</span> + $<%= @f_m_kits_builds %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Reduce drop-ship costs by finding suppliers with competitive pricing and competitive shipping.
         </div>
-        <span>Drop-Ship Marketplace</span> + $10
+        <span>Drop-Ship Marketplace</span> + $<%= @f_m_drop_ship_marketplace %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Market your products to a host of thousands of resellers around the globe.
         </div>
-        <span>Company Marketplace</span> &ndash; N/A
+        <span>Company Marketplace</span> &ndash; <%= @f_m_company_marketplace %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Boost wholesale revenue and sales team productivity with easy to generate and distribute linesheets.
         </div>
-        <span>Linesheets</span> &ndash; N/A
+        <span>Linesheets</span> &ndash; <%= @f_m_linesheets %>
       </li>
     </ul> <!-- END .coming-soon -->
 

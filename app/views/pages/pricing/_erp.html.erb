@@ -1,29 +1,32 @@
+<%# "Include pricing list variables" %>
+<%= render partial: "pages/pricing/pricing_vars" %>
+
 <div class="col-xs-12 col-sm-4">
   <div class="pricing-table has-options most-popular monthly micro-erp">
     <h4 class="erp-six-month-free yearly-pricing"> 6 Month Free Trial! </h4>
     <div class="pricing-head animated flipInX">
       <h1> Thriii MicroERP </h1>
       <h2 class="monthly-pricing">
-        <span class="note">$</span>70<sub>month</sub>
+        <span class="note">$</span><%= @e_monthly_price %><sub>month</sub>
       </h2>
       <h2 class="yearly-pricing">
-        <span class="note">$</span>700<sub>year</sub>
+        <span class="note">$</span><%= @e_yearly_price %><sub>year</sub>
       </h2>
-      <h5>Includes 2 user</h5>
+      <h5>Includes <%= pluralize(@e_m_includes_users, "user") %></h5>
     </div>
     <ul class="list-unstyled thrid-pricing-row">
       <li>
         <span class="monthly-pricing">
-          $40 each additional user
+          $<%= @e_m_add_users %> each additional user
         </span>
         <span class="yearly-pricing">
-          $400 each additional user
+          $<%= @e_y_add_users %> each additional user
         </span>
       </li>
       <li>Sync w/ShipStation</li>
       <li>Sync w/Quickbooks</li>
       <li>View Detailed Reports</li>
-      <li>CSV Import/Export</li>
+      <li>CSV Import</li>
       <li data-toggle="popover" data-trigger="hover" title="Disclaimer" data-placement="top" data-viewport="body" data-content="* Virtually Unlimited means up to 10,000 transactions per month. If you need more, let us know, and we'll provide you with more at a nominal monthly fee only when you exceed 10,000 transactions in a month. ** Exporting of certain data is restricted due to security and PCI Compliance requirements.">Virtually Unlimited Everything *
       </li>
       <li>Advanced Item Catalog</li>
@@ -33,139 +36,51 @@
     <ul class="list-unstyled add-ons monthly-pricing">
       <h2 class="add-on-header">Add-ons</h2>
       <li>
-        <span>CSV Export</span> &ndash; Free
+        <span>CSV Export</span> &ndash; <%= @e_m_csv_export %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Ideal for flash sales, presales and sell in advance.
         </div>
-        <span>Inventory Holds</span> &ndash; Free
+        <span>Inventory Holds</span> &ndash; <%= @e_m_inventory_holds %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Merge multiple orders into a single invoice simplifying your accounting.
         </div>
-        <span>Invoice Consolidation</span> + $10
+        <span>Invoice Consolidation</span> + $<%= @e_m_invoice_consolidation %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Automate drop-ship purchase orders for out of stock items or items that are shipped directly by your suppliers.
         </div>
-        <span>Drop-Ship Automation</span> + $10
+        <span>Drop-Ship Automation</span> &ndash; <%= @e_m_drop_ship_automation %>
       </li>
-      <!-- <li class="extra-info-popup">
-        <div class="cmp-popup">
-          Manage product specifications and easily export data for major retailers like Overstock.com etc.
-        </div>
-        <span>Advanced Item Catalog</span> + $10
-      </li>
-      <li class="extra-info-popup">
-        <div class="cmp-popup">
-          Serialize and lot production of products.
-        </div>
-        <span>Serial Numbers</span> + $20
-      </li>
-      <li class="extra-info-popup">
-        <div class="cmp-popup">
-          Group products, build sellable products from parts with support for reassembly.
-        </div>
-        <span>Kits/Builds</span> + $20
-      </li>
-      <li class="extra-info-popup">
-        <div class="cmp-popup">
-          Reduce drop-ship  costs by finding suppliers with competitive pricing and competitive shipping.
-        </div>
-        <span>Drop-Ship Marketplace</span> &ndash; free
-      </li>
-      <li class="extra-info-popup">
-        <div class="cmp-popup">
-          <span class="cmp-header">Extended List</span>
-          <ul>
-            <li>Inventory Numbers</li>
-            <li>Spec Sheets</li>
-            <li>Line Sheets</li>
-            <li>Hi-Res Images</li>
-            <li>Documents, <br> (eg. contract customer license agreements))</li>
-            <li>Market your products to a host of thousands of resellers around the globe.</li>
-          </ul>
-        </div>
-        <span>Company Marketplace</span> + $20<sup>*</sup>
-      </li>
-      <li class="extra-info-popup">
-        <div class="cmp-popup">
-          Boost wholesale revenue and sales team productivity with easy to generate and distribute linesheets.
-        </div>
-        <span>Linesheets</span> + $30
-      </li> -->
     </ul> <!-- END monthly-pricing -->
 
     <ul class="list-unstyled add-ons yearly-pricing">
       <h2 class="add-on-header">Add-ons</h2>
       <li>
-        <span>CSV Export</span> &ndash; Free
+        <span>CSV Export</span> &ndash; <%= @e_y_csv_export %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Ideal for flash sales, presales and sell in advance.
         </div>
-        <span>Inventory Holds</span> &ndash; Free
+        <span>Inventory Holds</span> &ndash; <%= @e_y_inventory_holds %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Merge multiple orders into a single invoice simplifying your accounting.
         </div>
-        <span>Invoice Consolidation</span> + $100
+        <span>Invoice Consolidation</span> + $<%= @e_y_invoice_consolidation %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Automate drop-ship purchase orders for out of stock items or items that are shipped directly by your suppliers.
         </div>
-        <span>Drop-Ship Automation</span> + $100
+        <span>Drop-Ship Automation</span> &ndash; <%= @e_y_drop_ship_automation %>
       </li>
-      <!-- <li class="extra-info-popup">
-        <div class="cmp-popup">
-          Manage product specifications and easily export data for major retailers like Overstock.com etc.
-        </div>
-        <span>Advanced Item Catalog</span> + $100
-      </li>
-      <li class="extra-info-popup">
-        <div class="cmp-popup">
-          Serialize and lot production of products.
-        </div>
-        <span>Serial Numbers</span> + $200
-      </li>
-      <li class="extra-info-popup">
-        <div class="cmp-popup">
-          Group products, build sellable products from parts with support for reassembly.
-        </div>
-        <span>Kits/Builds</span> + $200
-      </li>
-      <li class="extra-info-popup">
-        <div class="cmp-popup">
-          Reduce drop-ship  costs by finding suppliers with competitive pricing and competitive shipping.
-        </div>
-        <span>Drop-Ship Marketplace</span> &ndash; free
-      </li>
-      <li class="extra-info-popup">
-        <div class="cmp-popup">
-          <span class="cmp-header">Extended List</span>
-          <ul>
-            <li>Inventory Numbers</li>
-            <li>Spec Sheets</li>
-            <li>Line Sheets</li>
-            <li>Hi-Res Images</li>
-            <li>Documents, <br> (eg. contract customer license agreements))</li>
-            <li>Market your products to a host of thousands of resellers around the globe.</li>
-          </ul>
-        </div>
-        <span>Company Marketplace</span> + $200<sup>*</sup>
-      </li>
-      <li class="extra-info-popup">
-        <div class="cmp-popup">
-          Boost wholesale revenue and sales team productivity with easy to generate and distribute linesheets.
-        </div>
-        <span>Linesheets</span> + $300
-      </li> -->
     </ul> <!-- END yearly-pricing -->
 
     <ul class="list-unstyled coming-soon">
@@ -174,37 +89,37 @@
         <div class="cmp-popup">
           Manage product specifications and easily export data for major retailers like Overstock.com etc.
         </div>
-        <span>Advanced Item Catalog</span> &ndash; Free
+        <span>Advanced Item Catalog</span> &ndash; <%= @e_m_advanced_item_catalog %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Serialize and lot production of products.
         </div>
-        <span>Serial Numbers</span> + $20
+        <span>Serial Numbers</span> + $<%= @e_m_serial_numbers %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Group products, build sellable products from parts with support for reassembly.
         </div>
-        <span>Kits/Builds</span> + $20
+        <span>Kits/Builds</span> + $<%= @e_m_kits_builds %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Reduce drop-ship costs by finding suppliers with competitive pricing and competitive shipping.
         </div>
-        <span>Drop-Ship Marketplace</span> &ndash; Free
+        <span>Drop-Ship Marketplace</span> &ndash; <%= @e_m_drop_ship_marketplace %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Market your products to a host of thousands of resellers around the globe.
         </div>
-        <span>Company Marketplace</span> &ndash; Free
+        <span>Company Marketplace</span> &ndash; <%= @e_m_company_marketplace %>
       </li>
       <li class="extra-info-popup">
         <div class="cmp-popup">
           Boost wholesale revenue and sales team productivity with easy to generate and distribute linesheets.
         </div>
-        <span>Linesheets</span> + $30
+        <span>Linesheets</span> + $<%= @e_m_linesheets %>
       </li>
     </ul> <!-- END .coming-soon -->
 
