@@ -1,24 +1,25 @@
 {
-    "name": "ProjectName",
-    "title": "ProjectTitle",
-    "description": "Project Description",
-    "homepage": "https://github.com",
+    "name": "VerdeCircleCommunityCenter",
+    "title": "VerdeCircleCommunityCenter",
+    "description": "Corporate website and VerdeCircle Community Forum",
+    "homepage": "https://verde-forum.herokuapp.com",
     "version": "1.0.0",
     "csspath": "app/assets/stylesheets",
     "jspath": "app/assets/javascripts",
     "assetspath": "app/assets",
+    "imagespath": "public/images",
     "csscombpath": "grunt/csscomb.json",
     "csslintpath": "grunt/csslint.json",
     "repository": {
         "type": "git",
-        "url": "https://github.com/"
+        "url": "https://github.com/VerdeCircle/verdecircle-community"
     },
     "bugs": {
-        "url": "https://github.com/"
+        "url": "https://github.com/VerdeCircle/verdecircle-community/issues"
     },
     "license": {
         "type": "MIT",
-        "url": "https://github.com/"
+        "url": "https://github.com/VerdeCircle/verdecircle-community/License"
     },
     "devDependencies": {
         "grunt": "^0.4.5",
@@ -43,7 +44,7 @@
         "ChromeAndroid >= 39",
         "Firefox >= 24",
         "FirefoxAndroid >= 33",
-        "Explorer >= 8",
+        "Explorer >= 10",
         "ExplorerMobile >= 9",
         "iOS >= 6",
         "Opera >= 12",
