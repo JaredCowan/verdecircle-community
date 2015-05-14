@@ -110,17 +110,15 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: '<%= pkg.csspath %>/',
                 src: [
-                    '*.scss',
-                    '*.css.scss',
-                    '**/*.scss',
-                    '**/*.css.scss',
-                    '!application.*',
-                    '!depend.*',
+                    '*.*',
+                    '*/*.*',
+                    '!_variables.*',
+                    '!depend/**',
+                    '!communitycenter/**',
                     '!*.min.css',
                     '!*.css.map'
                 ],
-                dest: '<%= pkg.csspath %>/',
-                ext: '.scss'
+                dest: '<%= pkg.csspath %>/'
             }
         },
 
