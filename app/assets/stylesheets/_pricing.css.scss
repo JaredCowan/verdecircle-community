@@ -62,13 +62,48 @@
         font-weight: $font-weight-heavy;
       }
     }
+    + .i-heart-startups-logo {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      z-index: 1;
+      > img {
+        width: 167px;
+        border-top-right-radius: $border-radius-large;
+      }
+      @media (max-width: 645px) {
+        & {
+          display: none;
+        }
+      }
+    }
+  }
+  .mobile-only-startups-logo {
+    position: relative;
+    > .content {
+      @extend %module;
+      width: 203px;
+      margin-left: auto;
+      margin-right: auto;
+      > .mobile-i-heart-startups-logo {
+        display: inline-block;
+        > img {
+          width: 200px;
+        }
+      }
+    }
+    @media (min-width: $screen-sm-min) {
+      display: none;
+    }
   }
 }
 .pricing-table {
   @extend %module;
   position: relative;
+  margin-bottom: 10px;
+  cursor: default;
   text-align: center;
-  padding: 0 0 25px 0;
+  padding: 0 0 15px 0;
   border-radius: 5px;
   overflow: hidden;
   perspective: 1000;
@@ -90,24 +125,10 @@
       padding-bottom: 5px;
     }
   }
-  &.most-popular {
-    top: -20px;
-    > .i-heart-startups-logo {
-      position: absolute;
-      width: 75px;
-      top: 0;
-      right: 0;
-      z-index: 1;
+  @media (min-width: $screen-sm-min) {
+    &.most-popular {
+      top: -20px;
     }
-  }
-}
-.i-heart-startups-logo {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  > img {
-    width: 140px;
   }
 }
 .remove-special-startups-pricing {
@@ -238,11 +259,7 @@
     margin-top: 0;
   }
 }
-.pricing-table {
-  margin-bottom: 50px;
-  padding-bottom: 15px;
-  cursor: default;
-}
+
 .pricing-table .popover-title,
 .pricing-table .popover-content {
   color: $black-base;

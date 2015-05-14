@@ -1,15 +1,8 @@
 <%# "Include pricing list variables" %>
 <%= render partial: "pages/pricing/pricing_vars" %>
 
-<div class="row"> <!--price start-->
+<div class="row"> <!-- price start-->
   <div class="col-xs-12">
-    <div class="text-center feature-head">
-      <h1> 60 day free trial on most accounts </h1>
-      <p><strong>No credit card required!</strong> <br> No risk! No hidden fees! Cancel at anytime! </p>
-    </div>
-  </div>
-
-  <div class="col-xs-12" data-no-turbolink>
     <div class="pricing-switcher">
       <h3 class="switcher-header">
         Choose Plan Billing Cycle
@@ -21,11 +14,27 @@
         <label accesskey="y" for="yearly">Yearly</label>
         <span class="price-switch-btn monthly"></span>
       </p>
-    </div>
-    <%= link_to(image_tag('/images/i-heart-startups-black.png', alt: 'i heart startups logo'), show_startups_pricing_page_index_path, data: {remote: true, loader: false}, class: 'i-heart-startups-logo') %>
-  </div>
+    </div> <!-- END .pricing-switcher -->
+    <%= link_to(image_tag('/images/i-heart-startups-border.png', alt: 'i heart startups logo'), show_startups_pricing_page_index_path, data: {remote: true, loader: false}, class: 'i-heart-startups-logo', tabindex: 0) %>
+  </div> <!-- END .col -->
   
   <%= render "pages/pricing/freemium" %>
   <%= render "pages/pricing/core" %>
+
+  <div class="col-xs-12 mobile-only-startups-logo">
+    <div class="content">
+    <%= link_to(image_tag('/images/i-heart-startups-border.png', alt: 'i heart startups logo'), show_startups_pricing_page_index_path, data: {remote: true, loader: false}, class: 'mobile-i-heart-startups-logo') %>
+    </div>
+  </div> <!-- END .mobile-only-startups-logo -->
+
   <%= render "pages/pricing/erp" %>
+</div> <!-- END price (.row) -->
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="text-center feature-head">
+      <h1> 60 day free trial on most accounts </h1>
+      <p><strong>No credit card required!</strong> <br> No risk! No hidden fees! Cancel at anytime! </p>
+    </div>
+  </div>
 </div>
