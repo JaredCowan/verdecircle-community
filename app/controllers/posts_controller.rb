@@ -26,7 +26,8 @@ class PostsController < ApplicationController
         redirect_to @notFoundReturnUrl
       end
     else
-      @posts = Post.includes(:topic, user: [:favorites, :user_relationships], comments: [{ votes: :voter }, :user, replies: [{ votes: :voter }, :user ], ], tags: [:taggings ], favorites: [:user ] ).page(params[:page]).decorate
+      # @posts = Post.includes(:topic, user: [:favorites, :user_relationships], comments: [{ votes: :voter }, :user, replies: [{ votes: :voter }, :user ], ], tags: [:taggings ], favorites: [:user ] ).page(params[:page]).decorate
+      @posts = Post.includes(:topic, :comments, :user, :tags, favorites: [:user]).page(params[:page]).decorate
 
       respond_to do |format|
         format.html
