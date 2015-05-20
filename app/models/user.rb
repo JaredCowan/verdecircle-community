@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   acts_as_messageable
   acts_as_voter
-  # has_paper_trail
+  has_paper_trail
   acts_as_paranoid
 
   devise :database_authenticatable, :registerable,
@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, 
             length: { minimum: 3, maximum: 20 },
             uniqueness: { case_sensitive: false }
-  validates :first_name, :last_name, presence: true, length: { minimum: 3, maximum: 20 }
+  # validates :first_name, :last_name, presence: true, length: { minimum: 3, maximum: 20 }
 
   after_create :send_welcome_emails
 

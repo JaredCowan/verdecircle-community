@@ -104,7 +104,6 @@ gem 'sinatra', require: false
 # Utils
 gem 'addressable'
 gem 'settingslogic'
-gem 'ffaker'
 
 group :development do
   # Docs
@@ -129,6 +128,7 @@ group :development, :test do
   gem 'spring'                  # keep application running in the background
   gem 'spring-commands-rspec'
   # gem 'zeus'                  # required in gemfile for guard
+  gem 'ffaker'
 
   # Debugging
   # gem 'pry'                   # better than irb

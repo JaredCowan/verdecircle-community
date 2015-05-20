@@ -23,37 +23,39 @@ namespace :export do
   desc "Create users."
   task :create_users => :environment do
 
-    # 1.times do |n|
-    #   User.create(
-    #     id: User.last.id + 1,
-    #     first_name: Faker::Name.first_name,
-    #     last_name: Faker::Name.last_name,
-    #     email: Faker::Internet.safe_email,
-    #     username: Faker::Internet.user_name("#{Faker::Name.first_name}#{Faker::Lorem.words(1).sort[0]} #{Faker::Name.last_name}", %w(_)),
-    #     encrypted_password: BCrypt::Password.create('secret', cost: 12)
-    #   )
-    # end
+    30.times do |n|
+      User.create(
+        id: User.last.id + 1,
+        first_name: FFaker::Name.first_name,
+        last_name: FFaker::Name.last_name,
+        email: FFaker::Internet.safe_email,
+        username: FFaker::Internet.user_name("#{FFaker::Name.first_name}#{FFaker::Lorem.words(1).sort[0]} #{FFaker::Name.last_name}").gsub(/[._]/, "")[0, 15],
+        password: BCrypt::Password.create('secret', cost: 6),
+        is_admin: false,
+        created_at: Time.now.to_s.split("+")[0].strip
+      )
+    end
   end
 
   desc "Create posts, with comments and replies."
   task :create_posts => :environment do
 
     postAry, cmntAry = [], []
-    10.times do |n|
+    70.times do |n|
       Post.create(
         user_id: User.all.map(&:id).sample,
-        subject: Faker::Lorem.words(4).join(' '),
-        body: Faker::Lorem.paragraph(7),
+        subject: FFaker::Lorem.words(4).join(' '),
+        body: FFaker::Lorem.paragraph(7),
         topic_id: Topic.all.map(&:id).sample,
-        tag_list: Faker::Lorem.words(5).join(', ')
+        tag_list: FFaker::Lorem.words(5).join(', ')
       )
       postAry.push(Post.first.id)
     end
 
-    postAry.each do |pa|
+    postAry[0, 11].each do |pa|
       10.times do |c|
         Comment.create(
-          body: Faker::Lorem.paragraph(7),
+          body: FFaker::Lorem.paragraph(7),
           user_id: User.all.map(&:id).sample,
           post_id: pa,
         )
@@ -64,7 +66,7 @@ namespace :export do
     cmntAry.each do |r|
       10.times do |cr|
         Reply.create(
-          body: Faker::Lorem.paragraph(7),
+          body: FFaker::Lorem.paragraph(7),
           user_id: User.all.map(&:id).sample,
           comment_id: r,
         )
