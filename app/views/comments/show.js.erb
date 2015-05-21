@@ -1,4 +1,8 @@
+var $target = $("#<%= escape_javascript(params[:target]) %>");
+
 var $comments_list = $('#comments-list');
 var $comment_form = $('#comment-form');
-$comments_list.html('<%= escape_javascript(render partial: "comments/comment_show") %>');
+// $comments_list.html('<%= escape_javascript(render partial: "comments/comment_show") %>');
+$target.after('<%= escape_javascript(render partial: "comments/comment_show") %>')
 $comment_form.hide();
+console.log($target);

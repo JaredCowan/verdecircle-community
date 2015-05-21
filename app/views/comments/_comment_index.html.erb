@@ -1,21 +1,34 @@
+<% post ||= @post %>
+<% comments ||= post.comments.where.not(id: nil) %>
+
 <% @comments.each do |comment| %>
+
+  <% comment_id = "comment_#{comment.id}" %>
+
   <%= div_for comment, class: "well comment_#{comment.id}" do %>
-    <span class="date"><small><%= time_ago_in_words(comment.created_at) %> ago</small></span>
+    <span class="date"><small><%#= time_ago_in_words(comment.created_at) %> ago</small></span>
 
     <p class="comment-content">
       <%= sanitize comment.body, tags: %w(a), attributes: %w(href) %>
     </p>
-    <h6 id="replies-count">
-      <%= pluralize(comment.replies.length, 'Reply') %>
-    </h6>
-    <%= link_to "Reply", post_comment_path(@post, comment, reply: true), remote: true if user_signed_in? %>
-    <%= link_to "Show More", post_comment_path(@post, comment), remote: true %>
+
+    <%= link_to "Reply", post_comment_path(@post, comment, target: comment_id, reply: true), data: { loader: false, remote: true } %>
+    <%#= link_to "Show More", post_comment_path(@post, comment), remote: true %>
       <% if user_signed_in? %>
         <%#= vote_logic_helper(comment) %>
         <% if is_owner?(comment) %>
           <%= link_to '', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Delete comment?', confirm_modal: "#delete-post" }, class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true, title: 'Delete comment', rel: 'tooltip' %>
           <%= link_to '', edit_post_comment_path(@post, comment), class: 'glyphicon glyphicon-pencil text-info', id: "#{comment.id}_edit", remote: true, title: 'Edit Comment' %>
-        <% end %>
+        <% end %> <!-- END is_owner? -->
+      <% end %> <!-- END if user_signed_in -->
+      <% unless comment.replies.empty? %>
+        <h6 id="replies-count">
+          <%= link_to "#{pluralize(comment.replies.length, 'Reply')}", post_comment_path(@post, comment, target: comment_id), data: { loader: false, remote: true } %>
+        </h6>
       <% end %>
-  <% end %>
-<% end %>
+  <% end %> <!-- END div_for comment -->
+<% end %> <!-- END @comments.each -->
+
+  <div class="comment-pagination">
+    <%= link_to_next_page @comments, "Load More", class: "btn btn-primary", params: {controller: 'comments', action: 'index', post_id: post.id}, remote: true %>
+  </div>

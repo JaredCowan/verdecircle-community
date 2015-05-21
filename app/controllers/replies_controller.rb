@@ -21,10 +21,7 @@ class RepliesController < ApplicationController
       # flash.keep[:success] = "Your comment has posted"
       # @new_reply = @comment.replies.new
       respond_to do |format|
-        format.html do
-          flash[:success] = 'Your comment has been posted.'
-          redirect_to @post
-        end
+        format.html { redirect_to @post }
         format.js
       end
     else

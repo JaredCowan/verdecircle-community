@@ -22,4 +22,6 @@ class Comment < ActiveRecord::Base
   scope :votes, lambda { |post| ActsAsVotable::Vote.where("votable_type = ? AND votable_id IN (?)", 'Comment', post.comments.where("cached_votes_total > ?", 0E0.floor).ids) }
 
   scope :reported, lambda { ActsAsVotable::Vote.where(vote_scope: 'reported') }
+
+  paginates_per 1
 end
