@@ -82,9 +82,9 @@
         <li>
           <%= link_to I18n.t("nav.hot-topics"), "javascript:;" %>
         </li>
-        <li>
-          <%= link_to I18n.t("nav.feature-request"), "javascript:;" %>
-        </li>
+        <!-- <li>
+          <%#= link_to I18n.t("nav.feature-request"), "javascript:;" %>
+        </li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown hidden-xs">
@@ -118,7 +118,7 @@
         </li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <%= render 'users/avatar', size: :tiny %> My Account
+            <%= render 'users/avatar', size: :tiny %> Account
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu animated flipInX">

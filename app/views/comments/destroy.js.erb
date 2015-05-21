@@ -1,2 +1,8 @@
+var $flash_messages   = $(".errors__container");
+$flash_messages.html('<%= escape_javascript(render partial: "layouts/messages") %>');
+
+var $destroy_modal = $(".global-modal-partial");
+$destroy_modal.replaceWith('<%= escape_javascript(render partial: "layouts/destroy_modal") %>');
+
 $('#comments-count').html('<%= escape_javascript(I18n.t("comments", count: @post.counter)) %>');
 $('#comments-list').html('<%= escape_javascript(render partial: "comment_index") %>');

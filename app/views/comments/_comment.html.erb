@@ -25,8 +25,8 @@
         <%= link_to '', edit_post_comment_path(comment.post, comment), class: 'glyphicon glyphicon-pencil text-info', id: "#{comment.id}_edit", remote: true, title: 'Edit Comment' %>
       <% end %>
 
-      <div id="reply-form<%= comment.id %>">
-        <%= render 'replies/reply_form', locals: {comment: comment} %>
+      <div id="reply-form<%#= comment.id %>">
+        <%#= render 'replies/reply_form', locals: {comment: comment} %>
       </div>
     <% end %>
   </div>

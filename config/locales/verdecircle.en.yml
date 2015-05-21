@@ -10,7 +10,7 @@ en:
   # Main navigation links
   nav:
     home: "Home"
-    dashboard: "My Dashboard"
+    dashboard: "Dashboard"
     categories: "Categories"
     favorites: "My Favorites"
     activity: "Activity Feed"

@@ -1,7 +1,7 @@
 <% id ||= "destroy-modal" %>
 <% i18n_prefix = i18n_prefix.present? ? "#{i18n_prefix}." : "" %>
 
-<div aria-hidden="<%= true %>" aria-labelledby="<%= id %>-title" class="modal fade" id="<%= id %>" role="dialog" tabindex="<%= -1 %>">
+<div aria-hidden="<%= true %>" aria-labelledby="<%= id %>-title" class="modal fade global-modal-partial" id="<%= id %>" role="dialog" tabindex="<%= -1 %>">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
