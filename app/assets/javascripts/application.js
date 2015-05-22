@@ -21,6 +21,8 @@
 
 //= require depend/bootstrap/bootstrap
 
+//= require js-routes
+
 /*
   * Inputmask
 */

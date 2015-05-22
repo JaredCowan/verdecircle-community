@@ -104,6 +104,10 @@ class Post < ActiveRecord::Base
       n = ActionController::Base.helpers.strip_tags(n)
       Tag.where(name: n).first_or_create!
     end
+    names.split(",").each do |t|
+      tag = Tag.where("name = ?", t).first
+      tag.update(taggings_count: tag.taggings_count += 1)
+    end
   end
 
   def format_post

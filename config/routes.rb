@@ -183,8 +183,6 @@ Rails.application.routes.draw do
       end
     end
 
-    # get '/:username', to: redirect('/u/%{username}')
-
     get '/emptytrash', to: 'conversations#empty_trash', as: 'empty_trash'
 
     get '/home', to: 'users#show', as: 'user_home'
@@ -198,6 +196,8 @@ Rails.application.routes.draw do
     get '/p/email', to: 'pages#email' if ENV['ALLOW_EMAIL_PREVIEW'].present?
 
     get 'robots.:format' => 'robots#index'
+
+    get 'tags', to: 'pages#tags', defaults: { format: :json }
 
     root 'pages#home'
 

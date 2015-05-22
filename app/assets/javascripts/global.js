@@ -2,19 +2,15 @@
  * Global file for verdecircle.com & community center + whatever else
  * First script loaded at bottom of page
 */
+//= require depend/bootstrap/bootstrap-tagsinput
 //= require depend/no-autocomplete
 //= require depend/pagepiling
 //= require depend/scroll
 //= require verdecircle/load_posts
-
 //= require nprogress
-//= require nprogress-pjax
-//= require nprogress-ajax
 //= require rails_confirm_dialog
 //= require depend/flash_notifs
 //= require jquery.scrollto
-
-//= require js-routes
 
 // Add error class to .avatar images if they fail to load
 // See avatar.scss and _avatar.html.erb
