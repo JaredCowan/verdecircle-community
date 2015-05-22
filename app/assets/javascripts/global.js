@@ -1,7 +1,8 @@
-/*!
+/*
  * Global file for verdecircle.com & community center + whatever else
+ * First script loaded at bottom of page
 */
-
+//= require depend/no-autocomplete
 //= require depend/pagepiling
 //= require depend/scroll
 //= require verdecircle/load_posts
@@ -28,7 +29,7 @@
 //= require verdecircle/pricing
 //= require verdecircle/thriii_page
 
-/*!
+/*
  * common scripts load last!
 */
 //= require verdecircle/commonscripts
@@ -41,8 +42,6 @@ var ready = function() {
   $("#pagepile-loading").fadeOut(1500, function() {
     $(this).remove();
   });
-
-  formHasErrorWithFeedback();
 
   $("textarea.form-control").on("keydown focus blur", function(e) {
     var $this     = $(this),
@@ -68,46 +67,6 @@ var formHasErrorWithFeedback = function() {
   });
 }
 
-
-// $(".desktop input").on("mouseover", function(e) {
-//   var $this  = $(this),
-//       $label = $this.parent().find("label");
-//   console.log($this, e);
-//   $label.addClass("fancyplaceholder");
-//   $this.on("mouseout", function(e) {
-//     $label.removeClass("fancyplaceholder");
-//   });
-// });
-
-$(".form-control").on("mouseover hover focus", function(e) {
-  var $this  = $(this),
-      $input = $this[0],
-      $label = $this.parent().find("label");
-  // console.log($this);
-  $label.addClass("fancyplaceholderin");
-  // $label.toggle( ":hover" );
-  $this.on("focus", function() {
-    // console.log($this);
-  });
-  setTimeout(function() {
-    $this.toggleClass( "focused", $this.is( ":focus" ) );
-  }, 0 );
-  $this.on("mouseleave blur", function() {
-    // console.log($input.value.length);
-    if ($input.value.length === 0) {
-        $label.removeClass("fancyplaceholderin");
-      $label.addClass("fancyplaceholderout");
-      // $this.animate({opacity: 1}, 600, function() {
-      //   $label.removeClass("fancyplaceholderin");
-      //   $label.removeClass("fancyplaceholderout");
-      // });
-      setTimeout(function() {
-        $label.removeClass("fancyplaceholderout");
-      }, 400 );
-    }
-  });
-});
-
 function ajaxLinkLoader() {
   $("a[data-remote]")
     .not("[data-loader='false']").on('ajax:before', function(e){
@@ -120,5 +79,17 @@ function ajaxLinkLoader() {
     });
 }
 
-$(document).on("ready", ajaxLinkLoader);
+function hasInputMask() {
+  $("[data-mask='phone']").inputmask({
+    mask: '(999) 999-9999'
+  });
+}
 
+$(document).on("ready", formHasErrorWithFeedback(),
+                        ajaxLinkLoader(),
+                        hasInputMask()
+);
+
+$(document).ajaxStop(function() {
+  hasInputMask();
+});

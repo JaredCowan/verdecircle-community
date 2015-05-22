@@ -64,7 +64,7 @@ en:
       contact:
         name: "Your full name"
         email: "johndoe@example.com"
-        phone: "123-555-5555"
+        phone: "(123) 555-5555"
         subject: "Message Subject"
         body: "Please explain your reason for contact"
       blog:

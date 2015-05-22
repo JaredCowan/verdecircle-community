@@ -3,7 +3,7 @@
  * Changed: Wednesday, February 18th, 2015, at 3:51:35 PM * 
 */ 
 
-/*!
+/*
  * This file loads in the head section
  *
  * Load jQuery first
@@ -15,8 +15,14 @@
 //= require jquery_ujs
 //= require jquery-ui
 
-/*!
+/*
   * Bootstrap
 */
 
 //= require depend/bootstrap/bootstrap
+
+/*
+  * Inputmask
+*/
+
+//= require depend/inputmask
