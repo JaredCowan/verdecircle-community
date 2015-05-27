@@ -18,7 +18,8 @@
   .intro-icon {
     font-size: 30px;
   }
-  .intro-icon-text {
+  .intro-icon-text,
+  .typed-cursor {
     vertical-align: super;
   }
 }
@@ -241,4 +242,24 @@
   .navbar-brand {
     margin-left: -4px !important;
   }
+}
+
+.typed-cursor {
+  opacity: 1;
+  animation: typed-blink .7s infinite;
+}
+@keyframes typed-blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-webkit-keyframes typed-blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes typed-blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
 }

@@ -41,6 +41,9 @@
 
     <%= javascript_include_tag 'global' %>
     <%= javascript_include_tag 'verde_circle' %>
+    <% if content_for :javascripts %>
+      <%= yield :javascripts %>
+    <% end %>
     <%= render 'layouts/footers/verdecircle' %>
     <%= render 'layouts/javascripts' %>
     <%= render 'layouts/analytics' %>

@@ -1,10 +1,14 @@
+<%= content_for :javascripts do %>
+  <%= javascript_include_tag 'depend/typed' %>
+<% end %>
+
 <div class="row hidden-xs intro-icon-wrapper">
   <div class="col-xs-4">
     <ul class="list-unstyled list-inline">
       <li>
         <i class="intro-icon fa fa-cloud"></i>
       </li>
-      <li class="intro-icon-text">
+      <li class="intro-icon-text" id="anywhere-access">
         Anytime, Anywhere Access
       </li>
     </ul>
@@ -15,7 +19,7 @@
       <li>
         <i class="intro-icon fa fa-lightbulb-o"></i>
       </li>
-      <li class="intro-icon-text">
+      <li class="intro-icon-text" id="business-intelligence">
         Business Intelligence
       </li>
     </ul>
@@ -26,7 +30,7 @@
       <li>
         <i class="intro-icon fa fa-smile-o"></i>
       </li>
-      <li class="intro-icon-text">
+      <li class="intro-icon-text" id="business-simplified">
         Your Business Simplified
       </li>
     </ul>
