@@ -261,6 +261,36 @@ textarea.form-control {
     }
   }
 }
+
+.provider-twitter {
+  background: #00aced !important;
+  border-color: #0099d3 !important;
+  &:hover {
+    background: #21c2ff !important;
+  }
+}
+.provider-facebook {
+  background: #3b5998 !important;
+  border-color: #2f487c !important;
+  &:hover {
+    background: #4c70ba !important;
+  }
+}
+.provider-linkedin {
+  background: #069 !important;
+  border-color: #00547e !important;
+  &:hover {
+    background: #08c !important;
+  }
+}
+.provider-google {
+  background-color: #d73d32 !important;
+  border-color: #e4271a !important;
+  &:hover {
+    background-color: #e4271a !important;
+  }
+}
+
 @keyframes pulsate {
   0% {transform: scale(1);}
   50% {transform: scale(1.2);}
