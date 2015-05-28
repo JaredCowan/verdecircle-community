@@ -1,0 +1,58 @@
+<% post ||= @post %>
+<% comments = post.comments.where.not(id: nil) %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <span>Post Form</span>
+    <span class="pull-right" id="favorite-action-buttons">
+      <%= render partial: "favorites/buttons" %>
+    </span>
+  </div>
+  <div class="panel-body">
+    <%= @post.subject %>
+    <%= @post.body %>
+  </div>
+</div>
+
+<% @post.tags.each do |t| %>
+  <%= link_to t.name, tag_path(t.name) %>
+<% end %>
+
+<% if @post.image? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="checkbox">
+        <span>Image</span>
+      </div>
+    </div>
+    <div class="panel-body">
+      <%= image_tag(@post.image.url, class: "img-responsive img-rounded", alt: "Responsive image") %>
+    </div>
+  </div>
+<% end %>
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <%= render partial: "posts/vote_buttons" %>
+      <h4 id="comments-count">
+        <%= I18n.t("comments", count: comments.length) %>
+      </h4>
+  </div>
+</div>
+
+<div id="comments-list">
+  <%= render partial: "comments/comment_index", comments: comments %>
+</div>
+
+<% if user_signed_in? %>
+  <div id="comment-form">
+    <%= render partial: 'comments/comment_form' %>
+  </div>
+  <% if is_owner?(@post) %>
+    <%= link_to 'Edit', edit_post_path(@post) %> |
+    <%= link_to 'Back', posts_path %> |
+    <%= link_to I18n.t("confirm.delete.title"), post_path(@post), method: :delete, data: { confirm: I18n.t("confirm.basic") } %> |
+    <%= link_to I18n.t("confirm.soft-delete.title"), post_path(@post), method: :delete, data: { confirm: I18n.t("confirm.soft-delete.message") } %>
+    | <%= link_to I18n.t("confirm.hard-delete.title"), super_delete_post_path(@post.id), method: :delete, data: { confirm: I18n.t("confirm.hard-delete.message"), confirm_modal: "#delete-post"} %>
+    <%= render 'layouts/destroy_modal', id: 'delete-post', i18n_prefix: 'confirm.destroy' %>
+  <% end %>
+<% end %>

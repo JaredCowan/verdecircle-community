@@ -1,10 +1,14 @@
+<%= content_for :javascripts do %>
+  <%= javascript_include_tag 'depend/typed' %>
+<% end %>
+
 <div class="row hidden-xs intro-icon-wrapper">
   <div class="col-xs-4">
     <ul class="list-unstyled list-inline">
       <li>
         <i class="intro-icon fa fa-cloud"></i>
       </li>
-      <li class="intro-icon-text">
+      <li class="intro-icon-text" id="anywhere-access">
         Anytime, Anywhere Access
       </li>
     </ul>
@@ -15,7 +19,7 @@
       <li>
         <i class="intro-icon fa fa-lightbulb-o"></i>
       </li>
-      <li class="intro-icon-text">
+      <li class="intro-icon-text" id="business-intelligence">
         Business Intelligence
       </li>
     </ul>
@@ -26,7 +30,7 @@
       <li>
         <i class="intro-icon fa fa-smile-o"></i>
       </li>
-      <li class="intro-icon-text">
+      <li class="intro-icon-text" id="business-simplified">
         Your Business Simplified
       </li>
     </ul>
@@ -45,7 +49,8 @@
         <%= link_to "Skip To Features", thriii_page_index_path, class: "btn btn-verde-green", tabindex: 0, data: { no_turbolink: true} %>
         <%= link_to "Close", "javascript: $('.intro-video-overlay').remove();", class: "close-video-overlay" %>
       </div>
-      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Jp6AF__EwKQ?rel=0&amp;controls=0&amp;showinfo=0&amp;modestbranding=1" allowfullscreen></iframe>
+      <iframe class="embed-responsive-item" src="//www.youtube.com/embed/qYLhYF6vZgE?rel=0&amp;controls=0&amp;showinfo=0&amp;modestbranding=1">
+      </iframe>
     </div>
   </div>
 </div>

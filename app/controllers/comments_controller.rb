@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 
   def index
     @post     = Post.includes(:user, comments: [:user, :votes, :replies]).find(params[:post_id])
-    @comments = @post.comments.includes({user: :votes}, :replies)
+    @comments = @post.comments.includes({user: :votes}, :replies).page(params[:page])
     @params   = params
 
     respond_to do |format|
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     @post     = Post.find(params[:post_id])
     @comments = @post.comments
     @comment  = @post.comments.build(comment_params)
-    @likes    = query_votes(@post)
+    # @likes    = query_votes(@post)
     # @new_reply = @comment.replies.new
 
     if @comment.save
@@ -77,7 +77,7 @@ class CommentsController < ApplicationController
     @post     = Post.includes(:user, comments: [:user, :votes, :replies]).find(params[:post_id])
     @comment  = @post.comments.includes({user: :votes}, :replies).find(params[:id])
     @comments = @post.comments.includes({user: :votes}, :replies)
-    @replies  = @comment.replies
+    @replies  = @comment.replies.page(params[:page])
 
     respond_to do |format|
       format.html { redirect_to @post }

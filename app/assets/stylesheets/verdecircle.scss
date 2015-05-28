@@ -18,7 +18,8 @@
   .intro-icon {
     font-size: 30px;
   }
-  .intro-icon-text {
+  .intro-icon-text,
+  .typed-cursor {
     vertical-align: super;
   }
 }
@@ -27,7 +28,7 @@
   max-height: 450px;
   margin-top: -13px;
   padding-top: 5px;
-  background-color: #000;
+  background-color: $black-base;
 }
 #intro-video {
   max-width: 765px;
@@ -40,9 +41,9 @@
   }
   .intro-video-overlay {
     position: absolute;
-    top: 2px;
+    top: 0;
     left: 0;
-    bottom: 4px;
+    bottom: 0;
     width: 300px;
     padding: 10px;
     background-color: $gray-darker;
@@ -50,6 +51,7 @@
     z-index: 1000;
     text-align: center;
     > h1 {
+      margin: 5px auto 10px;
       color: $verde-purple-dark;
     }
     .meta-text {
@@ -180,6 +182,7 @@
   }
   .contact-page-address-wrapper {
     max-width: 900px;
+    min-height: 1px;
     margin-left: auto;
     margin-right: auto;
     > .address {
@@ -188,24 +191,20 @@
     }
     .contact-form-wrapper {
       @extend %module;
+      padding: 5px 15px;
       .contact-form textarea {
         height: 200px;
         resize: vertical !important;
       }
     }
+    @media (max-width: $screen-xs-max) {
+      & > .address, & .contact-form-wrapper {
+        width: 100%;
+        margin: inherit 0;
+      }
+    }
   }
 }
-
-@media (max-width: 768px) {
-  .controller__contacts .contact-page-address-wrapper > .address {
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-
-
 
 .navbar-green {
   background-color: $verde-green;
@@ -243,4 +242,24 @@
   .navbar-brand {
     margin-left: -4px !important;
   }
+}
+
+.typed-cursor {
+  opacity: 1;
+  animation: typed-blink .7s infinite;
+}
+@keyframes typed-blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-webkit-keyframes typed-blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes typed-blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
 }

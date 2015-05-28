@@ -3,32 +3,61 @@
 <%= simple_form_for(contact, html: { class: "form-group", multipart: true }, remote: true) do |f| %>
 
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <span>Contact Us</span>
-    </div>
     <div class="panel-body">
       <div class="row">
         <div class="col-xs-12 col-sm-6">
-          <%= f.input :inquiry, collection: I18n.t("contact.inquiry").map {|k,v| v},include_blank: false %>
+
+          <div class="input-group form-group" aria-labelledby="contact_inquiry">
+            <span class="input-group-addon">
+              <i class="fa fa-question"></i>
+            </span>
+            <%= f.input :inquiry, collection: I18n.t("contact.inquiry").map {|k,v| v},include_blank: false, required: true, label: false %>
+          </div>
         </div>
+
         <div class="col-xs-12 col-sm-6">
-          <%= f.input :name, required: true %>
+          <div class="input-group form-group" aria-labelledby="contact_name">
+            <span class="input-group-addon">
+              <i class="fa fa-user"></i>
+            </span>
+            <%= f.input :name, required: true, label: false %>
+          </div>
         </div>
+
         <div class="col-xs-12 col-sm-7">
-          <%= f.input :email, required: true %>
+          <div class="input-group form-group" aria-labelledby="contact_email">
+            <span class="input-group-addon">
+              <i class="fa fa-at"></i>
+            </span>
+            <%= f.input :email, required: true, label: false %>
+          </div>
         </div>
+
         <div class="col-xs-12 col-sm-5">
-          <%= f.input :phone, required: true %>
+          <div class="input-group form-group" aria-labelledby="contact_phone">
+            <span class="input-group-addon">
+              <i class="fa fa-phone"></i>
+            </span>
+            <%= f.input :phone, required: true, label: false, input_html: { data: { mask: "phone" }} %>
+          </div>
         </div>
+
         <div class="col-xs-12">
-          <%= f.input :subject, required: true %>
+          <div class="input-group form-group" aria-labelledby="contact_subject">
+            <span class="input-group-addon">
+              <i class="fa fa-pencil"></i>
+            </span>
+            <%= f.input :subject, required: true, label: false, input_html: { no_autocomplete: "" } %>
+          </div>
         </div>
-        <div class="col-xs-12">
-          <%= f.input :body, required: true %>
+
+        <div class="col-xs-12" aria-labelledby="contact_body" aria-describedby="contact_body_label">
+          <%= f.input :body, required: true, label_html: { class: "sr-only", id: "contact_body_label" } %>
         </div>
-      </div>
-    </div>
-  </div>
+
+      </div> <!-- .row -->
+    </div> <!-- END .panel-body -->
+  </div> <!-- END .panel -->
 
   <div class="form-actions text-center">
     <%= f.button :submit %>

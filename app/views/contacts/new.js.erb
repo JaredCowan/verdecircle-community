@@ -2,4 +2,4 @@ var $flash_messages = $(".errors__container");
 var $contact_form   = $(".contact-form");
 
 $flash_messages.html('<%= escape_javascript(render partial: "layouts/messages") %>');
-$contact_form.html('<%= escape_javascript(render("contacts/form")) %>');
+$contact_form.html('<%= escape_javascript(render partial: "contacts/form") %>');

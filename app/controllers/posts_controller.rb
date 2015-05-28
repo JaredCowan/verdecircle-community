@@ -39,7 +39,7 @@ class PostsController < ApplicationController
 
   def show
     @post        = Post.includes(:topic, user: [:favorites, :user_relationships], comments: [{ votes: :voter }, :user, replies: [{ votes: :voter }, :user ], ], tags: [:taggings ], favorites: [:user ] ).find(params[:id])
-    @comments    = @post.comments.includes({user: :votes}, :replies)
+    @comments    = @post.comments.includes({user: :votes}, :replies).page(params[:page])
     @likes       = query_votes(@post)
     @new_comment = @post.comments.new
 

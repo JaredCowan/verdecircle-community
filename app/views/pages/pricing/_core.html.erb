@@ -20,7 +20,6 @@
         </span>
       </li>
       <li>Sync w/ShipStation</li>
-      <li>Sync w/Quickbooks</li>
       <li>View Detailed Reports</li>
       <li>CSV Import</li>
       <li data-toggle="popover" data-trigger="hover" title="Disclaimer" data-placement="top" data-viewport="body" data-content="* Virtually Unlimited means up to 10,000 transactions per month. If you need more, let us know, and we'll provide you with more at a nominal monthly fee only when you exceed 10,000 transactions in a month. ** Exporting of certain data is restricted due to security and PCI Compliance requirements.">Virtually Unlimited Everything *</li>
@@ -30,6 +29,9 @@
     </ul>
     <ul class="list-unstyled add-ons monthly-pricing">
       <h2 class="add-on-header">Add-ons</h2>
+      <li>
+        <span>Sync w/Quickbooks</span> + $<%= @c_m_qb_sync %>
+      </li>
       <li>
         <span>CSV Export</span> &ndash; <%= @c_m_csv_export %>
       </li>
@@ -55,6 +57,9 @@
 
     <ul class="list-unstyled add-ons yearly-pricing">
       <h2 class="add-on-header">Add-ons</h2>
+      <li>
+        <span>Sync w/Quickbooks</span> + $<%= @c_y_qb_sync %>
+      </li>
       <li>
         <span>CSV Export</span> &ndash; <%= @c_y_csv_export %>
       </li>

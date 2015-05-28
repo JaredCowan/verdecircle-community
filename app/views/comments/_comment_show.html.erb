@@ -1,11 +1,16 @@
-<%= link_to "Hide Replies", post_comments_path(@post), remote: true %>
+<% post ||= @post %>
+<% comment ||= @comment %>
+<% reply_form_class = "reply-form-for-comment-#{comment.id}" %>
 
-<div class="well replies" id="replies-list<%= @comment.id %>">
-  <%= render partial: "replies/reply", collection: @comment.replies, locals: {comment: @comment} %>
-</div>
+<% unless comment.replies.empty? %>
+  <div class="well replies" id="replies-list<%= comment.id %>">
+    <%= link_to "Hide Replies", post_comments_path(post), data: { loader: false, remote: true } %>
+    <%= render partial: "replies/reply", comment: comment %>
+  </div>
+<% end %>
 
 <% if user_signed_in? %>
-  <div id="reply-form">
-    <%= render 'replies/reply_form', locals: {comment: @comment} %>
+  <div class="reply-form <%= reply_form_class %>" id="reply-form">
+    <%= render 'replies/reply_form', comment: comment %>
   </div>
 <% end %>

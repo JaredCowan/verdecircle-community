@@ -13,13 +13,13 @@ common: &common
 
   # Place social links for you or your company here
   social:
-    facebook: 'https://www.facebook.com/'
+    facebook: 'https://www.facebook.com/verdecircle'
     twitter: 'https://twitter.com/'
     google_plus: 'https://plus.google.com/'
-    linkedin: 'http://www.linkedin.com/'
+    linkedin: 'https://www.linkedin.com/company/verde-circle'
 
   contact:
-    email: 'email@example.com'
+    email: 'jared@verdecircle.com'
     phone: '555-555-5555'
 
   session:

@@ -1,7 +1,8 @@
 class Tag < ActiveRecord::Base
   has_many :taggings
   has_many :posts, through: :taggings
-  has_many :blogs, through: :taggings
+
+  default_scope -> { order('taggings_count DESC') }
 
   class << self
     def tag_counts

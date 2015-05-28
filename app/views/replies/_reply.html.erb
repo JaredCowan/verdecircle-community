@@ -1,18 +1,17 @@
-<%# if comment.quother %>
-  <% reply_class = 'quother' %>
-<%# else %>
-  <% reply_class = 'visitor' %>
-<%# end %>
+<% comment ||= @comment %>
+<% replies ||= comment.replies %>
+<% reply ||= @reply %>
 
-<%= div_for reply, class: "#{reply_class}" do %>
+<% replies.each do |reply| %>
+  <%= div_for reply do %>
   <h4 class="reply-author"><%#= sanitize(comment.author) %><%#= sanitize(" @ <span class='quoth-typography'> quoth</span>") if comment.quother %></h4>
-  <span class="date"><small><%#= time_ago_in_words(comment.created_at) %> ago</small></span>
+  <span class="date"><small><%= time_ago_in_words(comment.created_at) %> ago</small></span>
   <p class="reply-content">
     <%= sanitize reply.body, tags: %w(a), attributes: %w(href) %>
   </p>
-  <% if signed_in? && reply.user_id == current_user.id %>
-    <%= link_to '', post_comment_reply_path(comment.post.id, comment, reply), method: :delete, data: { confirm: 'Delete comment?', confirm_modal: "#delete-post" }, class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true, title: 'Delete comment', rel: 'tooltip' %>
-  <% end %>
+  <%# if signed_in? && reply.user_id == current_user.id %>
+    <%#= link_to '', post_comment_reply_path(comment.post.id, comment, reply), method: :delete, data: { confirm: 'Delete comment?', confirm_modal: "#delete-post" }, class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true, title: 'Delete comment', rel: 'tooltip' %>
+  <%# end %>
   <hr>
 <% end %>
-
+<% end %>

@@ -1,4 +1,5 @@
 var $comments_list = $('#comments-list');
 var $comment_form = $('#comment-form');
-$comments_list.html('<%= escape_javascript(render partial: "comment_index") %>');
+$(".comment").last().after('<%= escape_javascript(render partial: "comments/comment_index") %>');
+$(".comment-pagination").html('<%= escape_javascript(link_to_next_page @comments, "Load More", class: "btn btn-primary", params: {controller: 'comments', action: 'index', post_id: @post.id}, remote: true) %>');
 $comment_form.show();

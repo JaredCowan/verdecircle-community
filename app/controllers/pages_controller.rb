@@ -56,6 +56,21 @@ class PagesController < ApplicationController
     render "test", layout: "mobile"
   end
 
+  def tags
+    if params[:q] && !params[:q].empty?
+      tagArray = []
+      q        = ActionController::Base.helpers.strip_tags(params[:q]).downcase.parameterize
+      Tag.all.each { |t| tagArray.push(t) if (t.name[0].include?(q[0]) && t.name[1..-1].include?(q[1..-1])) }
+      @tags = tagArray
+    else
+      @tags = Tag.limit(20)
+    end
+
+    respond_to do |format|
+      format.json { render json: @tags }
+    end
+  end
+
   def error
     redirect_to root_path if flash.empty?
   end

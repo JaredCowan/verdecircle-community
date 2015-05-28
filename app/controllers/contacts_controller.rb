@@ -14,19 +14,6 @@ class ContactsController < ApplicationController
     end
   end
 
-  # For admins to view all submits
-  def submits
-    if user_signed_in? && current_user.is_admin?
-      @contacts = Contact.all
-      respond_to do |format|
-        format.html
-        format.json { render json: @contact }
-      end
-    else
-      redirect_to controller: "contacts", action: "index"
-    end
-  end
-
   def new
     @contact = Contact.new
 
@@ -38,7 +25,7 @@ class ContactsController < ApplicationController
 
   def show
     @return_to = request.env["HTTP_REFERER"] ||= contacts_path
-    if user_signed_in? && !current_user.is_admin?
+    if user_signed_in? && current_user.is_admin?
       @contact = Contact.find(params[:id])
 
       respond_to do |format|
@@ -55,15 +42,12 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
+        @contact = nil
         flash.now[:success] = "Message successfully sent."
-        format.html { redirect_to controller: "contacts", action: "index", format: :html }
-        format.js { render controller: "contacts", action: "index", format: :js }
-        format.json
+        format.js
       else
         flash.now[:danger] = "#{@contact.errors.count} error(s) prohibited this message from being sent: #{@contact.errors.full_messages.join(', ')}"
-        format.html
         format.js { render :new, status: 200 }
-        format.json
       end
     end
   end
@@ -79,6 +63,19 @@ class ContactsController < ApplicationController
         flash.now[:success] = "There was an error deleting this message."
         render :back
       end
+    end
+  end
+
+  # For admins to view all submits
+  def submits
+    if user_signed_in? && current_user.is_admin?
+      @contacts = Contact.all
+      respond_to do |format|
+        format.html
+        format.json { render json: @contact }
+      end
+    else
+      redirect_to controller: "contacts", action: "index"
     end
   end
 
