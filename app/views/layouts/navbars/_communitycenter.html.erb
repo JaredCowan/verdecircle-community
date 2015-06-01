@@ -62,7 +62,9 @@
             <%= link_to I18n.t('verdecircle.navigation-dropdown.thriii'), thriii_page_index_path %>
           </li>
           <li role="presentation" tabindex="-1">
-            <%= link_to I18n.t('verdecircle.navigation-dropdown.blog'), blogs_path %>
+            <a href="//blog.verdecircle.com" target="_blank">
+              <%= I18n.t('verdecircle.navigation-dropdown.blog') %>
+            </a>
           </li>
           <li role="presentation" tabindex="-1">
             <%= link_to I18n.t('verdecircle.navigation-dropdown.contact'), contacts_path %>
@@ -79,10 +81,10 @@
         <li>
           <%= link_to I18n.t("nav.categories"), topics_path %>
         </li>
-        <li>
+        <!-- <li>
           <%= link_to I18n.t("nav.hot-topics"), "javascript:;" %>
         </li>
-        <!-- <li>
+        <li>
           <%#= link_to I18n.t("nav.feature-request"), "javascript:;" %>
         </li> -->
       </ul>
@@ -155,7 +157,7 @@
           <%= render "users/sessions/new" %>
         </li>
         <li>
-          <a href="javascript:;" title="free trial link">Free Trail</a>
+          <a href="<%= url_for pricing_path %>" title="free trial link">Free Trail</a>
         </li>
       </ul> <!-- END navbar-nav ul -->
     <% end %> <!-- END unless user_signedin? -->

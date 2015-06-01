@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20150511205141) do
   create_table "blogs", force: true do |t|
     t.integer  "user_id",                         null: false
     t.string   "subject",            default: "", null: false
-    t.text     "body",               default: "", null: false
-    t.text     "integer",            default: "", null: false
+    t.text     "body",                            null: false
+    t.text     "integer",                         null: false
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20150511205141) do
   add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
 
   create_table "comments", force: true do |t|
-    t.text     "body",                    default: "",  null: false
+    t.text     "body",                                  null: false
     t.integer  "user_id"
     t.integer  "post_id"
     t.datetime "created_at"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20150511205141) do
     t.string   "email",      default: "", null: false
     t.string   "phone",      default: "", null: false
     t.string   "subject",    default: "", null: false
-    t.text     "body",       default: "", null: false
+    t.text     "body",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -205,7 +205,7 @@ ActiveRecord::Schema.define(version: 20150511205141) do
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.string   "subject",                 default: "",  null: false
-    t.text     "body",                    default: "",  null: false
+    t.text     "body",                                  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
@@ -249,7 +249,7 @@ ActiveRecord::Schema.define(version: 20150511205141) do
   add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories", using: :btree
 
   create_table "replies", force: true do |t|
-    t.text     "body",                    default: "",  null: false
+    t.text     "body",                                  null: false
     t.integer  "user_id",                               null: false
     t.integer  "comment_id",                            null: false
     t.datetime "created_at"
@@ -353,6 +353,7 @@ ActiveRecord::Schema.define(version: 20150511205141) do
     t.datetime "avatar_updated_at"
     t.datetime "deleted_at"
     t.boolean  "is_employee",            default: false
+    t.string   "job_title"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -399,6 +400,7 @@ ActiveRecord::Schema.define(version: 20150511205141) do
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
+  Foreigner.load
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", name: "mb_opt_outs_on_conversations_id", column: "conversation_id"
 
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", name: "notifications_on_conversation_id", column: "conversation_id"

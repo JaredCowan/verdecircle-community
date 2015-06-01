@@ -7,7 +7,7 @@ class CreateContacts < ActiveRecord::Migration
       t.string :phone, null: false, default: ""
 
       t.string :subject, null: false, default: ""
-      t.text :body, null: false, default: ""
+      t.text :body, null: false
 
       t.timestamps
     end
