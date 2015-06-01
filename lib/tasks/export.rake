@@ -30,7 +30,7 @@ namespace :export do
         last_name: FFaker::Name.last_name,
         email: FFaker::Internet.safe_email,
         username: FFaker::Internet.user_name("#{FFaker::Name.first_name}#{FFaker::Lorem.words(1).sort[0]} #{FFaker::Name.last_name}").gsub(/[._]/, "")[0, 15],
-        password: BCrypt::Password.create('secret', cost: 6),
+        password: "$2a$06$CRFCw90N9pTm5uQ3xD1HR.s8.dTCPHprlHquIDDKQn8UZLl8rIpkC",
         is_admin: false,
         created_at: Time.now.to_s.split("+")[0].strip
       )

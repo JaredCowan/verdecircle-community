@@ -1,8 +1,8 @@
-<% if user_signed_in? %>
-  <% @notifications = Notifyer::Notification.find_by_sql("SELECT * FROM notifications FULL OUTER JOIN users ON notifications.user_id = " + current_user.id.to_s + "WHERE users.id = " + current_user.id.to_s  + "") %>
-  <% @unread = @notifications.map(&:is_read).reject {|n| n == true}.length %>
-  <% @unread_count ||= @notifications.map(&:is_read).reject {|n| n == true}.length %>
-<% end %>
+<%# if user_signed_in? %>
+  <%# @notifications = Notifyer::Notification.find_by_sql("SELECT * FROM notifications FULL OUTER JOIN users ON notifications.user_id = " + current_user.id.to_s + "WHERE users.id = " + current_user.id.to_s  + "") %>
+  <%# @unread = @notifications.map(&:is_read).reject {|n| n == true}.length %>
+  <%# @unread_count ||= @notifications.map(&:is_read).reject {|n| n == true}.length %>
+<%# end %>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="navbar-header">
     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"> 
@@ -33,17 +33,17 @@
           <%= link_to I18n.t("notifications.mark.all.read"), mark_all_read_notifications_path(current_user.username), method: :post %>
           <%= link_to I18n.t("notifications.mark.all.unread"), mark_all_unread_notifications_path(current_user.username), method: :post %>
         </li>
-        <% if @notifications.nil? %>
-          <% @notifications.each do |n| %>
-            <li>
-              <a href="/<%= n.notifyable_type.downcase %>s/<%= n.notifyable_id %>"> <%#= render 'users/avatar', size: :tiny, user: n.sender %> <%= n.sender.username.titleize %> commented on <%= "#{n.user.username.titleize}'s #{n.notifyable_type}" %> </a>
+        <%# if @notifications.nil? %>
+          <%# @notifications.each do |n| %>
+            <!-- <li>
+              <a href="/<%#= n.notifyable_type.downcase %>s/<%#= n.notifyable_id %>"> <%#= render 'users/avatar', size: :tiny, user: n.sender %> <%#= n.sender.username.titleize %> commented on <%#= "#{n.user.username.titleize}'s #{n.notifyable_type}" %> </a>
             </li>
             <li> 
-              <%= link_to I18n.t("notifications.mark.read"),mark_as_read_notification_path(current_user.username, n.id), method: :post %>
+              <%#= link_to I18n.t("notifications.mark.read"),mark_as_read_notification_path(current_user.username, n.id), method: :post %>
               <%#= link_to "Stop Notifications", opt_out_notification_path(current_user.username, n.notifyable_id, type: n.notifyable_type), method: :post %>
             </li>
-          <% end %>
-        <% end %>
+          <%# end %>
+        <%# end %> -->
       </ul>
     </div>
   <% end %>
@@ -82,7 +82,7 @@
           <%= link_to I18n.t("nav.categories"), topics_path %>
         </li>
         <!-- <li>
-          <%= link_to I18n.t("nav.hot-topics"), "javascript:;" %>
+          <%#= link_to I18n.t("nav.hot-topics"), "javascript:;" %>
         </li>
         <li>
           <%#= link_to I18n.t("nav.feature-request"), "javascript:;" %>
@@ -94,7 +94,7 @@
             <span class="label label-primary">
               <i class="fa fa-comments"></i>
               <span id="notificationsCount">
-                <%= @unread_count if @unread_count > 0 %>
+                <%#= @unread_count if @unread_count > 0 %>
               </span>
             </span>
             <b class="caret"></b>
@@ -105,17 +105,17 @@
               <%= link_to I18n.t("notifications.mark.all.read"), mark_all_read_notifications_path(current_user.username), method: :post %>
               <%= link_to I18n.t("notifications.mark.all.unread"), mark_all_unread_notifications_path(current_user.username), method: :post %>
             </li>
-            <% if @notifications.nil? %>
-              <% @notifications.each do |n| %>
+           <!--  <%# if @notifications.nil? %>
+              <%# @notifications.each do |n| %>
                 <li>
-                  <a href="/<%= n.notifyable_type.downcase %>s/<%= n.notifyable_id %>"> <%#= render 'users/avatar', size: :tiny, user: n.sender %> <%= n.sender.username.titleize %> commented on <%= "#{n.user.username.titleize}'s #{n.notifyable_type}" %> </a>
+                  <a href="/<%#= n.notifyable_type.downcase %>s/<%#= n.notifyable_id %>"> <%#= render 'users/avatar', size: :tiny, user: n.sender %> <%#= n.sender.username.titleize %> commented on <%#= "#{n.user.username.titleize}'s #{n.notifyable_type}" %> </a>
                 </li>
                 <li> 
-                  <%= link_to I18n.t("notifications.mark.read"), mark_as_read_notification_path(current_user.username, n.id), method: :post %>
+                  <%#= link_to I18n.t("notifications.mark.read"), mark_as_read_notification_path(current_user.username, n.id), method: :post %>
                   <%#= link_to "Stop Notifications", opt_out_notification_path(current_user.username, n.notifyable_id, type: n.notifyable_type), method: :post %>
                 </li>
-              <% end %>
-            <% end %>
+              <%# end %>
+            <%# end %> -->
           </ul>
         </li>
         <li class="dropdown">
