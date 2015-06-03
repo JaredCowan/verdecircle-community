@@ -29,6 +29,9 @@
     <%= javascript_include_tag "head" %>
     <%= javascript_include_tag "application" %>
     <%= yield :head %>
+    <% if content_for :add_head_javascript %>
+      <%= yield :add_head_javascript %>
+    <% end %>
   </head>
   <body class="controller__<%= controller_name %> action__<%= action_name %>" data-feed="{<%= %Q("current_user":{"id":"#{current_user.id if user_signed_in?}","username":"#{current_user.username if user_signed_in?}"}) %>}">
     <%= render 'layouts/navbars/verdecircle' %>

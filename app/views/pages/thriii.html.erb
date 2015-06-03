@@ -1,5 +1,29 @@
 <% provide(:stylesheets) do %>
   <%= stylesheet_link_tag 'depend/pagepiling', media: 'all' %>
+  <%= stylesheet_link_tag 'verdecircle/slidedeck', media: 'all' %>
+  <style type="text/css">
+    #slidedeck_frame {
+      position: absolute;
+      width: 901px;
+      height: 460px;
+      top: 130px;
+      right: 0;
+      left: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .spine {
+      top: 396px !important;
+    }
+    .slide {
+      width: 750px !important;
+      height: 418px !important;
+    }
+  </style>
+<% end %>
+
+<% provide(:add_head_javascript) do %>
+  <%= javascript_include_tag "depend/slidedeck" %>
 <% end %>
 
 <div id="pagepile-loading">
@@ -29,31 +53,31 @@
 <div id="pagepile">
   <div class="section" id="section1">
     <div class="container-fluid">
-    <%= render partial: "pages/thriii/features" %>
+      <%= render partial: "pages/thriii/features" %>
     </div>
   </div>
 
   <div class="section" id="section2">
     <div class="container-fluid">
-    <%= render partial: "pages/thriii/inventory" %>
+      <%= render partial: "pages/thriii/inventory" %>
     </div>
   </div>
 
   <div class="section" id="section3">
     <div class="container-fluid">
-    <%= render partial: "pages/thriii/orders" %>
+      <%= render partial: "pages/thriii/orders" %>
     </div>
   </div>
 
   <div class="section" id="section4">
     <div class="container-fluid">
-    <%= render partial: "pages/thriii/fulfillment" %>
+      <%= render partial: "pages/thriii/fulfillment" %>
     </div>
   </div>
 
   <div class="section" id="section5">
     <div class="container-fluid">
-    <%= render partial: "pages/thriii/accounting" %>
+      <%= render partial: "pages/thriii/accounting" %>
     </div>
   </div>
 </div>

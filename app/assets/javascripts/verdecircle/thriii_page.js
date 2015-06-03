@@ -13,6 +13,7 @@ loadThriiiPagePile = function() {
         'tooltips': ['features', 'inventory', 'orders', 'fulfillment', 'accounting']
       }
     });
+    $('.skin-slidedeck dl.slidedeck').slidedeck().vertical();
   }
 }
 
