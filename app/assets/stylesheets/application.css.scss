@@ -179,13 +179,8 @@ textarea.form-control {
   .pp-section {
     padding: 5px;
   }
-  #section1, #section3, #section5 {
-    background: #fff url('/images/verde-circle-logo-name-centered.png') no-repeat fixed center;
-  }
-  #section2, #section4 {
-   background: #fff url('/images/sampledash.jpg') no-repeat fixed center; 
-  }
   #section1, #section2, #section3, #section4, #section5 {
+    background: #fff url('/images/verde-circle-logo-name-centered.png') no-repeat fixed center;
     background-size: cover;
   }
 }
