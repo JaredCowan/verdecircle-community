@@ -13,8 +13,17 @@ loadThriiiPagePile = function() {
         'tooltips': ['features', 'inventory', 'orders', 'fulfillment', 'accounting']
       }
     });
-    $('.skin-slidedeck dl.slidedeck').slidedeck().vertical();
   }
 }
 
-$("document").on("ready", loadThriiiPagePile());
+initSlideDeck = function() {
+  if ($("#thriii-page").length >= 1) {
+    $.each($('.skin-slidedeck dl.slidedeck'), function() { 
+      $(this).slidedeck().vertical();
+    });
+  }
+}
+
+$("document").on("ready", loadThriiiPagePile(), initSlideDeck());
+
+
