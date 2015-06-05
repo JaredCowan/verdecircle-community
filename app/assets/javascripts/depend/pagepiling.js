@@ -44,7 +44,7 @@
                 position: 'right',
                 tooltips: []
             },
-            normalScrollElements: null,
+            normalScrollElements: '.skin-slidedeck dl.slidedeck',
             normalScrollElementTouchThreshold: 5,
             touchSensitivity: 5,
             keyboardScrolling: true,
