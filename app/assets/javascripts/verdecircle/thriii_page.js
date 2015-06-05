@@ -25,5 +25,3 @@ initSlideDeck = function() {
 }
 
 $("document").on("ready", loadThriiiPagePile(), initSlideDeck());
-
-
