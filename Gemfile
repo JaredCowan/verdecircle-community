@@ -3,7 +3,6 @@ ruby '2.1.5'
 
 gem 'rails', '~> 4.1.6'
 
-#
 # PLATFORM SPECIFIC
 #
 # OSX
@@ -17,24 +16,23 @@ gem 'terminal-notifier', group: [:development]
 # Monitoring
 gem 'rack-timeout', '~> 0.1.0beta4'
 gem 'newrelic_rpm'
-gem 'airbrake', '~> 3.2.1' # use with airbrake.io or errbit
+gem 'airbrake', '~> 3.2.1'        # use with airbrake.io or errbit
 # gem 'airbrake_user_attributes'  # use with self-hosted errbit; see config/initializers/airbrake.rb
-gem 'rack-google-analytics'
-# Consider switching to rack-tracker gem instead of Google gem
-# gem 'rack-tracker'
+gem 'rack-google-analytics'       # https://github.com/kangguru/rack-google-analytics
+# gem 'rack-tracker'              # Consider switching to rack-tracker gem instead of Google gem
 
 # Data
 gem 'pg'
-gem 'mysql2'
-gem 'dalli' # memcached
+# gem 'mysql2'  # Use MySQL or PostgreSQL
+gem 'dalli'     # memcached
 # gem 'schema_plus' # add better index and foreign key support
-gem 'jbuilder'
 gem 'rake', '>=10.3.2'
 # gem 'fog' # File uploads to google cloud storage
+gem 'jbuilder' # JSON builder
 
 # Assets
 gem 'sass-rails'
-# gem 'haml-rails'
+# gem 'haml-rails' # Uncomment to use HAML
 gem 'simple_form'
 gem 'uglifier'
 gem 'headjs-rails'
